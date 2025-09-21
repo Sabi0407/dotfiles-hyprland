@@ -1,0 +1,32 @@
+# Modern Yazi config
+
+[manager]
+# Utilise exa ou lsd pour lister les fichiers si dispo
+ls_command = "exa --icons --group-directories-first"
+# Affiche les fichiers cachés par défaut
+show_hidden = true
+
+[preview]
+# Utilise bat pour prévisualiser les fichiers texte
+text = "bat --style=plain --color=always --paging=never {}"
+# Utilise viu pour les images (si installé)
+image = "viu -b {}"
+# Utilise pdftotext pour les PDF
+pdf = "pdftotext {} -"
+
+[theme]
+# Thème moderne (ex: catppuccin-mocha)
+# Pour appliquer un thème, place le fichier dans ~/.config/yazi/themes/
+theme = "mocha"
+
+[statusbar]
+# Affiche le chemin, le nombre de fichiers, la sélection, etc.
+left = "{cwd} {mode}"
+right = "{total} files | {selected} selected"
+
+[keymap]
+# Raccourcis modernes
+open_terminal = "ctrl+t"
+toggle_hidden = "ctrl+h"
+preview = "space"
+quit = "q"

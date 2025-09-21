@@ -1,0 +1,26 @@
+# Configuration Wofi moderne
+show=drun
+width=600
+height=400
+location=center
+prompt=❯
+opacity=0.95
+
+# Recherche et UX
+insensitive=true
+hide_scroll=true
+no_actions=true
+term=kitty
+allow_images=true
+image_size=32
+
+# Icônes
+icon_theme=Papirus-Dark
+gtk-icon-theme-name=Papirus-Dark
+
+# Police
+gtk-font-name=JetBrains Mono 11
+
+# Thème
+gtk-application-prefer-dark-theme=true
+gtk-theme-name=Adwaita
