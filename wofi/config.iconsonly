@@ -1,0 +1,29 @@
+# ── Wofi icônes seulement ──────────────────────────────────────────
+show=drun
+location=center
+width=420
+height=280
+prompt=
+term=kitty
+
+# Recherche / UX
+insensitive=true
+hide_scroll=true
+no_actions=true
+matching=fuzzy
+
+# Icônes / images
+allow_images=true
+image_size=40
+
+# Colonnes pour un affichage ultra-compact (icônes seulement)
+columns=5
+
+# Apparence générale
+opacity=0.95
+
+# GTK
+gtk-application-prefer-dark-theme=true
+gtk-theme-name=Adwaita
+gtk-icon-theme-name=Adwaita
+gtk-font-name=SF Pro Display 17

@@ -1,0 +1,15 @@
+{
+    "Alt-/": "lua:comment.comment",
+    "Ctrl-Shift-g": "FindPrevious",
+    "Ctrl-a": "SelectAll",
+    "Ctrl-c": "Copy",
+    "Ctrl-f": "Find",
+    "Ctrl-g": "FindNext",
+    "Ctrl-q": "Quit",
+    "Ctrl-s": "Save",
+    "Ctrl-v": "Paste",
+    "Ctrl-x": "Cut",
+    "Ctrl-y": "Redo",
+    "Ctrl-z": "Undo",
+    "CtrlUnderscore": "lua:comment.comment"
+}
