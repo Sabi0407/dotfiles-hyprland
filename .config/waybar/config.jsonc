@@ -4,8 +4,7 @@
   "margin-top": 13,
   "modules-left": [
     "group/arch_drawer",
-    "group/clock_drawer",
-    "custom/usb_drives"
+    "group/clock_drawer"
   ],
   "modules-center": [
     "custom/notification",
@@ -169,8 +168,6 @@
     "tooltip-format": "Processus en arrière-plan :\n{}"
   },
 
-
-
   "tray": {
     "spacing": 10,
     "icon-size": 21,
@@ -196,6 +193,7 @@
       "custom/date_fr"
     ]
   },
+
 
   "custom/date_fr": {
     "exec": "LC_TIME=fr_FR.UTF-8 date '+%a%e %b %Y'",
@@ -275,15 +273,5 @@
     "format": "󰿅",
     "tooltip": "Éteindre",
     "on-click": "~/.config/Scripts/confirm_poweroff.sh"
-  },
-
-  "custom/usb_drives": {
-    "format": "{}",
-    "exec": "~/.config/Scripts/usb_drives_advanced.sh",
-    "interval": 3,
-    "return-type": "json",
-    "tooltip": true,
-    "on-click": "~/.config/Scripts/usb_menu_simple_fixed.sh",
-    "on-click-right": "~/.config/Scripts/usb_menu_simple_fixed.sh"
   }
 }
