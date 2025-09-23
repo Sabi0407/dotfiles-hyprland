@@ -33,6 +33,7 @@ if [[ -n "$CURRENT_WALLPAPER" && -f "$CURRENT_WALLPAPER" ]]; then
     sleep 2
     pkill waybar && sleep 0.5 && hyprctl dispatch exec waybar
     pkill swaync && sleep 0.5 && hyprctl dispatch exec swaync
+    pkill wofi && sleep 0.5 && hyprctl dispatch exec wofi
     
     # Notification de succès
     notify-send "Wallpaper" "✅ Thèmes pywal appliqués !" -i image-x-generic -t 3000

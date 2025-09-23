@@ -1,0 +1,112 @@
+/* Wofi - Style avec couleurs pywal intégrées */
+
+:root {
+  --wofi-color0: ;
+  --wofi-color1: ;
+  --wofi-color2: ;
+  --wofi-color3: ;
+  --wofi-color4: ;
+  --wofi-color5: ;
+  --wofi-color6: ;
+  --wofi-color7: ;
+  --wofi-color8: ;
+  --wofi-color9: ;
+  --wofi-color10: ;
+  --wofi-color11: ;
+  --wofi-color12: ;
+  --wofi-color13: ;
+  --wofi-color14: ;
+  --wofi-color15: ;
+
+  --wofi-rgb-color0: ;
+  --wofi-rgb-color1: ;
+  --wofi-rgb-color2: ;
+  --wofi-rgb-color3: ;
+  --wofi-rgb-color4: ;
+  --wofi-rgb-color5: ;
+  --wofi-rgb-color6: ;
+  --wofi-rgb-color7: ;
+  --wofi-rgb-color8: ;
+  --wofi-rgb-color9: ;
+  --wofi-rgb-color10: ;
+  --wofi-rgb-color11: ;
+  --wofi-rgb-color12: ;
+  --wofi-rgb-color13: ;
+  --wofi-rgb-color14: ;
+  --wofi-rgb-color15: ;
+
+  /* Variables CSS pour une cohérence globale */
+  --primary: var(--wofi-color2);
+  --primary-rgb: var(--wofi-rgb-color2);
+  --text: var(--wofi-color15);
+  --text-rgb: var(--wofi-rgb-color15);
+  --bg: var(--wofi-color0);
+  --surface: var(--wofi-color8);
+  --surface-hover: var(--wofi-color2);
+  --border: var(--wofi-color8);
+}
+
+/* Configuration de base */
+* {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  font-weight: 500;
+  outline: none;
+}
+
+window {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  margin: 12px;
+  padding: 16px;
+  opacity: 0.98;
+}
+
+#input {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 13px;
+  margin: 0 0 8px 0;
+  padding: 10px 14px;
+  min-height: 38px;
+}
+
+#entry {
+  background-color: var(--surface);
+  border-radius: 8px;
+  color: var(--text);
+  margin: 2px 0;
+  padding: 6px 10px;
+  min-height: 38px;
+  border: 1px solid var(--border);
+}
+
+#entry:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--surface-hover);
+}
+
+#entry:selected {
+  background-color: var(--surface-hover);
+  color: var(--text);
+  font-weight: 600;
+  border-color: var(--surface-hover);
+}
+
+#text {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0;
+  padding: 0 8px;
+}
+
+#image {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border-radius: 6px;
+}

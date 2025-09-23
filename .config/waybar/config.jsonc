@@ -4,7 +4,8 @@
   "margin-top": 13,
   "modules-left": [
     "group/arch_drawer",
-    "group/clock_drawer"
+    "group/clock_drawer",
+    "custom/storage"
   ],
   "modules-center": [
     "custom/notification",
@@ -273,5 +274,19 @@
     "format": "󰿅",
     "tooltip": "Éteindre",
     "on-click": "~/.config/Scripts/confirm_poweroff.sh"
+  },
+
+  "custom/storage": {
+    "format": "{icon} {text}",
+    "return-type": "json",
+    "exec": "~/.config/Scripts/storage_manager.sh",
+    "interval": 5,
+    "tooltip": true,
+    "on-click": "~/.config/Scripts/storage_manager.sh open",
+    "on-click-right": "~/.config/Scripts/storage_manager.sh toggle",
+    "format-icons": {
+      "connected": "󰋊",
+      "disconnected": "󰋊"
+    }
   }
 }
