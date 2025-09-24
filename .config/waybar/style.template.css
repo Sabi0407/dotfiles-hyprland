@@ -126,7 +126,8 @@
   #custom-date_fr,
   #custom-lock-session,
   #custom-reboot,
-  #custom-poweroff {
+  #custom-poweroff,
+  #custom-storage {
     color: {foreground};
     background: rgba({background-rgb}, 0.9);
     padding: 5px 16px;
@@ -161,7 +162,8 @@
   #custom-date_fr:hover,
   #custom-lock-session:hover,
   #custom-reboot:hover,
-  #custom-poweroff:hover {
+  #custom-poweroff:hover,
+  #custom-storage:hover {
     background: {color4};
     color: {background};
     border: 2px solid {color4};

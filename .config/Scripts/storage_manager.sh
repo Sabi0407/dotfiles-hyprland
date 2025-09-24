@@ -39,8 +39,8 @@ format_for_waybar() {
     fi
 
     if [ $external_count -eq 0 ]; then
-        # Aucun disque externe détecté - cacher le module
-        echo '{"text": "", "tooltip": "Aucun périphérique externe", "class": "hidden"}'
+        # Aucun disque externe détecté - faire disparaître le module complètement
+        echo ''
         return
     fi
 
