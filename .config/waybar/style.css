@@ -7,7 +7,7 @@
   
   window#waybar {
     background-color: transparent;
-    color: #c2c5c6;
+    color: #c3c2c7;
     border-radius: 16px;
     box-shadow: none;
     padding-top: 8px;
@@ -20,86 +20,86 @@
   
   /* Harmonisation workspaces */
   #workspaces {
-    background: rgba(12,23,28, 0.9);
+    background: rgba(15,13,32, 0.9);
     padding: 6px 16px;
     margin: 0 20px 0 20px;
     border: none;
     border-radius: 18px;
-    box-shadow: 0 4px 12px rgba(12,23,28, 0.3);
+    box-shadow: 0 4px 12px rgba(15,13,32, 0.3);
     transition: all 0.3s ease;
-    color: #c2c5c6;
+    color: #c3c2c7;
   }
   
   #workspaces:hover {
-    box-shadow: 0 6px 20px rgba(12,23,28, 0.4);
+    box-shadow: 0 6px 20px rgba(15,13,32, 0.4);
   }
   
   #workspaces button {
-    background: rgba(12,23,28, 0.4);
-    color: #c2c5c6;
+    background: rgba(15,13,32, 0.4);
+    color: #c3c2c7;
     font-size: 0.9em;
     font-weight: 500;
     padding: 3px 8px;
     margin: 0 3px;
     border: 1px solid transparent;
     border-radius: 10px;
-    box-shadow: 0 1px 4px rgba(12,23,28, 0.1);
+    box-shadow: 0 1px 4px rgba(15,13,32, 0.1);
     opacity: 0.7;
     transition: all 0.2s ease;
   }
   
   #workspaces button.active {
-    background: rgba(194,197,198, 0.1);
-    color: #B48665;
-    border: 1px solid #B48665;
-    box-shadow: 0 2px 8px rgba(12,23,28, 0.2);
+    background: rgba(195,194,199, 0.1);
+    color: #A58AA0;
+    border: 1px solid #A58AA0;
+    box-shadow: 0 2px 8px rgba(15,13,32, 0.2);
     opacity: 1;
     font-weight: 600;
   }
   
   #workspaces button:hover {
-    background: rgba(194,197,198, 0.08);
-    color: #B48665;
-    border: 1px solid #B48665;
-    box-shadow: 0 2px 6px rgba(12,23,28, 0.15);
+    background: rgba(195,194,199, 0.08);
+    color: #A58AA0;
+    border: 1px solid #A58AA0;
+    box-shadow: 0 2px 6px rgba(15,13,32, 0.15);
     opacity: 0.9;
     transition: all 0.2s ease;
   }
   
   #workspaces button.urgent {
-    color: #9B6231;
-    background: rgba(155,98,49, 0.2);
+    color: #98849E;
+    background: rgba(152,132,158, 0.2);
   }
   
   #workspaces button.visible {
-    color: #B48665;
+    color: #A58AA0;
   }
   
   #workspaces button.empty {
-    color: #c2c5c6;
+    color: #c3c2c7;
     opacity: 0.5;
   }
   
   #group-clock_drawer,
   #group-processes_tray,
   #group-arch_drawer {
-    color: #c2c5c6;
-    background: rgba(12,23,28, 0.9);
+    color: #c3c2c7;
+    background: rgba(15,13,32, 0.9);
     padding: 5px 16px;
     margin: 0 12px 0 0;
     border: 2px solid transparent;
     border-radius: 16px;
-    box-shadow: 0 2px 6px rgba(12,23,28, 0.2);
+    box-shadow: 0 2px 6px rgba(15,13,32, 0.2);
     transition: all 0.2s;
   }
   
   #group-clock_drawer:hover,
   #group-processes_tray:hover,
   #group-arch_drawer:hover {
-    background: rgba(194,197,198, 0.15);
-    color: #B48665;
-    border: 2px solid #B48665;
-    box-shadow: 0 4px 15px rgba(12,23,28, 0.4);
+    background: rgba(195,194,199, 0.15);
+    color: #A58AA0;
+    border: 2px solid #A58AA0;
+    box-shadow: 0 4px 15px rgba(15,13,32, 0.4);
   }
   
   #battery,
@@ -128,12 +128,12 @@
   #custom-reboot,
   #custom-poweroff,
   #custom-storage {
-    color: #c2c5c6;
-    background: rgba(12,23,28, 0.9);
+    color: #c3c2c7;
+    background: rgba(15,13,32, 0.9);
     padding: 5px 16px;
     margin: 0 0 0 12px;
     border-radius: 16px;
-    box-shadow: 0 2px 6px rgba(12,23,28, 0.2);
+    box-shadow: 0 2px 6px rgba(15,13,32, 0.2);
     transition: all 0.2s;
     border: 2px solid transparent;
   }
@@ -164,19 +164,19 @@
   #custom-reboot:hover,
   #custom-poweroff:hover,
   #custom-storage:hover {
-    background: #B48665;
-    color: #0c171c;
-    border: 2px solid #B48665;
-    box-shadow: 0 4px 15px rgba(180,134,101, 0.4);
+    background: #A58AA0;
+    color: #0f0d20;
+    border: 2px solid #A58AA0;
+    box-shadow: 0 4px 15px rgba(165,138,160, 0.4);
   }
   
   #battery {
   transition: all 0.3s ease;
-  color: #c2c5c6;
+  color: #c3c2c7;
 }
 
 #battery.warning {
-  color: #D58A38;
+  color: #9A86A1;
   animation: battery-pulse 2s infinite;
 }
 
@@ -210,55 +210,55 @@
 }  
 
 #custom-mic_status {
-    color: #c2c5c6;
-    background: rgba(12,23,28, 0.9);
+    color: #c3c2c7;
+    background: rgba(15,13,32, 0.9);
     padding: 5px 16px;
     margin: 0 0 0 12px;
     border-radius: 16px;
-    box-shadow: 0 2px 6px rgba(12,23,28, 0.2);
+    box-shadow: 0 2px 6px rgba(15,13,32, 0.2);
     transition: all 0.2s;
     border: 2px solid transparent;
 }
 
 #custom-mic_status:hover {
-    background: #B48665;
-    color: #0c171c;
-    border: 2px solid #B48665;
-    box-shadow: 0 4px 15px rgba(180,134,101, 0.4);
+    background: #A58AA0;
+    color: #0f0d20;
+    border: 2px solid #A58AA0;
+    box-shadow: 0 4px 15px rgba(165,138,160, 0.4);
 }
 
 #group-arch_drawer {
-  color: #c2c5c6;
-  background: rgba(12,23,28, 0.9);
+  color: #c3c2c7;
+  background: rgba(15,13,32, 0.9);
   padding: 5px 16px;
   margin: 0 12px 0 0;
   border: 2px solid transparent;
   border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(12,23,28, 0.2);
+  box-shadow: 0 2px 6px rgba(15,13,32, 0.2);
   transition: all 0.2s;
 }
 
 #group-arch_drawer:hover {
-  background: rgba(180,134,101, 0.15);
-  color: #B48665;
-  border: 2px solid #B48665;
-  box-shadow: 0 4px 15px rgba(12,23,28, 0.4);
+  background: rgba(165,138,160, 0.15);
+  color: #A58AA0;
+  border: 2px solid #A58AA0;
+  box-shadow: 0 4px 15px rgba(15,13,32, 0.4);
 }
 
 /* Styles spécifiques pour le module USB */
 #custom-usb_drives.no-usb {
   opacity: 0.5;
-  color: #c2c5c6;
+  color: #c3c2c7;
 }
 
 #custom-usb_drives.usb-connected {
-  color: #c2c5c6;
-  border: 1px solid rgba(180,134,101, 0.3);
+  color: #c3c2c7;
+  border: 1px solid rgba(165,138,160, 0.3);
 }
 
 #custom-usb_drives.usb-many {
-  color: #c2c5c6;
-  border: 1px solid rgba(213,138,56, 0.3);
+  color: #c3c2c7;
+  border: 1px solid rgba(154,134,161, 0.3);
   animation: pulse 2s infinite;
 }
 
