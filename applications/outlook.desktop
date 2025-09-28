@@ -7,4 +7,4 @@ Terminal=false
 Type=Application
 Categories=Network;WebBrowser;Email;
 Keywords=outlook;microsoft;mail;email;hotmail;
-Icon=outlook
+Icon=ms-outlook

@@ -10,7 +10,6 @@ window {
   font-weight: 500;
   padding: 10px 12px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.18);
-  backdrop-filter: blur(12px);
   margin: 12px;
   min-width: 380px;
   max-width: 380px;
@@ -20,14 +19,14 @@ window {
 #input {
   background-color: rgba(--wofi-color0, 0.65);
   color: --wofi-color15;
-  border-radius: 14px;
-  padding: 6px 10px;
+  border-radius: 10px;
+  padding: 8px 10px;
   margin-bottom: 10px;
   font-size: 14px;
   font-weight: 500;
   border: 1px solid rgba(--wofi-color8, 0.15);
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.03);
-  min-height: 16px;
+  min-height: 40px;
 }
 
 #input:focus {
@@ -91,6 +90,57 @@ window {
   border-radius: 0 1px 1px 0;
 }
 
+/* Focus clavier */
+#entry:focus {
+  outline: 2px solid --wofi-color4;
+  outline-offset: 2px;
+  box-shadow: 
+    0 2px 6px rgba(0,0,0,0.05),
+    0 0 0 4px rgba(--wofi-rgb-color4, 0.15);
+}
+
+/* Raccourcis clavier visuels */
+#entry {
+  position: relative;
+}
+
+#entry:nth-child(1)::after { content: "1"; }
+#entry:nth-child(2)::after { content: "2"; }
+#entry:nth-child(3)::after { content: "3"; }
+#entry:nth-child(4)::after { content: "4"; }
+#entry:nth-child(5)::after { content: "5"; }
+#entry:nth-child(6)::after { content: "6"; }
+#entry:nth-child(7)::after { content: "7"; }
+#entry:nth-child(8)::after { content: "8"; }
+#entry:nth-child(9)::after { content: "9"; }
+
+#entry::after {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(--wofi-rgb-color15, 0.4);
+  background: rgba(--wofi-rgb-color8, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-width: 16px;
+  text-align: center;
+  font-family: monospace;
+}
+
+#entry:selected::after {
+  color: rgba(--wofi-rgb-color0, 0.6);
+  background: rgba(--wofi-rgb-color0, 0.15);
+}
+
+#entry:focus::after {
+  color: --wofi-color4;
+  background: rgba(--wofi-rgb-color4, 0.2);
+}
+
+
 #image {
   width: 28px;
   height: 28px;
@@ -127,8 +177,42 @@ window {
   box-shadow: 0 1px 1px rgba(0,0,0,0.02);
 }
 
+#scroll slider:hover {
+  background-color: rgba(--wofi-color4, 0.4);
+}
+
 #scroll trough {
   background-color: rgba(--wofi-color0, 0.06);
   border-radius: 3px;
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.01);
+}
+
+/* Flèches pour les actions multiples */
+#entry.activatable::before {
+  content: "›";
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(--wofi-rgb-color15, 0.6);
+  font-size: 16px;
+  font-weight: 600;
+  z-index: 1;
+}
+
+#entry.activatable:selected::before {
+  color: rgba(--wofi-rgb-color0, 0.7);
+}
+
+/* Actions dépliées */
+#entry.action {
+  padding-left: 40px;
+  font-size: 13px;
+  min-height: 32px;
+  opacity: 0.9;
+}
+
+#entry.action #image {
+  width: 20px;
+  height: 20px;
 }
