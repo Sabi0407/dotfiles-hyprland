@@ -1,7 +1,0 @@
-@define-color background {{background}};
-@define-color primary {{primary}};
-@define-color secondary {{secondary}};
-@define-color surface {{surface}};
-@define-color on_surface {{on_surface}};
-
-{{ self | pprint }} 
