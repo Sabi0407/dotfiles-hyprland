@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=IPSSI Ymag
+GenericName=Ymag
+Comment=Ouvrir IPSSI Ymag
+Exec=xdg-open https://ecole-ipssi.ymag.cloud/
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;Education;
+Keywords=ipssi;ymag;école;éducation;
+Icon=applications-science

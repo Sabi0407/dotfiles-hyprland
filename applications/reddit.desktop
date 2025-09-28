@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Reddit
+GenericName=Reddit
+Comment=Ouvrir Reddit
+Exec=xdg-open https://www.reddit.com/
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+Keywords=reddit;social;actualités;
+Icon=reddit

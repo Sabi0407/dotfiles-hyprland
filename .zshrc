@@ -32,8 +32,8 @@ source $ZSH/oh-my-zsh.sh
 # Alias personnalisés
 source ~/.config/aliases/aliases.sh
 
-# Thème Powerlevel10k (nécessaire si pas chargé automatiquement)
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+# Powerlevel10k est maintenant chargé via Oh My Zsh (ligne 10)
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # Charge la configuration du prompt Powerlevel10k si elle existe
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh

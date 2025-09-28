@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Wrapper pour appliquer le thème Catppuccin Mocha Red
+run_zenity_dark() {
+  # Appliquer le thème Catppuccin Mocha Red à Zenity
+  GTK_THEME="catppuccin-mocha-red-standard+default" zenity "$@" 2> >(grep -v "Adwaita-WARNING")
+}
+
 # Seuils de notification
 THRESHOLDS=(20 15 10 5 3)
 # Fichier pour mémoriser le dernier seuil notifié
@@ -44,16 +50,16 @@ while true; do
             notify-send -u normal -i battery-caution "⚠️ Batterie faible" "Il reste $CAPACITY% de batterie\nBranchez votre chargeur rapidement"
             ;;
           10)
-            # Utiliser zenity pour une alerte plus visible
-            zenity --warning --title "Batterie très faible" --text "Il ne reste que $CAPACITY% de batterie !\n\nBranchez votre chargeur immédiatement" --window-icon=battery-low
+            # Utiliser zenity pour une alerte plus visible (forcer le thème sombre)
+            run_zenity_dark --warning --title "Batterie très faible" --text "Il ne reste que $CAPACITY% de batterie !\n\nBranchez votre chargeur immédiatement" --window-icon=battery-low
             ;;
           5)
-            # Utiliser zenity pour une alerte critique
-            zenity --error --title "Batterie critique" --text "Il ne reste que $CAPACITY% de batterie !\n\nBRANCHEZ VOTRE CHARGEUR MAINTENANT !" --window-icon=battery-caution
+            # Utiliser zenity pour une alerte critique (forcer le thème sombre)
+            run_zenity_dark --error --title "Batterie critique" --text "Il ne reste que $CAPACITY% de batterie !\n\nBRANCHEZ VOTRE CHARGEUR MAINTENANT !" --window-icon=battery-caution
             ;;
           3)
-            # Utiliser zenity pour une alerte ultra critique
-            zenity --error --title "Batterie ultra critique" --text "Seulement $CAPACITY% restants !\n\nArrêtez ou branchez immédiatement." --window-icon=battery-empty
+            # Utiliser zenity pour une alerte ultra critique (forcer le thème sombre)
+            run_zenity_dark --error --title "Batterie ultra critique" --text "Seulement $CAPACITY% restants !\n\nArrêtez ou branchez immédiatement." --window-icon=battery-empty
             ;;
         esac
         echo "$TH" > "$STATE_FILE"

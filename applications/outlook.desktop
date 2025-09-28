@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Outlook
+GenericName=Outlook
+Comment=Ouvrir Outlook
+Exec=xdg-open https://outlook.live.com/
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;Email;
+Keywords=outlook;microsoft;mail;email;hotmail;
+Icon=outlook

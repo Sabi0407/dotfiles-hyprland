@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Gmail
+GenericName=Gmail
+Comment=Ouvrir Gmail
+Exec=xdg-open https://mail.google.com/
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;Email;
+Keywords=gmail;google;mail;email;
+Icon=gmail

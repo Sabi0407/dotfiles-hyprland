@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=ChatGPT
+GenericName=ChatGPT
+Comment=Ouvrir ChatGPT
+Exec=xdg-open https://chatgpt.com/
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+Keywords=chatgpt;openai;ia;assistant;
+Icon=chatgpt

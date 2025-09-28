@@ -1,12 +1,17 @@
 #!/bin/bash
 
+run_zenity_dark() {
+  # Appliquer le thème Catppuccin Mocha Red à Zenity
+  GTK_THEME="catppuccin-mocha-red-standard+default" zenity "$@" 2> >(grep -v "Adwaita-WARNING")
+}
+
 # Script de confirmation pour l'extinction
 
 # Afficher une boîte de dialogue de confirmation avec zenity
-if zenity --question --title "Extinction" --text "Tu veux éteindre ton système?" --ok-label "Oui" --cancel-label "Non flemme" --window-icon=system-shutdown; then
+if run_zenity_dark --question --title "Extinction" --text "Tu veux éteindre ton système?" --ok-label "Oui" --cancel-label "Non flemme" --window-icon=system-shutdown; then
     # Si l'utilisateur clique sur "Oui"
     systemctl poweroff
 else
     # Si l'utilisateur clique sur "Non" ou ferme la fenêtre
     exit 0
-fi 
+fi

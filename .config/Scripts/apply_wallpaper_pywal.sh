@@ -7,7 +7,7 @@
 CURRENT_WALLPAPER=$(waypaper --get 2>/dev/null)
 
 if [ -n "$CURRENT_WALLPAPER" ] && [ -f "$CURRENT_WALLPAPER" ]; then
-    echo "🎨 Application de pywal pour : $(basename "$CURRENT_WALLPAPER")"
+    echo " Application de pywal pour : $(basename "$CURRENT_WALLPAPER")"
     
     # Générer les couleurs avec pywal
     wal -i "$CURRENT_WALLPAPER" -n
@@ -36,7 +36,7 @@ if [ -n "$CURRENT_WALLPAPER" ] && [ -f "$CURRENT_WALLPAPER" ]; then
     sleep 0.3
     hyprctl dispatch exec swaync
     
-    echo "✅ Pywal appliqué avec succès !"
+    echo " Pywal appliqué avec succès !"
 else
-    echo "⚠️  Impossible de récupérer le wallpaper actuel"
+    echo "  Impossible de récupérer le wallpaper actuel"
 fi

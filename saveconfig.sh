@@ -18,6 +18,10 @@ ICONS_DEST="$DEST/icons"
 APPS_SRC="$HOME/.local/share/applications/"
 APPS_DEST="$DEST/applications"
 
+# Configuration SDDM
+SDDM_SRC="/etc/sddm.conf.d/"
+SDDM_DEST="$DEST/sddm"
+
 # Dossier Images et Wallpapers
 #IMAGES_SRC="$HOME/Images/"
 #IMAGES_DEST="$DEST/Images"
@@ -39,24 +43,29 @@ echo "$(date): Sauvegarde des applications" >> "$LOG_FILE"
 mkdir -p "$APPS_DEST"
 rsync -av --delete "$APPS_SRC" "$APPS_DEST/" >> "$LOG_FILE" 2>&1
 
-# 4) Sync des Images et Wallpapers (exclut Screenshot)
+# 4) Sync de la configuration SDDM
+echo "$(date): Sauvegarde de la configuration SDDM" >> "$LOG_FILE"
+mkdir -p "$SDDM_DEST"
+sudo rsync -av --delete "$SDDM_SRC" "$SDDM_DEST/" >> "$LOG_FILE" 2>&1
+
+# 5) Sync des Images et Wallpapers (exclut Screenshot)
 #echo "$(date): Sauvegarde des images et wallpapers" >> "$LOG_FILE"
 #mkdir -p "$IMAGES_DEST"
 #rsync -av --delete --exclude='Screenshot/' "$IMAGES_SRC" "$IMAGES_DEST/" >> "$LOG_FILE" 2>&1
 
-# 5) Sync de .bashrc
+# 6) Sync de .bashrc
 echo "$(date): Sauvegarde de .bashrc" >> "$LOG_FILE"
 rsync -av --delete "$HOME/.bashrc" "$DEST/" >> "$LOG_FILE" 2>&1
 
-# 6) Sync de .zshrc
+# 7) Sync de .zshrc
 echo "$(date): Sauvegarde de .zshrc" >> "$LOG_FILE"
 rsync -av --delete "$HOME/.zshrc" "$DEST/" >> "$LOG_FILE" 2>&1
 
-# 7) Sync de mimeapps.list
+# 8) Sync de mimeapps.list
 echo "$(date): Sauvegarde de mimeapps.list" >> "$LOG_FILE"
 rsync -av --delete "$HOME/.config/mimeapps.list" "$DEST/.config/" >> "$LOG_FILE" 2>&1
 
-# 8) Sync de saveconfig.sh
+# 9) Sync de saveconfig.sh
 echo "$(date): Sauvegarde de saveconfig.sh" >> "$LOG_FILE"
 rsync -av --delete "$HOME/saveconfig.sh" "$DEST/" >> "$LOG_FILE" 2>&1
 

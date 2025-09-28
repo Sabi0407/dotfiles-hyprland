@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=X (Twitter)
+GenericName=X
+Comment=Ouvrir X (Twitter)
+Exec=xdg-open https://x.com/
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;
+Keywords=x;twitter;social;
+Icon=x-twitter

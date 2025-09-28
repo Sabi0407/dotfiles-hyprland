@@ -1,8 +1,10 @@
 [Desktop Entry]
-Name=github
-Comment=Ouvrir GitHub dans le navigateur
+Name=GitHub
+GenericName=GitHub
+Comment=Ouvrir GitHub
 Exec=xdg-open https://github.com/
-Icon=github
 Terminal=false
 Type=Application
-Categories=Utility; 
+Categories=Network;WebBrowser;Development;
+Keywords=github;git;code;développement;repository;
+Icon=github

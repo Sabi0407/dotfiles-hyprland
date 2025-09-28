@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=ProtonMail
+GenericName=ProtonMail
+Comment=Ouvrir ProtonMail
+Exec=xdg-open https://mail.proton.me/
+Terminal=false
+Type=Application
+Categories=Network;WebBrowser;Email;
+Keywords=protonmail;proton;mail;email;sécurisé;
+Icon=protonmail
