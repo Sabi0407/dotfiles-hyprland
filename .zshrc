@@ -69,3 +69,4 @@ update() {
 [[ -f /home/sabi/.dart-cli-completion/zsh-config.zsh ]] && . /home/sabi/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
+export PATH="$HOME/.local/bin:$PATH"
