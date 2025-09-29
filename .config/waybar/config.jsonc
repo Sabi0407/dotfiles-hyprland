@@ -105,16 +105,6 @@
 
 
 
-  "custom/workspaces": {
-    "format": "{}",
-    "exec": "~/.config/Scripts/workspace_letters.sh",
-    "interval": 1,
-    "return-type": "plain",
-    "on-click": "hyprctl dispatch workspace 1",
-    "on-click-right": "hyprctl dispatch workspace 2",
-    "on-click-middle": "hyprctl dispatch workspace 3",
-    "tooltip": false
-  },
 
   "hyprland/workspaces": {
     "format": "{name}",
@@ -124,8 +114,30 @@
     "on-scroll-down": "hyprctl dispatch workspace -1",
     "sort-by-number": true,
     "all-outputs": true,
-    "disable-scroll": true,
-    "show-empty-workspaces": false
+    "disable-scroll": false,
+    "show-empty-workspaces": false,
+    "active-only": false,
+    "move-to-monitor": true,
+    "persistent-workspaces": {
+      "1": [],
+      "2": []
+    },
+    "format-window-separator": " ",
+    "window-rewrite-default": "",
+    "window-rewrite": {
+      "title<.*youtube.*>": "󰗃",
+      "class<firefox>": "󰈹",
+      "class<firefox> title<.*github.*>": "󰊤", 
+      "class<firefox> title<.*reddit.*>": "󰑍",
+      "class<code>": "󰨞",
+      "class<discord>": "󰙯",
+      "class<spotify>": "󰓇",
+      "class<steam>": "󰓓",
+      "class<kitty>": "󰄛",
+      "class<thunar>": "󰉋",
+      "class<gimp>": "󰵸",
+      "class<blender>": "󰂫"
+    }
   },
 
   "power-profiles-daemon": {
