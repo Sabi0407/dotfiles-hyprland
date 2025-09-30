@@ -1,5 +1,11 @@
 # Environnement Hyprland – Documentation des paquets
 
+
+
+https://youtu.be/zQ3K9oAn1vE
+
+
+
 Ce document regroupe les paquets nécessaires au fonctionnement d’un environnement Hyprland complet sous Arch Linux.  
 Chaque section présente les logiciels, leur rôle et la source d’installation (dépôts officiels via pacman ou AUR via yay).
 
