@@ -10,6 +10,8 @@ run_zenity_dark() {
 THRESHOLDS=(20 15 10 5 3)
 # Fichier pour mémoriser le dernier seuil notifié
 STATE_FILE="$HOME/.cache/battery_notify.last"
+# Fichier pour mémoriser si on a déjà notifié à 79%
+FULL_NOTIFIED_FILE="$HOME/.cache/battery_notify.full"
 
 # Fonction pour obtenir le pourcentage batterie
 get_battery() {
@@ -73,10 +75,19 @@ while true; do
       echo 100 > "$STATE_FILE"
       LAST_NOTIFIED=100
     fi
-    # Notification batterie pleine à 79% si en charge
-    if [ "$CAPACITY" -eq 79 ] && on_charging; then
-      notify-send -u normal -i battery-full "✅ Batterie pleine" "Votre batterie est à $CAPACITY%\nVous pouvez débrancher votre chargeur"
+    
+    # Notification batterie pleine à 90% si en charge (une seule fois)
+    if [ "$CAPACITY" -ge 90 ] && on_charging; then
+      if [ ! -f "$FULL_NOTIFIED_FILE" ]; then
+        notify-send -u normal -i battery-full "✅ Batterie pleine" "Votre batterie est à $CAPACITY%\nVous pouvez débrancher votre chargeur"
+        touch "$FULL_NOTIFIED_FILE"
+      fi
+    fi
+    
+    # Reset la notification à 90% si la batterie descend en dessous de 85%
+    if [ "$CAPACITY" -lt 85 ] && [ -f "$FULL_NOTIFIED_FILE" ]; then
+      rm -f "$FULL_NOTIFIED_FILE"
+    fi
   fi
-  fi
-  sleep 10
+  sleep 60
 done 
