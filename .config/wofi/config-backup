@@ -10,6 +10,7 @@ term=kitty
 allow_images=true
 insensitive=true
 image_size=32
+# Configuration pour l'affichage en liste verticale
 columns=1
 lines=10
 orientation=vertical
