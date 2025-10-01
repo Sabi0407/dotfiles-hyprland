@@ -44,6 +44,8 @@
   "widgets": [
     "label",
     "buttons-grid",
+    "volume",
+    "backlight",
     "mpris",
     "title",
     "dnd",
@@ -66,6 +68,19 @@
     "mpris": {
       "image-size": 96,
       "image-radius": 12
+    },
+    "volume": {
+      "label": "󰕾",
+      "show-per-app": false,
+      "show-per-app-icon": true,
+      "show-per-app-label": false,
+      "expand-button-label": "󰝝",
+      "collapse-button-label": "󰝞"
+    },
+    "backlight": {
+      "label": "󰃟",
+      "device": "intel_backlight",
+      "subsystem": "backlight"
     },
     "buttons-grid": {
       "actions": [

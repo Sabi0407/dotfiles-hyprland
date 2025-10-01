@@ -13,9 +13,9 @@ nohup waybar > /dev/null 2>&1 &
 sleep 1
 
 if pgrep -f waybar > /dev/null; then
-    echo "✅ Waybar redémarré avec succès !"
+    echo " Waybar redémarré avec succès !"
 else
-    echo "❌ Erreur lors du redémarrage de Waybar"
+    echo "Erreur lors du redémarrage de Waybar"
     echo "Tentative de diagnostic..."
     waybar 2>&1 | head -3
 fi
