@@ -69,6 +69,37 @@ rsync -av --delete "$HOME/.config/mimeapps.list" "$DEST/.config/" >> "$LOG_FILE"
 echo "$(date): Sauvegarde de saveconfig.sh" >> "$LOG_FILE"
 rsync -av --delete "$HOME/saveconfig.sh" "$DEST/" >> "$LOG_FILE" 2>&1
 
+# 10) Sync de la configuration Firefox (userChrome.css et user.js)
+echo "$(date): Sauvegarde de la configuration Firefox" >> "$LOG_FILE"
+FIREFOX_PROFILE_DIR=$(ls ~/.mozilla/firefox/ | grep default | head -1)
+if [ -n "$FIREFOX_PROFILE_DIR" ]; then
+    FIREFOX_SRC="$HOME/.mozilla/firefox/$FIREFOX_PROFILE_DIR/chrome/"
+    FIREFOX_DEST="$DEST/firefox/chrome"
+    mkdir -p "$FIREFOX_DEST"
+    rsync -av --delete "$FIREFOX_SRC" "$FIREFOX_DEST/" >> "$LOG_FILE" 2>&1
+    
+    # Sync du user.js
+    FIREFOX_USER_JS="$HOME/.mozilla/firefox/$FIREFOX_PROFILE_DIR/user.js"
+    if [ -f "$FIREFOX_USER_JS" ]; then
+        rsync -av "$FIREFOX_USER_JS" "$DEST/firefox/" >> "$LOG_FILE" 2>&1
+    fi
+    echo "$(date): Configuration Firefox sauvegardée depuis le profil $FIREFOX_PROFILE_DIR" >> "$LOG_FILE"
+else
+    echo "$(date): ATTENTION - Aucun profil Firefox par défaut trouvé" >> "$LOG_FILE"
+fi
+
+# 11) Sync de la configuration VSCodium (settings.json)
+echo "$(date): Sauvegarde de la configuration VSCodium" >> "$LOG_FILE"
+VSCODIUM_SRC="$HOME/.config/VSCodium/User/settings.json"
+VSCODIUM_DEST="$DEST/VSCodium/User"
+if [ -f "$VSCODIUM_SRC" ]; then
+    mkdir -p "$VSCODIUM_DEST"
+    rsync -av "$VSCODIUM_SRC" "$VSCODIUM_DEST/" >> "$LOG_FILE" 2>&1
+    echo "$(date): Configuration VSCodium sauvegardée" >> "$LOG_FILE"
+else
+    echo "$(date): ATTENTION - Fichier VSCodium settings.json non trouvé" >> "$LOG_FILE"
+fi
+
 # Message de statut
 if [ $? -eq 0 ]; then
     echo "Sauvegarde réussie à $(date)"
