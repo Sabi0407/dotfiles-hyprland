@@ -89,7 +89,7 @@
     "format-bluetooth": "󰂱 {volume}%",
     "format-muted": "󰖁",
     "scroll-step": 1,
-    "on-click": "pavucontrol",
+    "on-click": "~/.config/Scripts/pavucontrol-compact.sh",
     "ignored-sinks": ["Easy Effects Sink"],
     "format-icons": {
       "headphone": "",

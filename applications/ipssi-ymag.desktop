@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=IPSSI Ymag
+Name=NetYparéo
 GenericName=Ymag
 Comment=Ouvrir IPSSI Ymag
 Exec=xdg-open https://ecole-ipssi.ymag.cloud/

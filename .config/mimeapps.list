@@ -1,5 +1,5 @@
 [Default Applications]
-application/zip=xarchiver.desktop
+application/zip=org.gnome.FileRoller.desktop
 x-scheme-handler/anytype=anytype.desktop
 inode/directory=thunar.desktop
 application/x-shellscript=org.xfce.mousepad.desktop
@@ -22,7 +22,7 @@ application/x-compressed-tar=xarchiver.desktop
 application/x-tar=xarchiver.desktop
 
 [Added Associations]
-application/zip=thunar.desktop;
+application/zip=thunar.desktop;org.gnome.FileRoller.desktop;
 image/png=imv.desktop;
 text/css=org.xfce.mousepad.desktop;
 text/plain=org.xfce.mousepad.desktop;
