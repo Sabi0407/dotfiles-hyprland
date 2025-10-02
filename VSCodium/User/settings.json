@@ -1,0 +1,15 @@
+{
+    // Désactive complètement la barre de titre et les décorations
+    "window.titleBarStyle": "native",
+    "window.menuBarVisibility": "hidden",
+    "window.nativeTabs": false,
+    
+    // Interface minimaliste
+    "workbench.activityBar.location": "top",
+    "editor.minimap.enabled": false,
+    "workbench.statusBar.visible": true,
+    
+    // Thème sombre compatible avec Catppuccin
+    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.iconTheme": "vs-seti"
+}
