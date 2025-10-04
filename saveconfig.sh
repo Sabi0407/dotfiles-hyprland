@@ -23,7 +23,7 @@ SDDM_SRC="/etc/sddm.conf.d/"
 SDDM_DEST="$DEST/sddm"
 
 # Dossier Wallpapers uniquement
-WALLPAPERS_SRC="$HOME/Images/wallpapers/"
+WALLPAPERS_SRC="$HOME/wallpapers/"
 WALLPAPERS_DEST="$DEST/wallpapers"
 
 # 1) Sync de ~/.config
@@ -53,9 +53,9 @@ echo "$(date): Sauvegarde des wallpapers" >> "$LOG_FILE"
 if [ -d "$WALLPAPERS_SRC" ]; then
     mkdir -p "$WALLPAPERS_DEST"
     rsync -av --delete "$WALLPAPERS_SRC" "$WALLPAPERS_DEST/" >> "$LOG_FILE" 2>&1
-    echo "$(date): Wallpapers sauvegardés depuis $WALLPAPERS_SRC" >> "$LOG_FILE"
+    echo "$(date): Wallpapers sauvegardés depuis ~/wallpapers/" >> "$LOG_FILE"
 else
-    echo "$(date): ATTENTION - Dossier wallpapers non trouvé: $WALLPAPERS_SRC" >> "$LOG_FILE"
+    echo "$(date): ATTENTION - Dossier ~/wallpapers/ non trouvé" >> "$LOG_FILE"
 fi
 
 # 6) Sync de .bashrc
