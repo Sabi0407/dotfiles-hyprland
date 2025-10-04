@@ -1,0 +1,20 @@
+/* Firefox - Configuration minimaliste et stable */
+/* Compatible avec Hyprland et Wayland */
+
+/* Masquer seulement les boutons de fenêtre (plus sûr) */
+.titlebar-buttonbox-container {
+    display: none !important;
+}
+
+/* Réduire l'espace de la barre de titre sans la supprimer complètement */
+#titlebar {
+    height: 0px !important;
+    min-height: 0px !important;
+}
+
+/* Ajuster la barre d'onglets */
+#TabsToolbar {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    padding-top: 0px !important;
+}
