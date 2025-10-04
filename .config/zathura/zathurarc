@@ -1,0 +1,124 @@
+# Configuration Zathura - Mode sombre Catppuccin Mocha
+# Compatible avec votre thème Hyprland
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 🎨 THÈME CATPPUCCIN MOCHA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Couleurs de base Catppuccin Mocha
+set default-bg                     "#1e1e2e"
+set default-fg                     "#cdd6f4"
+
+# Barre de statut
+set statusbar-bg                   "#313244"
+set statusbar-fg                   "#cdd6f4"
+
+# Barre d'entrée
+set inputbar-bg                    "#313244"
+set inputbar-fg                    "#cdd6f4"
+
+# Messages de notification
+set notification-bg                "#313244"
+set notification-fg                "#cdd6f4"
+set notification-error-bg          "#f38ba8"
+set notification-error-fg          "#1e1e2e"
+set notification-warning-bg        "#fab387"
+set notification-warning-fg        "#1e1e2e"
+
+# Completion
+set completion-bg                  "#313244"
+set completion-fg                  "#cdd6f4"
+set completion-group-bg            "#45475a"
+set completion-group-fg            "#f9e2af"
+set completion-highlight-bg        "#585b70"
+set completion-highlight-fg        "#cdd6f4"
+
+# Index
+set index-bg                       "#1e1e2e"
+set index-fg                       "#cdd6f4"
+set index-active-bg                "#585b70"
+set index-active-fg                "#cdd6f4"
+
+# Couleurs de rendu
+set render-loading-bg              "#1e1e2e"
+set render-loading-fg              "#cdd6f4"
+
+# Surlignage et sélection
+set highlight-color                "#f9e2af"
+set highlight-active-color         "#a6e3a1"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ⚙️ CONFIGURATION GÉNÉRALE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Mode sombre par défaut
+set recolor                        true
+set recolor-lightcolor             "#1e1e2e"
+set recolor-darkcolor              "#cdd6f4"
+set recolor-reverse-video          true
+set recolor-keephue                true
+
+# Interface
+set font                           "FiraCode Nerd Font 12"
+set show-scrollbars                false
+set statusbar-basename             true
+set window-title-basename          true
+set selection-clipboard            clipboard
+
+# Navigation et zoom
+set zoom-min                       10
+set zoom-max                       1000
+set zoom-step                      10
+set scroll-step                    40
+set scroll-hstep                   40
+set scroll-full-overlap            0.01
+set scroll-wrap                    false
+
+# Pages
+set pages-per-row                  1
+set first-page-column              1:2
+set adjust-open                    best-fit
+set smooth-scroll                  true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ⌨️ RACCOURCIS CLAVIER
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Navigation
+map j scroll down
+map k scroll up
+map h scroll left
+map l scroll right
+
+# Zoom
+map + zoom in
+map - zoom out
+map = zoom in
+map 0 adjust_window best-fit
+map a adjust_window width
+map s adjust_window height
+
+# Mode sombre toggle
+map <C-r> recolor
+
+# Rotation
+map r rotate
+map R rotate
+
+# Recherche
+map / search forward
+map ? search backward
+map n search next
+map N search previous
+
+# Plein écran
+map f toggle_fullscreen
+map F5 toggle_presentation
+
+# Index/Table des matières
+map <Tab> toggle_index
+map i toggle_index
+
+# Quitter
+map q quit
+map <C-c> quit
