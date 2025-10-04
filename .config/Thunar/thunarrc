@@ -1,0 +1,113 @@
+# Configuration Thunar - Gestionnaire de fichiers optimisé
+# Compatible avec votre setup Hyprland + Catppuccin
+
+[Configuration]
+# ═══════════════════════════════════════════════════════════════════════════════
+# 🎨 APPARENCE ET INTERFACE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Vue par défaut (ThunarIconView, ThunarDetailsView, ThunarCompactView)
+DefaultView=ThunarDetailsView
+
+# Taille des icônes (THUNAR_ICON_SIZE_SMALLEST à THUNAR_ICON_SIZE_LARGEST)
+LastIconView=THUNAR_ICON_SIZE_NORMAL
+LastDetailsViewColumnWidths=50,133,50,50,178,50,50,73,70
+
+# Barre latérale (ThunarShortcutsPane, ThunarTreePane)
+LastSidePane=ThunarShortcutsPane
+
+# Largeur de la barre latérale
+LastSeparatorPosition=170
+
+# Affichage de la barre d'outils
+LastToolbarVisible=TRUE
+
+# Affichage de la barre de statut
+LastStatusbarVisible=TRUE
+
+# Affichage de la barre de localisation (ThunarLocationButtons, ThunarLocationEntry)
+LastLocationBar=ThunarLocationButtons
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 🔧 COMPORTEMENT
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Tri par défaut (THUNAR_SORT_BY_NAME, THUNAR_SORT_BY_SIZE, THUNAR_SORT_BY_TYPE, THUNAR_SORT_BY_DATE_MODIFIED)
+LastSortColumn=THUNAR_SORT_BY_NAME
+LastSortOrder=GTK_SORT_ASCENDING
+
+# Afficher les fichiers cachés
+LastShowHidden=FALSE
+
+# Ouvrir les dossiers dans de nouveaux onglets au lieu de nouvelles fenêtres
+MiscFoldersOpenInTabs=TRUE
+
+# Confirmer avant de déplacer vers la corbeille
+MiscConfirmMoveToTrash=TRUE
+
+# Confirmer avant de supprimer définitivement
+MiscConfirmNonUndoableActions=TRUE
+
+# Sélection simple (un clic pour sélectionner)
+MiscSingleClick=FALSE
+
+# Navigation avec un seul clic dans la vue en arbre
+MiscSingleClickTimeout=500
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 📁 DOSSIERS ET NAVIGATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Se souvenir de la géométrie des fenêtres
+MiscRememberGeometry=TRUE
+
+# Toujours afficher les onglets
+MiscAlwaysShowTabs=FALSE
+
+# Nombre maximum d'onglets à retenir
+MiscMaxRecentItems=10
+
+# Dossier par défaut à l'ouverture
+DefaultWorkingDirectory=/home/sabi
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 🎯 PERFORMANCES ET OPTIMISATIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Cache des miniatures
+MiscThumbnailMode=THUNAR_THUMBNAIL_MODE_ALWAYS
+
+# Taille maximale des fichiers pour les miniatures (en Mo)
+MiscThumbnailMaxFileSize=52428800
+
+# Activer les miniatures pour tous les types de fichiers
+MiscShowThumbnails=TRUE
+
+# Actualisation automatique des dossiers
+MiscFolderItemCount=THUNAR_FOLDER_ITEM_COUNT_ALWAYS
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 🖱️ INTERACTIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Action du bouton du milieu de la souris
+MiscMiddleClickInTab=TRUE
+
+# Glisser-déposer par défaut (copier, déplacer, lier)
+MiscTransferMode=THUNAR_TRANSFER_MODE_ASK
+
+# Zoom avec Ctrl+molette
+MiscZoomLevel=THUNAR_ZOOM_LEVEL_NORMAL
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 🔍 RECHERCHE ET FILTRES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Recherche récursive dans les sous-dossiers
+MiscRecursiveSearch=TRUE
+
+# Recherche sensible à la casse
+MiscCaseSensitiveSearch=FALSE
+
+# Filtrer les fichiers en temps réel
+MiscFileFilter=TRUE
