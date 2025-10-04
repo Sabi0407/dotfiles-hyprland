@@ -1,8 +1,12 @@
+# Wofi Configuration
+# Adapted from Binoy Manoj config
+# GitHub: https://github.com/binoymanoj
+
 opacity=0.95
 width=380
 height=420
 location=center
-prompt=Rechercher...
+prompt=Search...
 show=drun
 hide_scroll=true
 no_actions=false
@@ -13,6 +17,18 @@ image_size=32
 columns=1
 lines=10
 orientation=vertical
+filter_rate=100
+allow_markup=true
+halign=fill
+content_halign=fill
+gtk_dark=true
+matching=fuzzy
+drun-display_generic=false
+key_forward=Tab
+key_backward=ISO_Left_Tab
+layer=overlay
+key_down=ctrl-j
+key_up=ctrl-k
 gtk-application-prefer-dark-theme=true
 gtk-theme-name=Adwaita
 gtk-icon-theme-name=Adwaita
