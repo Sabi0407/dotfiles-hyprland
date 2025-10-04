@@ -22,9 +22,9 @@ APPS_DEST="$DEST/applications"
 SDDM_SRC="/etc/sddm.conf.d/"
 SDDM_DEST="$DEST/sddm"
 
-# Dossier Images et Wallpapers
-#IMAGES_SRC="$HOME/Images/"
-#IMAGES_DEST="$DEST/Images"
+# Dossier Wallpapers uniquement
+WALLPAPERS_SRC="$HOME/Images/wallpapers/"
+WALLPAPERS_DEST="$DEST/wallpapers"
 
 # 1) Sync de ~/.config
 echo "$(date): Début de la sauvegarde de ~/.config" >> "$LOG_FILE"
@@ -48,10 +48,15 @@ echo "$(date): Sauvegarde de la configuration SDDM" >> "$LOG_FILE"
 mkdir -p "$SDDM_DEST"
 sudo rsync -av --delete "$SDDM_SRC" "$SDDM_DEST/" >> "$LOG_FILE" 2>&1
 
-# 5) Sync des Images et Wallpapers (exclut Screenshot)
-#echo "$(date): Sauvegarde des images et wallpapers" >> "$LOG_FILE"
-#mkdir -p "$IMAGES_DEST"
-#rsync -av --delete --exclude='Screenshot/' "$IMAGES_SRC" "$IMAGES_DEST/" >> "$LOG_FILE" 2>&1
+# 5) Sync du dossier Wallpapers uniquement
+echo "$(date): Sauvegarde des wallpapers" >> "$LOG_FILE"
+if [ -d "$WALLPAPERS_SRC" ]; then
+    mkdir -p "$WALLPAPERS_DEST"
+    rsync -av --delete "$WALLPAPERS_SRC" "$WALLPAPERS_DEST/" >> "$LOG_FILE" 2>&1
+    echo "$(date): Wallpapers sauvegardés depuis $WALLPAPERS_SRC" >> "$LOG_FILE"
+else
+    echo "$(date): ATTENTION - Dossier wallpapers non trouvé: $WALLPAPERS_SRC" >> "$LOG_FILE"
+fi
 
 # 6) Sync de .bashrc
 echo "$(date): Sauvegarde de .bashrc" >> "$LOG_FILE"
