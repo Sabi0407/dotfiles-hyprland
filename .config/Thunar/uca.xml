@@ -104,6 +104,141 @@
 	<image-files/>
 	<other-files/>
 	<text-files/>
+<action>
+	<icon>text-editor</icon>
+	<name>Éditer avec Micro</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-8</unique-id>
+	<command>kitty --working-directory %d micro %f</command>
+	<description>Éditer le fichier avec l'éditeur Micro dans Kitty</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<text-files/>
+	<other-files/>
+</action>
+
+<action>
+	<icon>media-playback-start</icon>
+	<name>Lire le média</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-9</unique-id>
+	<command>mpv %f</command>
+	<description>Lire le fichier média avec MPV</description>
+	<range></range>
+	<patterns>*.mp4;*.mkv;*.avi;*.mp3;*.flac;*.wav;*.ogg</patterns>
+	<startup-notify/>
+	<audio-files/>
 	<video-files/>
+</action>
+
+<action>
+	<icon>image-x-generic</icon>
+	<name>Voir l'image</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-10</unique-id>
+	<command>imv %f</command>
+	<description>Voir l'image avec imv</description>
+	<range></range>
+	<patterns>*.jpg;*.jpeg;*.png;*.gif;*.webp;*.svg;*.bmp</patterns>
+	<startup-notify/>
+	<image-files/>
+</action>
+
+<action>
+	<icon>folder-new</icon>
+	<name>Créer un projet</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-11</unique-id>
+	<command>~/.config/Scripts/create-project.sh %f</command>
+	<description>Créer un nouveau projet dans ce dossier</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+
+<action>
+	<icon>edit-find</icon>
+	<name>Rechercher dans les fichiers</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-12</unique-id>
+	<command>kitty --working-directory %f fzf-search</command>
+	<description>Rechercher récursivement dans ce dossier</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+
+<action>
+	<icon>document-open</icon>
+	<name>Ouvrir avec navigateur</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-13</unique-id>
+	<command>zathura %f</command>
+	<description>Ouvrir le PDF avec Zathura</description>
+	<range></range>
+	<patterns>*.pdf</patterns>
+	<startup-notify/>
+	<other-files/>
+</action>
+
+<action>
+	<icon>folder-sync</icon>
+	<name>Synchroniser avec Git</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-14</unique-id>
+	<command>kitty --working-directory %f git-sync</command>
+	<description>Synchroniser le dépôt Git dans ce dossier</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+
+<action>
+	<icon>security-high</icon>
+	<name>Vérifier les permissions</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-15</unique-id>
+	<command>kitty --working-directory %f ls -la</command>
+	<description>Afficher les permissions détaillées du dossier</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+
+<action>
+	<icon>edit-cut</icon>
+	<name>Déplacer vers...</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-16</unique-id>
+	<command>kitty --working-directory %d mv %f</command>
+	<description>Déplacer le fichier vers un autre emplacement</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+
+<action>
+	<icon>text-editor</icon>
+	<name>Éditer avec Obsidian</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-18</unique-id>
+	<command>obsidian %f</command>
+	<description>Ouvrir le fichier Markdown avec Obsidian</description>
+	<range></range>
+	<patterns>*.md;*.markdown</patterns>
+	<startup-notify/>
+	<text-files/>
+	<other-files/>
 </action>
 </actions>

@@ -11,13 +11,13 @@ DefaultView=ThunarDetailsView
 
 # Taille des icônes (THUNAR_ICON_SIZE_SMALLEST à THUNAR_ICON_SIZE_LARGEST)
 LastIconView=THUNAR_ICON_SIZE_NORMAL
-LastDetailsViewColumnWidths=50,133,50,50,178,50,50,73,70
+LastDetailsViewColumnWidths=50,200,80,80,150,50,50,100,120
 
 # Barre latérale (ThunarShortcutsPane, ThunarTreePane)
 LastSidePane=ThunarShortcutsPane
 
 # Largeur de la barre latérale
-LastSeparatorPosition=170
+LastSeparatorPosition=200
 
 # Affichage de la barre d'outils
 LastToolbarVisible=TRUE
@@ -37,13 +37,13 @@ LastSortColumn=THUNAR_SORT_BY_NAME
 LastSortOrder=GTK_SORT_ASCENDING
 
 # Afficher les fichiers cachés
-LastShowHidden=FALSE
+LastShowHidden=TRUE
 
 # Ouvrir les dossiers dans de nouveaux onglets au lieu de nouvelles fenêtres
 MiscFoldersOpenInTabs=TRUE
 
 # Confirmer avant de déplacer vers la corbeille
-MiscConfirmMoveToTrash=TRUE
+MiscConfirmMoveToTrash=FALSE
 
 # Confirmer avant de supprimer définitivement
 MiscConfirmNonUndoableActions=TRUE
@@ -52,7 +52,7 @@ MiscConfirmNonUndoableActions=TRUE
 MiscSingleClick=FALSE
 
 # Navigation avec un seul clic dans la vue en arbre
-MiscSingleClickTimeout=500
+MiscSingleClickTimeout=300
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # 📁 DOSSIERS ET NAVIGATION
@@ -62,10 +62,10 @@ MiscSingleClickTimeout=500
 MiscRememberGeometry=TRUE
 
 # Toujours afficher les onglets
-MiscAlwaysShowTabs=FALSE
+MiscAlwaysShowTabs=TRUE
 
 # Nombre maximum d'onglets à retenir
-MiscMaxRecentItems=10
+MiscMaxRecentItems=20
 
 # Dossier par défaut à l'ouverture
 DefaultWorkingDirectory=/home/sabi
@@ -77,14 +77,17 @@ DefaultWorkingDirectory=/home/sabi
 # Cache des miniatures
 MiscThumbnailMode=THUNAR_THUMBNAIL_MODE_ALWAYS
 
-# Taille maximale des fichiers pour les miniatures (en Mo)
-MiscThumbnailMaxFileSize=52428800
+# Taille maximale des fichiers pour les miniatures (100 Mo)
+MiscThumbnailMaxFileSize=104857600
 
 # Activer les miniatures pour tous les types de fichiers
 MiscShowThumbnails=TRUE
 
 # Actualisation automatique des dossiers
 MiscFolderItemCount=THUNAR_FOLDER_ITEM_COUNT_ALWAYS
+
+# Préchargement des dossiers pour navigation rapide
+MiscParallelCopyMode=THUNAR_PARALLEL_COPY_MODE_ALWAYS
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # 🖱️ INTERACTIONS
