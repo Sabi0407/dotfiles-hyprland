@@ -1,3 +1,4 @@
+
 # ========================================
 # ALIASES DE BASE
 # ========================================
@@ -78,4 +79,4 @@ alias wallmenu='~/.config/wallpapermenu.sh'
 
 alias syup='cd ~/ChromiumPywal && ./generate-theme.sh'
 
-alias upadate= pacman -sy && pacman
+alias clean='/home/sabi/.config/Scripts/cleanup-system.sh'
