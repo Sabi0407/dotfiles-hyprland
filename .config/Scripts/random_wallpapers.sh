@@ -47,10 +47,8 @@ if [ -n "$wallpaper" ]; then
     sleep 0.5
     hyprctl dispatch exec swaync
     
-    # Redémarrer wofi pour appliquer les nouvelles couleurs
-    pkill wofi
-    sleep 0.5
-    hyprctl dispatch exec wofi
+    # Tuer wofi s'il est ouvert (pour appliquer les nouvelles couleurs au prochain lancement)
+    pkill wofi 2>/dev/null
     
     echo "Wallpaper changé : $(basename "$wallpaper") avec transition: $transition"
 else

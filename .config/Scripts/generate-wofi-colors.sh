@@ -209,4 +209,10 @@ if grep -q "A23B30\|E56537\|DB694C\|F49E51\|F7A748" "$WOFI_COLORS_FILE" 2>/dev/n
 else
     echo "Couleurs Wofi générées avec succès dans ~/.config/wofi/colors.css"
 fi
-echo "Style complet généré dans ~/.config/wofi/style-full.css" 
+echo "Style complet généré dans ~/.config/wofi/style-full.css"
+
+# Copier le template pywal généré si disponible
+if [ -f "$HOME/.cache/wal/wofi-style.css" ]; then
+    cp "$HOME/.cache/wal/wofi-style.css" "$HOME/.config/wofi/style.css"
+    echo "Style pywal copié vers ~/.config/wofi/style.css"
+fi 
