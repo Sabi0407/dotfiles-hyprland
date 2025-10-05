@@ -1,12 +1,12 @@
-/* ~/.config/wofi/style.css - Tiroir d'applications Catppuccin Mocha */
+/* ~/.config/wofi/style.css - Généré par pywal */
 
 window {
     margin: 0px;
-    background-color: rgba(30, 30, 46, 0.95);
+    background-color: #141d2eee;
     border-radius: 15px;
-    border: 2px solid #89b4fa;
+    border: 2px solid #DB694C;
     font-family: "JetBrainsMono Nerd Font";
-    color: #cdd6f4;
+    color: #c4c6ca;
     min-width: 380px;
     max-width: 380px;
     width: 380px;
@@ -16,14 +16,14 @@ window {
     margin: 5px;
     padding: 10px;
     border-radius: 10px;
-    border: 2px solid --wofi-color8;
-    color: --wofi-color15;
-    background-color: rgba(--wofi-rgb-color8, 0.6);
+    border: 2px solid #636b79;
+    color: #c4c6ca;
+    background-color: #141d2e99;
 }
 
 #input:focus {
-    background-color: rgba(--wofi-rgb-color8, 0.8);
-    border-color: --wofi-color4;
+    background-color: #141d2ecc;
+    border-color: #DB694C;
 }
 
 #inner-box {
@@ -39,10 +39,10 @@ window {
 #entry {
     padding: 5px;
     margin: 5px;
-    background-color: rgba(--wofi-rgb-color8, 0.3);
+    background-color: #636b794d;
     border-radius: 10px;
     transition: all 0.2s ease;
-    color: --wofi-color15;
+    color: #c4c6ca;
     position: relative;
     display: flex;
     align-items: center;
@@ -52,11 +52,11 @@ window {
 }
 
 #entry:hover {
-    background-color: rgba(--wofi-rgb-color8, 0.5);
+    background-color: #636b7980;
 }
 
 #entry:selected {
-    background-color: rgba(--wofi-rgb-color8, 0.7);
+    background-color: #636b79b3;
     border: none;
 }
 
@@ -67,17 +67,17 @@ window {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: rgba(255,255,255,0.08);
+  background: #DB694C14;
   border-radius: 0 1px 1px 0;
 }
 
 /* Focus clavier */
 #entry:focus {
-  outline: 2px solid --wofi-color4;
+  outline: 2px solid #DB694C;
   outline-offset: 2px;
   box-shadow: 
     0 2px 6px rgba(0,0,0,0.05),
-    0 0 0 4px rgba(--wofi-rgb-color4, 0.15);
+    0 0 0 4px #DB694C26;
 }
 
 /* Raccourcis clavier visuels */
@@ -102,8 +102,8 @@ window {
   transform: translateY(-50%);
   font-size: 11px;
   font-weight: 600;
-  color: rgba(--wofi-rgb-color15, 0.4);
-  background: rgba(--wofi-rgb-color8, 0.1);
+  color: #c4c6ca66;
+  background: #636b791a;
   padding: 2px 6px;
   border-radius: 4px;
   min-width: 16px;
@@ -112,15 +112,14 @@ window {
 }
 
 #entry:selected::after {
-  color: rgba(--wofi-rgb-color0, 0.6);
-  background: rgba(--wofi-rgb-color0, 0.15);
+  color: #141d2e99;
+  background: #141d2e26;
 }
 
 #entry:focus::after {
-  color: --wofi-color4;
-  background: rgba(--wofi-rgb-color4, 0.2);
+  color: #DB694C;
+  background: #DB694C33;
 }
-
 
 #image {
     width: 32px;
@@ -132,7 +131,7 @@ window {
 
 #text {
     margin: 5px;
-    color: --wofi-color15;
+    color: #c4c6ca;
     padding-left: 8px;
     flex-grow: 1;
     font-size: 14px;
@@ -143,7 +142,7 @@ window {
 }
 
 #text:selected {
-    color: --wofi-color4;
+    color: #DB694C;
 }
 
 #scroll {
@@ -157,13 +156,13 @@ scrollbar {
 }
 
 scrollbar slider {
-    background-color: rgba(--wofi-rgb-color4, 0.3);
+    background-color: #DB694C4d;
     border-radius: 6px;
     margin: 2px;
 }
 
 scrollbar slider:hover {
-    background-color: rgba(--wofi-rgb-color4, 0.5);
+    background-color: #DB694C80;
 }
 
 /* Flèches pour les actions multiples */
@@ -173,14 +172,14 @@ scrollbar slider:hover {
   right: 32px;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(--wofi-rgb-color15, 0.6);
+  color: #c4c6ca99;
   font-size: 16px;
   font-weight: 600;
   z-index: 1;
 }
 
 #entry.activatable:selected::before {
-  color: rgba(--wofi-rgb-color0, 0.7);
+  color: #141d2eb3;
 }
 
 /* Actions dépliées */

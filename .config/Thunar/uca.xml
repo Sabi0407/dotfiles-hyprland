@@ -241,4 +241,31 @@
 	<text-files/>
 	<other-files/>
 </action>
+
+<action>
+	<icon>document-new</icon>
+	<name>Nouveau fichier texte</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-19</unique-id>
+	<command>~/.config/Scripts/thunar-new-file.sh %d</command>
+	<description>Créer un nouveau fichier texte avec Mousepad (nom personnalisé)</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+
+<action>
+	<icon>text-x-generic</icon>
+	<name>Ouvrir avec Mousepad</name>
+	<submenu></submenu>
+	<unique-id>1759014546145235-20</unique-id>
+	<command>mousepad %f</command>
+	<description>Ouvrir le fichier avec Mousepad</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<text-files/>
+	<other-files/>
+</action>
 </actions>

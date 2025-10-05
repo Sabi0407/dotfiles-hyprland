@@ -1,0 +1,43 @@
+/* Configuration GTK3 personnalisée */
+/* Désactiver l'arrière-plan flou des dialogues */
+
+/* Supprimer le backdrop blur des fenêtres de dialogue */
+.background {
+    background-color: @theme_bg_color;
+}
+
+/* Désactiver le flou d'arrière-plan pour les dialogues de fichiers */
+filechooser .background,
+filechooser window,
+dialog .background,
+dialog window {
+    background-color: @theme_bg_color;
+    backdrop-filter: none;
+    -gtk-backdrop-filter: none;
+}
+
+/* Supprimer la transparence et le flou */
+window.background {
+    background-color: @theme_bg_color;
+    opacity: 1.0;
+}
+
+/* Désactiver le backdrop pour toutes les fenêtres */
+window:backdrop {
+    background-color: @theme_bg_color;
+    opacity: 1.0;
+}
+
+/* Fenêtre de sélection de fichiers sans flou */
+.filechooser {
+    background-color: @theme_bg_color;
+    backdrop-filter: none;
+}
+
+/* Dialogues zenity sans flou */
+#zenity-dialog,
+#zenity-file-selection {
+    background-color: @theme_bg_color;
+    backdrop-filter: none;
+    -gtk-backdrop-filter: none;
+}
