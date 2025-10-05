@@ -1,0 +1,120 @@
+[Configuration]
+# Configuration Mousepad optimisée pour développement
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# APPARENCE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Thème de coloration syntaxique (classic, cobalt, kate, oblivion, solarized-dark, solarized-light, tango)
+ColorScheme=solarized-dark
+
+# Police de caractères
+ViewFontName=JetBrains Mono 11
+
+# Afficher les numéros de ligne
+ViewShowLineNumbers=true
+
+# Afficher les marques de fin de ligne
+ViewShowWhitespace=false
+
+# Surligner la ligne actuelle
+ViewHighlightCurrentLine=true
+
+# Afficher la marge droite
+ViewShowRightMargin=true
+ViewRightMarginPosition=80
+
+# Afficher la barre d'état
+WindowStatusbarVisible=true
+
+# Afficher la barre d'outils
+WindowToolbarVisible=true
+
+# Mode plein écran au démarrage
+WindowFullscreen=false
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ÉDITION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Taille de la tabulation
+ViewTabWidth=4
+
+# Insérer des espaces au lieu de tabulations
+ViewInsertSpaces=true
+
+# Retour à la ligne automatique
+ViewWordWrap=false
+
+# Auto-indentation
+ViewAutoIndent=true
+
+# Correspondance des parenthèses
+ViewMatchBrackets=true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FICHIERS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Encodage par défaut (UTF-8)
+FileSaveEncoding=UTF-8
+
+# Fin de ligne par défaut (Unix: LF, Windows: CRLF, Mac: CR)
+FileSaveLineEnding=unix
+
+# Créer une copie de sauvegarde
+FileBackup=false
+
+# Sauvegarde automatique
+FileAutosave=true
+FileAutosaveInterval=5
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FENÊTRE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Taille de la fenêtre
+WindowWidth=1000
+WindowHeight=700
+
+# Position de la fenêtre (center, mouse, none)
+WindowPosition=center
+
+# Se souvenir de la taille et position
+WindowRememberSize=true
+WindowRememberPosition=true
+
+# Ouvrir les fichiers dans des onglets
+WindowOpenInNewTab=true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# RECHERCHE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Recherche sensible à la casse
+SearchMatchCase=false
+
+# Recherche de mots entiers uniquement
+SearchMatchWholeWord=false
+
+# Recherche avec expressions régulières
+SearchRegex=false
+
+# Surligner toutes les correspondances
+SearchHighlightAll=true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DIVERS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Vérifier les modifications externes
+FileMonitorChanges=true
+
+# Recharger automatiquement les fichiers modifiés
+FileReloadOnChange=true
+
+# Afficher les fichiers récents
+RecentFilesMenuSize=10
+
+# Coloration syntaxique activée
+ViewColorScheme=true
