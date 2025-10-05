@@ -1,43 +1,60 @@
 /* Configuration GTK3 personnalisée */
-/* Désactiver l'arrière-plan flou des dialogues */
+/* Désactiver complètement l'arrière-plan flou des dialogues */
 
-/* Supprimer le backdrop blur des fenêtres de dialogue */
-.background {
-    background-color: @theme_bg_color;
+@define-color backdrop_bg_color @theme_bg_color;
+@define-color backdrop_base_color @theme_base_color;
+
+/* Forcer l'opacité complète pour toutes les fenêtres */
+* {
+    -gtk-icon-effect: none;
 }
 
-/* Désactiver le flou d'arrière-plan pour les dialogues de fichiers */
-filechooser .background,
-filechooser window,
-dialog .background,
-dialog window {
-    background-color: @theme_bg_color;
-    backdrop-filter: none;
-    -gtk-backdrop-filter: none;
-}
-
-/* Supprimer la transparence et le flou */
-window.background {
-    background-color: @theme_bg_color;
+window:backdrop,
+dialog:backdrop,
+.background:backdrop {
     opacity: 1.0;
+}
+
+window,
+window.background,
+.background {
+    background-color: @theme_bg_color !important;
+    opacity: 1.0 !important;
 }
 
 /* Désactiver le backdrop pour toutes les fenêtres */
-window:backdrop {
-    background-color: @theme_bg_color;
-    opacity: 1.0;
+window:backdrop,
+*:backdrop {
+    background-color: @theme_bg_color !important;
+    opacity: 1.0 !important;
+    backdrop-filter: none !important;
 }
 
-/* Fenêtre de sélection de fichiers sans flou */
+/* Dialogues de fichiers sans flou */
+filechooser,
+filechooser .background,
+filechooser window,
+dialog,
+dialog .background,
+dialog window {
+    background-color: @theme_bg_color !important;
+    backdrop-filter: none !important;
+    -gtk-backdrop-filter: none !important;
+    opacity: 1.0 !important;
+}
+
+/* Fenêtre de sélection de fichiers */
 .filechooser {
-    background-color: @theme_bg_color;
-    backdrop-filter: none;
+    background-color: @theme_bg_color !important;
+    backdrop-filter: none !important;
+    opacity: 1.0 !important;
 }
 
-/* Dialogues zenity sans flou */
+/* Dialogues zenity */
 #zenity-dialog,
 #zenity-file-selection {
-    background-color: @theme_bg_color;
-    backdrop-filter: none;
-    -gtk-backdrop-filter: none;
+    background-color: @theme_bg_color !important;
+    backdrop-filter: none !important;
+    -gtk-backdrop-filter: none !important;
+    opacity: 1.0 !important;
 }
