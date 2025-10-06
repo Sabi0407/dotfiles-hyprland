@@ -46,9 +46,7 @@ cat << 'EOF' | wofi --dmenu \
 🎬 MULTIMÉDIA
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  SUPER + M              Sélectionner une vidéo (MPV)
- SUPER + P              Spotify Play/Pause
- SUPER + [              Piste précédente
- SUPER + ]              Piste suivante
+ SUPER + P              Mode pseudo-tiling
  F1 / SUPER + F1        Muet
  F2 / SUPER + F2        Volume -
  F3 / SUPER + F3        Volume +
@@ -63,10 +61,13 @@ cat << 'EOF' | wofi --dmenu \
  SUPER + Ctrl + W       Rofi wallpaper
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📸 CAPTURES D'ÉCRAN
+📸 CAPTURES & ENREGISTREMENT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  SUPER + S              Flameshot (capture)
  SUPER + T              Copier capture dans presse-papier
+ SUPER + Shift + V      Démarrer enregistrement (zone)
+ SUPER + Ctrl + V       Statut enregistrement
+ SUPER + Shift + Ctrl + V  Arrêter enregistrement
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 🔒 SYSTÈME
@@ -76,7 +77,19 @@ cat << 'EOF' | wofi --dmenu \
  SUPER + N              Centre de notifications
  SUPER + Shift + C      Recharger la config
  SUPER + C              Changer de layout
+ SUPER + K              Toggle rétroéclairage clavier
+ SUPER + Y              Interface Syncthing
  Ctrl + Alt + W         Wallpaper aléatoire
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔍 ZOOM & REDIMENSIONNEMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ SUPER + =              Zoom curseur +
+ SUPER + -              Zoom curseur -
+ SUPER + Shift + 0      Réinitialiser zoom
+ SUPER + Mouse Scroll   Redimensionner fenêtre
+ ALT + Mouse Scroll     Redimensionner horizontal
+ CTRL + Mouse Scroll    Navigation focus/zoom
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 💡 ASTUCES
