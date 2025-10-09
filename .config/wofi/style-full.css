@@ -1,39 +1,39 @@
 /* Wofi - Style avec couleurs pywal intégrées */
 
 :root {
-  --wofi-color0: ;
-  --wofi-color1: ;
-  --wofi-color2: ;
-  --wofi-color3: ;
-  --wofi-color4: ;
-  --wofi-color5: ;
-  --wofi-color6: ;
-  --wofi-color7: ;
-  --wofi-color8: ;
-  --wofi-color9: ;
-  --wofi-color10: ;
-  --wofi-color11: ;
-  --wofi-color12: ;
-  --wofi-color13: ;
-  --wofi-color14: ;
-  --wofi-color15: ;
+  --wofi-color0: #130813;
+  --wofi-color1: #8F162D;
+  --wofi-color2: #A61B31;
+  --wofi-color3: #AF2737;
+  --wofi-color4: #BC2F40;
+  --wofi-color5: #CA3747;
+  --wofi-color6: #E25F5E;
+  --wofi-color7: #c4c1c4;
+  --wofi-color8: #6b576b;
+  --wofi-color9: #8F162D;
+  --wofi-color10: #A61B31;
+  --wofi-color11: #AF2737;
+  --wofi-color12: #BC2F40;
+  --wofi-color13: #CA3747;
+  --wofi-color14: #E25F5E;
+  --wofi-color15: #c4c1c4;
 
-  --wofi-rgb-color0: ;
-  --wofi-rgb-color1: ;
-  --wofi-rgb-color2: ;
-  --wofi-rgb-color3: ;
-  --wofi-rgb-color4: ;
-  --wofi-rgb-color5: ;
-  --wofi-rgb-color6: ;
-  --wofi-rgb-color7: ;
-  --wofi-rgb-color8: ;
-  --wofi-rgb-color9: ;
-  --wofi-rgb-color10: ;
-  --wofi-rgb-color11: ;
-  --wofi-rgb-color12: ;
-  --wofi-rgb-color13: ;
-  --wofi-rgb-color14: ;
-  --wofi-rgb-color15: ;
+  --wofi-rgb-color0: 19, 8, 19;
+  --wofi-rgb-color1: 143, 22, 45;
+  --wofi-rgb-color2: 166, 27, 49;
+  --wofi-rgb-color3: 175, 39, 55;
+  --wofi-rgb-color4: 188, 47, 64;
+  --wofi-rgb-color5: 202, 55, 71;
+  --wofi-rgb-color6: 226, 95, 94;
+  --wofi-rgb-color7: 196, 193, 196;
+  --wofi-rgb-color8: 107, 87, 107;
+  --wofi-rgb-color9: 143, 22, 45;
+  --wofi-rgb-color10: 166, 27, 49;
+  --wofi-rgb-color11: 175, 39, 55;
+  --wofi-rgb-color12: 188, 47, 64;
+  --wofi-rgb-color13: 202, 55, 71;
+  --wofi-rgb-color14: 226, 95, 94;
+  --wofi-rgb-color15: 196, 193, 196;
 
   /* Variables CSS pour une cohérence globale */
   --primary: var(--wofi-color2);

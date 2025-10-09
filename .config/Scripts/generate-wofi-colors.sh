@@ -46,7 +46,7 @@ else
         echo "$r, $g, $b"
     }
 
-    # Générer le fichier CSS avec les variables wofi
+    # Générer le fichier CSS compact et raffiné avec pywal16
     cat > "$WOFI_COLORS_FILE" << EOF
 /* Couleurs générées par pywal pour Wofi */
 
