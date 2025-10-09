@@ -20,6 +20,7 @@ application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 application/x-compressed-tar=xarchiver.desktop
 application/x-tar=xarchiver.desktop
+x-scheme-handler/discord=vesktop.desktop
 
 [Added Associations]
 application/zip=thunar.desktop;org.gnome.FileRoller.desktop;
