@@ -24,7 +24,7 @@ if [ -n "$wallpaper" ]; then
     # Synchroniser tous les thèmes avec pywal
     ~/.config/Scripts/wal2swaync.sh
     ~/.config/Scripts/generate-pywal-waybar-style.sh
-    ~/.config/Scripts/generate-wofi-colors.sh
+    ~/.config/Scripts/generate-tofi-colors.sh
     ~/.config/Scripts/generate-kitty-colors.sh
     ~/.config/Scripts/generate-wlogout-colors.sh
     ~/.config/Scripts/generate-hyprland-colors.sh
@@ -47,8 +47,8 @@ if [ -n "$wallpaper" ]; then
     sleep 0.5
     hyprctl dispatch exec swaync
     
-    # Tuer wofi s'il est ouvert (pour appliquer les nouvelles couleurs au prochain lancement)
-    pkill wofi 2>/dev/null
+    # Tuer Tofi s'il est ouvert (pour appliquer les nouvelles couleurs au prochain lancement)
+    pkill tofi 2>/dev/null
     
     echo "Wallpaper changé : $(basename "$wallpaper") avec transition: $transition"
 else

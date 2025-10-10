@@ -75,7 +75,7 @@ alias root='sudo -i' # Se connecter en tant que root
 
 # Scripts
 alias saveconfig='/home/sabi/saveconfig.sh'
-alias wallmenu='~/.config/wallpapermenu.sh'
+alias wallmenu='~/.config/Scripts/wallpaper-manager.sh random'
 
 alias syup='cd ~/ChromiumPywal && ./generate-theme.sh'
 

@@ -236,7 +236,7 @@
 
   "custom/keyboard-backlight": {
     "format": "󰌵 {}%",
-    "exec": "~/.config/Scripts/keyboard_backlight_time_wrapper.sh",
+    "exec": "~/.config/Scripts/keyboard_backlight_waybar.sh",
     "interval": 1,
     "return-type": "plain",
     "on-click": "~/.config/Scripts/backlight_setup.sh toggle",

@@ -32,7 +32,7 @@ apply_wallpaper() {
     wal -i "$wallpaper_path" -n
     
     # Synchroniser tous les thèmes
-    for script in wal2swaync generate-pywal-waybar-style generate-wofi-colors generate-kitty-colors generate-hyprland-colors; do
+    for script in wal2swaync generate-pywal-waybar-style generate-tofi-colors generate-kitty-colors generate-hyprland-colors; do
         if [ -f "$SCRIPTS_DIR/$script.sh" ]; then
             "$SCRIPTS_DIR/$script.sh" 2>/dev/null
         fi
@@ -55,8 +55,8 @@ apply_wallpaper() {
     sleep 0.3
     hyprctl dispatch exec swaync
     
-    # Forcer la fermeture de Wofi pour qu'il recharge le CSS
-    pkill wofi 2>/dev/null
+    # Forcer la fermeture de Tofi pour qu'il recharge les couleurs
+    pkill tofi 2>/dev/null
     sleep 0.2
     
     echo "Wallpaper appliqué avec succès: $(basename "$wallpaper_path")"
