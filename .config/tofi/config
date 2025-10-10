@@ -1,0 +1,79 @@
+# Tofi Configuration - Modern & Clean
+# ~/.config/tofi/config
+
+# Dimensions optimisées et compactes
+width = 420
+height = 380
+corner-radius = 12
+outline-width = 1
+border-width = 0
+
+# Position centrée
+anchor = center
+margin-top = 0
+margin-bottom = 0
+margin-left = 0
+margin-right = 0
+
+# Padding compact et harmonieux
+padding-top = 16
+padding-bottom = 12
+padding-left = 20
+padding-right = 20
+
+# Comportement optimisé et compact
+num-results = 12
+result-spacing = 6
+horizontal = false
+hide-cursor = true
+history = true
+fuzzy-match = true
+drun-launch = true
+
+# Typographie claire
+font = JetBrainsMono Nerd Font
+font-size = 14
+font-weight = 500
+
+# Prompt minimaliste sans icône
+prompt-text = ""
+prompt-padding = 0
+prompt-background-padding = 0
+
+# Couleurs avec pywal (seront remplacées automatiquement)
+background-color = #201e1eF0
+text-color = #c7c6c6
+prompt-color = #c7c6c6
+prompt-background = #BCBD9540
+selection-color = #BCBD95
+selection-text-color = #201e1e
+selection-background-padding = 10
+outline-color = #BCBD9580
+border-color = #BCBD9560
+
+# Animations fluides
+transition-in = 200
+transition-out = 120
+
+# Configuration moderne
+clip-to-padding = true
+scale = true
+exclusive-zone = -1
+hide-input = false
+ascii-input = false
+multi-instance = false
+late-keyboard-init = false
+
+# Style des résultats compact et élégant
+result-spacing = 6
+selection-match-color = #BCBD95
+match-color = #BCBD95
+selection-background-corner-radius = 6
+text-cursor-style = bar
+text-cursor-corner-radius = 2
+text-cursor-thickness = 2
+text-cursor-color = #BCBD95
+
+# Terminal par défaut
+terminal = kitty
+drun-print-exec = false
