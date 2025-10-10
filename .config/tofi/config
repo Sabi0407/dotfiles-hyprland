@@ -41,15 +41,15 @@ prompt-padding = 0
 prompt-background-padding = 0
 
 # Couleurs avec pywal (seront remplacées automatiquement)
-background-color = #201e1eF0
-text-color = #c7c6c6
-prompt-color = #c7c6c6
-prompt-background = #BCBD9540
-selection-color = #BCBD95
-selection-text-color = #201e1e
+background-color = #0f0917F0
+text-color = #c3c1c5
+prompt-color = #c3c1c5
+prompt-background = #DA9CBA40
+selection-color = #DA9CBA
+selection-text-color = #0f0917
 selection-background-padding = 10
-outline-color = #BCBD9580
-border-color = #BCBD9560
+outline-color = #DA9CBA80
+border-color = #DA9CBA60
 
 # Animations fluides
 transition-in = 200
@@ -66,13 +66,13 @@ late-keyboard-init = false
 
 # Style des résultats compact et élégant
 result-spacing = 6
-selection-match-color = #BCBD95
-match-color = #BCBD95
+selection-match-color = #DA9CBA
+match-color = #DA9CBA
 selection-background-corner-radius = 6
 text-cursor-style = bar
 text-cursor-corner-radius = 2
 text-cursor-thickness = 2
-text-cursor-color = #BCBD95
+text-cursor-color = #DA9CBA
 
 # Terminal par défaut
 terminal = kitty
