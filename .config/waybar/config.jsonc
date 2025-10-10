@@ -9,13 +9,11 @@
   ],
   "modules-center": [
     "custom/notification",
-    "hyprland/workspaces",
-    "power-profiles-daemon"
+    "hyprland/workspaces"
   ],
   "modules-right": [
     "pulseaudio",
     "custom/mic_status",
-    "custom/keyboard-backlight",
     "bluetooth",
     "tray",
     "battery"
@@ -134,23 +132,11 @@
       "class<spotify>": "󰓇",
       "class<steam>": "󰓓",
       "class<kitty>": "󰄛",
-      "class<thunar>": "󰉋",
       "class<gimp>": "󰵸",
       "class<blender>": "󰂫"
     }
   },
 
-  "power-profiles-daemon": {
-    "format": "{icon}",
-    "tooltip-format": "Power mode: {profile}",
-    "tooltip": true,
-    "format-icons": {
-      "default": "",
-      "performance": "󰠠",
-      "balanced": "󰚀",
-      "power-saver": "󰌪"
-    }
-  },
 
   "hyprland/window": {
     "format": "{class}",
@@ -234,18 +220,6 @@
     "tooltip": "Activer/Désactiver Ne pas déranger"
   },
 
-  "custom/keyboard-backlight": {
-    "format": "󰌵 {}%",
-    "exec": "~/.config/Scripts/keyboard_backlight_waybar.sh",
-    "interval": 1,
-    "return-type": "plain",
-    "on-click": "~/.config/Scripts/backlight_setup.sh toggle",
-    "on-click-right": "~/.config/Scripts/backlight_setup.sh cycle",
-    "on-scroll-up": "~/.config/Scripts/backlight_setup.sh up",
-    "on-scroll-down": "~/.config/Scripts/backlight_setup.sh down",
-    "tooltip": "Rétroéclairage clavier : {}%",
-    "tooltip-format": "Rétroéclairage clavier : {}%\nClic gauche : Toggle\nClic droit : Cycle\nScroll : Ajuster"
-  },
 
 
   "custom/mic_status": {
