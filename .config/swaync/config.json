@@ -62,8 +62,8 @@
       "text": "Do not disturb"
     },
     "label": {
-      "max-lines": 1,
-      "text": " "
+      "max-lines": 2,
+      "text": "Centre de notifications"
     },
     "mpris": {
       "image-size": 96,
@@ -86,23 +86,28 @@
       "actions": [
         {
           "label": "󰤨",
-          "command": "nm-connection-editor"
+          "command": "nm-connection-editor",
+          "tooltip": "Réseau"
         },
         {
           "label": "󰕾",
-          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+          "tooltip": "Audio"
         },
         {
           "label": "󰂯",
-          "command": "blueman-manager"
+          "command": "blueman-manager",
+          "tooltip": "Bluetooth"
         },
         {
           "label": "󰍬",
-          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+          "tooltip": "Microphone"
         },
         {
           "label": "󰏘",
-          "command": "nwg-look"
+          "command": "nwg-look",
+          "tooltip": "Apparence"
         }
       ]
     }

@@ -43,17 +43,17 @@ prompt-text = "󰣇 "
 prompt-padding = 12
 prompt-background-padding = 6
 prompt-background = #00000000
-prompt-color = #c4c6ca
+prompt-color = #c3c4c4
 
 # Couleurs fixes (valeurs hexadécimales)
-background-color = #141d2eF0
-text-color = #c4c6ca
-selection-color = #DB694C
-selection-text-color = #141d2e
+background-color = #121516F0
+text-color = #c3c4c4
+selection-color = #AC4A2C
+selection-text-color = #121516
 selection-background-padding = 10
-outline-color = #DB694C80
-border-color = #DB694C60
-text-cursor-color = #DB694C
+outline-color = #AC4A2C80
+border-color = #AC4A2C60
+text-cursor-color = #AC4A2C
 
 # Animations fluides et responsives
 transition-in = 150
@@ -74,7 +74,7 @@ selection-background-corner-radius = 8
 text-cursor-style = bar
 text-cursor-corner-radius = 3
 text-cursor-thickness = 3
-selection-match-color = #DB694C
+selection-match-color = #AC4A2C
 default-result-background = #00000000
 default-result-background-padding = 4
 

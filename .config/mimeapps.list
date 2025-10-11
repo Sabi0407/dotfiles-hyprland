@@ -46,3 +46,4 @@ application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;org.gnome.Evince.desktop;okul
 application/x-compressed-tar=xarchiver.desktop;
 application/x-tar=xarchiver.desktop;
 text/markdown=obsidian.desktop;
+application/schema+json=org.xfce.mousepad.desktop;

@@ -10,17 +10,13 @@ LOG_FILE="$HOME/.config/saveconfig.log"
 CONFIG_DEST="$DEST/.config"
 DIRS=(aliases flameshot gtk-3.0 gtk-4.0 hypr kitty Kvantum Mousepad mpv nerdfetch nwg-look qt5ct Scripts swaync Thunar waybar tofi micro yazi zathura)
 
-# Dossier ~/.icons
+# Dossier ~/.icons (hors thème symbolique \"default\")
 ICONS_SRC="$HOME/.icons/"
 ICONS_DEST="$DEST/icons"
 
 # Dossier ~/.local/share/applications
 APPS_SRC="$HOME/.local/share/applications/"
 APPS_DEST="$DEST/applications"
-
-# Configuration SDDM (ancien gestionnaire de connexion - commenté car non utilisé)
-# SDDM_SRC="/etc/sddm.conf.d/"
-# SDDM_DEST="$DEST/sddm-config"
 
 # Configuration ly (gestionnaire de connexion)
 LY_SRC="/etc/ly/"
@@ -44,24 +40,24 @@ done
 # 2) Sync des icônes
 echo "$(date): Sauvegarde des icônes" >> "$LOG_FILE"
 mkdir -p "$ICONS_DEST"
-rsync -av --delete "$ICONS_SRC" "$ICONS_DEST/" >> "$LOG_FILE" 2>&1
+rm -rf "$ICONS_DEST/default"
+if [ -d "$ICONS_SRC" ]; then
+    rsync -av --delete --exclude 'default/' "$ICONS_SRC" "$ICONS_DEST/" >> "$LOG_FILE" 2>&1
+else
+    echo "$(date): ATTENTION - Dossier ~/.icons/ non trouvé" >> "$LOG_FILE"
+fi
 
 # 3) Sync des .desktop
 echo "$(date): Sauvegarde des applications" >> "$LOG_FILE"
 mkdir -p "$APPS_DEST"
 rsync -av --delete "$APPS_SRC" "$APPS_DEST/" >> "$LOG_FILE" 2>&1
 
-# 4) Sync de la configuration SDDM (désactivé - SDDM non utilisé)
-# echo "$(date): Sauvegarde de la configuration SDDM" >> "$LOG_FILE"
-# mkdir -p "$SDDM_DEST"
-# sudo rsync -av --delete "$SDDM_SRC" "$SDDM_DEST/" >> "$LOG_FILE" 2>&1
-
-# 5) Sync de la configuration ly
+# 4) Sync de la configuration ly
 echo "$(date): Sauvegarde de la configuration ly" >> "$LOG_FILE"
 mkdir -p "$LY_DEST"
 sudo rsync -av --delete "$LY_SRC" "$LY_DEST/" >> "$LOG_FILE" 2>&1
 
-# 6) Sync du dossier Wallpapers uniquement
+# 5) Sync du dossier Wallpapers uniquement
 echo "$(date): Sauvegarde des wallpapers" >> "$LOG_FILE"
 if [ -d "$WALLPAPERS_SRC" ]; then
     mkdir -p "$WALLPAPERS_DEST"
@@ -71,23 +67,23 @@ else
     echo "$(date): ATTENTION - Dossier ~/wallpapers/ non trouvé" >> "$LOG_FILE"
 fi
 
-# 7) Sync de .bashrc
+# 6) Sync de .bashrc
 echo "$(date): Sauvegarde de .bashrc" >> "$LOG_FILE"
 rsync -av --delete "$HOME/.bashrc" "$DEST/" >> "$LOG_FILE" 2>&1
 
-# 8) Sync de .zshrc
+# 7) Sync de .zshrc
 echo "$(date): Sauvegarde de .zshrc" >> "$LOG_FILE"
 rsync -av --delete "$HOME/.zshrc" "$DEST/" >> "$LOG_FILE" 2>&1
 
-# 9) Sync de mimeapps.list
+# 8) Sync de mimeapps.list
 echo "$(date): Sauvegarde de mimeapps.list" >> "$LOG_FILE"
 rsync -av --delete "$HOME/.config/mimeapps.list" "$DEST/.config/" >> "$LOG_FILE" 2>&1
 
-# 10) Sync de saveconfig.sh
+# 9) Sync de saveconfig.sh
 echo "$(date): Sauvegarde de saveconfig.sh" >> "$LOG_FILE"
 rsync -av --delete "$HOME/saveconfig.sh" "$DEST/" >> "$LOG_FILE" 2>&1
 
-# 11) Sync de la configuration Firefox (userChrome.css et user.js)
+# 10) Sync de la configuration Firefox (userChrome.css et user.js)
 echo "$(date): Sauvegarde de la configuration Firefox" >> "$LOG_FILE"
 FIREFOX_PROFILE_DIR=$(ls ~/.mozilla/firefox/ | grep default | head -1)
 if [ -n "$FIREFOX_PROFILE_DIR" ]; then
@@ -106,7 +102,7 @@ else
     echo "$(date): ATTENTION - Aucun profil Firefox par défaut trouvé" >> "$LOG_FILE"
 fi
 
-# 12) Sync de la configuration VSCodium (settings.json)
+# 11) Sync de la configuration VSCodium (settings.json)
 echo "$(date): Sauvegarde de la configuration VSCodium" >> "$LOG_FILE"
 VSCODIUM_SRC="$HOME/.config/VSCodium/User/settings.json"
 VSCODIUM_DEST="$DEST/VSCodium/User"
@@ -127,4 +123,4 @@ else
     echo "$(date): ERREUR - La sauvegarde a échoué" >> "$LOG_FILE"
 fi
 
-echo "Log détaillé disponible dans: $LOG_FILE"
+echo "Log détaillés disponible dans: $LOG_FILE"
