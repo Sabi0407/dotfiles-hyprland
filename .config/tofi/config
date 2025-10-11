@@ -21,40 +21,44 @@ padding-bottom = 12
 padding-left = 10%
 padding-right = 10%
 
-# Nombre de résultats réduit pour écran complet
-num-results = 5
-result-spacing = 25
+# Nombre de résultats optimisé pour écran complet
+num-results = 8
+result-spacing = 20
 horizontal = false
 hide-cursor = true
 history = true
 fuzzy-match = true
 drun-launch = true
+sort-results = true
+max-history = 100
 
 # Typographie adaptée à l'écran complet
 font = JetBrainsMono Nerd Font
-font-size = 24
+font-size = 26
 font-weight = 500
+font-features = "liga", "calt"
 
 # Prompt avec logo Arch Linux (sans fond surligné)
-prompt-text = "󰣇 : "
-prompt-padding = 8
-prompt-background-padding = 4
+prompt-text = "󰣇 "
+prompt-padding = 12
+prompt-background-padding = 6
 prompt-background = #00000000
+prompt-color = #c4c6ca
 
 # Couleurs fixes (valeurs hexadécimales)
-background-color = #121e2aF0
-text-color = #c3c6c9
-prompt-color = #c3c6c9
-selection-color = #3BA995
-selection-text-color = #121e2a
+background-color = #141d2eF0
+text-color = #c4c6ca
+selection-color = #DB694C
+selection-text-color = #141d2e
 selection-background-padding = 10
-outline-color = #3BA99580
-border-color = #3BA99560
-text-cursor-color = #3BA995
+outline-color = #DB694C80
+border-color = #DB694C60
+text-cursor-color = #DB694C
 
-# Animations fluides
-transition-in = 200
-transition-out = 120
+# Animations fluides et responsives
+transition-in = 150
+transition-out = 100
+min-input-width = 300
 
 # Configuration moderne
 clip-to-padding = true
@@ -66,11 +70,16 @@ multi-instance = false
 late-keyboard-init = false
 
 # Style des résultats pour écran complet
-selection-background-corner-radius = 6
+selection-background-corner-radius = 8
 text-cursor-style = bar
-text-cursor-corner-radius = 2
-text-cursor-thickness = 2
+text-cursor-corner-radius = 3
+text-cursor-thickness = 3
+selection-match-color = #DB694C
+default-result-background = #00000000
+default-result-background-padding = 4
 
-# Terminal par défaut
+# Terminal par défaut et optimisations
 terminal = kitty
 drun-print-exec = false
+require-match = false
+print-index = false
