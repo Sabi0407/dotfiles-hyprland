@@ -24,7 +24,7 @@ COLOR15=$(grep '"color15"' "$COLORS_FILE" | sed 's/.*"color15": *"\([^"]*\)".*/\
 sed -i "s/background-color = .*/background-color = ${COLOR0}F0/" "$TOFI_CONFIG"
 sed -i "s/text-color = .*/text-color = ${COLOR15}/" "$TOFI_CONFIG"
 sed -i "s/prompt-color = .*/prompt-color = ${COLOR15}/" "$TOFI_CONFIG"
-sed -i "s/prompt-background = .*/prompt-background = ${COLOR4}40/" "$TOFI_CONFIG"
+sed -i "s/prompt-background = .*/prompt-background = #00000000/" "$TOFI_CONFIG"
 sed -i "s/selection-color = .*/selection-color = ${COLOR4}/" "$TOFI_CONFIG"
 sed -i "s/selection-text-color = .*/selection-text-color = ${COLOR0}/" "$TOFI_CONFIG"
 sed -i "s/outline-color = .*/outline-color = ${COLOR4}80/" "$TOFI_CONFIG"

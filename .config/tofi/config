@@ -1,11 +1,11 @@
-# Tofi Configuration - Modern & Clean
+# Tofi Configuration - Modern & Clean avec pywal
 # ~/.config/tofi/config
 
-# Dimensions optimisées et compactes
-width = 420
-height = 380
-corner-radius = 12
-outline-width = 1
+# Dimensions plein écran
+width = 100%
+height = 100%
+corner-radius = 0
+outline-width = 0
 border-width = 0
 
 # Position centrée
@@ -15,41 +15,42 @@ margin-bottom = 0
 margin-left = 0
 margin-right = 0
 
-# Padding compact et harmonieux
-padding-top = 16
+# Padding généreux pour écran complet
+padding-top = 33%
 padding-bottom = 12
-padding-left = 20
-padding-right = 20
+padding-left = 10%
+padding-right = 10%
 
-# Comportement optimisé et compact
-num-results = 12
-result-spacing = 6
+# Nombre de résultats réduit pour écran complet
+num-results = 5
+result-spacing = 25
 horizontal = false
 hide-cursor = true
 history = true
 fuzzy-match = true
 drun-launch = true
 
-# Typographie claire
+# Typographie adaptée à l'écran complet
 font = JetBrainsMono Nerd Font
-font-size = 14
+font-size = 24
 font-weight = 500
 
-# Prompt minimaliste sans icône
-prompt-text = ""
-prompt-padding = 0
-prompt-background-padding = 0
+# Prompt avec logo Arch Linux (sans fond surligné)
+prompt-text = "󰣇 : "
+prompt-padding = 8
+prompt-background-padding = 4
+prompt-background = #00000000
 
-# Couleurs avec pywal (seront remplacées automatiquement)
-background-color = #0f0917F0
-text-color = #c3c1c5
-prompt-color = #c3c1c5
-prompt-background = #DA9CBA40
-selection-color = #DA9CBA
-selection-text-color = #0f0917
+# Couleurs fixes (valeurs hexadécimales)
+background-color = #121e2aF0
+text-color = #c3c6c9
+prompt-color = #c3c6c9
+selection-color = #3BA995
+selection-text-color = #121e2a
 selection-background-padding = 10
-outline-color = #DA9CBA80
-border-color = #DA9CBA60
+outline-color = #3BA99580
+border-color = #3BA99560
+text-cursor-color = #3BA995
 
 # Animations fluides
 transition-in = 200
@@ -64,15 +65,11 @@ ascii-input = false
 multi-instance = false
 late-keyboard-init = false
 
-# Style des résultats compact et élégant
-result-spacing = 6
-selection-match-color = #DA9CBA
-match-color = #DA9CBA
+# Style des résultats pour écran complet
 selection-background-corner-radius = 6
 text-cursor-style = bar
 text-cursor-corner-radius = 2
 text-cursor-thickness = 2
-text-cursor-color = #DA9CBA
 
 # Terminal par défaut
 terminal = kitty
