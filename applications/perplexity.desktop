@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Perplexity AI
+Comment=Ouvrir Perplexity AI dans le navigateur
+Exec=xdg-open https://www.perplexity.ai
+Icon=perplexity
+Terminal=false
+Categories=Network;Utility;

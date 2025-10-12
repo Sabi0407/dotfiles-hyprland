@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=ChatGPT (Éphémère)
+Comment=Ouvrir ChatGPT en session temporaire
+Exec=xdg-open https://chat.openai.com/?temporary-chat=true
+Icon=chatgpt
+Terminal=false
+Categories=Network;Utility;
