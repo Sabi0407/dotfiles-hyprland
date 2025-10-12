@@ -50,8 +50,8 @@
   
   #workspaces button.active {
     background: rgba(195,196,196, 0.1);
-    color: #AC4A2C;
-    border: 1px solid #AC4A2C;
+    color: #7F9BC1;
+    border: 1px solid #7F9BC1;
     box-shadow: 0 2px 8px rgba(18,21,22, 0.2);
     opacity: 1;
     font-weight: 600;
@@ -59,20 +59,20 @@
   
   #workspaces button:hover {
     background: rgba(195,196,196, 0.08);
-    color: #AC4A2C;
-    border: 1px solid #AC4A2C;
+    color: #7F9BC1;
+    border: 1px solid #7F9BC1;
     box-shadow: 0 2px 6px rgba(18,21,22, 0.15);
     opacity: 0.9;
     transition: all 0.2s ease;
   }
   
   #workspaces button.urgent {
-    color: #655B53;
-    background: rgba(101,91,83, 0.2);
+    color: #5C7085;
+    background: rgba(92,112,133, 0.2);
   }
   
   #workspaces button.visible {
-    color: #AC4A2C;
+    color: #7F9BC1;
   }
   
   #workspaces button.empty {
@@ -97,8 +97,8 @@
   #group-processes_tray:hover,
   #group-arch_drawer:hover {
     background: rgba(195,196,196, 0.15);
-    color: #AC4A2C;
-    border: 2px solid #AC4A2C;
+    color: #7F9BC1;
+    border: 2px solid #7F9BC1;
     box-shadow: 0 4px 15px rgba(18,21,22, 0.4);
   }
   
@@ -164,10 +164,10 @@
   #custom-reboot:hover,
   #custom-poweroff:hover,
   #custom-storage:hover {
-    background: #AC4A2C;
+    background: #7F9BC1;
     color: #121516;
-    border: 2px solid #AC4A2C;
-    box-shadow: 0 4px 15px rgba(172,74,44, 0.4);
+    border: 2px solid #7F9BC1;
+    box-shadow: 0 4px 15px rgba(127,155,193, 0.4);
   }
   
   #battery {
@@ -176,7 +176,7 @@
 }
 
 #battery.warning {
-  color: #746E60;
+  color: #74899E;
   animation: battery-pulse 2s infinite;
 }
 
@@ -221,10 +221,10 @@
 }
 
 #custom-mic_status:hover {
-    background: #AC4A2C;
+    background: #7F9BC1;
     color: #121516;
-    border: 2px solid #AC4A2C;
-    box-shadow: 0 4px 15px rgba(172,74,44, 0.4);
+    border: 2px solid #7F9BC1;
+    box-shadow: 0 4px 15px rgba(127,155,193, 0.4);
 }
 
 #group-arch_drawer {
@@ -239,9 +239,9 @@
 }
 
 #group-arch_drawer:hover {
-  background: rgba(172,74,44, 0.15);
-  color: #AC4A2C;
-  border: 2px solid #AC4A2C;
+  background: rgba(127,155,193, 0.15);
+  color: #7F9BC1;
+  border: 2px solid #7F9BC1;
   box-shadow: 0 4px 15px rgba(18,21,22, 0.4);
 }
 
@@ -253,12 +253,12 @@
 
 #custom-usb_drives.usb-connected {
   color: #c3c4c4;
-  border: 1px solid rgba(172,74,44, 0.3);
+  border: 1px solid rgba(127,155,193, 0.3);
 }
 
 #custom-usb_drives.usb-many {
   color: #c3c4c4;
-  border: 1px solid rgba(116,110,96, 0.3);
+  border: 1px solid rgba(116,137,158, 0.3);
   animation: pulse 2s infinite;
 }
 

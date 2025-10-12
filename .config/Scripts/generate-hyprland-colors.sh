@@ -50,7 +50,7 @@ echo "   Côté secondaire: $color4"
 echo "   Inactive border: $background"
 
 # Créer le fichier temporaire avec les nouvelles couleurs
-cat > /tmp/hyprland_colors_temp << EOF
+cat > /tmp/hyprland_colors_temp <<EOF
 # Couleurs générées automatiquement par pywal
 # Généré le $(date)
 # Wallpaper source: $(cat ~/.config/dernier_wallpaper.txt 2>/dev/null || echo "Inconnu")

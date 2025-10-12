@@ -48,12 +48,12 @@ prompt-color = #c3c4c4
 # Couleurs fixes (valeurs hexadécimales)
 background-color = #121516F0
 text-color = #c3c4c4
-selection-color = #AC4A2C
+selection-color = #7F9BC1
 selection-text-color = #121516
 selection-background-padding = 10
-outline-color = #AC4A2C80
-border-color = #AC4A2C60
-text-cursor-color = #AC4A2C
+outline-color = #7F9BC180
+border-color = #7F9BC160
+text-cursor-color = #7F9BC1
 
 # Animations fluides et responsives
 transition-in = 150
@@ -74,7 +74,7 @@ selection-background-corner-radius = 8
 text-cursor-style = bar
 text-cursor-corner-radius = 3
 text-cursor-thickness = 3
-selection-match-color = #AC4A2C
+selection-match-color = #7F9BC1
 default-result-background = #00000000
 default-result-background-padding = 4
 

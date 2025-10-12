@@ -19,7 +19,7 @@ APPS_SRC="$HOME/.local/share/applications/"
 APPS_DEST="$DEST/applications"
 
 # Configuration ly (gestionnaire de connexion)
-LY_SRC="/etc/ly/"
+LY_SRC="$HOME/etc/ly/"
 LY_DEST="$DEST/ly-config"
 
 # Dossier Wallpapers uniquement
