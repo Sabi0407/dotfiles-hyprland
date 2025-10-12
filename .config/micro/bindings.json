@@ -13,7 +13,7 @@
     "Ctrl-z": "Undo",
     "CtrlUnderscore": "lua:comment.comment",
     
-    "Ctrl-t": "NewTab",
+    "Ctrl-t": "command:tabnew",
     "Ctrl-w": "command:tabclose",
     "Ctrl-Shift-t": "command:tabopen",
     "Ctrl-Tab": "NextTab",
@@ -33,8 +33,5 @@
     "Ctrl-d": "DuplicateLine",
     "Ctrl-u": "PageUp",
     "Ctrl-Shift-u": "PageDown",
-    "F5": "command:reload",
-    "F11": "ToggleFullscreen",
-    "Ctrl-plus": "command:set tabsize +1",
-    "Ctrl-minus": "command:set tabsize -1"
+    "F5": "command:reload"
 }
