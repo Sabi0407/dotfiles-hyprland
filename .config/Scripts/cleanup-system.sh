@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script de nettoyage système - Suppression des dépendances inutiles
 
-echo "🧹 Nettoyage du système - Suppression des dépendances inutiles"
+echo " Nettoyage du système - Suppression des dépendances inutiles"
 echo "================================================================"
 
 # Couleurs pour l'affichage

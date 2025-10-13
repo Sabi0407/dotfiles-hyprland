@@ -8,7 +8,7 @@ LOG_FILE="$HOME/.config/saveconfig.log"
 
 # Dossiers sous ~/.config à synchroniser
 CONFIG_DEST="$DEST/.config"
-DIRS=(aliases flameshot gtk-3.0 gtk-4.0 hypr kitty Kvantum Mousepad mpv nerdfetch nwg-look qt5ct Scripts swaync Thunar waybar tofi micro yazi zathura)
+DIRS=(aliases flameshot fastfetch gtk-3.0 gtk-4.0 hypr kitty Kvantum Mousepad mpv nerdfetch nwg-look qt5ct Scripts swaync Thunar waybar tofi micro yazi zathura)
 
 # Dossier ~/.icons (hors thème symbolique \"default\")
 ICONS_SRC="$HOME/.icons/"
