@@ -30,6 +30,7 @@ wal --theme "$THEME"
 ~/.config/Scripts/generate-wofi-colors.sh
 ~/.config/Scripts/generate-kitty-colors.sh
 ~/.config/Scripts/generate-wlogout-colors.sh
+~/.config/Scripts/generate-hyprlock-colors.sh
 
 # Générer le thème Discord
 pywal-discord -t abou

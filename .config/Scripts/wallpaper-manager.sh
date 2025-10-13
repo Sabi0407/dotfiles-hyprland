@@ -32,7 +32,7 @@ apply_wallpaper() {
     wal -i "$wallpaper_path" -n
     
     # Synchroniser tous les thèmes
-    for script in wal2swaync generate-pywal-waybar-style generate-tofi-colors generate-kitty-colors generate-hyprland-colors; do
+    for script in wal2swaync generate-pywal-waybar-style generate-tofi-colors generate-kitty-colors generate-hyprland-colors generate-hyprlock-colors; do
         if [ -f "$SCRIPTS_DIR/$script.sh" ]; then
             "$SCRIPTS_DIR/$script.sh" 2>/dev/null
         fi

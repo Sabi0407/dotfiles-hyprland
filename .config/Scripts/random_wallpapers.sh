@@ -27,6 +27,7 @@ if [ -n "$wallpaper" ]; then
     ~/.config/Scripts/generate-tofi-colors.sh
     ~/.config/Scripts/generate-kitty-colors.sh
     ~/.config/Scripts/generate-wlogout-colors.sh
+    ~/.config/Scripts/generate-hyprlock-colors.sh
     ~/.config/Scripts/generate-hyprland-colors.sh
     
     # Générer le thème Discord avec pywal-discord

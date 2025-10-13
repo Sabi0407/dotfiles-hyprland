@@ -41,10 +41,11 @@ if [ -n "$wallpaper" ] && [ -f "$wallpaper" ]; then
     # Synchroniser tous les thèmes avec pywal
     ~/.config/Scripts/wal2swaync.sh
     ~/.config/Scripts/generate-pywal-waybar-style.sh
-    ~/.config/Scripts/generate-tofi-colors.sh
-    ~/.config/Scripts/generate-kitty-colors.sh
-    ~/.config/Scripts/generate-wlogout-colors.sh
-    ~/.config/Scripts/generate-hyprland-colors.sh
+~/.config/Scripts/generate-tofi-colors.sh
+~/.config/Scripts/generate-kitty-colors.sh
+~/.config/Scripts/generate-wlogout-colors.sh
+~/.config/Scripts/generate-hyprland-colors.sh
+~/.config/Scripts/generate-hyprlock-colors.sh
     
     # Générer le thème Discord avec pywal-discord
     pywal-discord -t abou
