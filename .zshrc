@@ -1,7 +1,10 @@
 # Powerlevel10k instant prompt (accélère l'affichage du prompt)
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
+if [[ -t 1 ]]; then
+  fastfetch --config ~/.config/fastfetch/config.jsonc --show-errors
 fi
+
 
 # Chemin d'installation de Oh My Zsh
 export ZSH="$HOME/.oh-my-zsh"
@@ -44,13 +47,16 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # Améliore la complétion (insensible à la casse)
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-# Instant prompt Powerlevel9k (désactive si tu as des soucis)
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# Lance fastfetch avec mon logo
+#if [[ -t 1 ]]; then
+ # fastfetch --config ~/.config/fastfetch/config.jsonc --show-errors
+#fi
 
-# Lance nerdfetch seulement si installé
-if command -v nerdfetch &>/dev/null; then
-  nerdfetch
-fi
+
+
+
+
+
 
 # Fonction de mise à jour
 update() {
