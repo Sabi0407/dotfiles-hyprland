@@ -13,11 +13,6 @@
 
   "modules": [
     {
-      "type": "title",
-      "format": "{user}@{host}"
-    },
-
-    {
       "type": "custom",
       "format": "──────────────"
     },
