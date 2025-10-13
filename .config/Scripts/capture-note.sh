@@ -1,9 +1,9 @@
 #!/bin/bash
-#  Capture d'écran automatique vers ~/Notes/Images/
+#  Capture d'écran automatique vers ~/Documents/Notes/Cours/Images/
 # Fonctionne sous Wayland avec grim + slurp + wl-copy
 
 # Dossier cible
-base_dir="$HOME/Notes/Images"
+base_dir="$HOME/Documents/Notes/Cours/Images"
 mkdir -p "$base_dir"
 
 # Nom de fichier horodaté

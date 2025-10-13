@@ -3,7 +3,7 @@
 set -euo pipefail
 
 COLORS_SH="$HOME/.cache/wal/colors.sh"
-OUT_DIR="$HOME/.config/hypr/generated"
+OUT_DIR="$HOME/.config/hypr/colors"
 OUT_FILE="$OUT_DIR/hyprlock-colors.conf"
 
 mkdir -p "$OUT_DIR"

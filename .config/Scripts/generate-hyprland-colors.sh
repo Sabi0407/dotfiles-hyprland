@@ -4,7 +4,7 @@
 
 # Vérifier que pywal a été exécuté
 if [[ ! -f "$HOME/.cache/wal/colors.sh" ]]; then
-    echo "❌ Pywal n'a pas été exécuté. Lancez d'abord 'wal -i /path/to/image'"
+    echo " Pywal n'a pas été exécuté. Lancez d'abord 'wal -i /path/to/image'"
     exit 1
 fi
 
@@ -17,7 +17,7 @@ HYPR_CONFIG="$HOME/.config/hypr/configs/look.conf"
 # Sauvegarder le fichier original si ce n'est pas déjà fait
 if [[ ! -f "${HYPR_CONFIG}.backup" ]]; then
     cp "$HYPR_CONFIG" "${HYPR_CONFIG}.backup"
-    echo "✅ Sauvegarde créée : ${HYPR_CONFIG}.backup"
+    echo " Sauvegarde créée : ${HYPR_CONFIG}.backup"
 fi
 
 # Fonction pour convertir hex en rgba
@@ -44,7 +44,7 @@ ACTIVE_SECONDARY=$(hex_to_rgba "$color4" "1.0")  # Couleur secondaire (côté op
 # Inactive border : utilise background avec un peu de transparence
 INACTIVE_COLOR=$(hex_to_rgba "$background" "0.8")
 
-echo "🎨 Génération des couleurs Hyprland avec pywal..."
+echo " Génération des couleurs Hyprland avec pywal..."
 echo "   Côté primaire: $color1"
 echo "   Côté secondaire: $color4"
 echo "   Inactive border: $background"
@@ -90,21 +90,21 @@ if [[ -f "$HYPR_CONFIG" ]]; then
     # Nettoyer
     rm -f /tmp/hyprland_config_temp /tmp/hyprland_colors_temp
     
-    echo "✅ Couleurs Hyprland mises à jour dans $HYPR_CONFIG"
+    echo "Couleurs Hyprland mises à jour dans $HYPR_CONFIG"
     
     # Recharger la configuration Hyprland
     if command -v hyprctl >/dev/null 2>&1; then
         hyprctl reload
-        echo "✅ Configuration Hyprland rechargée"
+        echo "Configuration Hyprland rechargée"
     fi
     
     # Afficher les couleurs appliquées
     echo ""
-    echo "🎨 Couleurs appliquées :"
+    echo " Couleurs appliquées :"
     echo "   Dégradé: $ACTIVE_PRIMARY → $ACTIVE_SECONDARY"
     echo "   Inactive border: $INACTIVE_COLOR"
     
 else
-    echo "❌ Fichier de configuration Hyprland introuvable : $HYPR_CONFIG"
+    echo " Fichier de configuration Hyprland introuvable : $HYPR_CONFIG"
     exit 1
 fi
