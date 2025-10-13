@@ -26,13 +26,10 @@ if [ -n "$wallpaper" ]; then
     ~/.config/Scripts/generate-pywal-waybar-style.sh
     ~/.config/Scripts/generate-tofi-colors.sh
     ~/.config/Scripts/generate-kitty-colors.sh
-    ~/.config/Scripts/generate-wlogout-colors.sh
     ~/.config/Scripts/generate-hyprlock-colors.sh
     ~/.config/Scripts/generate-hyprland-colors.sh
     
     # Générer le thème Discord avec pywal-discord
-    pywal-discord -t abou
-    echo '* { color: #ffffff !important; }' >> "$HOME/.config/BetterDiscord/themes/pywal-discord-abou.theme.css"
     
     # Sauvegarder le wallpaper aléatoire
     echo "$wallpaper" > "$HOME/.config/dernier_wallpaper.txt"
