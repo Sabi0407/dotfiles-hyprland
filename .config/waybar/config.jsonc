@@ -106,7 +106,12 @@
 
   "hyprland/workspaces": {
     "format": "{name}",
-    "on-click": "activate",
+    "format-active": "{name}",
+    "format-occupied": "{name}",
+    "format-empty": "{name}",
+    "format-urgent": "{name}",
+    "format-window-separator": " ",
+        "on-click": "activate",
     "on-click-right": "hyprctl dispatch workspace {name}",
     "on-scroll-up": "hyprctl dispatch workspace +1",
     "on-scroll-down": "hyprctl dispatch workspace -1",
@@ -120,12 +125,11 @@
       "1": [],
       "2": []
     },
-    "format-window-separator": " ",
     "window-rewrite-default": "",
     "window-rewrite": {
       "title<.*youtube.*>": "󰗃",
       "class<firefox>": "󰈹",
-      "class<firefox> title<.*github.*>": "󰊤", 
+      "class<firefox> title<.*github.*>": "󰊤",
       "class<firefox> title<.*reddit.*>": "󰑍",
       "class<code>": "󰨞",
       "class<discord>": "󰙯",
