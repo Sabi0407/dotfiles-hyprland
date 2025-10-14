@@ -76,14 +76,14 @@
           "tooltip": "DND"
         },
         {
-          "label": "󰣆",
-          "command": "nwg-look",
-          "tooltip": "GTK Theme"
+          "label": "󰸈",
+          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+          "tooltip": "Volume Mute"
         },
         {
-          "label": "󰍬",
-          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-          "tooltip": "Microphone"
+          "label": "󰣆",
+          "command": "nwg-look",
+          "tooltip": "Theme"
         }
       ]
     }
