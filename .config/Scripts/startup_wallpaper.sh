@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # Script pour le démarrage - restaure le dernier wallpaper choisi
+PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$HOME/.config/wal/cache}"
+export PYWAL_CACHE_DIR
+mkdir -p "$PYWAL_CACHE_DIR"
+
 WALLPAPER_DIR="$HOME/Images/wallpapers"
 LAST_WALLPAPER_FILE="$HOME/.config/dernier_wallpaper.txt"
 
@@ -41,11 +45,11 @@ if [ -n "$wallpaper" ] && [ -f "$wallpaper" ]; then
     # Synchroniser tous les thèmes avec pywal
     ~/.config/Scripts/wal2swaync.sh
     ~/.config/Scripts/generate-pywal-waybar-style.sh
-~/.config/Scripts/generate-tofi-colors.sh
-~/.config/Scripts/generate-kitty-colors.sh
-~/.config/Scripts/generate-wlogout-colors.sh
-~/.config/Scripts/generate-hyprland-colors.sh
-~/.config/Scripts/generate-hyprlock-colors.sh
+    ~/.config/Scripts/generate-tofi-colors.sh
+    ~/.config/Scripts/generate-kitty-colors.sh
+    ~/.config/Scripts/generate-wlogout-colors.sh
+    ~/.config/Scripts/generate-hyprland-colors.sh
+    ~/.config/Scripts/generate-hyprlock-colors.sh
     
     # Générer le thème Discord avec pywal-discord
     pywal-discord -t abou

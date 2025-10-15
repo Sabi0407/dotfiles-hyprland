@@ -2,14 +2,25 @@
 
 # Script pour générer les couleurs Hyprland à partir de pywal
 
+LOCAL_CACHE_DIR="$HOME/.config/Scripts/wal-cache"
+PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$LOCAL_CACHE_DIR}"
+DEFAULT_PYWAL_CACHE="$HOME/.cache/wal"
+COLORS_SH="$PYWAL_CACHE_DIR/colors.sh"
+
+mkdir -p "$PYWAL_CACHE_DIR"
+
+if [[ ! -f "$COLORS_SH" && -f "$DEFAULT_PYWAL_CACHE/colors.sh" ]]; then
+    COLORS_SH="$DEFAULT_PYWAL_CACHE/colors.sh"
+fi
+
 # Vérifier que pywal a été exécuté
-if [[ ! -f "$HOME/.cache/wal/colors.sh" ]]; then
+if [[ ! -f "$COLORS_SH" ]]; then
     echo " Pywal n'a pas été exécuté. Lancez d'abord 'wal -i /path/to/image'"
     exit 1
 fi
 
 # Charger les couleurs pywal
-source "$HOME/.cache/wal/colors.sh"
+source "$COLORS_SH"
 
 # Fichier de configuration Hyprland
 HYPR_CONFIG="$HOME/.config/hypr/configs/look.conf"

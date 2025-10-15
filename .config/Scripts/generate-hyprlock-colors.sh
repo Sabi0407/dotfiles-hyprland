@@ -1,6 +1,16 @@
 #!/bin/bash
 set -euo pipefail
-COLORS_SH="$HOME/.cache/wal/colors.sh"
+
+LOCAL_CACHE_DIR="$HOME/.config/Scripts/wal-cache"
+PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$LOCAL_CACHE_DIR}"
+DEFAULT_PYWAL_CACHE="$HOME/.cache/wal"
+COLORS_SH="$PYWAL_CACHE_DIR/colors.sh"
+
+mkdir -p "$PYWAL_CACHE_DIR"
+
+if [[ ! -f "$COLORS_SH" && -f "$DEFAULT_PYWAL_CACHE/colors.sh" ]]; then
+  COLORS_SH="$DEFAULT_PYWAL_CACHE/colors.sh"
+fi
 OUT_DIR="$HOME/.config/hypr/colors"
 OUT_FILE="$OUT_DIR/hyprlock-colors.conf"
 mkdir -p "$OUT_DIR"

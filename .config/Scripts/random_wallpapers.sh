@@ -3,6 +3,11 @@
 # Script simple pour changer de wallpaper aléatoirement
 # Pour le keybinding $mainMod + W
 
+LOCAL_CACHE_DIR="$HOME/.config/Scripts/wal-cache"
+PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$LOCAL_CACHE_DIR}"
+export PYWAL_CACHE_DIR
+mkdir -p "$PYWAL_CACHE_DIR"
+
 WALLPAPER_DIR="$HOME/Images/wallpapers"
 
 # Trouver un wallpaper aléatoire

@@ -2,6 +2,10 @@
 
 # Sélecteur de wallpapers avec Rofi
 
+PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$HOME/.config/wal/cache}"
+export PYWAL_CACHE_DIR
+mkdir -p "$PYWAL_CACHE_DIR"
+
 WALLPAPER_DIR="$HOME/Images/wallpapers"
 
 # Vérifier le dossier

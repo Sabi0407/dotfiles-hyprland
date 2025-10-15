@@ -3,6 +3,11 @@
 # Script pour changer facilement de thème
 # Usage: ./change_theme.sh [nom_du_theme]
 
+LOCAL_CACHE_DIR="$HOME/.config/Scripts/wal-cache"
+PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$LOCAL_CACHE_DIR}"
+export PYWAL_CACHE_DIR
+mkdir -p "$PYWAL_CACHE_DIR"
+
 if [ -z "$1" ]; then
     echo "Thèmes disponibles :"
     echo "  gruvbox"
@@ -27,9 +32,10 @@ wal --theme "$THEME"
 # Synchroniser tous les composants
 ~/.config/Scripts/wal2swaync.sh
 ~/.config/Scripts/generate-pywal-waybar-style.sh
-~/.config/Scripts/generate-wofi-colors.sh
+~/.config/Scripts/generate-tofi-colors.sh
 ~/.config/Scripts/generate-kitty-colors.sh
 ~/.config/Scripts/generate-hyprlock-colors.sh
+~/.config/Scripts/generate-hyprland-colors.sh
 
 # Générer le thème Discord
 pywal-discord -t abou

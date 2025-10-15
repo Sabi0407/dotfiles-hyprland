@@ -1,9 +1,17 @@
 #!/bin/bash
-
 # Générer les couleurs Tofi à partir des couleurs pywal16
 # Ce script met à jour la configuration Tofi avec les couleurs actuelles
 
-COLORS_FILE="$HOME/.cache/wal/colors.json"
+LOCAL_CACHE_DIR="$HOME/.config/Scripts/wal-cache"
+PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$LOCAL_CACHE_DIR}"
+DEFAULT_PYWAL_CACHE="$HOME/.cache/wal"
+COLORS_FILE="$PYWAL_CACHE_DIR/colors.json"
+
+mkdir -p "$PYWAL_CACHE_DIR"
+
+if [ ! -f "$COLORS_FILE" ] && [ -f "$DEFAULT_PYWAL_CACHE/colors.json" ]; then
+    COLORS_FILE="$DEFAULT_PYWAL_CACHE/colors.json"
+fi
 TOFI_CONFIG="$HOME/.config/tofi/config"
 
 if [ ! -f "$COLORS_FILE" ]; then

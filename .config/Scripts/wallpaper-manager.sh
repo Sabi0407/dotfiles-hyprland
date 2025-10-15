@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # Configuration
+PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$HOME/.config/wal/cache}"
+export PYWAL_CACHE_DIR
+mkdir -p "$PYWAL_CACHE_DIR"
+
 WALLPAPER_DIR="$HOME/Images/wallpapers"
 LAST_WALLPAPER_FILE="$HOME/.config/dernier_wallpaper.txt"
 SCRIPTS_DIR="$HOME/.config/Scripts"

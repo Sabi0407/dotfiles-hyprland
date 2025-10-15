@@ -1,7 +1,20 @@
 #!/usr/bin/env bash
 # wal2swaync — Génère ~/.config/swaync/style.css à partir de wal
 
-CACHE="$HOME/.cache/wal/colors"
+LOCAL_CACHE_DIR="$HOME/.config/Scripts/wal-cache"
+PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$LOCAL_CACHE_DIR}"
+DEFAULT_PYWAL_CACHE="$HOME/.cache/wal"
+mkdir -p "$PYWAL_CACHE_DIR"
+CACHE="$PYWAL_CACHE_DIR/colors"
+
+if [ ! -f "$CACHE" ] && [ -f "$DEFAULT_PYWAL_CACHE/colors" ]; then
+  CACHE="$DEFAULT_PYWAL_CACHE/colors"
+fi
+
+if [ ! -f "$CACHE" ]; then
+  echo "[wal2swaync] Palette introuvable" >&2
+  exit 1
+fi
 TGT="$HOME/.config/swaync/style.css"
 OVERRIDE="$HOME/.config/swaync/style.overrides.css"
 

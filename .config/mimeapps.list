@@ -47,3 +47,4 @@ application/x-compressed-tar=xarchiver.desktop;
 application/x-tar=xarchiver.desktop;
 text/markdown=obsidian.desktop;
 application/schema+json=org.xfce.mousepad.desktop;
+application/x-zerosize=mpv.desktop;

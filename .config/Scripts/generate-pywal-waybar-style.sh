@@ -1,12 +1,21 @@
 #!/bin/sh
 TEMPLATE="$HOME/.config/waybar/style.template.css"
 OUT="$HOME/.config/waybar/style.css"
+LOCAL_CACHE_DIR="$HOME/.config/Scripts/wal-cache"
+PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$LOCAL_CACHE_DIR}"
+DEFAULT_PYWAL_CACHE="$HOME/.cache/wal"
+mkdir -p "$PYWAL_CACHE_DIR"
+
+COLORS_FILE="$PYWAL_CACHE_DIR/colors.sh"
+if [ ! -f "$COLORS_FILE" ] && [ -f "$DEFAULT_PYWAL_CACHE/colors.sh" ]; then
+    COLORS_FILE="$DEFAULT_PYWAL_CACHE/colors.sh"
+fi
 
 # Charger les couleurs pywal si possible
-if [ -f "$HOME/.cache/wal/colors.sh" ]; then
-    . "$HOME/.cache/wal/colors.sh"
+if [ -f "$COLORS_FILE" ]; then
+    . "$COLORS_FILE"
 else
-    echo "[pywal-waybar] Avertissement : ~/.cache/wal/colors.sh introuvable, utilisation des couleurs par défaut."
+    echo "[pywal-waybar] Avertissement : aucune palette pywal trouvée, utilisation des couleurs par défaut." >&2
 fi
 
 # Définir des couleurs de secours si une variable n'est pas définie

@@ -25,13 +25,13 @@
     margin: 0 20px 0 20px;
     border: none;
     border-radius: 18px;
-    box-shadow: 0 4px 12px rgba({background-rgb}, 0.3);
+    box-shadow: none;
     transition: all 0.3s ease;
     color: {foreground};
   }
   
   #workspaces:hover {
-    box-shadow: 0 6px 20px rgba({background-rgb}, 0.4);
+    box-shadow: none;
   }
   
   #workspaces button {
@@ -43,7 +43,7 @@
     margin: 0 3px;
     border: 1px solid transparent;
     border-radius: 10px;
-    box-shadow: 0 1px 4px rgba({background-rgb}, 0.1);
+    box-shadow: none;
     opacity: 0.7;
     transition: all 0.2s ease;
   }
@@ -52,7 +52,7 @@
     background: rgba({foreground-rgb}, 0.1);
     color: {color4};
     border: 1px solid {color4};
-    box-shadow: 0 2px 8px rgba({background-rgb}, 0.2);
+    box-shadow: none;
     opacity: 1;
     font-weight: 600;
   }
@@ -61,7 +61,7 @@
     background: rgba({foreground-rgb}, 0.08);
     color: {color4};
     border: 1px solid {color4};
-    box-shadow: 0 2px 6px rgba({background-rgb}, 0.15);
+    box-shadow: none;
     opacity: 0.9;
     transition: all 0.2s ease;
   }
@@ -89,7 +89,7 @@
     margin: 0 12px 0 0;
     border: 2px solid transparent;
     border-radius: 16px;
-    box-shadow: 0 2px 6px rgba({background-rgb}, 0.2);
+    box-shadow: none;
     transition: all 0.2s;
   }
   
@@ -99,7 +99,7 @@
     background: rgba({foreground-rgb}, 0.15);
     color: {color4};
     border: 2px solid {color4};
-    box-shadow: 0 4px 15px rgba({background-rgb}, 0.4);
+    box-shadow: none;
   }
   
   #battery,
@@ -133,7 +133,7 @@
     padding: 5px 16px;
     margin: 0 0 0 12px;
     border-radius: 16px;
-    box-shadow: 0 2px 6px rgba({background-rgb}, 0.2);
+    box-shadow: none;
     transition: all 0.2s;
     border: 2px solid transparent;
   }
@@ -167,7 +167,7 @@
     background: {color4};
     color: {background};
     border: 2px solid {color4};
-    box-shadow: 0 4px 15px rgba({color4-rgb}, 0.4);
+    box-shadow: none;
   }
   
   #battery {
