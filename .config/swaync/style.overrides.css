@@ -2,14 +2,14 @@
 
 @define-color theme_fg @color15;
 @define-color theme_fg_secondary alpha(@color15, 0.78);
-@define-color theme_bg alpha(@color0, 0.92);
-@define-color popup_bg alpha(@color0, 0.90);
-@define-color module_bg alpha(@color0, 0.84);
-@define-color module_hover_bg alpha(@color7, 0.52);
-@define-color button_bg alpha(@color8, 0.46);
-@define-color button_hover_bg alpha(@color8, 0.62);
-@define-color accent_color alpha(@color4, 0.85);
-@define-color accent_color_hover alpha(@color4, 0.97);
+@define-color theme_bg alpha(@color0, 0.97);
+@define-color popup_bg alpha(@color0, 0.96);
+@define-color module_bg alpha(@color0, 0.92);
+@define-color module_hover_bg alpha(@color7, 0.60);
+@define-color button_bg alpha(@color8, 0.58);
+@define-color button_hover_bg alpha(@color8, 0.70);
+@define-color accent_color alpha(@color4, 0.92);
+@define-color accent_color_hover alpha(@color4, 1.0);
 @define-color border_light alpha(@color15, 0.18);
 @define-color border_dark alpha(@color0, 0.22);
 @define-color border_medium alpha(@color15, 0.09);
@@ -336,17 +336,21 @@ scale slider {
 
 .floating-notifications .notification-background {
   background-color: @popup_bg;
-  border: 1px solid @border_light;
-  border-radius: 18px;
+  border: 1px solid alpha(@color15, 0.16);
+  border-radius: 16px;
   padding: 16px;
   margin: 8px 14px;
-  transition: background-color 0.15s ease;
-  box-shadow: 0 28px 44px alpha(@color0, 0.56), 0 0 22px alpha(@color0, 0.44) inset;
-  filter: brightness(0.97);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  box-shadow: none;
+  filter: none;
 }
 
 .floating-notifications .notification-row:hover .notification-background {
-  background-color: alpha(@popup_bg, 1.1);
+  background-color: alpha(@popup_bg, 1.05);
+  border-color: alpha(@color15, 0.24);
+  box-shadow: none;
+  filter: none;
+  transform: translateY(-1px);
 }
 
 .floating-notifications .notification .summary {
@@ -374,8 +378,10 @@ scale slider {
 .floating-notifications .close-button {
   background-color: @close_button_bg;
   border-radius: 50%;
-  min-width: 26px;
-  min-height: 26px;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 4px;
+  margin-left: 14px;
   transition: background-color 0.15s ease;
 }
 
@@ -384,7 +390,7 @@ scale slider {
 }
 
 .floating-notifications .close-button image {
-  margin-right: 12px;
+  margin: 0;
   color: @icon_secondary;
 }
 
