@@ -8,7 +8,8 @@
     "workbench.iconTheme": "vs-seti",
     "git.openRepositoryInParentFolders": "never",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
-    "geminicodeassist.project": "semiotic-tooling-k4vbx"
+    "geminicodeassist.project": "semiotic-tooling-k4vbx",
+    "security.workspace.trust.untrustedFiles": "open"
 
     }
 
