@@ -1,0 +1,144 @@
+/* ═══════════════════════════════════════════════════════════════════════════════ */
+/* AMÉLIORATION DE LA LISIBILITÉ DES MENUS CONTEXTUELS GTK-4.0 */
+/* ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Menu contextuel principal */
+popover,
+popover.background,
+popover > contents {
+    background-color: @theme_bg_color !important;
+    border: 2px solid @theme_fg_color !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    padding: 8px !important;
+    margin: 4px !important;
+}
+
+/* Éléments du menu contextuel */
+menuitem,
+modelbutton {
+    background-color: transparent !important;
+    border-radius: 8px !important;
+    margin: 2px 0 !important;
+    padding: 8px 12px !important;
+    min-height: 32px !important;
+    transition: all 0.2s ease !important;
+    color: @theme_fg_color !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+}
+
+/* Hover sur les éléments du menu */
+menuitem:hover,
+modelbutton:hover {
+    background-color: @theme_selected_bg_color !important;
+    color: @theme_selected_fg_color !important;
+    transform: translateX(2px) !important;
+}
+
+/* Élément sélectionné */
+menuitem:selected,
+modelbutton:selected {
+    background-color: @theme_selected_bg_color !important;
+    color: @theme_selected_fg_color !important;
+    font-weight: 600 !important;
+}
+
+/* Séparateurs dans le menu */
+separator {
+    background-color: @theme_fg_color !important;
+    opacity: 0.3 !important;
+    margin: 6px 8px !important;
+    min-height: 1px !important;
+}
+
+/* Icônes dans le menu */
+menuitem image,
+modelbutton image {
+    margin-right: 12px !important;
+    opacity: 0.8 !important;
+}
+
+menuitem:hover image,
+modelbutton:hover image {
+    opacity: 1.0 !important;
+}
+
+/* Flèches pour les sous-menus */
+menuitem arrow,
+modelbutton arrow {
+    margin-left: 12px !important;
+    opacity: 0.7 !important;
+}
+
+/* Menu contextuel Thunar spécifique */
+.thunar popover,
+.thunar popover.background {
+    background-color: @theme_bg_color !important;
+    border: 2px solid @theme_fg_color !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+.thunar menuitem,
+.thunar modelbutton {
+    background-color: transparent !important;
+    border-radius: 8px !important;
+    margin: 2px 0 !important;
+    padding: 10px 14px !important;
+    min-height: 36px !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+}
+
+.thunar menuitem:hover,
+.thunar modelbutton:hover {
+    background-color: @theme_selected_bg_color !important;
+    color: @theme_selected_fg_color !important;
+    transform: translateX(3px) !important;
+}
+
+/* Amélioration des menus contextuels généraux */
+menu,
+.menu {
+    background-color: @theme_bg_color !important;
+    border: 2px solid @theme_fg_color !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    padding: 6px !important;
+}
+
+/* Éléments de menu avec meilleur contraste */
+.menu menuitem,
+.menu modelbutton {
+    background-color: transparent !important;
+    border-radius: 8px !important;
+    margin: 1px 0 !important;
+    padding: 8px 12px !important;
+    min-height: 32px !important;
+    color: @theme_fg_color !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+}
+
+.menu menuitem:hover,
+.menu modelbutton:hover {
+    background-color: @theme_selected_bg_color !important;
+    color: @theme_selected_fg_color !important;
+    transform: translateX(2px) !important;
+}
+
+/* Amélioration des raccourcis clavier dans les menus */
+.menu menuitem accelerator {
+    color: @theme_fg_color !important;
+    opacity: 0.7 !important;
+    font-size: 12px !important;
+    margin-left: 16px !important;
+}
+
+.menu menuitem:hover accelerator {
+    color: @theme_selected_fg_color !important;
+    opacity: 0.9 !important;
+}
+
+
