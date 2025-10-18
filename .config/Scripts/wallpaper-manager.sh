@@ -28,12 +28,13 @@ apply_wallpaper() {
     fi
     
     # Appliquer le wallpaper avec transition
-    transitions=("fade" "wipe" "grow" "center" "outer")
+    transitions=("none" "simple" "fade" "left" "right" "top" "bottom" "wipe" "wave" "grow" "center" "outer" "random")
     transition=${transitions[$RANDOM % ${#transitions[@]}]}
     swww img "$wallpaper_path" --transition-type "$transition" --transition-duration 2
     
     # Générer les couleurs pywal
     wal -i "$wallpaper_path" -n
+    "$SCRIPTS_DIR/update-pywalfox.sh" > /dev/null 2>&1 || true
     
     # Synchroniser tous les thèmes
     for script in wal2swaync generate-pywal-waybar-style generate-tofi-colors generate-kitty-colors generate-hyprland-colors generate-hyprlock-colors; do
@@ -41,11 +42,6 @@ apply_wallpaper() {
             "$SCRIPTS_DIR/$script.sh" 2>/dev/null
         fi
     done
-    
-    # Générer le thème Discord si disponible
-    if command -v pywal-discord >/dev/null 2>&1; then
-        pywal-discord -t abou 2>/dev/null
-    fi
     
     # Sauvegarder le wallpaper utilisé
     echo "$wallpaper_path" > "$LAST_WALLPAPER_FILE"
@@ -89,6 +85,13 @@ main() {
             fi
             apply_wallpaper "$WALLPAPER_DIR/$2"
             ;;
+        "apply-path")
+            if [ -z "$2" ]; then
+                echo "Usage: $0 apply-path /chemin/vers/fichier.jpg"
+                exit 1
+            fi
+            apply_wallpaper "$2"
+            ;;
         "restore")
             if [ -f "$LAST_WALLPAPER_FILE" ]; then
                 saved_wallpaper=$(cat "$LAST_WALLPAPER_FILE")
@@ -107,6 +110,18 @@ main() {
             echo "Wallpapers disponibles dans $WALLPAPER_DIR:"
             find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) -exec basename {} \; | sort
             ;;
+        "fast-waybar")
+            waybar &
+            WAYBAR_PID=$!
+            (
+                sleep 3
+                if "$SCRIPTS_DIR/generate-pywal-waybar-style.sh"; then
+                    sleep 1
+                    kill "$WAYBAR_PID" 2>/dev/null
+                    waybar &
+                fi
+            ) &
+            ;;
         "help"|"h"|*)
             echo "Script de gestion des wallpapers avec pywal"
             echo ""
@@ -114,6 +129,8 @@ main() {
             echo "  $0 [random|r]              - Wallpaper aléatoire"
             echo "  $0 [specific|s] <fichier>  - Wallpaper spécifique"
             echo "  $0 [restore]               - Restaurer le dernier wallpaper"
+            echo "  $0 apply-path /chemin.jpg  - Appliquer un fichier précis (absolu)"
+            echo "  $0 fast-waybar             - Démarrer Waybar rapidement puis resynchroniser le thème"
             echo "  $0 [list|l]                - Lister les wallpapers disponibles"
             echo "  $0 [help|h]                - Afficher cette aide"
             echo ""
