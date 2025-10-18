@@ -6,5 +6,9 @@
     "editor.minimap.enabled": false,
     "workbench.statusBar.visible": true,
     "workbench.iconTheme": "vs-seti",
-    "git.openRepositoryInParentFolders": "never"
-}
+    "git.openRepositoryInParentFolders": "never",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "geminicodeassist.project": "semiotic-tooling-k4vbx"
+
+    }
+
