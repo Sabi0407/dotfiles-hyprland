@@ -28,6 +28,7 @@ echo "Application du thème : $THEME"
 
 # Appliquer le thème
 wal --theme "$THEME"
+~/.config/Scripts/update-pywalfox.sh > /dev/null 2>&1 || true
 
 # Synchroniser tous les composants
 ~/.config/Scripts/wal2swaync.sh
@@ -36,10 +37,6 @@ wal --theme "$THEME"
 ~/.config/Scripts/generate-kitty-colors.sh
 ~/.config/Scripts/generate-hyprlock-colors.sh
 ~/.config/Scripts/generate-hyprland-colors.sh
-
-# Générer le thème Discord
-pywal-discord -t abou
-echo '* { color: #ffffff !important; }' >> "$HOME/.config/BetterDiscord/themes/pywal-discord-abou.theme.css"
 
 # Recharger waybar
 pkill waybar

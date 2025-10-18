@@ -41,41 +41,6 @@ rofi_selector() {
 }
 
 
-# Fonction d'application du wallpaper
-apply_wallpaper() {
-    local wallpaper_path="$1"
-    
-    if [ ! -f "$wallpaper_path" ]; then
-        echo "Erreur: Fichier introuvable"
-        return 1
-    fi
-    
-    echo "Application: $(basename "$wallpaper_path")"
-    
-    # Appliquer avec transition
-    swww img "$wallpaper_path" --transition-type wipe --transition-duration 1.5
-    
-    # Générer couleurs pywal
-    wal -i "$wallpaper_path" -n
-    
-    # Synchroniser thèmes
-    for script in wal2swaync generate-pywal-waybar-style generate-tofi-colors generate-kitty-colors generate-hyprland-colors generate-hyprlock-colors; do
-        [ -f "$HOME/.config/Scripts/$script.sh" ] && "$HOME/.config/Scripts/$script.sh" 2>/dev/null
-    done
-    
-    # Discord
-    command -v pywal-discord >/dev/null && pywal-discord -t abou 2>/dev/null
-    
-    # Sauvegarder
-    echo "$wallpaper_path" > "$HOME/.config/dernier_wallpaper.txt"
-    
-    # Recharger interface
-    pkill waybar && sleep 0.2 && hyprctl dispatch exec waybar
-    pkill swaync && sleep 0.2 && hyprctl dispatch exec swaync
-    
-    echo "Wallpaper appliqué"
-}
-
 # Fonction principale
 main() {
     local selection
@@ -87,8 +52,7 @@ main() {
         wallpaper_path=$(find "$WALLPAPER_DIR" -name "$selection.*" | head -1)
         
         if [ -f "$wallpaper_path" ]; then
-            apply_wallpaper "$wallpaper_path"
-            echo "Wallpaper '$selection' appliqué avec succès !"
+            "$HOME/.config/Scripts/wallpaper-manager.sh" apply-path "$wallpaper_path"
         else
             echo "Wallpaper introuvable: $selection"
         fi
