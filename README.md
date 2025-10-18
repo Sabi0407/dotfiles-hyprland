@@ -179,7 +179,7 @@ Collection de scripts personnalisés .
 
 Script automatisé pour installer tous les composants nécessaires. Installe les paquets pacman, AUR et Flatpak.
 
-Le script d'installation est disponible dans `package-base.sh`
+Le script d'installation est disponible dans `package-base-v2.sh`
 
 ### Utilisation
 ```bash
