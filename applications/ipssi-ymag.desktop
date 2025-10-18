@@ -2,7 +2,7 @@
 Name=NetYparéo
 GenericName=Ymag
 Comment=Ouvrir IPSSI Ymag
-Exec=xdg-open https://ecole-ipssi.ymag.cloud/
+Exec=librewolf https://ecole-ipssi.ymag.cloud/
 Terminal=false
 Type=Application
 Categories=Network;WebBrowser;Education;

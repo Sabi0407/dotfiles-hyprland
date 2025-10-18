@@ -1,10 +1,11 @@
 [Desktop Entry]
 Name=Outlook
 GenericName=Outlook
-Comment=Ouvrir Outlook
-Exec=xdg-open https://outlook.live.com/
+Comment=Ouvrir Outlook avec LibreWolf
+Exec=/usr/lib/librewolf/librewolf https://outlook.live.com/
 Terminal=false
 Type=Application
 Categories=Network;WebBrowser;Email;
 Keywords=outlook;microsoft;mail;email;hotmail;
 Icon=ms-outlook
+StartupWMClass=LibreWolf

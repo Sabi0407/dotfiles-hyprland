@@ -1,4 +1,13 @@
 [MIME Cache]
+application/java-archive=java-java-openjdk.desktop;
+application/x-cmakecache=cmake-gui.desktop;
+application/x-designer=designer.desktop;
+application/x-jar=java-java-openjdk.desktop;
+application/x-java-archive=java-java-openjdk.desktop;
+application/x-linguist=linguist.desktop;
 application/x-pka=packettracer.desktop;
 application/x-pkt=packettracer.desktop;
 application/x-pkz=packettracer.desktop;
+text/markdown=obsidian.desktop;
+text/vnd.trolltech.linguist=linguist.desktop;
+text/x-markdown=obsidian.desktop;
