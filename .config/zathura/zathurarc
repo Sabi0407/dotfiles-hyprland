@@ -30,6 +30,18 @@ set recolor-keephue true
 set recolor-darkcolor "#cdd6f4"
 set recolor-lightcolor "#1e1e2e"
 
+# Confort et ergonomie
+set adjust-open "best-fit"
+set smooth-scroll true
+set scroll-page-threshold 0.1
+set scroll-step 80
+set zoom-step 12
+set incremental-search true
+set selection-notification true
+set window-title-basename true
+set render-loading true
+set synctex true
+
 # Navigation rapide
 map <C-Left> navigate previous
 map <C-Right> navigate next
@@ -42,3 +54,8 @@ map <C-d> scroll down
 map <C-u> scroll up
 map <C-j> scroll down
 map <C-k> scroll up
+map <C-0> zoom default
+map <C-g> goto
+map <C-e> toggle_fullscreen
+map <C-m> toggle_statusbar
+map <C-n> toggle_inputbar
