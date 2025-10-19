@@ -1,7 +1,7 @@
 [Default Applications]
 application/zip=org.gnome.FileRoller.desktop
 x-scheme-handler/anytype=anytype.desktop
-inode/directory=thunar.desktop
+inode/directory=org.gnome.Nautilus.desktop
 application/x-shellscript=org.xfce.mousepad.desktop
 x-terminal-emulator.desktop=kitty.desktop
 TerminalEmulator=kitty.desktop
@@ -23,7 +23,7 @@ application/x-tar=xarchiver.desktop
 x-scheme-handler/discord=vesktop.desktop
 
 [Added Associations]
-application/zip=thunar.desktop;org.gnome.FileRoller.desktop;
+application/zip=org.gnome.FileRoller.desktop;
 image/png=imv.desktop;
 text/css=org.xfce.mousepad.desktop;
 text/plain=org.xfce.mousepad.desktop;

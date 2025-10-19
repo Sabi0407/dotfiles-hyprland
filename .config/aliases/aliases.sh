@@ -45,6 +45,8 @@ alias gp='git push' # Pousser les modifications
 
 # Éditeurs
 alias m='micro' # Micro
+alias firefox='env -u QT_QPA_PLATFORMTHEME -u QT_STYLE_OVERRIDE -u QT_QPA_PLATFORM -u QT5_STYLE_OVERRIDE -u GTK_THEME -u GTK_APPLICATION_PREFER_DARK_THEME -u GTK_CSD -u GTK_TITLEBAR /usr/lib/firefox/firefox'
+alias obsidian='env -u QT_QPA_PLATFORMTHEME -u QT_STYLE_OVERRIDE -u QT_QPA_PLATFORM -u QT5_STYLE_OVERRIDE -u GTK_THEME -u GTK_APPLICATION_PREFER_DARK_THEME -u GTK_CSD -u GTK_TITLEBAR /usr/sbin/obsidian'
 
 # Redémarrage rapide
 alias reloadb='source ~/.bashrc' # Recharger le fichier de configuration

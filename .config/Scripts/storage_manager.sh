@@ -120,7 +120,7 @@ open_disk() {
   fi
 
   if [ -n "$mountpoint" ]; then
-    thunar "$mountpoint" >/dev/null 2>&1 &
+    nautilus "$mountpoint" >/dev/null 2>&1 &
     notify "Stockage" "Ouverture de $label" -i folder-open -t 2000
   else
     notify "Stockage" "Aucun point de montage pour $label" -i dialog-information -t 3000

@@ -138,7 +138,7 @@
       "class<kitty>": "󰄛",
       "class<gimp>": "󰵸",
       "class<blender>": "󰂫",
-      "class<thunar>": "󰉋",
+      "class<nautilus>": "󰉋",
       "class<mpv>": "󰎆",
       "class<obsidian>": "󰈙",
       "class<anki>": "󰚯",
@@ -167,7 +167,7 @@
       "disabled": "\uf294",
       "default": "\uf293"
     },
-    "on-click": "blueman-manager"
+    "on-click": "~/.config/Scripts/open_bluetooth_manager.sh"
   },
 
   "custom/processes": {
