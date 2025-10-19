@@ -2,7 +2,7 @@
 <actions>
 <action>
 	<icon>utilities-terminal</icon>
-	<name>Ouvrir Kitty ici</name>
+	<name>Terminal</name>
 	<submenu></submenu>
 	<unique-id>1759014546145235-1</unique-id>
 	<command>kitty --working-directory %f</command>
@@ -15,7 +15,7 @@
 
 <action>
 	<icon>code</icon>
-	<name>Ouvrir avec VSCodium</name>
+	<name>Éditeur</name>
 	<submenu></submenu>
 	<unique-id>1759014546145235-2</unique-id>
 	<command>codium %f</command>
@@ -28,57 +28,8 @@
 </action>
 
 <action>
-	<icon>folder-compress</icon>
-	<name>Créer une archive</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-3</unique-id>
-	<command>file-roller --add %F</command>
-	<description>Créer une archive avec les fichiers sélectionnés</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-
-<action>
-	<icon>edit-copy</icon>
-	<name>Copier le chemin</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-4</unique-id>
-	<command>echo -n %f | wl-copy</command>
-	<description>Copier le chemin complet dans le presse-papiers</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-
-<action>
-	<icon>system-file-manager</icon>
-	<name>Ouvrir en tant qu'administrateur</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-5</unique-id>
-	<command>pkexec thunar %f</command>
-	<description>Ouvrir Thunar avec les droits administrateur</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-</action>
-
-<action>
 	<icon>image-viewer</icon>
-	<name>Définir comme fond d'écran</name>
+	<name>Wallpaper</name>
 	<submenu></submenu>
 	<unique-id>1759014546145235-6</unique-id>
 	<command>wal -i %f</command>
@@ -90,37 +41,8 @@
 </action>
 
 <action>
-	<icon>folder-settings</icon>
-	<name>Ouvrir dossier .config</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-7</unique-id>
-	<command>thunar /home/sabi/.config</command>
-	<description>Ouvrir le dossier de configuration dans une nouvelle fenêtre</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-<action>
-	<icon>text-editor</icon>
-	<name>Éditer avec Micro</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-8</unique-id>
-	<command>kitty --working-directory %d micro %f</command>
-	<description>Éditer le fichier avec l'éditeur Micro dans Kitty</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<text-files/>
-	<other-files/>
-</action>
-
-<action>
 	<icon>media-playback-start</icon>
-	<name>Lire le média</name>
+	<name>Lire</name>
 	<submenu></submenu>
 	<unique-id>1759014546145235-9</unique-id>
 	<command>mpv %f</command>
@@ -134,7 +56,7 @@
 
 <action>
 	<icon>image-x-generic</icon>
-	<name>Voir l'image</name>
+	<name>Voir</name>
 	<submenu></submenu>
 	<unique-id>1759014546145235-10</unique-id>
 	<command>imv %f</command>
@@ -146,34 +68,8 @@
 </action>
 
 <action>
-	<icon>folder-new</icon>
-	<name>Créer un projet</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-11</unique-id>
-	<command>~/.config/Scripts/create-project.sh %f</command>
-	<description>Créer un nouveau projet dans ce dossier</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-</action>
-
-<action>
-	<icon>edit-find</icon>
-	<name>Rechercher dans les fichiers</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-12</unique-id>
-	<command>kitty --working-directory %f fzf-search</command>
-	<description>Rechercher récursivement dans ce dossier</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-</action>
-
-<action>
 	<icon>document-open</icon>
-	<name>Ouvrir avec navigateur</name>
+	<name>PDF</name>
 	<submenu></submenu>
 	<unique-id>1759014546145235-13</unique-id>
 	<command>zathura %f</command>
@@ -181,91 +77,6 @@
 	<range></range>
 	<patterns>*.pdf</patterns>
 	<startup-notify/>
-	<other-files/>
-</action>
-
-<action>
-	<icon>folder-sync</icon>
-	<name>Synchroniser avec Git</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-14</unique-id>
-	<command>kitty --working-directory %f git-sync</command>
-	<description>Synchroniser le dépôt Git dans ce dossier</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-</action>
-
-<action>
-	<icon>security-high</icon>
-	<name>Vérifier les permissions</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-15</unique-id>
-	<command>kitty --working-directory %f ls -la</command>
-	<description>Afficher les permissions détaillées du dossier</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-</action>
-
-<action>
-	<icon>edit-cut</icon>
-	<name>Déplacer vers...</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-16</unique-id>
-	<command>kitty --working-directory %d mv %f</command>
-	<description>Déplacer le fichier vers un autre emplacement</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-	<audio-files/>
-	<image-files/>
-	<other-files/>
-	<text-files/>
-	<video-files/>
-</action>
-
-<action>
-	<icon>text-editor</icon>
-	<name>Éditer avec Obsidian</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-18</unique-id>
-	<command>obsidian %f</command>
-	<description>Ouvrir le fichier Markdown avec Obsidian</description>
-	<range></range>
-	<patterns>*.md;*.markdown</patterns>
-	<startup-notify/>
-	<text-files/>
-	<other-files/>
-</action>
-
-<action>
-	<icon>document-new</icon>
-	<name>Nouveau fichier texte</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-19</unique-id>
-	<command>~/.config/Scripts/thunar-new-file.sh %d</command>
-	<description>Créer un nouveau fichier texte avec Mousepad (nom personnalisé)</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<directories/>
-</action>
-
-<action>
-	<icon>text-x-generic</icon>
-	<name>Ouvrir avec Mousepad</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-20</unique-id>
-	<command>mousepad %f</command>
-	<description>Ouvrir le fichier avec Mousepad</description>
-	<range></range>
-	<patterns>*</patterns>
-	<startup-notify/>
-	<text-files/>
 	<other-files/>
 </action>
 </actions>
