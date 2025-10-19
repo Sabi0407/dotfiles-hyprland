@@ -12,13 +12,11 @@
     "hyprland/workspaces"
   ],
   "modules-right": [
-    "pulseaudio",
     "custom/mic_status",
-    "bluetooth",
-    "tray",
-    "battery"
+    "group/tray_drawer",
+    "group/battery_drawer"
   ],
-  "height": 44,
+  "height": 46,
 
   "custom/notification": {
     "tooltip": false,
@@ -179,6 +177,8 @@
     "tooltip-format": "Processus en arrière-plan :\n{}"
   },
 
+
+
   "tray": {
     "spacing": 10,
     "icon-size": 21,
@@ -188,9 +188,33 @@
     "icon-theme": "Adwaita",
     "items-order": [
       "nm-applet",
+      "spotify",
       "*"
     ]
   },
+
+  "custom/tray_toggle": {
+    "format": "",
+    "tooltip": false
+  },
+
+  "group/tray_drawer": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "slider-drawer",
+      "transition-left-to-right": false,
+      "click-to-reveal": true,
+      "close-on-unfocus": false
+    },
+    "modules": [
+      "custom/tray_toggle",
+      "tray",
+      "pulseaudio",
+      "bluetooth"
+    ]
+  },
+
 
   "group/clock_drawer": {
     "orientation": "horizontal",
@@ -202,6 +226,18 @@
     "modules": [
       "clock",
       "custom/date_fr"
+    ]
+  },
+
+  "group/battery_drawer": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "slider-drawer",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "battery"
     ]
   },
 

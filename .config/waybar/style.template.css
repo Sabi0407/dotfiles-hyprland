@@ -128,6 +128,7 @@
   #memory,
   #disk,
   #tray,
+  #custom-tray_toggle,
   #custom-launcher,
   #custom-notification,
   #power-profiles-daemon,
@@ -164,6 +165,7 @@
   #memory:hover,
   #disk:hover,
   #tray:hover,
+  #custom-tray_toggle:hover,
   #custom-launcher:hover,
   #custom-notification:hover,
   #power-profiles-daemon:hover,
@@ -181,7 +183,17 @@
     border: 2px solid {color4};
     box-shadow: none;
   }
-  
+
+  /* Masquer les modules du drawer quand il est replié */
+  #group-tray_drawer:not(.open) > box > *:not(:first-child) {
+    margin: 0;
+    padding: 0;
+    min-width: 0;
+    opacity: 0;
+    border-width: 0;
+  }
+
+
   #battery {
   transition: all 0.3s ease;
   color: {foreground};
