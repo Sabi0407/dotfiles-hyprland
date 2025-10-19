@@ -1,153 +1,135 @@
 #!/bin/bash
 
-# Script pour gérer les périphériques de stockage dans Waybar
-# Affiche les disques montés et permet de les ouvrir ou démonter
+ICON="󰋊"
 
-# Fonction pour obtenir les disques externes (montés et non montés)
-get_external_disks() {
-    # Obtenir tous les disques externes (exclure seulement le disque système nvme0n1)
-    lsblk -o NAME,TYPE,SIZE,MODEL | awk '
-    NR>1 && $2 == "disk" && $1 !~ /^nvme0n1$/ {
-        # Inclure tous les disques sda, sdb, etc. (disques externes typiques)
-        if ($1 ~ /^sd[a-z]$/) {
-            print $1
-        }
-    }' | head -5
+notify() {
+  command -v notify-send >/dev/null 2>&1 || return 0
+  notify-send "$@"
 }
 
-# Fonction pour obtenir les disques montés (excluant les partitions système)
-get_mounted_disks() {
-    # Lister les disques externes montés uniquement (exclure les disques système)
-    df -h | awk 'NR>1 && !/\/dev\/loop/ && $1 ~ /^\/dev\/sd[a-z]/ && $6 !~ /^\/$/ && $6 !~ /^\/boot$/ && $6 !~ /^\/home$/ {print $1 "|" $6 "|" $3 "|" $5}' | head -5
+escape_json() {
+  local input=${1//\\/\\\\}
+  input=${input//\"/\\\"}
+  input=${input//$'\n'/\\n}
+  echo "$input"
 }
 
-# Fonction pour le format Waybar
-format_for_waybar() {
-    local mounted_disks=$(get_mounted_disks)
-    local external_disks=$(get_external_disks)
+first_external_partition() {
+  local current_disk=""
+  local current_tran=""
 
-    # Compter les disques
-    local mounted_count=0
-    local external_count=0
-
-    if [ -n "$mounted_disks" ]; then
-        mounted_count=$(echo "$mounted_disks" | wc -l)
+  while read -r name type tran; do
+    if [ "$type" = "disk" ]; then
+      current_disk="$name"
+      current_tran="$tran"
+      continue
     fi
 
-    if [ -n "$external_disks" ]; then
-        external_count=$(echo "$external_disks" | wc -l)
-    fi
+    [ "$type" = "part" ] || continue
 
-    if [ $external_count -eq 0 ]; then
-        # Aucun disque externe détecté - faire disparaître le module complètement
-        echo ''
-        return
-    fi
+    case "$current_disk" in
+      /dev/nvme0*|/dev/mmcblk0*) continue ;;
+    esac
 
-    local text="󰋊"
-    local tooltip="Périphériques externes:\\n"
-
-    # Ajouter les disques montés
-    if [ $mounted_count -gt 0 ]; then
-        while IFS='|' read -r device mountpoint size used; do
-            local disk_name=$(basename "$device")
-            tooltip+="[MONTÉ] $disk_name: $size ($used utilisé)\\n  Monté sur: $mountpoint\\n"
-        done <<< "$mounted_disks"
+    if [[ "$current_disk" =~ ^/dev/sd ]] || [[ "$current_tran" = "usb" && "$current_disk" =~ ^/dev/nvme ]]; then
+      echo "$name"
+      return 0
     fi
+  done < <(lsblk -rpo NAME,TYPE,TRAN)
 
-    # Ajouter les disques non montés
-    if [ $external_count -gt $mounted_count ]; then
-        while IFS= read -r device; do
-            if ! echo "$mounted_disks" | grep -q "$device"; then
-                tooltip+="[NON MONTÉ] $device\\n"
-            fi
-        done <<< "$external_disks"
-    fi
-
-    # Affichage principal
-    if [ $mounted_count -eq 1 ] && [ $external_count -eq 1 ]; then
-        # Un seul disque, monté
-        local first_disk=$(echo "$mounted_disks" | head -1)
-        IFS='|' read -r device mountpoint size used <<< "$first_disk"
-        local disk_name=$(basename "$device")
-        echo "{\"text\": \"$text $disk_name\", \"tooltip\": \"${tooltip}\", \"class\": \"connected\"}"
-    elif [ $mounted_count -gt 0 ]; then
-        # Certains disques montés
-        echo "{\"text\": \"$text $mounted_count/$external_count\", \"tooltip\": \"${tooltip}\", \"class\": \"connected\"}"
-    else
-        # Aucun disque monté mais disques détectés
-        echo "{\"text\": \"$text $external_count disques\", \"tooltip\": \"${tooltip}\", \"class\": \"disconnected\"}"
-    fi
+  return 1
 }
 
-# Fonction pour ouvrir le dossier avec Thunar
-open_disk() {
-    local disk_path="$1"
-    if [ -d "$disk_path" ]; then
-        thunar "$disk_path" &
-    fi
+get_label() {
+  local part="$1"
+  local label
+
+  label=$(lsblk -no LABEL "$part" 2>/dev/null | head -n1)
+  [ -n "$label" ] || label=$(basename "$part")
+  echo "$label"
 }
 
-# Fonction pour démonter/monter un disque avec notification
+mountpoint_for() {
+  local part="$1"
+  findmnt -rn -S "$part" -o TARGET 2>/dev/null
+}
+
+print_status() {
+  local part label mountpoint class tooltip
+
+  part=$(first_external_partition) || { echo ''; return; }
+  label=$(get_label "$part")
+  mountpoint=$(mountpoint_for "$part")
+
+  if [ -n "$mountpoint" ]; then
+    class="connected"
+    tooltip=$(printf "%s monté sur %s\nClic gauche : ouvrir\nClic droit : démonter" "$label" "$mountpoint")
+  else
+    class="disconnected"
+    tooltip=$(printf "%s non monté\nClic droit : monter" "$label")
+  fi
+
+  printf '{"text":"%s %s","tooltip":"%s","class":"%s"}\n' \
+    "$ICON" "$(escape_json "$label")" "$(escape_json "$tooltip")" "$class"
+}
+
 toggle_mount() {
-    local device="$1"
-    local mountpoint="$2"
-    local disk_name=$(basename "$device")
+  local part label mountpoint
 
-    if mount | grep -q "$device"; then
-        # Le disque est monté, le démonter
-        if udisksctl unmount -b "$device" 2>/dev/null; then
-            notify-send "Stockage" "Disque $disk_name démonté" -i drive-harddisk
-        else
-            notify-send "Stockage" "Erreur lors du démontage de $disk_name" -i error
-        fi
+  part=$(first_external_partition) || {
+    notify "Stockage" "Aucun disque externe détecté" -i dialog-information -t 3000
+    return 1
+  }
+
+  label=$(get_label "$part")
+  mountpoint=$(mountpoint_for "$part")
+
+  if [ -n "$mountpoint" ]; then
+    if udisksctl unmount -b "$part" --no-user-interaction >/dev/null 2>&1; then
+      notify "Stockage" "Disque $label démonté" -i drive-harddisk -t 2000
     else
-        # Le disque n'est pas monté, essayer de le monter
-        if udisksctl mount -b "$device" 2>/dev/null; then
-            notify-send "Stockage" "Disque $disk_name monté automatiquement" -i drive-harddisk
-        else
-            # Essayer avec pkexec (PolicyKit) pour les permissions graphiques
-            if command -v pkexec >/dev/null 2>&1; then
-                if pkexec mount "$device" "/run/media/$(whoami)/$disk_name" 2>/dev/null; then
-                    notify-send "Stockage" "Disque $disk_name monté avec PolicyKit" -i drive-harddisk
-                else
-                    notify-send "Stockage" "Impossible de monter $disk_name (droits insuffisants)" -i error
-                fi
-            else
-                # Fallback : informer l'utilisateur
-                notify-send "Stockage" "Montage manuel requis pour $disk_name" -i dialog-warning
-                notify-send "Stockage" "Commande: sudo mount $device /run/media/$(whoami)/$disk_name" -i dialog-information
-            fi
-        fi
+      notify "Stockage" "Échec du démontage de $label" -i error -t 5000
+      return 1
     fi
+  else
+    if udisksctl mount -b "$part" --no-user-interaction >/dev/null 2>&1; then
+      notify "Stockage" "Disque $label monté" -i drive-harddisk -t 2000
+    else
+      notify "Stockage" "Impossible de monter $label" -i error -t 5000
+      notify "Stockage" "Exécutez ~/.config/Scripts/setup-storage-mount.sh pour autoriser l'utilisateur" -i dialog-information -t 6000
+      return 1
+    fi
+  fi
 }
 
-# Gestion des arguments
-case "$1" in
-    "open")
-        # Ouvrir le premier disque monté
-        first_disk=$(get_mounted_disks | head -1)
-        if [ -n "$first_disk" ]; then
-            IFS='|' read -r device mountpoint size used <<< "$first_disk"
-            open_disk "$mountpoint"
-        fi
-        ;;
-    "toggle")
-        # Basculer le montage du premier disque (monté ou non)
-        mounted_disk=$(get_mounted_disks | head -1)
-        external_disk=$(get_external_disks | head -1)
+open_disk() {
+  local part label mountpoint
 
-        if [ -n "$mounted_disk" ]; then
-            # Il y a un disque monté, le démonter
-            IFS='|' read -r device mountpoint size used <<< "$mounted_disk"
-            toggle_mount "$device" "$mountpoint"
-        elif [ -n "$external_disk" ]; then
-            # Il n'y a pas de disque monté mais des disques détectés, monter le premier
-            toggle_mount "/dev/$external_disk" ""
-        fi
-        ;;
-    *)
-        # Affichage par défaut pour Waybar
-        format_for_waybar
-        ;;
+  part=$(first_external_partition) || {
+    notify "Stockage" "Aucun disque externe détecté" -i dialog-information -t 3000
+    return 1
+  }
+
+  label=$(get_label "$part")
+  mountpoint=$(mountpoint_for "$part")
+
+  if [ -z "$mountpoint" ]; then
+    if udisksctl mount -b "$part" --no-user-interaction >/dev/null 2>&1; then
+      mountpoint=$(mountpoint_for "$part")
+    fi
+  fi
+
+  if [ -n "$mountpoint" ]; then
+    thunar "$mountpoint" >/dev/null 2>&1 &
+    notify "Stockage" "Ouverture de $label" -i folder-open -t 2000
+  else
+    notify "Stockage" "Aucun point de montage pour $label" -i dialog-information -t 3000
+    return 1
+  fi
+}
+
+case "$1" in
+  toggle) toggle_mount ;;
+  open) open_disk ;;
+  *) print_status ;;
 esac
