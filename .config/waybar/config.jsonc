@@ -50,13 +50,13 @@
     "format": "{icon}  {capacity}%",
     "format-charging": "󰂄  {capacity}%",
     "format-full": "󰁹  {capacity}%",
-    "format-warning": "󰂃  {capacity}%",
-    "format-critical": "󰁺  {capacity}%",
+    "format-warning": "{icon}  {capacity}%",
+    "format-critical": "{icon}  {capacity}%",
     "format-plugged": "󰂄  {capacity}%",
     "format-discharging": "{icon}  {capacity}%",
     "max-length": 20,
     "format-icons": [
-      "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰂃", "󰁹"
+      "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰂁", "󰁹"
     ],
     "tooltip-format": "Batterie : {capacity}%\nÉtat : {time}\nPuissance : {power}W",
     "interval": 1,
@@ -66,12 +66,13 @@
       "very_critical": 10,
       "extreme": 5
     },
-    "critical-notification": true,
-    "warning-notification": true,
+    "critical-notification": false,
+    "warning-notification": false,
     "on-click": "gnome-power-statistics",
     "on-click-right": "brightnessctl g | xargs -I{} dunstify 'Luminosité actuelle' '{}'",
     "on-scroll-up": "brightnessctl set +5%",
-    "on-scroll-down": "brightnessctl set 5%-"
+    "on-scroll-down": "brightnessctl set 5%-",
+    "exec-on-event": "~/.config/Scripts/battery_notify.sh"
   },
 
   "clock": {
