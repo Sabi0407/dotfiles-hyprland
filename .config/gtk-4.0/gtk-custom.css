@@ -6,34 +6,33 @@
 popover,
 popover.background,
 popover > contents {
-    background-color: @theme_bg_color !important;
-    border: 2px solid @theme_fg_color !important;
-    border-radius: 12px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    padding: 8px !important;
-    margin: 4px !important;
+    background-color: shade(@theme_bg_color, 1.24) !important;
+    border: 1px solid alpha(@theme_fg_color, 0.5) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.24) !important;
+    padding: 4px !important;
+    margin: 2px !important;
 }
 
 /* Éléments du menu contextuel */
 menuitem,
 modelbutton {
     background-color: transparent !important;
-    border-radius: 8px !important;
-    margin: 2px 0 !important;
-    padding: 8px 12px !important;
-    min-height: 32px !important;
+    border-radius: 4px !important;
+    margin: 1px 0 !important;
+    padding: 2px 6px !important;
+    min-height: 16px !important;
     transition: all 0.2s ease !important;
-    color: @theme_fg_color !important;
+    color: shade(@theme_fg_color, 1.1) !important;
     font-weight: 500 !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
 }
 
 /* Hover sur les éléments du menu */
 menuitem:hover,
 modelbutton:hover {
-    background-color: @theme_selected_bg_color !important;
+    background-color: shade(@theme_selected_bg_color, 0.88) !important;
     color: @theme_selected_fg_color !important;
-    transform: translateX(2px) !important;
 }
 
 /* Élément sélectionné */
@@ -48,7 +47,7 @@ modelbutton:selected {
 separator {
     background-color: @theme_fg_color !important;
     opacity: 0.3 !important;
-    margin: 6px 8px !important;
+    margin: 1px 2px !important;
     min-height: 1px !important;
 }
 
@@ -67,73 +66,71 @@ modelbutton:hover image {
 /* Flèches pour les sous-menus */
 menuitem arrow,
 modelbutton arrow {
-    margin-left: 12px !important;
+    margin-left: 8px !important;
     opacity: 0.7 !important;
 }
 
 /* Menu contextuel Thunar spécifique */
 .thunar popover,
 .thunar popover.background {
-    background-color: @theme_bg_color !important;
-    border: 2px solid @theme_fg_color !important;
-    border-radius: 12px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    background-color: shade(@theme_bg_color, 1.18) !important;
+    border: 1px solid alpha(@theme_fg_color, 0.45) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.28) !important;
 }
 
 .thunar menuitem,
 .thunar modelbutton {
     background-color: transparent !important;
-    border-radius: 8px !important;
-    margin: 2px 0 !important;
-    padding: 10px 14px !important;
-    min-height: 36px !important;
-    font-size: 15px !important;
+    border-radius: 4px !important;
+    margin: 1px 0 !important;
+    padding: 3px 8px !important;
+    min-height: 18px !important;
+    font-size: 12px !important;
     font-weight: 500 !important;
 }
 
 .thunar menuitem:hover,
 .thunar modelbutton:hover {
-    background-color: @theme_selected_bg_color !important;
+    background-color: alpha(@theme_selected_bg_color, 0.92) !important;
     color: @theme_selected_fg_color !important;
-    transform: translateX(3px) !important;
 }
 
 /* Amélioration des menus contextuels généraux */
 menu,
 .menu {
-    background-color: @theme_bg_color !important;
-    border: 2px solid @theme_fg_color !important;
-    border-radius: 12px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    padding: 6px !important;
+    background-color: shade(@theme_bg_color, 1.2) !important;
+    border: 1px solid alpha(@theme_fg_color, 0.45) !important;
+    border-radius: 6px !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.24) !important;
+    padding: 4px !important;
 }
 
 /* Éléments de menu avec meilleur contraste */
 .menu menuitem,
 .menu modelbutton {
     background-color: transparent !important;
-    border-radius: 8px !important;
+    border-radius: 5px !important;
     margin: 1px 0 !important;
-    padding: 8px 12px !important;
-    min-height: 32px !important;
-    color: @theme_fg_color !important;
+    padding: 2px 6px !important;
+    min-height: 16px !important;
+    color: shade(@theme_fg_color, 1.1) !important;
     font-weight: 500 !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
 }
 
 .menu menuitem:hover,
 .menu modelbutton:hover {
-    background-color: @theme_selected_bg_color !important;
+    background-color: shade(@theme_selected_bg_color, 0.88) !important;
     color: @theme_selected_fg_color !important;
-    transform: translateX(2px) !important;
 }
 
 /* Amélioration des raccourcis clavier dans les menus */
 .menu menuitem accelerator {
     color: @theme_fg_color !important;
     opacity: 0.7 !important;
-    font-size: 12px !important;
-    margin-left: 16px !important;
+    font-size: 11px !important;
+    margin-left: 10px !important;
 }
 
 .menu menuitem:hover accelerator {
@@ -141,4 +138,32 @@ menu,
     opacity: 0.9 !important;
 }
 
+/* Masquer les options de zoom pour GTK4 */
+.thunar menuitem#zoom-in,
+.thunar menuitem#zoom-out,
+.thunar menuitem#zoom-reset,
+.thunar menuitem#zoom-default,
+.thunar menuitem#view-zoom-in,
+.thunar menuitem#view-zoom-out,
+.thunar menuitem#view-zoom-reset {
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-width: 0 !important;
+    opacity: 0 !important;
+    color: transparent !important;
+}
 
+.thunar menuitem#zoom-in *,
+.thunar menuitem#zoom-out *,
+.thunar menuitem#zoom-reset *,
+.thunar menuitem#zoom-default *,
+.thunar menuitem#view-zoom-in *,
+.thunar menuitem#view-zoom-out *,
+.thunar menuitem#view-zoom-reset * {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 0 !important;
+    color: transparent !important;
+    opacity: 0 !important;
+}

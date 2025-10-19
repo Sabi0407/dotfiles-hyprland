@@ -18,16 +18,15 @@ dialog:backdrop,
 window,
 window.background,
 .background {
-    background-color: @theme_bg_color !important;
-    opacity: 1.0 !important;
+    background-color: #121314;
+    opacity: 1.0;
 }
 
 /* Désactiver le backdrop pour toutes les fenêtres */
 window:backdrop,
 *:backdrop {
-    background-color: @theme_bg_color !important;
-    opacity: 1.0 !important;
-    backdrop-filter: none !important;
+    background-color: #121314;
+    opacity: 1.0;
 }
 
 /* Dialogues de fichiers sans flou */
@@ -37,26 +36,21 @@ filechooser window,
 dialog,
 dialog .background,
 dialog window {
-    background-color: @theme_bg_color !important;
-    backdrop-filter: none !important;
-    -gtk-backdrop-filter: none !important;
-    opacity: 1.0 !important;
+    background-color: @theme_bg_color;
+    opacity: 1.0;
 }
 
 /* Fenêtre de sélection de fichiers */
 .filechooser {
-    background-color: @theme_bg_color !important;
-    backdrop-filter: none !important;
-    opacity: 1.0 !important;
+    background-color: @theme_bg_color;
+    opacity: 1.0;
 }
 
 /* Dialogues zenity */
 #zenity-dialog,
 #zenity-file-selection {
-    background-color: @theme_bg_color !important;
-    backdrop-filter: none !important;
-    -gtk-backdrop-filter: none !important;
-    opacity: 1.0 !important;
+    background-color: @theme_bg_color;
+    opacity: 1.0;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════ */
@@ -67,94 +61,359 @@ dialog window {
 popover,
 popover.background,
 popover > contents {
-    background-color: @theme_bg_color !important;
-    border: 2px solid @theme_fg_color !important;
-    border-radius: 12px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
-    padding: 8px !important;
-    margin: 4px !important;
+    background-color: @theme_bg_color;
+    border: 2px solid @theme_fg_color;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    padding: 8px;
+    margin: 4px;
 }
 
 /* Éléments du menu contextuel */
 menuitem,
 modelbutton {
-    background-color: transparent !important;
-    border-radius: 8px !important;
-    margin: 2px 0 !important;
-    padding: 8px 12px !important;
-    min-height: 32px !important;
-    transition: all 0.2s ease !important;
-    color: @theme_fg_color !important;
-    font-weight: 500 !important;
-    font-size: 14px !important;
+    background-color: transparent;
+    border-radius: 8px;
+    margin: 2px 0;
+    padding: 8px 12px;
+    min-height: 32px;
+    transition: all 0.2s ease;
+    color: @theme_fg_color;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 /* Hover sur les éléments du menu */
 menuitem:hover,
 modelbutton:hover {
-    background-color: @theme_selected_bg_color !important;
-    color: @theme_selected_fg_color !important;
-    transform: translateX(2px) !important;
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
 }
 
 /* Élément sélectionné */
 menuitem:selected,
 modelbutton:selected {
-    background-color: @theme_selected_bg_color !important;
-    color: @theme_selected_fg_color !important;
-    font-weight: 600 !important;
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+    font-weight: 600;
 }
 
 /* Séparateurs dans le menu */
 separator {
-    background-color: @theme_fg_color !important;
-    opacity: 0.3 !important;
-    margin: 6px 8px !important;
-    min-height: 1px !important;
+    background-color: @theme_fg_color;
+    opacity: 0.3;
+    margin: 6px 8px;
+    min-height: 1px;
 }
 
 /* Icônes dans le menu */
 menuitem image,
 modelbutton image {
-    margin-right: 12px !important;
-    opacity: 0.8 !important;
+    margin-right: 12px;
+    opacity: 0.8;
 }
 
 menuitem:hover image,
 modelbutton:hover image {
-    opacity: 1.0 !important;
+    opacity: 1.0;
 }
 
 /* Flèches pour les sous-menus */
 menuitem arrow,
 modelbutton arrow {
-    margin-left: 12px !important;
-    opacity: 0.7 !important;
+    margin-left: 12px;
+    opacity: 0.7;
 }
 
-/* Menu contextuel Thunar spécifique */
+/* Menu contextuel Thunar spécifique - Ultra compact et opaque */
 .thunar popover,
-.thunar popover.background {
-    background-color: @theme_bg_color !important;
-    border: 2px solid @theme_fg_color !important;
-    border-radius: 12px !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+.thunar popover.background,
+.thunar menu,
+.thunar menu.background,
+.thunar menu.popup,
+.thunar .menu,
+.thunar .popup,
+window.thunar popover,
+window.thunar menu,
+window.thunar .menu,
+window.thunar .popup {
+    background-color: #121314;
+    border: 1px solid #c3c4c4;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    color: #c3c4c4;
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+    -GtkPopover-arrow-width: 0;
+    -GtkPopover-arrow-height: 0;
+    border-image: none;
+}
+
+.thunar popover > *,
+.thunar menu > *,
+.thunar .popup > *,
+window.thunar menu > *,
+window.thunar popover > * {
+    background-color: transparent;
+}
+
+/* Retirer la flèche du popover Thunar */
+.thunar popover > arrow,
+window.thunar popover > arrow,
+.thunar popover > arrow.top,
+.thunar popover > arrow.bottom,
+.thunar popover > arrow.left,
+.thunar popover > arrow.right,
+window.thunar popover > arrow.top,
+window.thunar popover > arrow.bottom,
+window.thunar popover > arrow.left,
+window.thunar popover > arrow.right {
+    min-height: 0;
+    min-width: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    -gtk-icon-source: none;
+    padding: 0;
+    opacity: 0;
+    border-image: none;
+}
+
+/* Forcer l'arrondi des coins pour tous les menus Thunar */
+.thunar popover,
+.thunar menu,
+.thunar .menu,
+window.thunar popover,
+window.thunar menu,
+window.thunar .menu {
+    border-radius: 8px;
+}
+
+/* Assurer l'arrondi des coins pour les conteneurs */
+.thunar popover > contents,
+.thunar menu > contents,
+window.thunar popover > contents,
+window.thunar menu > contents {
+    border-radius: 8px;
 }
 
 .thunar menuitem,
-.thunar modelbutton {
-    background-color: transparent !important;
-    border-radius: 8px !important;
-    margin: 2px 0 !important;
-    padding: 10px 14px !important;
-    min-height: 36px !important;
-    font-size: 15px !important;
-    font-weight: 500 !important;
+.thunar modelbutton,
+window.thunar menuitem,
+window.thunar modelbutton {
+    background-color: transparent;
+    border-radius: 2px;
+    margin: 0;
+    padding: 2px 4px;
+    min-height: 16px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #c3c4c4;
 }
 
 .thunar menuitem:hover,
-.thunar modelbutton:hover {
-    background-color: @theme_selected_bg_color !important;
-    color: @theme_selected_fg_color !important;
-    transform: translateX(3px) !important;
+.thunar modelbutton:hover,
+window.thunar menuitem:hover,
+window.thunar modelbutton:hover {
+    background-color: #c3c4c4; /* Hover complètement opaque */
+    color: #121314;
+    padding: 2px 4px;
+}
+
+.thunar menuitem separator,
+window.thunar menuitem separator {
+    margin: 1px 2px;
+    opacity: 0.5;
+    background-color: #c3c4c4;
+    min-height: 1px;
+}
+
+/* Icônes Thunar ultra compactes */
+.thunar menuitem image,
+.thunar modelbutton image,
+window.thunar menuitem image,
+window.thunar modelbutton image {
+    margin-right: 3px;
+    opacity: 0.9;
+    min-width: 12px;
+    min-height: 12px;
+}
+
+.thunar menuitem:hover image,
+.thunar modelbutton:hover image,
+window.thunar menuitem:hover image,
+window.thunar modelbutton:hover image {
+    opacity: 1.0;
+}
+
+/* Masquer la barre de menu de Thunar */
+.thunar menubar,
+.thunar .menubar,
+window.thunar menubar,
+window.thunar .menubar {
+    min-height: 0;
+    min-width: 0;
+    background-color: transparent;
+    background-image: none;
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+    opacity: 0;
+    color: transparent;
+    -gtk-icon-source: none;
+    box-shadow: none;
+    border: none;
+    font-size: 0;
+}
+
+window.thunar menubar > *,
+.thunar menubar > * {
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    color: transparent;
+}
+
+window.thunar menubar menuitem,
+.thunar menubar menuitem {
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+    min-width: 0;
+    opacity: 0;
+}
+
+/* Couleurs identiques quand la fenêtre perd le focus */
+.thunar window:backdrop,
+.thunar window.background:backdrop,
+.thunar .background:backdrop,
+window.thunar:backdrop,
+window.thunar .background:backdrop,
+.thunar popover:backdrop,
+.thunar menu:backdrop,
+window.thunar popover:backdrop,
+window.thunar menu:backdrop {
+    background-color: #121314;
+    color: #c3c4c4;
+    opacity: 1;
+    border-color: #c3c4c4;
+}
+
+/* Garder la barre de titre identique hors focus */
+window.thunar headerbar,
+window.thunar headerbar:backdrop,
+.thunar headerbar,
+.thunar headerbar:backdrop {
+    background-color: transparent;
+    color: transparent;
+    box-shadow: none;
+    border: none;
+    opacity: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window.thunar headerbar *,
+.thunar headerbar * {
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    color: transparent;
+    background: transparent;
+}
+
+/* Masquer les barres de défilement dans Thunar */
+.thunar scrolledwindow scrollbar,
+.thunar .scrolledwindow scrollbar,
+window.thunar scrolledwindow scrollbar,
+window.thunar .scrolledwindow scrollbar,
+.thunar scrollbar,
+.thunar .scrollbar,
+window.thunar scrollbar,
+window.thunar .scrollbar {
+    min-height: 0;
+    min-width: 0;
+    background-color: transparent;
+    background-image: none;
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+    opacity: 0;
+    color: transparent;
+    -gtk-icon-source: none;
+}
+
+/* Masquer les boutons de défilement */
+.thunar scrollbar button,
+.thunar .scrollbar button,
+window.thunar scrollbar button,
+window.thunar .scrollbar button {
+    min-height: 0;
+    min-width: 0;
+    background-color: transparent;
+    background-image: none;
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+    opacity: 0;
+    color: transparent;
+    -gtk-icon-source: none;
+}
+
+/* Effacer le séparateur entre la barre latérale et le contenu */
+window.thunar paned > separator,
+.thunar paned > separator,
+window.thunar paned separator,
+.thunar paned separator {
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+window.thunar paned,
+.thunar paned {
+    -GtkPaned-handle-size: 0;
+}
+
+/* Masquer les options de zoom dans Thunar (sans propriétés non valides) */
+.thunar menuitem#zoom-in,
+.thunar menuitem#zoom-out,
+.thunar menuitem#zoom-reset,
+.thunar menuitem#zoom-default,
+.thunar menuitem#view-zoom-in,
+.thunar menuitem#view-zoom-out,
+.thunar menuitem#view-zoom-reset {
+    min-height: 0;
+    min-width: 0;
+    background-color: transparent;
+    background-image: none;
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+    opacity: 0;
+    color: transparent;
+    -gtk-icon-source: none;
+}
+
+.thunar menuitem#zoom-in *,
+.thunar menuitem#zoom-out *,
+.thunar menuitem#zoom-reset *,
+.thunar menuitem#zoom-default *,
+.thunar menuitem#view-zoom-in *,
+.thunar menuitem#view-zoom-out *,
+.thunar menuitem#view-zoom-reset * {
+    padding: 0;
+    margin: 0;
+    font-size: 0;
+    color: transparent;
+    opacity: 0;
+    min-height: 0;
+    min-width: 0;
 }
