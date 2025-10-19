@@ -80,7 +80,7 @@ modelbutton {
     transition: all 0.15s ease;
     color: @theme_fg_color;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 /* Hover sur les éléments du menu */
@@ -208,7 +208,7 @@ window.thunar modelbutton {
     margin: 0;
     padding: 2px 4px;
     min-height: 16px;
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 500;
     color: #c3c4c4;
 }
