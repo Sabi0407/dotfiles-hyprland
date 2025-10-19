@@ -41,38 +41,50 @@
     font-weight: 500;
     padding: 3px 8px;
     margin: 0 3px;
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     border-radius: 10px;
     box-shadow: none;
     opacity: 0.7;
     transition: all 0.2s ease;
   }
   
-  #workspaces button.active {
-    background: rgba({foreground-rgb}, 0.1);
+  #workspaces button:not(.active):not(.visible):hover,
+  #workspaces button.occupied:not(.active):not(.visible) {
+    background: rgba({foreground-rgb}, 0.08);
     color: {color4};
-    border: 1px solid {color4};
+    border-color: {color4};
+    box-shadow: none;
+    opacity: 0.9;
+  }
+  
+  #workspaces button.active,
+  #workspaces button.visible {
+    background: {color4};
+    color: {background};
+    border-color: {color4};
     box-shadow: none;
     opacity: 1;
     font-weight: 600;
   }
   
-  #workspaces button:hover {
-    background: rgba({foreground-rgb}, 0.08);
-    color: {color4};
-    border: 1px solid {color4};
-    box-shadow: none;
-    opacity: 0.9;
-    transition: all 0.2s ease;
+  #workspaces button.active:hover,
+  #workspaces button.visible:hover {
+    background: {color4};
+    color: {background};
+    border-color: {color4};
+    opacity: 1;
   }
   
   #workspaces button.urgent {
-    color: {color1};
-    background: rgba({color1-rgb}, 0.2);
+    background: {color1};
+    color: {background};
+    border-color: {color1};
+    animation: pulse 0.8s ease-in-out infinite;
+    opacity: 1;
   }
   
   #workspaces button.visible {
-    color: {color4};
+    color: {background};
   }
   
   #workspaces button.empty {
@@ -207,7 +219,7 @@
     color: #ff4444;
     border-color: #ff4444;
   }
-}  
+}
 
 #custom-mic_status {
     color: {foreground};
