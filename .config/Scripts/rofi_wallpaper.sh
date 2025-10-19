@@ -71,12 +71,12 @@ main() {
             wallpaper_path=$(find "$WALLPAPER_DIR" -name "$selection" | head -1)
         fi
         
-        if [ -f "$wallpaper_path" ]; then
-            echo "Application du wallpaper: $wallpaper_path"
-            "$HOME/.config/Scripts/wallpaper-manager.sh" apply-path "$wallpaper_path"
-        else
-            echo "Wallpaper introuvable: $selection"
-        fi
+               if [ -f "$wallpaper_path" ]; then
+                   echo "Application du wallpaper: $wallpaper_path"
+                   "$HOME/.config/Scripts/wallpaper-manager.sh" apply-path "$wallpaper_path"
+               else
+                   echo "Wallpaper introuvable: $selection"
+               fi
     else
         echo "Sélection annulée"
     fi
