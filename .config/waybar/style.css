@@ -20,7 +20,7 @@
   
   /* Harmonisation workspaces */
   #workspaces {
-    background: rgba(25,10,25, 0.9);
+    background: rgba(25,10,25, 0.6);
     padding: 6px 16px;
     margin: 0 20px 0 20px;
     border: none;
@@ -35,7 +35,7 @@
   }
   
   #workspaces button {
-    background: rgba(25,10,25, 0.4);
+    background: rgba(25,10,25, 0.28);
     color: #c5c1c5;
     font-size: 0.9em;
     font-weight: 500;
@@ -50,9 +50,9 @@
   
   #workspaces button:not(.active):not(.visible):hover,
   #workspaces button.occupied:not(.active):not(.visible) {
-    background: rgba(197,193,197, 0.08);
+    background: rgba(197,193,197, 0.18);
     color: #6E4787;
-    border-color: #6E4787;
+    border-color: rgba(110,71,135, 0.8);
     box-shadow: none;
     opacity: 0.9;
   }
@@ -96,7 +96,7 @@
   #group-processes_tray,
   #group-arch_drawer {
     color: #c5c1c5;
-    background: rgba(25,10,25, 0.9);
+    background: rgba(25,10,25, 0.55);
     padding: 5px 16px;
     margin: 0 12px 0 0;
     border: 2px solid transparent;
@@ -108,9 +108,9 @@
   #group-clock_drawer:hover,
   #group-processes_tray:hover,
   #group-arch_drawer:hover {
-    background: rgba(197,193,197, 0.15);
+    background: rgba(197,193,197, 0.22);
     color: #6E4787;
-    border: 2px solid #6E4787;
+    border: 2px solid rgba(110,71,135, 0.8);
     box-shadow: none;
   }
   
@@ -142,7 +142,7 @@
   #custom-poweroff,
   #custom-storage {
     color: #c5c1c5;
-    background: rgba(25,10,25, 0.9);
+    background: rgba(25,10,25, 0.55);
     padding: 5px 16px;
     margin: 0 0 0 12px;
     border-radius: 16px;
@@ -178,9 +178,9 @@
   #custom-reboot:hover,
   #custom-poweroff:hover,
   #custom-storage:hover {
-    background: #6E4787;
+    background: rgba(110,71,135, 0.85);
     color: #190a19;
-    border: 2px solid #6E4787;
+    border: 2px solid rgba(110,71,135, 0.85);
     box-shadow: none;
   }
 
@@ -235,7 +235,7 @@
 
 #custom-mic_status {
     color: #c5c1c5;
-    background: rgba(25,10,25, 0.9);
+    background: rgba(25,10,25, 0.55);
     padding: 5px 16px;
     margin: 0 0 0 12px;
     border-radius: 16px;
@@ -245,15 +245,15 @@
 }
 
 #custom-mic_status:hover {
-    background: #6E4787;
+    background: rgba(110,71,135, 0.85);
     color: #190a19;
-    border: 2px solid #6E4787;
+    border: 2px solid rgba(110,71,135, 0.85);
     box-shadow: 0 4px 15px rgba(110,71,135, 0.4);
 }
 
 #group-arch_drawer {
   color: #c5c1c5;
-  background: rgba(25,10,25, 0.9);
+  background: rgba(25,10,25, 0.55);
   padding: 5px 16px;
   margin: 0 12px 0 0;
   border: 2px solid transparent;
@@ -263,9 +263,9 @@
 }
 
 #group-arch_drawer:hover {
-  background: rgba(110,71,135, 0.15);
+  background: rgba(110,71,135, 0.22);
   color: #6E4787;
-  border: 2px solid #6E4787;
+  border: 2px solid rgba(110,71,135, 0.8);
   box-shadow: 0 4px 15px rgba(25,10,25, 0.4);
 }
 

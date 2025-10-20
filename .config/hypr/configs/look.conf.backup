@@ -18,10 +18,10 @@ decoration {
     
     # Configuration des ombres
     shadow {
-        enabled = true
-        range = 8                    # Portée de l'ombre
+        enabled = false              # Désactive l'ombre noire autour des fenêtres
+        range = 8                    # Portée conservée au cas où on réactive
         render_power = 4             # Qualité du rendu
-        color = rgba(0a0a0aee)       # Couleur sombre avec transparence
+        color = rgba(0a0a0a44)       # Teinte légère si l'on réactive l'ombre
     }
     
     # Effets de flou pour les fenêtres transparentes
