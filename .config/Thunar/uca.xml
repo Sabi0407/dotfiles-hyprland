@@ -2,81 +2,26 @@
 <actions>
 <action>
 	<icon>utilities-terminal</icon>
-	<name>Terminal</name>
+	<name>Open Terminal Here</name>
 	<submenu></submenu>
-	<unique-id>1759014546145235-1</unique-id>
+	<unique-id>1760916221159090-1</unique-id>
 	<command>kitty --working-directory %f</command>
-	<description>Ouvrir le terminal Kitty dans ce dossier</description>
+	<description>Example for a custom action</description>
 	<range></range>
 	<patterns>*</patterns>
 	<startup-notify/>
 	<directories/>
 </action>
-
 <action>
-	<icon>code</icon>
-	<name>Éditeur</name>
+	<icon>utilities-terminal</icon>
+	<name>Ouvrir Terminal Ici</name>
 	<submenu></submenu>
-	<unique-id>1759014546145235-2</unique-id>
-	<command>codium %f</command>
-	<description>Ouvrir le fichier/dossier avec VSCodium</description>
+	<unique-id>1760916221159090-2</unique-id>
+	<command>kitty --working-directory %f</command>
+	<description>Ouvrir Kitty dans ce dossier</description>
 	<range></range>
 	<patterns>*</patterns>
 	<startup-notify/>
 	<directories/>
-	<text-files/>
-</action>
-
-<action>
-	<icon>image-viewer</icon>
-	<name>Wallpaper</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-6</unique-id>
-	<command>wal -i %f</command>
-	<description>Définir cette image comme fond d'écran avec pywal</description>
-	<range></range>
-	<patterns>*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.webp</patterns>
-	<startup-notify/>
-	<image-files/>
-</action>
-
-<action>
-	<icon>media-playback-start</icon>
-	<name>Lire</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-9</unique-id>
-	<command>mpv %f</command>
-	<description>Lire le fichier média avec MPV</description>
-	<range></range>
-	<patterns>*.mp4;*.mkv;*.avi;*.mp3;*.flac;*.wav;*.ogg</patterns>
-	<startup-notify/>
-	<audio-files/>
-	<video-files/>
-</action>
-
-<action>
-	<icon>image-x-generic</icon>
-	<name>Voir</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-10</unique-id>
-	<command>imv %f</command>
-	<description>Voir l'image avec imv</description>
-	<range></range>
-	<patterns>*.jpg;*.jpeg;*.png;*.gif;*.webp;*.svg;*.bmp</patterns>
-	<startup-notify/>
-	<image-files/>
-</action>
-
-<action>
-	<icon>document-open</icon>
-	<name>PDF</name>
-	<submenu></submenu>
-	<unique-id>1759014546145235-13</unique-id>
-	<command>zathura %f</command>
-	<description>Ouvrir le PDF avec Zathura</description>
-	<range></range>
-	<patterns>*.pdf</patterns>
-	<startup-notify/>
-	<other-files/>
 </action>
 </actions>

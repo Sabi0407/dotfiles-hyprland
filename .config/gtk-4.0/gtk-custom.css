@@ -207,6 +207,102 @@ menu,
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════════ */
+/* Masquer la barre de menu de Thunar GTK-4.0                                     */
+/* ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Masquer la barre de menu de Thunar */
+.thunar menubar,
+.thunar .menubar,
+window.thunar menubar,
+window.thunar .menubar {
+    min-height: 0 !important;
+    min-width: 0 !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-width: 0 !important;
+    opacity: 0 !important;
+    color: transparent !important;
+    -gtk-icon-source: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    font-size: 0 !important;
+}
+
+window.thunar menubar > *,
+.thunar menubar > * {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 0 !important;
+    color: transparent !important;
+}
+
+window.thunar menubar menuitem,
+.thunar menubar menuitem {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
+    opacity: 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════ */
+/* Masquer la barre de menu de Blueman Manager GTK-4.0                            */
+/* ═══════════════════════════════════════════════════════════════════════════════ */
+
+/* Masquer la barre de menu de Blueman Manager */
+.blueman-manager menubar,
+.blueman-manager .menubar,
+window.blueman-manager menubar,
+window.blueman-manager .menubar,
+window.blueman-manager > menubar,
+window.blueman-manager > .menubar,
+window.blueman-manager GtkMenuBar,
+window.blueman-manager .GtkMenuBar {
+    min-height: 0 !important;
+    min-width: 0 !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-width: 0 !important;
+    opacity: 0 !important;
+    color: transparent !important;
+    -gtk-icon-source: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    font-size: 0 !important;
+    visibility: hidden !important;
+}
+
+window.blueman-manager menubar > *,
+.blueman-manager menubar > *,
+window.blueman-manager > menubar > *,
+window.blueman-manager > .menubar > * {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 0 !important;
+    color: transparent !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+window.blueman-manager menubar menuitem,
+.blueman-manager menubar menuitem,
+window.blueman-manager > menubar menuitem,
+window.blueman-manager > .menubar menuitem {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    color: transparent !important;
+    background: transparent !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════════ */
 /* Nautilus : masquer le bouton fermer                                            */
 /* ═══════════════════════════════════════════════════════════════════════════════ */
 
