@@ -61,12 +61,12 @@
       "actions": [
         {
           "label": "",
-          "command": "nm-connection-editor",
+          "command": "nm-connection-editor && swaync-client -t",
           "tooltip": "NetworkManager"
         },
         {
           "label": "",
-          "command": "/usr/bin/blueman-manager",
+          "command": "/usr/bin/blueman-manager && swaync-client -t",
           "tooltip": "Bluetooth"
         },
         {
@@ -77,12 +77,12 @@
         },
         {
           "label": "󰸈",
-          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle && swaync-client -t",
           "tooltip": "Volume Mute"
         },
         {
           "label": "󰣆",
-          "command": "nwg-look",
+          "command": "nwg-look && swaync-client -t",
           "tooltip": "Theme"
         }
       ]

@@ -43,19 +43,19 @@ prompt-text = "󰣇 "
 prompt-padding = 12
 prompt-background-padding = 6
 prompt-background = #00000000
-prompt-color = #c5c1c5
+prompt-color = #c2c2c6
 
 # Couleurs Pywal synchronisées (script generate-tofi-colors.sh)
 # Valeurs par défaut, seront écrasées après un wal
-background-color = #190a19CC
-text-color = #c5c1c5
-selection-color = #3C6D8A
-selection-text-color = #190a19
+background-color = #0c0c1cCC
+text-color = #c2c2c6
+selection-color = #717287
+selection-text-color = #0c0c1c
 selection-background-padding = 10
-outline-color = #3C6D8A80
-border-color = #3C6D8A60
-text-cursor-color = #614883
-match-color = #3C6D8A
+outline-color = #71728780
+border-color = #71728760
+text-cursor-color = #9F9CA8
+match-color = #717287
 
 # Animations fluides et responsives
 transition-in = 150
@@ -76,7 +76,7 @@ selection-background-corner-radius = 8
 text-cursor-style = bar
 text-cursor-corner-radius = 3
 text-cursor-thickness = 3
-selection-match-color = #3C6D8A
+selection-match-color = #717287
 default-result-background = #00000000
 default-result-background-padding = 4
 
