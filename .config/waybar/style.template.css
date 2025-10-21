@@ -20,7 +20,7 @@
   
   /* Harmonisation workspaces */
   #workspaces {
-    background: rgba({background-rgb}, 0.6);
+    background: {background};
     padding: 6px 16px;
     margin: 0 20px 0 20px;
     border: none;
@@ -35,7 +35,7 @@
   }
   
   #workspaces button {
-    background: rgba({background-rgb}, 0.28);
+    background: rgba({background-rgb}, 0.9);
     color: {foreground};
     font-size: 0.9em;
     font-weight: 500;
@@ -50,7 +50,7 @@
   
   #workspaces button:not(.active):not(.visible):hover,
   #workspaces button.occupied:not(.active):not(.visible) {
-    background: rgba({foreground-rgb}, 0.18);
+    background: rgba({foreground-rgb}, 0.28);
     color: {color4};
     border-color: rgba({color4-rgb}, 0.8);
     box-shadow: none;
@@ -96,7 +96,7 @@
   #group-processes_tray,
   #group-arch_drawer {
     color: {foreground};
-    background: rgba({background-rgb}, 0.55);
+    background: {background};
     padding: 5px 16px;
     margin: 0 12px 0 0;
     border: 2px solid transparent;
@@ -108,7 +108,7 @@
   #group-clock_drawer:hover,
   #group-processes_tray:hover,
   #group-arch_drawer:hover {
-    background: rgba({foreground-rgb}, 0.22);
+    background: rgba({foreground-rgb}, 0.55);
     color: {color4};
     border: 2px solid rgba({color4-rgb}, 0.8);
     box-shadow: none;
@@ -142,7 +142,7 @@
   #custom-poweroff,
   #custom-storage {
     color: {foreground};
-    background: rgba({background-rgb}, 0.55);
+    background: {background};
     padding: 5px 16px;
     margin: 0 0 0 12px;
     border-radius: 16px;
@@ -178,7 +178,7 @@
   #custom-reboot:hover,
   #custom-poweroff:hover,
   #custom-storage:hover {
-    background: rgba({color4-rgb}, 0.85);
+    background: rgba({color4-rgb}, 0.95);
     color: {background};
     border: 2px solid rgba({color4-rgb}, 0.85);
     box-shadow: none;
