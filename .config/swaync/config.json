@@ -81,6 +81,11 @@
           "tooltip": "Volume Mute"
         },
         {
+          "label": "󰍬",
+          "command": "~/.config/Scripts/toggle_mic.sh && swaync-client -t",
+          "tooltip": "Microphone"
+        },
+        {
           "label": "󰣆",
           "command": "nwg-look && swaync-client -t",
           "tooltip": "Theme"

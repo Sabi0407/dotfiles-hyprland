@@ -235,7 +235,7 @@
 
 #custom-mic_status {
     color: {foreground};
-    background: rgba({background-rgb}, 0.55);
+    background: {background};
     padding: 5px 16px;
     margin: 0 0 0 12px;
     border-radius: 16px;
@@ -245,7 +245,7 @@
 }
 
 #custom-mic_status:hover {
-    background: rgba({color4-rgb}, 0.85);
+    background: rgba({color4-rgb}, 0.95);
     color: {background};
     border: 2px solid rgba({color4-rgb}, 0.85);
     box-shadow: 0 4px 15px rgba({color4-rgb}, 0.4);
@@ -253,7 +253,7 @@
 
 #group-arch_drawer {
   color: {foreground};
-  background: rgba({background-rgb}, 0.55);
+  background: {background};
   padding: 5px 16px;
   margin: 0 12px 0 0;
   border: 2px solid transparent;
