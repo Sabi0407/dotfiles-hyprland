@@ -13,8 +13,8 @@
   "control-center-margin-right": 0,
   "control-center-margin-left": 0,
   "notification-2fa-action": true,
-  "notification-inline-replies": false,
-  "notification-window-width": 380,
+  "notification-inline-replies": true,
+  "notification-window-width": 420,
   "notification-icon-size": 48,
   "notification-body-image-height": 240,
   "notification-body-image-width": 240,
@@ -33,6 +33,8 @@
     "buttons-grid",
     "volume",
     "backlight",
+    "battery",
+    "network",
     "mpris",
     "title",
     "notifications"
@@ -49,7 +51,8 @@
     },
     "volume": {
       "label": "",
-      "step": 5
+      "step": 5,
+      "show-percentage": true
     },
     "backlight": {
       "label": "󰃞",
@@ -61,36 +64,53 @@
       "actions": [
         {
           "label": "",
-          "command": "nm-connection-editor && swaync-client -t",
+          "command": "bash -c 'swaync-client -t && exec nm-connection-editor'",
           "tooltip": "NetworkManager"
         },
         {
           "label": "",
-          "command": "/usr/bin/blueman-manager && swaync-client -t",
+          "command": "bash -c 'swaync-client -t && exec blueman-manager'",
           "tooltip": "Bluetooth"
         },
         {
           "label": "󰂛",
-          "command": "swaync-client -d",
+          "command": "bash -c 'swaync-client -d && swaync-client -t'",
           "type": "toggle",
           "tooltip": "DND"
         },
         {
           "label": "󰸈",
-          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle && swaync-client -t",
+          "command": "bash -c 'swaync-client -t && pactl set-sink-mute @DEFAULT_SINK@ toggle'",
           "tooltip": "Volume Mute"
         },
         {
           "label": "󰍬",
-          "command": "~/.config/Scripts/toggle_mic.sh && swaync-client -t",
+          "command": "bash -c 'swaync-client -t && ~/.config/Scripts/toggle_mic.sh'",
           "tooltip": "Microphone"
         },
         {
           "label": "󰣆",
-          "command": "nwg-look && swaync-client -t",
+          "command": "bash -c 'swaync-client -t && exec nwg-look'",
           "tooltip": "Theme"
+        },
+        {
+          "label": "󰅖",
+          "command": "bash -c 'swaync-client --reload && swaync-client -t'",
+          "tooltip": "Recharger SwayNC"
         }
       ]
+    },
+    "battery": {
+      "critical": 15,
+      "low": 25,
+      "show-percentage": true
+    },
+    "network": {
+      "label-wifi": "󰤨",
+      "label-ethernet": "󰈀",
+      "label-disconnected": "󰤭",
+      "show-type": true,
+      "show-connected-devices": true
     }
   }
 }
