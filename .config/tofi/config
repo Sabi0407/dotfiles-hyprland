@@ -16,14 +16,14 @@ margin-left = 0
 margin-right = 0
 
 # Padding généreux pour écran complet
-padding-top = 33%
+padding-top = 18%
 padding-bottom = 12
 padding-left = 10%
 padding-right = 10%
 
 # Nombre de résultats optimisé pour écran complet
 num-results = 8
-result-spacing = 20
+result-spacing = 16
 horizontal = false
 hide-cursor = true
 history = true
@@ -51,7 +51,9 @@ background-color = #190a19CC
 text-color = #c5c1c5
 selection-color = #3C6D8A
 selection-text-color = #190a19
-selection-background-padding = 10
+selection-background-padding = 14
+selection-outline-width = 2
+selection-outline-color = #3C6D8A80
 outline-color = #3C6D8A80
 border-color = #3C6D8A60
 text-cursor-color = #614883
@@ -72,13 +74,15 @@ multi-instance = false
 late-keyboard-init = false
 
 # Style des résultats pour écran complet
-selection-background-corner-radius = 8
+selection-background-corner-radius = 12
 text-cursor-style = bar
 text-cursor-corner-radius = 3
 text-cursor-thickness = 3
 selection-match-color = #3C6D8A
-default-result-background = #00000000
-default-result-background-padding = 4
+default-result-background = #190a19AA
+default-result-background-padding = 6
+placeholder-text = "Rechercher..."
+placeholder-color = #c5c1c5AA
 
 # Terminal par défaut et optimisations
 terminal = kitty
