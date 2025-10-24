@@ -4,8 +4,7 @@
   "margin-top": 13,
   "modules-left": [
     "group/arch_drawer",
-    "group/clock_drawer",
-    "custom/storage"
+    "group/clock_drawer"
   ],
   "modules-center": [
     "custom/notification",
@@ -13,10 +12,12 @@
   ],
   "modules-right": [
     "custom/mic_status",
+    "custom/speaker_profile",
+    "custom/storage",
     "group/tray_drawer",
     "group/battery_drawer"
   ],
-  "height": 46,
+  "height": 42,
 
   "custom/notification": {
     "tooltip": false,
@@ -84,7 +85,7 @@
   "pulseaudio": {
     "format": "{icon}  {volume}%",
     "format-bluetooth": "󰂱 {volume}%",
-    "format-muted": "󰖁",
+    "format-muted": "󰖁<span foreground='red'><sup></sup></span>",
     "scroll-step": 1,
     "on-click": "pavucontrol",
     "ignored-sinks": ["Easy Effects Sink"],
@@ -100,16 +101,26 @@
     "tooltip-format": "Volume: {volume}%"
   },
 
+  "network": {
+    "interval": 2,
+    "format-wifi": "",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭<span foreground='red'><sup></sup></span>",
+    "format-unknown": "󰤫",
+    "tooltip": true,
+    "tooltip-format": "{ifname} {ipaddr}\nSignal : {signalStrength}%\nVitesse : {bandwidthDownBits}↓ / {bandwidthUpBits}↑"
+  },
+
 
 
 
   "hyprland/workspaces": {
-    "format": " {name} ",
-    "format-active": " {name} ",
-    "format-occupied": " {name} ",
-    "format-empty": " {name} ",
-    "format-urgent": " {name} ",
-    "format-window-separator": " ",
+    "format": "{icon}",
+    "format-active": "{icon}",
+    "format-occupied": "{icon}",
+    "format-empty": "{name}",
+    "format-urgent": "{icon}",
+    "format-window-separator": "",
     "on-click": "activate",
     "on-click-right": "hyprctl dispatch workspace {name}",
     "on-scroll-up": "hyprctl dispatch workspace +1",
@@ -157,28 +168,6 @@
   },
   
 
-  "bluetooth": {
-    "format": "{icon}",
-    "format-disabled": "",
-    "format-icons": {
-      "Galaxy Buds Pro": "", // Icône écouteurs (FontAwesome)
-      "0C:8D:CA:1C:2A:88": "", // Adresse MAC si besoin
-      "enabled": "\uf293",
-      "disabled": "\uf294",
-      "default": "\uf293"
-    },
-    "on-click": "~/.config/Scripts/open_bluetooth_manager.sh"
-  },
-
-  "custom/processes": {
-    "format": "󰓇",
-    "tooltip": true,
-    "exec": "~/.config/Scripts/running_apps.sh",
-    "interval": 1,
-    "tooltip-format": "Processus en arrière-plan :\n{}"
-  },
-
-
 
   "tray": {
     "spacing": 10,
@@ -211,8 +200,7 @@
     "modules": [
       "custom/tray_toggle",
       "tray",
-      "pulseaudio",
-      "bluetooth"
+      "pulseaudio"
     ]
   },
 
@@ -238,7 +226,10 @@
       "transition-left-to-right": false
     },
     "modules": [
-      "battery"
+      "battery",
+      "cpu",
+      "memory",
+      "temperature"
     ]
   },
 
@@ -278,7 +269,38 @@
     "tooltip": true
   },
 
+  "custom/speaker_profile": {
+    "format": "{icon}",
+    "return-type": "json",
+    "exec": "~/.config/Scripts/audio_profile_waybar.sh",
+    "interval": 5,
+    "tooltip": true,
+    "on-click": "~/.config/Scripts/audio_profile_waybar.sh toggle",
+    "on-click-right": "~/.config/Scripts/audio_profile_waybar.sh cycle"
+  },
 
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "interval": 5,
+    "tooltip": true,
+    "tooltip-format": "CPU : {usage}%"
+  },
+
+  "memory": {
+    "format": "󰍛 {percentage}%",
+    "interval": 5,
+    "tooltip": true,
+    "tooltip-format": "Mémoire : {used} / {total} Gio ({percentage}%)"
+  },
+
+  "temperature": {
+    "format": "󰔏 {temperatureC}°",
+    "tooltip": true,
+    "interval": 5,
+    "thermal-zone": 0,
+    "critical-threshold": 75,
+    "tooltip-format": "Température : {temperatureC}°C"
+  },
 
   "group/arch_drawer": {
     "orientation": "horizontal",
