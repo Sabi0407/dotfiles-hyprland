@@ -26,9 +26,9 @@ fi
 
 if [ $SHOW -eq 1 ]; then
     if [ "$STATE" = "no" ]; then
-        echo '{"text": "󰍬", "tooltip": "Microphone actif"}'
+        echo '{"text": "󰍬", "tooltip": "Microphone actif", "class": "active"}'
     else
-        echo '{"text": "󰍭", "tooltip": "Microphone coupé"}'
+        echo '{"text": "󰍭<span foreground=\"red\"><sup></sup></span>", "tooltip": "Microphone coupé", "class": "muted"}'
     fi
 else
     echo ''
