@@ -15,12 +15,20 @@ get_background_processes() {
     sed 's/ $//'
 }
 
+escape_json() {
+    local input=${1//\\/\\\\}
+    input=${input//\"/\\\"}
+    input=${input//$'\n'/\\n}
+    echo "$input"
+}
+
 # Obtenir les processus
 processes=$(get_background_processes)
 
-# Si aucun processus trouvé
 if [ -z "$processes" ]; then
-    echo "Aucun processus en arrière-plan"
+    tooltip="Aucun processus en arrière-plan"
 else
-    echo "$processes"
+    tooltip="Processus en arrière-plan :\n$processes"
 fi
+
+printf '{"text":"","tooltip":"%s"}\n' "$(escape_json "$tooltip")"
