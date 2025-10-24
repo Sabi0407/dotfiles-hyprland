@@ -2,6 +2,16 @@
 
 ICON="󰋊"
 
+open_manager() {
+  if command -v thunar >/dev/null 2>&1; then
+    thunar "$1" >/dev/null 2>&1 &
+  elif command -v nautilus >/dev/null 2>&1; then
+    nautilus "$1" >/dev/null 2>&1 &
+  else
+    xdg-open "$1" >/dev/null 2>&1 &
+  fi
+}
+
 notify() {
   command -v notify-send >/dev/null 2>&1 || return 0
   notify-send "$@"
@@ -120,7 +130,7 @@ open_disk() {
   fi
 
   if [ -n "$mountpoint" ]; then
-    nautilus "$mountpoint" >/dev/null 2>&1 &
+    open_manager "$mountpoint"
     notify "Stockage" "Ouverture de $label" -i folder-open -t 2000
   else
     notify "Stockage" "Aucun point de montage pour $label" -i dialog-information -t 3000
