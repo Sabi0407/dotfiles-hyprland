@@ -48,7 +48,12 @@
       "key": "󰍛  ",
       "format": "{1} / {2} ({3})"
     },
-
+    {
+      "type": "command",
+      "key": "󰄉  ",
+      "format": "{result}",
+      "text": "python3 - <<'PY'\nfrom datetime import datetime\nfrom pathlib import Path\n\nlog = Path('/var/log/pacman.log')\ninstall_date = None\nif log.exists():\n    with log.open() as f:\n        for line in f:\n            if line.startswith('['):\n                try:\n                    install_date = datetime.strptime(line[1:11], '%Y-%m-%d')\n                    break\n                except ValueError:\n                    continue\nif install_date is None:\n    print('indisponible', end='')\nelse:\n    delta = datetime.now() - install_date\n    days = max(delta.days, 0)\n    years, rem_days = divmod(days, 365)\n    months, rem_days = divmod(rem_days, 30)\n    parts = []\n    if years:\n        suffix = 's' if years > 1 else ''\n        parts.append(f'{years} an{suffix}')\n    if months:\n        parts.append(f'{months} mois')\n    if rem_days or not parts:\n        if rem_days == 0 and not parts:\n            parts.append('moins d\\'un jour')\n        elif rem_days:\n            suffix = 's' if rem_days > 1 else ''\n            parts.append(f'{rem_days} jour{suffix}')\n    print(', '.join(parts), end='')\nPY\n"
+    },
     {
       "type": "custom",
       "format": "──────────────"
