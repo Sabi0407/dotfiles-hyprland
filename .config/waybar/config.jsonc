@@ -210,7 +210,9 @@
     "drawer": {
       "transition-duration": 500,
       "children-class": "slider-drawer",
-      "transition-left-to-right": true
+      "transition-left-to-right": true,
+      "click-to-reveal": true,
+      "close-on-unfocus": true
     },
     "modules": [
       "clock",

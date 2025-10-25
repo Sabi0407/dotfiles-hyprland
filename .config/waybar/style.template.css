@@ -20,10 +20,10 @@ window#waybar {
 
 /* Workspaces */
 #workspaces {
-  background: rgba({background-rgb}, 0.88);
+  background: {background};
   padding: 4px 12px;
   margin: 0 16px;
-  border: 1px solid rgba({color4-rgb}, 0.25);
+  border: 1px solid mix({background}, {color4}, 0.25);
   border-radius: 12px;
   box-shadow: none;
   transition: all 0.25s ease;
@@ -35,7 +35,7 @@ window#waybar {
 }
 
 #workspaces button {
-  background: rgba({background-rgb}, 0.95);
+  background: mix({background}, #ffffff, 0.08);
   color: {foreground};
   font-size: 0.9em;
   font-weight: 500;
@@ -50,9 +50,9 @@ window#waybar {
 
 #workspaces button:not(.active):not(.visible):hover,
 #workspaces button.occupied:not(.active):not(.visible) {
-  background: rgba({foreground-rgb}, 0.28);
+  background: mix({background}, {foreground}, 0.28);
   color: {color4};
-  border-color: rgba({color4-rgb}, 0.55);
+  border-color: mix({background}, {color4}, 0.55);
   box-shadow: none;
   opacity: 0.9;
 }
@@ -61,7 +61,7 @@ window#waybar {
 #workspaces button.visible {
   background: {color4};
   color: {background};
-  border-color: rgba({color4-rgb}, 0.85);
+  border-color: mix({background}, {color4}, 0.85);
   box-shadow: none;
   opacity: 1;
   font-weight: 600;
@@ -71,7 +71,7 @@ window#waybar {
 #workspaces button.visible:hover {
   background: {color4};
   color: {background};
-  border-color: rgba({color4-rgb}, 0.85);
+  border-color: mix({background}, {color4}, 0.85);
   opacity: 1;
 }
 
@@ -96,22 +96,22 @@ window#waybar {
 #group-processes_tray,
 #group-arch_drawer {
   color: {foreground};
-  background: rgba({background-rgb}, 0.88);
+  background: {background};
   padding: 4px 14px;
   margin: 0 10px 0 0;
   border: 1px solid transparent;
   border-radius: 14px;
-  box-shadow: 0 4px 12px rgba({background-rgb}, 0.25);
+  box-shadow: none;
   transition: all 0.2s;
 }
 
 #group-clock_drawer:hover,
 #group-processes_tray:hover,
 #group-arch_drawer:hover {
-  background: rgba({foreground-rgb}, 0.12);
+  background: mix({background}, {foreground}, 0.18);
   color: {color4};
-  border: 1px solid rgba({color4-rgb}, 0.45);
-  box-shadow: 0 6px 18px rgba({background-rgb}, 0.35);
+  border: 1px solid mix({background}, {color4}, 0.45);
+  box-shadow: none;
 }
 
 #battery,
@@ -147,13 +147,13 @@ window#waybar {
 #custom-speaker_profile,
 #custom-system_toggle {
   color: {foreground};
-  background: rgba({background-rgb}, 0.88);
+  background: {background};
   padding: 4px 14px;
   margin: 0 0 0 10px;
   border-radius: 14px;
-  box-shadow: 0 4px 12px rgba({background-rgb}, 0.25);
+  box-shadow: none;
   transition: all 0.2s;
-  border: 1px solid rgba({color4-rgb}, 0.2);
+  border: 1px solid mix({background}, {color4}, 0.2);
 }
 
 #battery:hover,
@@ -188,10 +188,10 @@ window#waybar {
 #custom-mic_status:hover,
 #custom-speaker_profile:hover,
 #custom-system_toggle:hover {
-  background: rgba({color4-rgb}, 0.95);
+  background: mix({background}, {color4}, 0.95);
   color: {background};
-  border: 1px solid rgba({color4-rgb}, 0.75);
-  box-shadow: 0 6px 18px rgba({color4-rgb}, 0.35);
+  border: 1px solid mix({background}, {color4}, 0.75);
+  box-shadow: none;
 }
 
 /* Masquer les modules du drawer quand il est replié */
@@ -259,12 +259,12 @@ window#waybar {
 
 #custom-usb_drives.usb-connected {
   color: {foreground};
-  border: 1px solid rgba({color4-rgb}, 0.3);
+  border: 1px solid mix({background}, {color4}, 0.3);
 }
 
 #custom-usb_drives.usb-many {
   color: {foreground};
-  border: 1px solid rgba({color4-rgb}, 0.3);
+  border: 1px solid mix({background}, {color4}, 0.3);
   animation: pulse 2s infinite;
 }
 
