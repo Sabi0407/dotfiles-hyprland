@@ -19,15 +19,12 @@
 
     {
       "type": "os",
-      "key": "  "
+      "key": "  ",
+      "format": "{2}"
     },
     {
       "type": "kernel",
       "key": "  "
-    },
-    {
-      "type": "uptime",
-      "key": "󰔚  "
     },
     {
       "type": "packages",
