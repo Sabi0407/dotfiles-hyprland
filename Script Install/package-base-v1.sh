@@ -8,9 +8,9 @@ sudo pacman -S --needed \
 7zip base base-devel bat blueman bluez bluez-utils \
 brightnessctl discord ffmpegthumbnailer \
 firefox flatpak galculator git \
-gnome-themes-extra grim gsimplecal gvfs htop \
+gnome-themes-extra grim gsimplecal gvfs htop eza \
 hypridle hyprland imagemagick imv kitty kooha \
-ly micro mousepad mpv pavucontrol plymouth \
+ly micro mousepad mpv ncdu pavucontrol plymouth \
 power-profiles-daemon qbittorrent rofi slurp \
 thunar thunar-archive-plugin waybar wofi \
 network-manager-applet noto-fonts noto-fonts-emoji \

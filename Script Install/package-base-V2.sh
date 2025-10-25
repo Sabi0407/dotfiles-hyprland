@@ -25,11 +25,11 @@ brightnessctl clang cmake compiler-rt cppdap cronie \
 djvulibre enchant evince fastfetch ffmpegthumbnailer \
 firefox flameshot flatpak galculator git \
 gnome-themes-extra grim gsimplecal gspell \
-gtk-engine-murrine gtk-engines gvfs htop hypridle \
+gtk-engine-murrine gtk-engines gvfs htop eza hypridle \
 hyprland hyprlock hyprpicker imagemagick imv intel-ucode \
 jq kitty kvantum-theme-catppuccin-git libuv libxcrypt-compat \
 linux-firmware linux-lts linux-lts-headers llvm localsend-bin \
-ly meson micro mpv networkmanager \
+ly meson micro mpv ncdu networkmanager \
 network-manager-applet noto-fonts noto-fonts-emoji numlockx \
 nwg-look obsidian onlyoffice-bin openssl-1.1 packettracer \
 pacman-contrib papirus-folders-git papirus-icon-theme \
