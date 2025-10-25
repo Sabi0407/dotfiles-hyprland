@@ -23,7 +23,7 @@ LY_SRC="$HOME/etc/ly/"
 LY_DEST="$DEST/ly-config"
 
 # Dossier Wallpapers uniquement
-WALLPAPERS_SRC="$HOME/wallpapers/"
+WALLPAPERS_SRC="$HOME/Images/wallpapers/"
 WALLPAPERS_DEST="$DEST/wallpapers"
 
 # Créer le répertoire de destination principal s'il n'existe pas
@@ -55,7 +55,7 @@ rsync -av --delete "$APPS_SRC" "$APPS_DEST/" >> "$LOG_FILE" 2>&1
 # 4) Sync de la configuration ly
 echo "$(date): Sauvegarde de la configuration ly" >> "$LOG_FILE"
 mkdir -p "$LY_DEST"
-sudo rsync -av --delete "$LY_SRC" "$LY_DEST/" >> "$LOG_FILE" 2>&1
+rsync -av --delete "$LY_SRC" "$LY_DEST/" >> "$LOG_FILE" 2>&1
 
 # 5) Sync du dossier Wallpapers uniquement
 echo "$(date): Sauvegarde des wallpapers" >> "$LOG_FILE"
@@ -141,3 +141,8 @@ else
 fi
 
 echo "Log détaillés disponible dans: $LOG_FILE"
+
+# Basculer automatiquement dans le dépôt dotfiles
+if ! cd "$DEST"; then
+    echo "$(date): ERREUR - Impossible de se placer dans $DEST" >> "$LOG_FILE"
+fi
