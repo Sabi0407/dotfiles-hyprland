@@ -182,7 +182,10 @@ Collection de scripts personnalisés.
 ~/.config/Scripts/
 ```
 
----
+### Presse-papiers (Cliphist)
+
+- Service `wl-paste --watch cliphist store` lancé au démarrage pour conserver l'historique.
+- Raccourci Hyprland `Super + C` : ouvre l'historique via tofi, copie la sélection via `cliphist decode | wl-copy`.
 
 ## Script d'installation
 
