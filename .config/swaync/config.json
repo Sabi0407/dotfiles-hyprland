@@ -92,11 +92,6 @@
           "label": "󰣆",
           "command": "bash -c 'swaync-client -t && exec nwg-look'",
           "tooltip": "Theme"
-        },
-        {
-          "label": "󰅖",
-          "command": "bash -c 'swaync-client --reload && swaync-client -t'",
-          "tooltip": "Recharger SwayNC"
         }
       ]
     },
