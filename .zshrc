@@ -1,3 +1,6 @@
+# Powerlevel10k instant prompt configuration must be set before sourcing the instant prompt script.
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,11 +8,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Powerlevel10k instant prompt (accélère l'affichage du prompt)
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-
-if [[ -t 1 ]]; then
-  fastfetch --config ~/.config/fastfetch/config.jsonc --show-errors
+if [[ $- == *i* && -t 1 ]] && command -v fastfetch >/dev/null 2>&1; then
+  autoload -Uz add-zsh-hook
+  __fastfetch_precmd() {
+    add-zsh-hook -d precmd __fastfetch_precmd
+    command fastfetch --config ~/.config/fastfetch/config.jsonc --show-errors
+  }
+  add-zsh-hook precmd __fastfetch_precmd
 fi
 
 
