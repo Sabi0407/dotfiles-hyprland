@@ -5,11 +5,18 @@
 # Version: 2.0
 
 # Configuration par défaut
-WARNING_LEVEL=20
-CRITICAL_LEVEL=10
+DEFAULT_WARNING_LEVELS=(20 15)
+DEFAULT_CRITICAL_LEVELS=(10 5)
+DEFAULT_ZENITY_LEVELS=(15 10 5)
+WARNING_LEVELS=("${DEFAULT_WARNING_LEVELS[@]}")
+CRITICAL_LEVELS=("${DEFAULT_CRITICAL_LEVELS[@]}")
+ZENITY_LEVELS=("${DEFAULT_ZENITY_LEVELS[@]}")
 FULL_LEVEL=95
 NOTIFICATION_COOLDOWN=300  # 5 minutes en secondes
+CHECK_INTERVAL=60          # Vérification toutes les 60 secondes
 LOG_FILE="/tmp/battery_notify.log"
+ZENITY_THEME="catppuccin-mocha-red-standard+default"
+ZENITY_MISSING_LOGGED=0
 
 # Couleurs pour les logs
 RED='\033[0;31m'
@@ -48,6 +55,230 @@ update_cooldown() {
     local battery_id=$1
     local cooldown_file="/tmp/battery_notify_${battery_id}_cooldown"
     echo $(date +%s) > "$cooldown_file"
+}
+
+# Exécute zenity avec le thème Catppuccin et filtre les warnings GTK bruyants
+run_zenity_theming() {
+    if [ -n "$ZENITY_THEME" ]; then
+        GTK_THEME="$ZENITY_THEME" zenity "$@" 2> >(grep -v "Adwaita-WARNING")
+    else
+        zenity "$@" 2> >(grep -v "Adwaita-WARNING")
+    fi
+}
+
+# Vérifie si un niveau doit déclencher une alerte zenity persistante
+should_show_zenity_alert() {
+    local level=$1
+    for zenity_level in "${ZENITY_LEVELS[@]}"; do
+        if [ "$zenity_level" -eq "$level" ] 2>/dev/null; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# Lance une boîte de dialogue zenity persistante sans bloquer le script principal
+trigger_zenity_alert() {
+    local battery_name=$1
+    local level=$2
+    local capacity=$3
+    local time_remaining=$4
+    local alert_id="${battery_name}_zenity_${level}"
+    local pid_file="/tmp/battery_notify_${alert_id}.pid"
+
+    if ! command -v zenity >/dev/null 2>&1; then
+        if [ "${ZENITY_MISSING_LOGGED:-0}" -eq 0 ]; then
+            log_message "WARNING" "Zenity est introuvable: les alertes persistantes sont désactivées"
+            ZENITY_MISSING_LOGGED=1
+        fi
+        return
+    fi
+
+    if [ -f "$pid_file" ]; then
+        local existing_pid
+        existing_pid=$(cat "$pid_file" 2>/dev/null)
+        if [ -n "$existing_pid" ] && kill -0 "$existing_pid" 2>/dev/null; then
+            return
+        fi
+        rm -f "$pid_file"
+    fi
+
+    log_message "INFO" "Déclenchement Zenity pour ${battery_name} à ${capacity}% (niveau ${level}%)"
+
+    local severity="warning"
+    for critical_level in "${CRITICAL_LEVELS[@]}"; do
+        if [ "$critical_level" -eq "$level" ] 2>/dev/null; then
+            severity="critical"
+            break
+        fi
+    done
+
+    local zenity_title="Batterie faible"
+    [ "$severity" = "critical" ] && zenity_title="Batterie critique"
+
+    local zenity_message="${capacity}% restant"
+    if [ -n "$time_remaining" ]; then
+        zenity_message="${zenity_message}\nTemps restant: ${time_remaining}"
+    fi
+
+    (
+        if ! GDK_BACKEND=wayland run_zenity_theming --warning \
+            --title "${zenity_title}" \
+            --text "${zenity_message}" \
+            --ok-label "Compris" \
+            --width=320 \
+            --height=160 \
+            --window-icon=dialog-warning; then
+            log_message "ERROR" "Echec de la fenêtre Zenity (niveau ${level}%)"
+        fi
+    ) &
+    local zenity_pid=$!
+    echo "$zenity_pid" > "$pid_file"
+
+    (
+        wait "$zenity_pid" 2>/dev/null
+        local status=$?
+        if [ "$status" -eq 0 ]; then
+            log_message "INFO" "Fenêtre Zenity fermée pour ${battery_name} (niveau ${level}%)"
+        fi
+        rm -f "$pid_file"
+    ) &
+}
+
+# Fonction utilitaire pour afficher des listes de niveaux
+format_levels() {
+    local -n levels_ref=$1
+    if [ ${#levels_ref[@]} -eq 0 ]; then
+        echo "aucun"
+        return
+    fi
+    local IFS=', '
+    echo "${levels_ref[*]}"
+}
+
+format_levels_with_units() {
+    local -n levels_ref=$1
+    if [ ${#levels_ref[@]} -eq 0 ]; then
+        echo "aucun"
+        return
+    fi
+    local formatted=()
+    for level in "${levels_ref[@]}"; do
+        formatted+=("${level}%")
+    done
+    local IFS=', '
+    echo "${formatted[*]}"
+}
+
+# Analyse une chaîne de niveaux séparés par des virgules et la stocke dans un tableau
+parse_levels() {
+    local input=$1
+    local -n target_ref=$2
+    target_ref=()
+
+    IFS=',' read -ra raw_values <<< "$input"
+    for value in "${raw_values[@]}"; do
+        local cleaned=${value//[[:space:]]/}
+        if [ -n "$cleaned" ]; then
+            target_ref+=("$cleaned")
+        fi
+    done
+}
+
+# Trie les niveaux de la valeur la plus haute à la plus basse et supprime les doublons
+normalize_levels() {
+    local -n levels_ref=$1
+    local normalized=()
+
+    if [ ${#levels_ref[@]} -gt 0 ]; then
+        while IFS= read -r level; do
+            normalized+=("$level")
+        done < <(printf '%s\n' "${levels_ref[@]}" | awk 'NF' | sort -nr | uniq)
+    fi
+
+    levels_ref=("${normalized[@]}")
+}
+
+# Valide que chaque niveau est un entier compris entre 1 et 100
+validate_levels() {
+    local -n levels_ref=$1
+    local label=$2
+
+    if [ ${#levels_ref[@]} -eq 0 ]; then
+        echo "Erreur: Aucun niveau $label spécifié"
+        exit 1
+    fi
+
+    for level in "${levels_ref[@]}"; do
+        if ! [[ "$level" =~ ^[0-9]+$ ]] || [ "$level" -lt 1 ] || [ "$level" -gt 100 ]; then
+            echo "Erreur: Le niveau $label '$level' doit être un nombre entre 1 et 100"
+            exit 1
+        fi
+    done
+}
+
+# Vérifie qu'une valeur est un entier strictement positif
+validate_positive_integer() {
+    local value=$1
+    local label=$2
+
+    if ! [[ "$value" =~ ^[0-9]+$ ]] || [ "$value" -le 0 ]; then
+        echo "Erreur: $label doit être un entier positif"
+        exit 1
+    fi
+}
+
+# Récupère le niveau le plus haut d'une liste
+get_max_level() {
+    local -n levels_ref=$1
+    if [ ${#levels_ref[@]} -eq 0 ]; then
+        echo 0
+        return
+    fi
+    echo "${levels_ref[0]}"
+}
+
+# Récupère la dernière capacité connue pour une batterie
+get_last_capacity() {
+    local battery_name=$1
+    local state_file="/tmp/battery_notify_${battery_name}_last_capacity"
+
+    if [ -f "$state_file" ]; then
+        local value=$(cat "$state_file" 2>/dev/null)
+        if [[ "$value" =~ ^[0-9]+$ ]]; then
+            echo "$value"
+            return
+        fi
+    fi
+
+    echo 101
+}
+
+# Met à jour la dernière capacité connue pour une batterie
+update_last_capacity() {
+    local battery_name=$1
+    local capacity=$2
+    local state_file="/tmp/battery_notify_${battery_name}_last_capacity"
+    echo "$capacity" > "$state_file"
+}
+
+# Réinitialise la dernière capacité connue (lorsque la batterie est en charge)
+reset_last_capacity() {
+    local battery_name=$1
+    local state_file="/tmp/battery_notify_${battery_name}_last_capacity"
+    rm -f "$state_file"
+}
+
+# Détermine si un seuil vient d'être franchi vers le bas
+crossed_threshold() {
+    local last_capacity=$1
+    local current_capacity=$2
+    local threshold=$3
+
+    if [ "$current_capacity" -le "$threshold" ] && [ "$last_capacity" -gt "$threshold" ]; then
+        return 0
+    fi
+    return 1
 }
 
 # Fonction pour obtenir les informations de batterie
@@ -92,9 +323,26 @@ send_notification() {
     local title=$2
     local message=$3
     local icon=$4
-    local battery_id=$5
-    
-    dunstify -u "$urgency" "$title" "$message" -i "$icon" -t 10000
+    local battery_id=${5:-battery_notify}
+
+    if command -v notify-send >/dev/null 2>&1; then
+        notify-send \
+            --app-name "Battery Monitor" \
+            --urgency "$urgency" \
+            --icon "$icon" \
+            --expire-time=0 \
+            --hint="string:x-dunst-stack-tag:${battery_id}" \
+            "$title" "$message"
+    else
+        dunstify \
+            -a "Battery Monitor" \
+            -u "$urgency" \
+            --stack-tag "${battery_id}" \
+            "$title" "$message" \
+            -i "$icon" \
+            -t 0
+    fi
+
     log_message "NOTIFY" "Notification envoyée: $title - $message"
     update_cooldown "$battery_id"
 }
@@ -117,34 +365,54 @@ process_battery() {
     
     log_message "INFO" "Batterie $battery_name: ${capacity}% - $status"
     
-    # Vérifier les différents niveaux
+    # Mémoriser la dernière capacité pour détecter les franchissements de seuils
+    local last_capacity=$(get_last_capacity "$battery_name")
+
     if [ "$status" = "Discharging" ]; then
-        if [ "$capacity" -le "$CRITICAL_LEVEL" ]; then
-            if check_cooldown "${battery_name}_critical"; then
-                send_notification "critical" "🚨 Batterie critique !" \
-                    "Batterie à ${capacity}%${time_remaining:+ (${time_remaining} restant)}" \
-                    "battery-caution" "${battery_name}_critical"
+        for level in "${CRITICAL_LEVELS[@]}"; do
+            if crossed_threshold "$last_capacity" "$capacity" "$level"; then
+                if check_cooldown "${battery_name}_critical_${level}"; then
+                    send_notification "critical" "🚨 Batterie critique !" \
+                        "Batterie à ${capacity}%${time_remaining:+ (${time_remaining} restant)}" \
+                        "battery-caution" "${battery_name}_critical_${level}"
+                    if [ ${#ZENITY_LEVELS[@]} -gt 0 ] && should_show_zenity_alert "$level"; then
+                        trigger_zenity_alert "$battery_name" "$level" "$capacity" "$time_remaining"
+                    fi
+                fi
             fi
-        elif [ "$capacity" -le "$WARNING_LEVEL" ]; then
-            if check_cooldown "${battery_name}_warning"; then
-                send_notification "normal" "⚠️ Batterie faible" \
-                    "Batterie à ${capacity}%${time_remaining:+ (${time_remaining} restant)}" \
-                    "battery-low" "${battery_name}_warning"
+        done
+
+        for level in "${WARNING_LEVELS[@]}"; do
+            if crossed_threshold "$last_capacity" "$capacity" "$level"; then
+                if check_cooldown "${battery_name}_warning_${level}"; then
+                    send_notification "normal" "⚠️ Batterie faible" \
+                        "Batterie à ${capacity}%${time_remaining:+ (${time_remaining} restant)}" \
+                        "battery-low" "${battery_name}_warning_${level}"
+                    if [ ${#ZENITY_LEVELS[@]} -gt 0 ] && should_show_zenity_alert "$level"; then
+                        trigger_zenity_alert "$battery_name" "$level" "$capacity" "$time_remaining"
+                    fi
+                fi
             fi
-        fi
-    elif [ "$status" = "Charging" ]; then
-        if [ "$capacity" -ge "$FULL_LEVEL" ]; then
+        done
+
+        update_last_capacity "$battery_name" "$capacity"
+    else
+        reset_last_capacity "$battery_name"
+
+        if [ "$status" = "Charging" ]; then
+            if [ "$capacity" -ge "$FULL_LEVEL" ]; then
+                if check_cooldown "${battery_name}_full"; then
+                    send_notification "low" "🔋 Batterie chargée" \
+                        "Batterie à ${capacity}%${time_remaining:+ (${time_remaining} pour charger)}" \
+                        "battery-full" "${battery_name}_full"
+                fi
+            fi
+        elif [ "$status" = "Full" ]; then
             if check_cooldown "${battery_name}_full"; then
-                send_notification "low" "🔋 Batterie chargée" \
-                    "Batterie à ${capacity}%${time_remaining:+ (${time_remaining} pour charger)}" \
+                send_notification "low" "🔋 Batterie pleine" \
+                    "Batterie complètement chargée" \
                     "battery-full" "${battery_name}_full"
             fi
-        fi
-    elif [ "$status" = "Full" ]; then
-        if check_cooldown "${battery_name}_full"; then
-            send_notification "low" "🔋 Batterie pleine" \
-                "Batterie complètement chargée" \
-                "battery-full" "${battery_name}_full"
         fi
     fi
 }
@@ -154,17 +422,19 @@ show_help() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "  -w, --warning LEVEL    Niveau d'avertissement (défaut: $WARNING_LEVEL)"
-    echo "  -c, --critical LEVEL   Niveau critique (défaut: $CRITICAL_LEVEL)"
+    echo "  -w, --warning LEVELS   Niveaux d'avertissement (liste séparée par des virgules, défaut: $(format_levels DEFAULT_WARNING_LEVELS))"
+    echo "  -c, --critical LEVELS  Niveaux critiques (liste séparée par des virgules, défaut: $(format_levels DEFAULT_CRITICAL_LEVELS))"
     echo "  -f, --full LEVEL       Niveau de charge complète (défaut: $FULL_LEVEL)"
-    echo "  -t, --timeout SECONDS  Délai entre notifications (défaut: $NOTIFICATION_COOLDOWN)"
     echo "  -l, --log FILE         Fichier de log (défaut: $LOG_FILE)"
+    echo "  -i, --interval SECONDS Intervalle entre deux vérifications (défaut: $CHECK_INTERVAL)"
+    echo "  -z, --zenity LEVELS    Niveaux pour alerte zenity persistante (défaut: $(format_levels DEFAULT_ZENITY_LEVELS), 'none' pour désactiver)"
+    echo "      --no-zenity        Désactiver complètement les alertes zenity persistantes"
     echo "  -s, --status           Afficher le statut de toutes les batteries"
     echo "  -h, --help             Afficher cette aide"
     echo ""
     echo "Exemples:"
     echo "  $0                     # Utiliser les paramètres par défaut"
-    echo "  $0 -w 25 -c 15         # Avertissement à 25%, critique à 15%"
+    echo "  $0 -w 25,15 -c 10,5    # Avertissements à 25% et 15%, critiques à 10% et 5%"
     echo "  $0 -s                  # Afficher le statut des batteries"
 }
 
@@ -191,24 +461,55 @@ show_status() {
 while [[ $# -gt 0 ]]; do
     case $1 in
         -w|--warning)
-            WARNING_LEVEL="$2"
+            if [ -z "$2" ]; then
+                echo "Erreur: --warning requiert une valeur"
+                exit 1
+            fi
+            parse_levels "$2" WARNING_LEVELS
+            normalize_levels WARNING_LEVELS
             shift 2
             ;;
         -c|--critical)
-            CRITICAL_LEVEL="$2"
+            if [ -z "$2" ]; then
+                echo "Erreur: --critical requiert une valeur"
+                exit 1
+            fi
+            parse_levels "$2" CRITICAL_LEVELS
+            normalize_levels CRITICAL_LEVELS
             shift 2
             ;;
         -f|--full)
             FULL_LEVEL="$2"
             shift 2
             ;;
-        -t|--timeout)
-            NOTIFICATION_COOLDOWN="$2"
-            shift 2
-            ;;
         -l|--log)
             LOG_FILE="$2"
             shift 2
+            ;;
+        -i|--interval)
+            if [ -z "$2" ]; then
+                echo "Erreur: --interval requiert une valeur"
+                exit 1
+            fi
+            CHECK_INTERVAL="$2"
+            shift 2
+            ;;
+        -z|--zenity)
+            if [ -z "$2" ]; then
+                echo "Erreur: --zenity requiert une valeur"
+                exit 1
+            fi
+            if [ "$2" = "none" ]; then
+                ZENITY_LEVELS=()
+            else
+                parse_levels "$2" ZENITY_LEVELS
+                normalize_levels ZENITY_LEVELS
+            fi
+            shift 2
+            ;;
+        --no-zenity)
+            ZENITY_LEVELS=()
+            shift
             ;;
         -s|--status)
             show_status
@@ -227,13 +528,24 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Validation des paramètres
-if ! [[ "$WARNING_LEVEL" =~ ^[0-9]+$ ]] || [ "$WARNING_LEVEL" -lt 1 ] || [ "$WARNING_LEVEL" -gt 100 ]; then
-    echo "Erreur: Le niveau d'avertissement doit être un nombre entre 1 et 100"
-    exit 1
+normalize_levels WARNING_LEVELS
+normalize_levels CRITICAL_LEVELS
+normalize_levels ZENITY_LEVELS
+
+validate_levels WARNING_LEVELS "d'avertissement"
+validate_levels CRITICAL_LEVELS "critique"
+if [ ${#ZENITY_LEVELS[@]} -gt 0 ]; then
+    validate_levels ZENITY_LEVELS "pour Zenity"
 fi
 
-if ! [[ "$CRITICAL_LEVEL" =~ ^[0-9]+$ ]] || [ "$CRITICAL_LEVEL" -lt 1 ] || [ "$CRITICAL_LEVEL" -gt 100 ]; then
-    echo "Erreur: Le niveau critique doit être un nombre entre 1 et 100"
+validate_positive_integer "$NOTIFICATION_COOLDOWN" "Le délai entre notifications"
+validate_positive_integer "$CHECK_INTERVAL" "L'intervalle de vérification"
+
+local_max_warning=$(get_max_level WARNING_LEVELS)
+local_max_critical=$(get_max_level CRITICAL_LEVELS)
+
+if [ "$local_max_warning" -le "$local_max_critical" ]; then
+    echo "Erreur: Le niveau d'avertissement le plus élevé doit être supérieur au niveau critique le plus élevé"
     exit 1
 fi
 
@@ -242,28 +554,30 @@ if ! [[ "$FULL_LEVEL" =~ ^[0-9]+$ ]] || [ "$FULL_LEVEL" -lt 1 ] || [ "$FULL_LEVE
     exit 1
 fi
 
-if [ "$WARNING_LEVEL" -le "$CRITICAL_LEVEL" ]; then
-    echo "Erreur: Le niveau d'avertissement doit être supérieur au niveau critique"
-    exit 1
-fi
-
 # Initialisation du log
 log_message "INFO" "Démarrage du script de surveillance de batterie"
-log_message "INFO" "Configuration: Warning=$WARNING_LEVEL%, Critical=$CRITICAL_LEVEL%, Full=$FULL_LEVEL%"
-
-# Traitement de toutes les batteries
-battery_found=false
-for battery_path in /sys/class/power_supply/BAT*; do
-    if [ -d "$battery_path" ]; then
-        battery_found=true
-        process_battery "$battery_path"
-    fi
-done
-
-if [ "$battery_found" = false ]; then
-    log_message "WARNING" "Aucune batterie trouvée dans /sys/class/power_supply/"
-    echo "Aucune batterie trouvée sur ce système"
-    exit 1
+zenity_config="désactivé"
+if [ ${#ZENITY_LEVELS[@]} -gt 0 ]; then
+    zenity_config=$(format_levels_with_units ZENITY_LEVELS)
 fi
+log_message "INFO" "Configuration: Warning=$(format_levels_with_units WARNING_LEVELS) - Critical=$(format_levels_with_units CRITICAL_LEVELS) - Full=${FULL_LEVEL}% - Cooldown=${NOTIFICATION_COOLDOWN}s - Interval=${CHECK_INTERVAL}s - Zenity=${zenity_config}"
 
-log_message "INFO" "Script terminé"
+trap 'log_message "INFO" "Arrêt du script de surveillance de batterie"; exit 0' SIGINT SIGTERM
+
+while true; do
+    battery_found=false
+    for battery_path in /sys/class/power_supply/BAT*; do
+        if [ -d "$battery_path" ]; then
+            battery_found=true
+            process_battery "$battery_path"
+        fi
+    done
+
+    if [ "$battery_found" = false ]; then
+        log_message "WARNING" "Aucune batterie trouvée dans /sys/class/power_supply/"
+        echo "Aucune batterie trouvée sur ce système"
+        exit 1
+    fi
+
+    sleep "$CHECK_INTERVAL"
+done
