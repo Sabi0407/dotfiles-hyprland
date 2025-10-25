@@ -15,10 +15,15 @@ alias docs='cd ~/Documents'
 alias img='cd ~/Images'
 alias dotfiles='cd ~/dotfiles'
 
-# ls amélioré
-alias ll='ls -alF' # Liste détaillée avec tous les fichiers
-alias la='ls -A'
-alias l='ls -CF'
+# ls amélioré avec eza
+alias ls='eza --icons'
+alias ll='eza -alh --icons --git' # Liste détaillée avec tous les fichiers
+alias la='eza -a --icons'
+alias l='eza --icons'
+alias lt='eza --tree --icons' # Vue arborescente
+
+# cat amélioré avec bat
+alias cat='bat'
 
 
 
