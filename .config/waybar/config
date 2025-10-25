@@ -1,0 +1,351 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 13,
+  "modules-left": [
+    "group/arch_drawer",
+    "group/clock_drawer"
+  ],
+  "modules-center": [
+    "custom/notification",
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "custom/mic_status",
+    "custom/speaker_profile",
+    "custom/storage",
+    "group/tray_drawer",
+    "group/battery_drawer"
+  ],
+  "height": 42,
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/launcher": {
+    "format": "",
+    "on-click": "wofi --show drun",
+    "tooltip-format": "Lancer une application"
+  },
+
+ 
+  "battery": {
+    "format": "{icon}  {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-full": "󰁹  {capacity}%",
+    "format-warning": "{icon}  {capacity}%",
+    "format-critical": "{icon}  {capacity}%",
+    "format-plugged": "󰂄  {capacity}%",
+    "format-discharging": "{icon}  {capacity}%",
+    "max-length": 20,
+    "format-icons": [
+      "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰂁", "󰁹"
+    ],
+    "tooltip-format": "Batterie : {capacity}%\nÉtat : {time}\nPuissance : {power}W",
+    "interval": 1,
+    "states": {
+      "warning": 20,
+      "critical": 15,
+      "very_critical": 10,
+      "extreme": 5
+    },
+    "critical-notification": false,
+    "warning-notification": false,
+    "on-click": "gnome-power-statistics",
+    "on-click-right": "brightnessctl g | xargs -I{} dunstify 'Luminosité actuelle' '{}'",
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "exec-on-event": "~/.config/Scripts/battery_notify.sh"
+  },
+
+  "clock": {
+    "format": "{:%H:%M:%S}",
+    "tooltip": false,
+    "interval": 1
+  },
+
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "󰂱 {volume}%",
+    "format-muted": "󰖁<span foreground='red'><sup></sup></span>",
+    "scroll-step": 1,
+    "on-click": "pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"],
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["󰖀", "󰕾"]
+    },
+    "tooltip-format": "Volume: {volume}%"
+  },
+
+  "network": {
+    "interval": 2,
+    "format-wifi": "",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭<span foreground='red'><sup></sup></span>",
+    "format-unknown": "󰤫",
+    "tooltip": true,
+    "tooltip-format": "{ifname} {ipaddr}\nSignal : {signalStrength}%\nVitesse : {bandwidthDownBits}↓ / {bandwidthUpBits}↑"
+  },
+
+
+
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-active": "{icon}",
+    "format-occupied": "{icon}",
+    "format-empty": "{name}",
+    "format-urgent": "{icon}",
+    "format-window-separator": "",
+    "on-click": "activate",
+    "on-click-right": "hyprctl dispatch workspace {name}",
+    "on-scroll-up": "hyprctl dispatch workspace +1",
+    "on-scroll-down": "hyprctl dispatch workspace -1",
+    "sort-by-number": true,
+    "all-outputs": true,
+    "disable-scroll": false,
+    "show-empty-workspaces": true,
+    "active-only": false,
+    "move-to-monitor": true,
+    "persistent-workspaces": {
+      "1": ["1", "2"]
+    },
+    "window-rewrite-default": "󰖯",
+    "window-rewrite": {
+      "title<.*youtube.*>": "󰗃",
+      "class<firefox>": "󰈹",
+      "class<firefox> title<.*github.*>": "󰊤",
+      "class<firefox> title<.*reddit.*>": "󰑍",
+      "class<firefox> title<.*youtube.*>": "󰗃",
+      "class<firefox> title<.*twitch.*>": "󰓓",
+      "class<code>": "󰨞",
+      "class<discord>": "󰙯",
+      "class<spotify>": "󰓇",
+      "class<steam>": "󰓓",
+      "class<kitty>": "󰄛",
+      "class<gimp>": "󰵸",
+      "class<blender>": "󰂫",
+      "class<nautilus>": "󰉋",
+      "class<mpv>": "󰎆",
+      "class<obsidian>": "󰈙",
+      "class<anki>": "󰚯",
+      "class<onlyoffice>": "󰈙",
+      "class<virtualbox>": "󰆧",
+      "class<qBittorrent>": "󰇚"
+    }
+  },
+
+
+  "hyprland/window": {
+    "format": "{class}",
+    "separate-outputs": true,
+    "icon": true,
+    "icon-size": 18
+  },
+  
+
+
+  "tray": {
+    "spacing": 10,
+    "icon-size": 21,
+    "icon-padding": 5,
+    "reverse-direction": false,
+    "show-passive-items": true,
+    "icon-theme": "Adwaita",
+    "items-order": [
+      "nm-applet",
+      "spotify",
+      "*"
+    ]
+  },
+
+  "custom/tray_toggle": {
+    "format": "",
+    "tooltip": false
+  },
+
+  "group/tray_drawer": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "slider-drawer",
+      "transition-left-to-right": false,
+      "click-to-reveal": true,
+      "close-on-unfocus": false
+    },
+    "modules": [
+      "custom/tray_toggle",
+      "tray",
+      "pulseaudio"
+    ]
+  },
+
+
+  "group/clock_drawer": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "slider-drawer",
+      "transition-left-to-right": true,
+      "click-to-reveal": true,
+      "close-on-unfocus": true
+    },
+    "modules": [
+      "clock",
+      "custom/date_fr"
+    ]
+  },
+
+  "group/battery_drawer": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "slider-drawer",
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "battery",
+      "cpu",
+      "memory",
+      "temperature"
+    ]
+  },
+
+
+  "custom/date_fr": {
+    "exec": "LC_TIME=fr_FR.UTF-8 date '+%a%e %b %Y'",
+    "interval": 1,
+    "return-type": "plain",
+    "on-click": "gsimplecal"
+  },
+
+  "custom/archlogo": {
+    "format": "",
+    "tooltip": "Lancer Tofi",
+    "on-click": "tofi-drun"
+  },
+
+  "custom/dnd": {
+    "format": "{icon}",
+    "format-icons": {
+      "on": "",
+      "off": ""
+    },
+    "exec": "swaync-client -g | grep -q 'Do Not Disturb: true' && echo '{\"icon\":\"on\"}' || echo '{\"icon\":\"off\"}'",
+    "on-click": "swaync-client -t",
+    "return-type": "json",
+    "interval": 2,
+    "tooltip": "Activer/Désactiver Ne pas déranger"
+  },
+
+
+
+  "custom/mic_status": {
+    "exec": "~/.config/Scripts/mic_status_waybar.sh",
+    "interval": 1,
+    "return-type": "json",
+    "tooltip": true
+  },
+
+  "custom/speaker_profile": {
+    "format": "{icon}",
+    "return-type": "json",
+    "exec": "~/.config/Scripts/audio_profile_waybar.sh",
+    "interval": 5,
+    "tooltip": true,
+    "on-click": "~/.config/Scripts/audio_profile_waybar.sh toggle",
+    "on-click-right": "~/.config/Scripts/audio_profile_waybar.sh cycle"
+  },
+
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "interval": 5,
+    "tooltip": true,
+    "tooltip-format": "CPU : {usage}%"
+  },
+
+  "memory": {
+    "format": "󰍛 {percentage}%",
+    "interval": 5,
+    "tooltip": true,
+    "tooltip-format": "Mémoire : {used} / {total} Gio ({percentage}%)"
+  },
+
+  "temperature": {
+    "format": "󰔏 {temperatureC}°",
+    "tooltip": true,
+    "interval": 5,
+    "thermal-zone": 0,
+    "critical-threshold": 75,
+    "tooltip-format": "Température : {temperatureC}°C"
+  },
+
+  "group/arch_drawer": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 300,
+      "children-class": "slider-drawer",
+      "transition-left-to-right": true
+    },
+    "modules": [
+      "custom/archlogo",
+      "custom/lock-session",
+      "custom/reboot",
+      "custom/poweroff"
+    ]
+  },
+
+  "custom/lock-session": {
+    "format": "󰌾",
+    "tooltip": "Verrouiller la session",
+    "on-click": "hyprlock"
+  },
+  "custom/reboot": {
+    "format": "󰜉",
+    "tooltip": "Redémarrer",
+    "on-click": "~/.config/Scripts/confirm_reboot.sh"
+  },
+  "custom/poweroff": {
+    "format": "󰿅",
+    "tooltip": "Éteindre",
+    "on-click": "~/.config/Scripts/confirm_poweroff.sh"
+  },
+
+  "custom/storage": {
+    "format": "{icon} {text}",
+    "return-type": "json",
+    "exec": "~/.config/Scripts/storage_manager.sh",
+    "interval": 5,
+    "tooltip": true,
+    "on-click": "~/.config/Scripts/storage_manager.sh open",
+    "on-click-right": "~/.config/Scripts/storage_manager.sh toggle",
+    "format-icons": {
+      "connected": "󰋊",
+      "disconnected": "󰋊"
+    }
+  }
+}
