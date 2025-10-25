@@ -64,6 +64,13 @@ toolbarbutton:hover {
   background-color: var(--c2) !important;
 }
 
+/* Masque les boutons système (réduit/maximise/ferme) pour éviter l'apparition de la croix */
+.titlebar-buttonbox-container {
+  display: none !important;
+}
+
+/* Note: copie active dans ~/.mozilla/firefox/qcktpd65.default-release/chrome/userChrome.css */
+
 /* URL bar */
 #urlbar, #searchbar {
   background-color: var(--c0) !important;
