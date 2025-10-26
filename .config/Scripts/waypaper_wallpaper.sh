@@ -31,6 +31,20 @@ config_path = pathlib.Path(os.environ["CONFIG_FILE"]).expanduser()
 wallpaper_dir = pathlib.Path(os.environ["WALLPAPER_DIR"]).expanduser()
 post_command = os.environ["POST_COMMAND"]
 
+extra_dirs = [
+    wallpaper_dir,
+    pathlib.Path.home() / "dotfiles/wallpapers",
+    pathlib.Path.home() / "Images/wallpapers",
+]
+
+folders = []
+for path in extra_dirs:
+    if not path.exists():
+        continue
+    resolved = str(path.resolve())
+    if resolved not in folders:
+        folders.append(resolved)
+
 config_path.parent.mkdir(parents=True, exist_ok=True)
 config = configparser.ConfigParser()
 config.read(config_path, encoding="utf-8")
@@ -42,13 +56,15 @@ settings = config["Settings"]
 
 folders_raw = settings.get("folder", "").strip()
 folder_lines = [line.strip() for line in folders_raw.splitlines() if line.strip()]
-if str(wallpaper_dir) not in folder_lines:
-    folder_lines.append(str(wallpaper_dir))
+for folder in folders:
+    if folder not in folder_lines:
+        folder_lines.append(folder)
 settings["folder"] = "\n".join(folder_lines)
 
 settings["backend"] = "none"
 settings.setdefault("fill", "fill")
 settings.setdefault("sort", "name")
+settings["number_of_columns"] = "9"
 settings["post_command"] = post_command
 settings.setdefault("color", "#000000")
 settings.setdefault("swww_transition_type", "random")
@@ -56,7 +72,12 @@ settings.setdefault("swww_transition_step", "63")
 settings.setdefault("swww_transition_angle", "0")
 settings.setdefault("swww_transition_duration", "2")
 settings.setdefault("swww_transition_fps", "60")
-settings.setdefault("number_of_columns", "4")
+settings.setdefault("zen_mode", "True")
+settings.setdefault("show_path_in_tooltip", "True")
+settings.setdefault("subfolders", "True")
+settings.setdefault("all_subfolders", "True")
+settings.setdefault("show_hidden", "False")
+settings["stylesheet"] = str(pathlib.Path.home() / ".config/waypaper/style.css")
 
 with config_path.open("w", encoding="utf-8") as f:
     config.write(f)
