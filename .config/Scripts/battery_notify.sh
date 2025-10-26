@@ -373,7 +373,7 @@ process_battery() {
                         "Batterie à ${capacity}%" \
                         "battery-caution" "${battery_name}_critical_${level}"
                     if [ ${#ZENITY_LEVELS[@]} -gt 0 ] && should_show_zenity_alert "$level"; then
-                        trigger_zenity_alert "$battery_name" "$level" "$capacity" "$time_remaining"
+                        trigger_zenity_alert "$battery_name" "$level" "$capacity" ""
                     fi
                 fi
             fi
@@ -386,7 +386,7 @@ process_battery() {
                         "Batterie à ${capacity}%" \
                         "battery-low" "${battery_name}_warning_${level}"
                     if [ ${#ZENITY_LEVELS[@]} -gt 0 ] && should_show_zenity_alert "$level"; then
-                        trigger_zenity_alert "$battery_name" "$level" "$capacity" "$time_remaining"
+                        trigger_zenity_alert "$battery_name" "$level" "$capacity" ""
                     fi
                 fi
             fi
