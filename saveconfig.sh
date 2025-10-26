@@ -83,43 +83,7 @@ rsync -av --delete "$HOME/.config/mimeapps.list" "$DEST/.config/" >> "$LOG_FILE"
 echo "$(date): Sauvegarde de saveconfig.sh" >> "$LOG_FILE"
 rsync -av --delete "$HOME/saveconfig.sh" "$DEST/" >> "$LOG_FILE" 2>&1
 
-# 10) Sync de la configuration Firefox (userChrome.css et user.js)
-echo "$(date): Sauvegarde de la configuration Firefox" >> "$LOG_FILE"
-mapfile -t FIREFOX_PROFILE_DIRS < <(find "$HOME/.mozilla/firefox" -maxdepth 1 -type d -name "*.default*" -printf "%f\n" | sort)
-
-if [ ${#FIREFOX_PROFILE_DIRS[@]} -gt 0 ]; then
-    BASE_FIREFOX_DEST="$DEST/firefox"
-    mkdir -p "$BASE_FIREFOX_DEST"
-
-    for FIREFOX_PROFILE_DIR in "${FIREFOX_PROFILE_DIRS[@]}"; do
-        PROFILE_SRC="$HOME/.mozilla/firefox/$FIREFOX_PROFILE_DIR"
-        PROFILE_DEST="$BASE_FIREFOX_DEST/$FIREFOX_PROFILE_DIR"
-        CHROME_SRC="$PROFILE_SRC/chrome"
-        CHROME_DEST="$PROFILE_DEST/chrome"
-
-        mkdir -p "$PROFILE_DEST"
-
-        if [ -d "$CHROME_SRC" ]; then
-            mkdir -p "$CHROME_DEST"
-            rsync -av --delete "$CHROME_SRC/" "$CHROME_DEST/" >> "$LOG_FILE" 2>&1
-        else
-            echo "$(date): INFO - Aucun dossier chrome pour le profil $FIREFOX_PROFILE_DIR" >> "$LOG_FILE"
-        fi
-
-        FIREFOX_USER_JS="$PROFILE_SRC/user.js"
-        if [ -f "$FIREFOX_USER_JS" ]; then
-            rsync -av "$FIREFOX_USER_JS" "$PROFILE_DEST/" >> "$LOG_FILE" 2>&1
-        else
-            echo "$(date): INFO - Aucun user.js trouvé pour le profil $FIREFOX_PROFILE_DIR" >> "$LOG_FILE"
-        fi
-
-        echo "$(date): Configuration Firefox sauvegardée depuis le profil $FIREFOX_PROFILE_DIR" >> "$LOG_FILE"
-    done
-else
-    echo "$(date): ATTENTION - Aucun profil Firefox par défaut trouvé" >> "$LOG_FILE"
-fi
-
-# 11) Sync de la configuration VSCodium (settings.json)
+# 10) Sync de la configuration VSCodium (settings.json)
 echo "$(date): Sauvegarde de la configuration VSCodium" >> "$LOG_FILE"
 VSCODIUM_SRC="$HOME/.config/VSCodium/User/settings.json"
 VSCODIUM_DEST="$DEST/VSCodium/User"
