@@ -1,12 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
-	<icon>utilities-terminal</icon>
-	<name>Open Terminal Here</name>
-	<submenu></submenu>
-	<unique-id>1760916221159090-1</unique-id>
-	<command>kitty --working-directory %f</command>
-	<description>Example for a custom action</description>
+	<icon>package-x-generic</icon>
+	<name>Compresser en .tar.gz</name>
+	<submenu>Archiver</submenu>
+	<unique-id>1760916221159090-4</unique-id>
+	<command>tar -czf %n.tar.gz %N</command>
+	<description>Compresser la selection en archive tar.gz</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<other-files/>
+</action>
+<action>
+	<icon>package-x-generic</icon>
+	<name>Compresser en .zip</name>
+	<submenu>Archiver</submenu>
+	<unique-id>1760916221159090-5</unique-id>
+	<command>zip -r %n.zip %N</command>
+	<description>Compresser la selection en archive ZIP</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<other-files/>
+</action>
+<action>
+	<icon>edit-copy</icon>
+	<name>Copier le chemin</name>
+	<submenu>Outils</submenu>
+	<unique-id>1760916221159090-3</unique-id>
+	<command>echo -n %f | wl-copy</command>
+	<description>Copier le chemin complet du fichier dans le presse-papier</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<other-files/>
+</action>
+<action>
+	<icon>system-search</icon>
+	<name>Trouver les doublons</name>
+	<submenu>Outils</submenu>
+	<unique-id>1760916221159090-6</unique-id>
+	<command>kitty sh -c &apos;find %f -type f -exec md5sum {} + | sort | uniq -w32 -dD | less&apos;</command>
+	<description>Rechercher les fichiers en double par hash MD5</description>
 	<range></range>
 	<patterns>*</patterns>
 	<startup-notify/>
@@ -15,7 +54,7 @@
 <action>
 	<icon>utilities-terminal</icon>
 	<name>Ouvrir Terminal Ici</name>
-	<submenu></submenu>
+	<submenu>Outils</submenu>
 	<unique-id>1760916221159090-2</unique-id>
 	<command>kitty --working-directory %f</command>
 	<description>Ouvrir Kitty dans ce dossier</description>
@@ -23,5 +62,16 @@
 	<patterns>*</patterns>
 	<startup-notify/>
 	<directories/>
+</action>
+<action>
+	<icon>dialog-password</icon>
+	<name>Editer en tant que root</name>
+	<submenu></submenu>
+	<unique-id>1760916221159090-7</unique-id>
+	<command>pkexec micro %f</command>
+	<description>Ouvrir le fichier avec micro en mode root</description>
+	<range></range>
+	<patterns>*</patterns>
+	<text-files/>
 </action>
 </actions>
