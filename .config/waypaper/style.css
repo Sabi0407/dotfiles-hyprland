@@ -1,0 +1,10 @@
+window {
+  padding: 8px;
+}
+flowboxchild {
+  padding: 4px;
+  margin: 4px;
+}
+.thumbnail {
+  border-radius: 10px;
+}
