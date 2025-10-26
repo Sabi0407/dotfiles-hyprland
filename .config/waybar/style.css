@@ -7,7 +7,7 @@
 
 window#waybar {
   background-color: transparent;
-  color: #c1c1c0;
+  color: #c4c1c1;
   border-radius: 16px;
   box-shadow: none;
   padding-top: 6px;
@@ -20,14 +20,14 @@ window#waybar {
 
 /* Workspaces */
 #workspaces {
-  background: #0a0a04;
+  background: #130808;
   padding: 4px 12px;
   margin: 0 16px;
-  border: 1px solid mix(#0a0a04, #8F908F, 0.25);
+  border: 1px solid transparent;
   border-radius: 12px;
   box-shadow: none;
   transition: all 0.25s ease;
-  color: #c1c1c0;
+  color: #c4c1c1;
 }
 
 #workspaces:hover {
@@ -35,8 +35,8 @@ window#waybar {
 }
 
 #workspaces button {
-  background: mix(#0a0a04, #ffffff, 0.08);
-  color: #c1c1c0;
+  background: mix(#130808, #ffffff, 0.08);
+  color: #c4c1c1;
   font-size: 0.9em;
   font-weight: 500;
   padding: 4px 10px;
@@ -50,18 +50,18 @@ window#waybar {
 
 #workspaces button:not(.active):not(.visible):hover,
 #workspaces button.occupied:not(.active):not(.visible) {
-  background: mix(#0a0a04, #c1c1c0, 0.28);
-  color: #8F908F;
-  border-color: mix(#0a0a04, #8F908F, 0.55);
+  background: mix(#130808, #c4c1c1, 0.28);
+  color: #B37F80;
+  border: 1px solid transparent;
   box-shadow: none;
   opacity: 0.9;
 }
 
 #workspaces button.active,
 #workspaces button.visible {
-  background: #8F908F;
-  color: #0a0a04;
-  border-color: mix(#0a0a04, #8F908F, 0.85);
+  background: #B37F80;
+  color: #130808;
+  border: 1px solid transparent;
   box-shadow: none;
   opacity: 1;
   font-weight: 600;
@@ -69,34 +69,34 @@ window#waybar {
 
 #workspaces button.active:hover,
 #workspaces button.visible:hover {
-  background: #8F908F;
-  color: #0a0a04;
-  border-color: mix(#0a0a04, #8F908F, 0.85);
+  background: #B37F80;
+  color: #130808;
+  border: 1px solid transparent;
   opacity: 1;
 }
 
 #workspaces button.urgent {
-  background: #7F807F;
-  color: #0a0a04;
-  border-color: #7F807F;
+  background: #912424;
+  color: #130808;
+  border: 1px solid transparent;
   animation: pulse 0.8s ease-in-out infinite;
   opacity: 1;
 }
 
 #workspaces button.visible {
-  color: #0a0a04;
+  color: #130808;
 }
 
 #workspaces button.empty {
-  color: #c1c1c0;
+  color: #c4c1c1;
   opacity: 0.5;
 }
 
 #group-clock_drawer,
 #group-processes_tray,
 #group-arch_drawer {
-  color: #c1c1c0;
-  background: #0a0a04;
+  color: #c4c1c1;
+  background: #130808;
   padding: 4px 14px;
   margin: 0 10px 0 0;
   border: 1px solid transparent;
@@ -108,9 +108,9 @@ window#waybar {
 #group-clock_drawer:hover,
 #group-processes_tray:hover,
 #group-arch_drawer:hover {
-  background: mix(#0a0a04, #c1c1c0, 0.18);
-  color: #8F908F;
-  border: 1px solid mix(#0a0a04, #8F908F, 0.45);
+  background: mix(#130808, #c4c1c1, 0.18);
+  color: #B37F80;
+  border: 1px solid mix(#130808, #B37F80, 0.45);
   box-shadow: none;
 }
 
@@ -145,15 +145,16 @@ window#waybar {
 #custom-weather,
 #custom-mic_status,
 #custom-speaker_profile,
+#custom-updates,
 #custom-system_toggle {
-  color: #c1c1c0;
-  background: #0a0a04;
+  color: #c4c1c1;
+  background: #130808;
   padding: 4px 14px;
   margin: 0 0 0 10px;
   border-radius: 14px;
   box-shadow: none;
   transition: all 0.2s;
-  border: 1px solid mix(#0a0a04, #8F908F, 0.2);
+  border: 1px solid transparent;
 }
 
 #battery:hover,
@@ -187,11 +188,33 @@ window#waybar {
 #custom-weather:hover,
 #custom-mic_status:hover,
 #custom-speaker_profile:hover,
+#custom-updates:hover,
 #custom-system_toggle:hover {
-  background: mix(#0a0a04, #8F908F, 0.95);
-  color: #0a0a04;
-  border: 1px solid mix(#0a0a04, #8F908F, 0.75);
+  background: mix(#130808, #B37F80, 0.95);
+  color: #130808;
+  border: 1px solid transparent;
   box-shadow: none;
+}
+
+#custom-updates.updates-none {
+  opacity: 0.65;
+}
+
+#custom-updates.updates-few {
+  border: 1px solid transparent;
+}
+
+#custom-updates.updates-some {
+  background: mix(#130808, #912424, 0.15);
+  border: 1px solid transparent;
+  color: #912424;
+}
+
+#custom-updates.updates-many {
+  background: mix(#130808, #912424, 0.3);
+  border: 1px solid transparent;
+  color: #912424;
+  animation: pulse 1.5s infinite;
 }
 
 /* Masquer les modules du drawer quand il est replié */
@@ -206,7 +229,7 @@ window#waybar {
 
 #battery {
   transition: all 0.3s ease;
-  color: #c1c1c0;
+  color: #c4c1c1;
 }
 
 #battery.warning {
@@ -252,17 +275,17 @@ window#waybar {
 
 #custom-usb_drives.no-usb {
   opacity: 0.5;
-  color: #c1c1c0;
+  color: #c4c1c1;
 }
 
 #custom-usb_drives.usb-connected {
-  color: #c1c1c0;
-  border: 1px solid mix(#0a0a04, #8F908F, 0.3);
+  color: #c4c1c1;
+  border: 1px solid mix(#130808, #B37F80, 0.3);
 }
 
 #custom-usb_drives.usb-many {
-  color: #c1c1c0;
-  border: 1px solid mix(#0a0a04, #8F908F, 0.3);
+  color: #c4c1c1;
+  border: 1px solid mix(#130808, #B37F80, 0.3);
   animation: pulse 2s infinite;
 }
 

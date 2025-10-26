@@ -13,6 +13,7 @@
   "modules-right": [
     "custom/mic_status",
     "custom/speaker_profile",
+    "custom/updates",
     "custom/storage",
     "group/tray_drawer",
     "group/battery_drawer"
@@ -63,7 +64,7 @@
     "interval": 1,
     "states": {
       "warning": 29,
-      "critical": 16
+      "critical": 15
     },
     "critical-notification": false,
     "warning-notification": false,
@@ -277,6 +278,17 @@
     "tooltip": true,
     "on-click": "~/.config/Scripts/audio_profile_waybar.sh toggle",
     "on-click-right": "~/.config/Scripts/audio_profile_waybar.sh cycle"
+  },
+
+  "custom/updates": {
+    "format": "{icon} {text}",
+    "return-type": "json",
+    "exec": "~/.config/Scripts/updates_waybar.sh",
+    "interval": 900,
+    "tooltip": true,
+    "on-click": "kitty --class=updates-term -e bash -lc 'yay -Syu'",
+    "on-click-right": "kitty --class=updates-term -e bash -lc 'sudo pacman -Syu'",
+    "on-click-middle": "kitty --class=updates-term -e bash -lc '~/.config/Scripts/cleanup-system.sh'"
   },
 
   "cpu": {

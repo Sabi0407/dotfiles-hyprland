@@ -23,7 +23,7 @@ window#waybar {
   background: {background};
   padding: 4px 12px;
   margin: 0 16px;
-  border: 1px solid mix({background}, {color4}, 0.25);
+  border: 1px solid transparent;
   border-radius: 12px;
   box-shadow: none;
   transition: all 0.25s ease;
@@ -52,7 +52,7 @@ window#waybar {
 #workspaces button.occupied:not(.active):not(.visible) {
   background: mix({background}, {foreground}, 0.28);
   color: {color4};
-  border-color: mix({background}, {color4}, 0.55);
+  border: 1px solid transparent;
   box-shadow: none;
   opacity: 0.9;
 }
@@ -61,7 +61,7 @@ window#waybar {
 #workspaces button.visible {
   background: {color4};
   color: {background};
-  border-color: mix({background}, {color4}, 0.85);
+  border: 1px solid transparent;
   box-shadow: none;
   opacity: 1;
   font-weight: 600;
@@ -71,14 +71,14 @@ window#waybar {
 #workspaces button.visible:hover {
   background: {color4};
   color: {background};
-  border-color: mix({background}, {color4}, 0.85);
+  border: 1px solid transparent;
   opacity: 1;
 }
 
 #workspaces button.urgent {
   background: {color1};
   color: {background};
-  border-color: {color1};
+  border: 1px solid transparent;
   animation: pulse 0.8s ease-in-out infinite;
   opacity: 1;
 }
@@ -145,6 +145,7 @@ window#waybar {
 #custom-weather,
 #custom-mic_status,
 #custom-speaker_profile,
+#custom-updates,
 #custom-system_toggle {
   color: {foreground};
   background: {background};
@@ -153,7 +154,7 @@ window#waybar {
   border-radius: 14px;
   box-shadow: none;
   transition: all 0.2s;
-  border: 1px solid mix({background}, {color4}, 0.2);
+  border: 1px solid transparent;
 }
 
 #battery:hover,
@@ -187,11 +188,33 @@ window#waybar {
 #custom-weather:hover,
 #custom-mic_status:hover,
 #custom-speaker_profile:hover,
+#custom-updates:hover,
 #custom-system_toggle:hover {
   background: mix({background}, {color4}, 0.95);
   color: {background};
-  border: 1px solid mix({background}, {color4}, 0.75);
+  border: 1px solid transparent;
   box-shadow: none;
+}
+
+#custom-updates.updates-none {
+  opacity: 0.65;
+}
+
+#custom-updates.updates-few {
+  border: 1px solid transparent;
+}
+
+#custom-updates.updates-some {
+  background: mix({background}, {color1}, 0.15);
+  border: 1px solid transparent;
+  color: {color1};
+}
+
+#custom-updates.updates-many {
+  background: mix({background}, {color1}, 0.3);
+  border: 1px solid transparent;
+  color: {color1};
+  animation: pulse 1.5s infinite;
 }
 
 /* Masquer les modules du drawer quand il est replié */

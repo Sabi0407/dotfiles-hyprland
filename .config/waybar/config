@@ -8,7 +8,8 @@
   ],
   "modules-center": [
     "custom/notification",
-    "hyprland/workspaces"
+    "hyprland/workspaces",
+    "custom/updates"
   ],
   "modules-right": [
     "custom/mic_status",
@@ -279,6 +280,17 @@
     "tooltip": true,
     "on-click": "~/.config/Scripts/audio_profile_waybar.sh toggle",
     "on-click-right": "~/.config/Scripts/audio_profile_waybar.sh cycle"
+  },
+
+  "custom/updates": {
+    "format": "󰇚 {text}",
+    "return-type": "json",
+    "exec": "~/.config/Scripts/updates_waybar.sh",
+    "interval": 900,
+    "tooltip": true,
+    "on-click": "kitty --class=updates-term -e bash -lc 'yay -Syu'",
+    "on-click-right": "kitty --class=updates-term -e bash -lc 'sudo pacman -Syu'",
+    "on-click-middle": "kitty --class=updates-term -e bash -lc '~/.config/Scripts/cleanup-system.sh'"
   },
 
   "cpu": {
