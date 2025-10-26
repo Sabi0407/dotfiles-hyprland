@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# Délégation à wallpaper-manager
+# repris par  wallpaper-manager
 exec "$HOME/.config/Scripts/wallpaper-manager.sh" fast-waybar "$@"

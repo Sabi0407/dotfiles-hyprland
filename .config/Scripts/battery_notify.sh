@@ -117,9 +117,6 @@ trigger_zenity_alert() {
     [ "$severity" = "critical" ] && zenity_title="Batterie critique"
 
     local zenity_message="${capacity}% restant"
-    if [ -n "$time_remaining" ]; then
-        zenity_message="${zenity_message}\nTemps restant: ${time_remaining}"
-    fi
 
     (
         if ! GDK_BACKEND=wayland run_zenity_theming --warning \
@@ -373,7 +370,7 @@ process_battery() {
             if crossed_threshold "$last_capacity" "$capacity" "$level"; then
                 if check_cooldown "${battery_name}_critical_${level}"; then
                     send_notification "critical" "🚨 Batterie critique !" \
-                        "Batterie à ${capacity}%${time_remaining:+ (${time_remaining} restant)}" \
+                        "Batterie à ${capacity}%" \
                         "battery-caution" "${battery_name}_critical_${level}"
                     if [ ${#ZENITY_LEVELS[@]} -gt 0 ] && should_show_zenity_alert "$level"; then
                         trigger_zenity_alert "$battery_name" "$level" "$capacity" "$time_remaining"
@@ -386,7 +383,7 @@ process_battery() {
             if crossed_threshold "$last_capacity" "$capacity" "$level"; then
                 if check_cooldown "${battery_name}_warning_${level}"; then
                     send_notification "normal" "⚠️ Batterie faible" \
-                        "Batterie à ${capacity}%${time_remaining:+ (${time_remaining} restant)}" \
+                        "Batterie à ${capacity}%" \
                         "battery-low" "${battery_name}_warning_${level}"
                     if [ ${#ZENITY_LEVELS[@]} -gt 0 ] && should_show_zenity_alert "$level"; then
                         trigger_zenity_alert "$battery_name" "$level" "$capacity" "$time_remaining"
@@ -403,7 +400,7 @@ process_battery() {
             if [ "$capacity" -ge "$FULL_LEVEL" ]; then
                 if check_cooldown "${battery_name}_full"; then
                     send_notification "low" "🔋 Batterie chargée" \
-                        "Batterie à ${capacity}%${time_remaining:+ (${time_remaining} pour charger)}" \
+                        "Batterie à ${capacity}%" \
                         "battery-full" "${battery_name}_full"
                 fi
             fi
