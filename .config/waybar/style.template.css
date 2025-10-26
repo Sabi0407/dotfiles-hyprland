@@ -210,13 +210,11 @@ window#waybar {
 }
 
 #battery.warning {
-  color: {color3};
+  color: #ffb347;
   animation: battery-pulse 2s infinite;
 }
 
-#battery.critical,
-#battery.very_critical,
-#battery.extreme {
+#battery.critical {
   color: #ff4444;
   animation: battery-critical 1.5s infinite;
   border: 1px solid #ff4444;

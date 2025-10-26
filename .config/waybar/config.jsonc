@@ -62,10 +62,8 @@
     "tooltip-format": "Batterie : {capacity}%\nÉtat : {time}\nPuissance : {power}W",
     "interval": 1,
     "states": {
-      "warning": 20,
-      "critical": 15,
-      "very_critical": 10,
-      "extreme": 5
+      "warning": 29,
+      "critical": 16
     },
     "critical-notification": false,
     "warning-notification": false,

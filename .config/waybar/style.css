@@ -7,7 +7,7 @@
 
 window#waybar {
   background-color: transparent;
-  color: #c5c1c5;
+  color: #c1c1c0;
   border-radius: 16px;
   box-shadow: none;
   padding-top: 6px;
@@ -20,14 +20,14 @@ window#waybar {
 
 /* Workspaces */
 #workspaces {
-  background: #190a19;
+  background: #0a0a04;
   padding: 4px 12px;
   margin: 0 16px;
-  border: 1px solid mix(#190a19, #6E4787, 0.25);
+  border: 1px solid mix(#0a0a04, #8F908F, 0.25);
   border-radius: 12px;
   box-shadow: none;
   transition: all 0.25s ease;
-  color: #c5c1c5;
+  color: #c1c1c0;
 }
 
 #workspaces:hover {
@@ -35,8 +35,8 @@ window#waybar {
 }
 
 #workspaces button {
-  background: mix(#190a19, #ffffff, 0.08);
-  color: #c5c1c5;
+  background: mix(#0a0a04, #ffffff, 0.08);
+  color: #c1c1c0;
   font-size: 0.9em;
   font-weight: 500;
   padding: 4px 10px;
@@ -50,18 +50,18 @@ window#waybar {
 
 #workspaces button:not(.active):not(.visible):hover,
 #workspaces button.occupied:not(.active):not(.visible) {
-  background: mix(#190a19, #c5c1c5, 0.28);
-  color: #6E4787;
-  border-color: mix(#190a19, #6E4787, 0.55);
+  background: mix(#0a0a04, #c1c1c0, 0.28);
+  color: #8F908F;
+  border-color: mix(#0a0a04, #8F908F, 0.55);
   box-shadow: none;
   opacity: 0.9;
 }
 
 #workspaces button.active,
 #workspaces button.visible {
-  background: #6E4787;
-  color: #190a19;
-  border-color: mix(#190a19, #6E4787, 0.85);
+  background: #8F908F;
+  color: #0a0a04;
+  border-color: mix(#0a0a04, #8F908F, 0.85);
   box-shadow: none;
   opacity: 1;
   font-weight: 600;
@@ -69,34 +69,34 @@ window#waybar {
 
 #workspaces button.active:hover,
 #workspaces button.visible:hover {
-  background: #6E4787;
-  color: #190a19;
-  border-color: mix(#190a19, #6E4787, 0.85);
+  background: #8F908F;
+  color: #0a0a04;
+  border-color: mix(#0a0a04, #8F908F, 0.85);
   opacity: 1;
 }
 
 #workspaces button.urgent {
-  background: #B04E74;
-  color: #190a19;
-  border-color: #B04E74;
+  background: #7F807F;
+  color: #0a0a04;
+  border-color: #7F807F;
   animation: pulse 0.8s ease-in-out infinite;
   opacity: 1;
 }
 
 #workspaces button.visible {
-  color: #190a19;
+  color: #0a0a04;
 }
 
 #workspaces button.empty {
-  color: #c5c1c5;
+  color: #c1c1c0;
   opacity: 0.5;
 }
 
 #group-clock_drawer,
 #group-processes_tray,
 #group-arch_drawer {
-  color: #c5c1c5;
-  background: #190a19;
+  color: #c1c1c0;
+  background: #0a0a04;
   padding: 4px 14px;
   margin: 0 10px 0 0;
   border: 1px solid transparent;
@@ -108,9 +108,9 @@ window#waybar {
 #group-clock_drawer:hover,
 #group-processes_tray:hover,
 #group-arch_drawer:hover {
-  background: mix(#190a19, #c5c1c5, 0.18);
-  color: #6E4787;
-  border: 1px solid mix(#190a19, #6E4787, 0.45);
+  background: mix(#0a0a04, #c1c1c0, 0.18);
+  color: #8F908F;
+  border: 1px solid mix(#0a0a04, #8F908F, 0.45);
   box-shadow: none;
 }
 
@@ -146,14 +146,14 @@ window#waybar {
 #custom-mic_status,
 #custom-speaker_profile,
 #custom-system_toggle {
-  color: #c5c1c5;
-  background: #190a19;
+  color: #c1c1c0;
+  background: #0a0a04;
   padding: 4px 14px;
   margin: 0 0 0 10px;
   border-radius: 14px;
   box-shadow: none;
   transition: all 0.2s;
-  border: 1px solid mix(#190a19, #6E4787, 0.2);
+  border: 1px solid mix(#0a0a04, #8F908F, 0.2);
 }
 
 #battery:hover,
@@ -188,9 +188,9 @@ window#waybar {
 #custom-mic_status:hover,
 #custom-speaker_profile:hover,
 #custom-system_toggle:hover {
-  background: mix(#190a19, #6E4787, 0.95);
-  color: #190a19;
-  border: 1px solid mix(#190a19, #6E4787, 0.75);
+  background: mix(#0a0a04, #8F908F, 0.95);
+  color: #0a0a04;
+  border: 1px solid mix(#0a0a04, #8F908F, 0.75);
   box-shadow: none;
 }
 
@@ -206,17 +206,15 @@ window#waybar {
 
 #battery {
   transition: all 0.3s ease;
-  color: #c5c1c5;
+  color: #c1c1c0;
 }
 
 #battery.warning {
-  color: #3C6D8A;
+  color: #ffb347;
   animation: battery-pulse 2s infinite;
 }
 
-#battery.critical,
-#battery.very_critical,
-#battery.extreme {
+#battery.critical {
   color: #ff4444;
   animation: battery-critical 1.5s infinite;
   border: 1px solid #ff4444;
@@ -254,17 +252,17 @@ window#waybar {
 
 #custom-usb_drives.no-usb {
   opacity: 0.5;
-  color: #c5c1c5;
+  color: #c1c1c0;
 }
 
 #custom-usb_drives.usb-connected {
-  color: #c5c1c5;
-  border: 1px solid mix(#190a19, #6E4787, 0.3);
+  color: #c1c1c0;
+  border: 1px solid mix(#0a0a04, #8F908F, 0.3);
 }
 
 #custom-usb_drives.usb-many {
-  color: #c5c1c5;
-  border: 1px solid mix(#190a19, #6E4787, 0.3);
+  color: #c1c1c0;
+  border: 1px solid mix(#0a0a04, #8F908F, 0.3);
   animation: pulse 2s infinite;
 }
 
