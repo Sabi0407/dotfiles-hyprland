@@ -26,13 +26,34 @@ collect_aur_updates() {
     fi
 }
 
+collect_flatpak_updates() {
+    if ! command -v flatpak >/dev/null 2>&1; then
+        printf ''
+        return
+    fi
+
+    local list=""
+
+    list=$(flatpak remote-ls --updates --columns=application 2>/dev/null || true)
+    list=$(printf '%s\n' "$list" | awk 'NF')
+
+    if [ -z "$list" ]; then
+        list=$(flatpak list --app --updates --columns=application 2>/dev/null || true)
+        list=$(printf '%s\n' "$list" | awk 'NR==1 && tolower($0) ~ /application/ {next} NF')
+    fi
+
+    printf '%s\n' "$list"
+}
+
 repo_updates="$(collect_repo_updates)"
 aur_updates="$(collect_aur_updates)"
+flatpak_updates="$(collect_flatpak_updates)"
 
 repo_count="$(printf '%s\n' "$repo_updates" | sed '/^\s*$/d' | wc -l)"
 aur_count="$(printf '%s\n' "$aur_updates" | sed '/^\s*$/d' | wc -l)"
+flatpak_count="$(printf '%s\n' "$flatpak_updates" | sed '/^\s*$/d' | wc -l)"
 
-total=$((repo_count + aur_count))
+total=$((repo_count + aur_count + flatpak_count))
 
 if [ "$total" -gt 0 ]; then
     icon="󰏔"
@@ -68,6 +89,7 @@ if [ "$total" -gt 0 ]; then
     tooltip=$(printf 'Mises à jour disponibles : %d\n\n' "$total")
     [ "$repo_count" -gt 0 ] && tooltip+=$(build_section "Référentiels :" "$repo_updates")
     [ "$aur_count" -gt 0 ] && tooltip+=$(build_section "AUR :" "$aur_updates")
+    [ "$flatpak_count" -gt 0 ] && tooltip+=$(build_section "Flatpak :" "$flatpak_updates")
 else
     tooltip="Système à jour."
 fi
