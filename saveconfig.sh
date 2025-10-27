@@ -19,7 +19,7 @@ APPS_SRC="$HOME/.local/share/applications/"
 APPS_DEST="$DEST/applications"
 
 # Configuration ly (gestionnaire de connexion)
-LY_SRC="$HOME/etc/ly/"
+LY_SRC="/etc/ly/"
 LY_DEST="$DEST/ly-config"
 
 # Dossier Wallpapers uniquement
@@ -52,10 +52,10 @@ echo "$(date): Sauvegarde des applications" >> "$LOG_FILE"
 mkdir -p "$APPS_DEST"
 rsync -av --delete "$APPS_SRC" "$APPS_DEST/" >> "$LOG_FILE" 2>&1
 
-# 4) Sync de la configuration ly
+# 4) Sync de la configuration ly (sauf save.ini)
 echo "$(date): Sauvegarde de la configuration ly" >> "$LOG_FILE"
 mkdir -p "$LY_DEST"
-rsync -av --delete "$LY_SRC" "$LY_DEST/" >> "$LOG_FILE" 2>&1
+sudo rsync -av --delete --exclude 'save.ini' "$LY_SRC" "$LY_DEST/" >> "$LOG_FILE" 2>&1
 
 # 5) Sync du dossier Wallpapers uniquement
 echo "$(date): Sauvegarde des wallpapers" >> "$LOG_FILE"
