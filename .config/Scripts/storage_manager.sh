@@ -96,17 +96,17 @@ toggle_mount() {
 
   if [ -n "$mountpoint" ]; then
     if udisksctl unmount -b "$part" --no-user-interaction >/dev/null 2>&1; then
-      notify "Stockage" "Disque $label démonté" -i drive-harddisk -t 2000
+      notify "Stockage" "Disque $label démonté" -i drive-harddisk -t 3000
     else
-      notify "Stockage" "Échec du démontage de $label" -i error -t 5000
+      notify "Stockage" "Échec du démontage de $label" -i error -t 3000
       return 1
     fi
   else
     if udisksctl mount -b "$part" --no-user-interaction >/dev/null 2>&1; then
-      notify "Stockage" "Disque $label monté" -i drive-harddisk -t 2000
+      notify "Stockage" "Disque $label monté" -i drive-harddisk -t 3000
     else
-      notify "Stockage" "Impossible de monter $label" -i error -t 5000
-      notify "Stockage" "Exécutez ~/.config/Scripts/setup-storage-mount.sh pour autoriser l'utilisateur" -i dialog-information -t 6000
+      notify "Stockage" "Impossible de monter $label" -i error -t 3000
+      notify "Stockage" "Exécutez ~/.config/Scripts/setup-storage-mount.sh pour autoriser l'utilisateur" -i dialog-information -t 3000
       return 1
     fi
   fi
@@ -131,7 +131,7 @@ open_disk() {
 
   if [ -n "$mountpoint" ]; then
     open_manager "$mountpoint"
-    notify "Stockage" "Ouverture de $label" -i folder-open -t 2000
+    notify "Stockage" "Ouverture de $label" -i folder-open -t 3000
   else
     notify "Stockage" "Aucun point de montage pour $label" -i dialog-information -t 3000
     return 1

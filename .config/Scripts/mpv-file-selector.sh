@@ -24,7 +24,7 @@ CHOICE=$(zenity --list \
     --width=350 \
     --height=200 \
     TRUE "Sélectionner un fichier vidéo/audio" \
-    FALSE "Ouvrir un dossier avec Nautilus" \
+    FALSE "Ouvrir un dossier avec Thunar" \
     2>/dev/null)
 
 # Si l'utilisateur annule
@@ -62,7 +62,7 @@ case "$CHOICE" in
         notify-send "MPV" "Lecture de : $(basename "$VIDEO_FILE")" --icon=video-x-generic
         ;;
         
-    "Ouvrir un dossier avec Nautilus")
+    "Ouvrir un dossier avec Thunar")
         # Demander quel dossier ouvrir
         FOLDER=$(zenity --file-selection \
             --title="Sélectionner un dossier" \
@@ -77,9 +77,9 @@ case "$CHOICE" in
             exit 0
         fi
 
-        # Ouvrir le dossier avec Nautilus
-        nautilus "$FOLDER" &
+        # Ouvrir le dossier avec Thunar
+        thunar "$FOLDER" &
         folder_name=$(basename "$FOLDER")
-        notify-send "Nautilus" "Ouverture du dossier : $folder_name" --icon=folder
+        notify-send "Thunar" "Ouverture du dossier : $folder_name" --icon=folder
         ;;
 esac

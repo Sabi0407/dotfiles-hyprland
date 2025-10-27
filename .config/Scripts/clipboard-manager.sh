@@ -18,5 +18,5 @@ if [ -n "$CHOICE" ]; then
     echo "$CHOICE" | wl-copy
     
     # Notification
-    notify-send "Presse-papiers" "Élément copié :\n${CHOICE:0:50}..." -i edit-copy -t 2000
+    notify-send "Presse-papiers" "Élément copié :\n${CHOICE:0:50}..." -i edit-copy -t 3000
 fi

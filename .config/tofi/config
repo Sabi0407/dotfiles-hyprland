@@ -43,21 +43,21 @@ prompt-text = "󰣇 "
 prompt-padding = 12
 prompt-background-padding = 6
 prompt-background = #00000000
-prompt-color = #c3c3c6
+prompt-color = #c4c3c8
 
 # Couleurs Pywal synchronisées (script generate-tofi-colors.sh)
 # Valeurs par défaut, seront écrasées après un wal
-background-color = #10121bCC
-text-color = #c3c3c6
-selection-color = #4D84BD
-selection-text-color = #10121b
+background-color = #140f23CC
+text-color = #c4c3c8
+selection-color = #5A4762
+selection-text-color = #140f23
 selection-background-padding = 14
 selection-outline-width = 2
-selection-outline-color = #4D84BD80
-outline-color = #4D84BD80
-border-color = #4D84BD60
-text-cursor-color = #608EC4
-match-color = #4D84BD
+selection-outline-color = #5A476280
+outline-color = #5A476280
+border-color = #5A476260
+text-cursor-color = #DA3053
+match-color = #5A4762
 
 # Animations fluides et responsives
 transition-in = 150
@@ -78,7 +78,7 @@ selection-background-corner-radius = 12
 text-cursor-style = bar
 text-cursor-corner-radius = 3
 text-cursor-thickness = 3
-selection-match-color = #4D84BD
+selection-match-color = #5A4762
 default-result-background = #190a19AA
 default-result-background-padding = 6
 placeholder-text = "Rechercher..."

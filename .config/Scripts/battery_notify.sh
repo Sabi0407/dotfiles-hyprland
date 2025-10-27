@@ -337,7 +337,7 @@ send_notification() {
             --stack-tag "${battery_id}" \
             "$title" "$message" \
             -i "$icon" \
-            -t 0
+            -t 3000
     fi
 
     log_message "NOTIFY" "Notification envoyée: $title - $message"
