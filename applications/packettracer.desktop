@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Cisco Packet Tracer
 Comment=Network simulation tool
-Exec=env QT_QPA_PLATFORM=xcb packettracer %f
+Exec=env QT_QPA_PLATFORM=xcb QT_STYLE_OVERRIDE=Fusion packettracer %f
 Icon=/usr/lib/packettracer/art/app.png
 Terminal=false
 Type=Application

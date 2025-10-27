@@ -8,12 +8,12 @@
   ],
   "modules-center": [
     "custom/notification",
-    "hyprland/workspaces"
+    "hyprland/workspaces",
+    "custom/updates"
   ],
   "modules-right": [
     "custom/mic_status",
     "custom/speaker_profile",
-    "custom/updates",
     "custom/storage",
     "group/tray_drawer",
     "group/battery_drawer"
@@ -68,8 +68,6 @@
     },
     "critical-notification": false,
     "warning-notification": false,
-    "on-click": "gnome-power-statistics",
-    "on-click-right": "brightnessctl g | xargs -I{} dunstify 'Luminosité actuelle' '{}'",
     "on-scroll-up": "brightnessctl set +5%",
     "on-scroll-down": "brightnessctl set 5%-",
     "exec-on-event": "~/.config/Scripts/battery_notify.sh"
@@ -210,7 +208,7 @@
       "transition-duration": 500,
       "children-class": "slider-drawer",
       "transition-left-to-right": true,
-      "click-to-reveal": true,
+      "click-to-reveal": false,
       "close-on-unfocus": true
     },
     "modules": [
@@ -224,7 +222,8 @@
     "drawer": {
       "transition-duration": 300,
       "children-class": "slider-drawer",
-      "transition-left-to-right": false
+      "transition-left-to-right": false,
+      "click-to-reveal": true
     },
     "modules": [
       "battery",
@@ -281,7 +280,7 @@
   },
 
   "custom/updates": {
-    "format": "{icon} {text}",
+    "format": "󰇚 {text}",
     "return-type": "json",
     "exec": "~/.config/Scripts/updates_waybar.sh",
     "interval": 900,
@@ -324,6 +323,7 @@
     "modules": [
       "custom/archlogo",
       "custom/lock-session",
+      "custom/logout",
       "custom/reboot",
       "custom/poweroff"
     ]
@@ -334,13 +334,18 @@
     "tooltip": "Verrouiller la session",
     "on-click": "hyprlock"
   },
+  "custom/logout": {
+    "format": "󰍃",
+    "tooltip": "Déconnexion",
+    "on-click": "~/.config/Scripts/confirm_logout.sh"
+  },
   "custom/reboot": {
     "format": "󰜉",
     "tooltip": "Redémarrer",
     "on-click": "~/.config/Scripts/confirm_reboot.sh"
   },
   "custom/poweroff": {
-    "format": "󰿅",
+    "format": "⏻",
     "tooltip": "Éteindre",
     "on-click": "~/.config/Scripts/confirm_poweroff.sh"
   },

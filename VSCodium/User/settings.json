@@ -5,13 +5,14 @@
     "window.nativeTabs": false,
     "editor.minimap.enabled": false,
     "workbench.statusBar.visible": true,
-    "workbench.iconTheme": "vs-seti",
+    "workbench.iconTheme": "catppuccin-mocha",
     "git.openRepositoryInParentFolders": "never",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "geminicodeassist.project": "semiotic-tooling-k4vbx",
     "security.workspace.trust.untrustedFiles": "open",
     "workbench.secondarySideBar.showLabels": false,
-    "window.customTitleBarVisibility": "never"
+    "window.customTitleBarVisibility": "never",
+    "workbench.colorTheme": "Catppuccin Mocha"
 
     }
 
