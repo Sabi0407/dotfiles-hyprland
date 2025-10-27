@@ -4,6 +4,8 @@ set -euo pipefail
 AVAILABLE_COLORS=(blue green pink red mauve peach teal lavender yellow rosewater sapphire sky maroon flamingo)
 ENV_FILE="$HOME/.config/hypr/configs/env.conf"
 CACHE_FILE="$HOME/.cache/current-cursor"
+KVANTUM_CONF="$HOME/.config/Kvantum/kvantum.kvconfig"
+KVANTUM_PREFIX="$HOME/.config/Kvantum"
 PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$HOME/.config/Scripts/wal-cache}"
 DEFAULT_PYWAL_CACHE="$HOME/.cache/wal"
 
@@ -26,84 +28,82 @@ detect_current_color() {
     printf 'blue'
 }
 
-if [ "${1:-}" = "--quick" ]; then
-    set -- "$(detect_current_color)"
-elif [ -z "${1:-}" ]; then
+select_color_with_tofi() {
     if ! command -v tofi >/dev/null 2>&1; then
         echo "Usage: $0 <couleur>" >&2
         echo "Couleurs disponibles: ${AVAILABLE_COLORS[*]}" >&2
         echo "(Installez tofi pour profiter de la sélection graphique)" >&2
         exit 1
     fi
-    TOFI_CFG=$(mktemp)
-    COLORS_FILE="$PYWAL_CACHE_DIR/colors.sh"
-    [ -f "$COLORS_FILE" ] || COLORS_FILE="$DEFAULT_PYWAL_CACHE/colors.sh"
-    if [ -f "$COLORS_FILE" ]; then
+
+    local cfg colors_file bg fg accent selection
+    cfg=$(mktemp)
+    colors_file="$PYWAL_CACHE_DIR/colors.sh"
+    [ -f "$colors_file" ] || colors_file="$DEFAULT_PYWAL_CACHE/colors.sh"
+    if [ -f "$colors_file" ]; then
         set +u
         # shellcheck disable=SC1090
-        . "$COLORS_FILE"
+        . "$colors_file"
         set -u
     fi
-    BG_COLOR="${color0:-#111111}"
-    FG_COLOR="${color15:-#f4f4f5}"
-    ACCENT_COLOR="${color4:-#82aaff}"
-    cat > "$TOFI_CFG" <<EOF
+    bg="${color0:-#0f172a}"
+    fg="${color15:-#f4f4f5}"
+    accent="${color4:-#82aaff}"
+    cat > "$cfg" <<EOF_CFG
 width = 40%
 height = 55%
 anchor = center
 border-width = 2
-border-color = ${ACCENT_COLOR}AA
+border-color = ${accent}AA
 outline-width = 0
-background-color = ${BG_COLOR}E6
-text-color = ${FG_COLOR}
-selection-color = ${ACCENT_COLOR}
+background-color = ${bg}E6
+text-color = ${fg}
+selection-color = ${accent}
 font = JetBrainsMono Nerd Font
 font-size = 22
 result-spacing = 8
 corner-radius = 12
 hide-cursor = false
-num-results = 9
-EOF
-    selection=$(printf '%s\n' "${AVAILABLE_COLORS[@]}" | tofi --config "$TOFI_CFG" --prompt-text "Thème Catppuccin" --require-match=true)
-    rm -f "$TOFI_CFG"
+num-results = 12
+EOF_CFG
+    selection=$(printf '%s
+' "${AVAILABLE_COLORS[@]}" | tofi --config "$cfg" --prompt-text "Thème Catppuccin" --require-match=true)
+    rm -f "$cfg"
     [ -z "$selection" ] && exit 0
-    set -- "$selection"
-fi
-
-COLOR="$1"
-THEME="catppuccin-mocha-${COLOR}-standard+default"
-CURSOR="catppuccin-mocha-dark-cursors"
-
-map_papirus_variant() {
-    case "$1" in
-        blue) echo "blue" ;;
-        green) echo "green" ;;
-        pink) echo "pink" ;;
-        red) echo "red" ;;
-        mauve|mauve*) echo "violet" ;;
-        peach) echo "orange" ;;
-        teal) echo "teal" ;;
-        lavender) echo "indigo" ;;
-        yellow) echo "yellow" ;;
-        rosewater) echo "paleorange" ;;
-        sapphire) echo "bluegrey" ;;
-        sky) echo "cyan" ;;
-        maroon) echo "carmine" ;;
-        flamingo) echo "magenta" ;;
-        *) echo "" ;;
-    esac
+    printf '%s' "$selection"
 }
 
-PAPIRUS_VARIANT=$(map_papirus_variant "$COLOR")
+if [ "${1:-}" = "--quick" ]; then
+    COLOR="$(detect_current_color)"
+else
+    COLOR="${1:-}"
+    if [ -z "$COLOR" ]; then
+        COLOR="$(select_color_with_tofi)"
+    fi
+fi
+
+if [[ ! " ${AVAILABLE_COLORS[*]} " =~ " ${COLOR} " ]]; then
+    echo "Couleur invalide: $COLOR" >&2
+    exit 1
+fi
+
+THEME="catppuccin-mocha-${COLOR}-standard+default"
+KVANTUM_THEME="catppuccin-mocha-${COLOR}"
+CURSOR="catppuccin-mocha-dark-cursors"
 
 if [ ! -d "/usr/share/themes/$THEME" ]; then
-    echo "Erreur: Le theme $THEME n'existe pas"
+    echo "Erreur: Le theme $THEME n'existe pas" >&2
     exit 1
 fi
 
 if [ ! -d "/usr/share/icons/$CURSOR" ]; then
-    echo "Erreur: Le curseur $CURSOR n'existe pas"
+    echo "Erreur: Le curseur $CURSOR n'existe pas" >&2
     exit 1
+fi
+
+if [ ! -d "$KVANTUM_PREFIX/$KVANTUM_THEME" ]; then
+    echo "Avertissement: Thème Kvantum $KVANTUM_THEME introuvable, utilisation de catppuccin-mocha-teal" >&2
+    KVANTUM_THEME="catppuccin-mocha-teal"
 fi
 
 echo "Changement du theme vers: $COLOR"
@@ -118,11 +118,11 @@ apply_prop() {
     fi
 }
 
-sed -i "s|^env = GTK_THEME,.*|env = GTK_THEME,$THEME|" ~/.config/hypr/configs/env.conf
-sed -i "s|^env = HYPRCURSOR_THEME,.*|env = HYPRCURSOR_THEME,$CURSOR|" ~/.config/hypr/configs/env.conf
-sed -i "s|^env = XCURSOR_THEME,.*|env = XCURSOR_THEME,$CURSOR|" ~/.config/hypr/configs/env.conf
-sed -i "s|^env = HYPRCURSOR_SIZE,.*|env = HYPRCURSOR_SIZE,24|" ~/.config/hypr/configs/env.conf
-sed -i "s|^env = XCURSOR_SIZE,.*|env = XCURSOR_SIZE,24|" ~/.config/hypr/configs/env.conf
+sed -i "s|^env = GTK_THEME,.*|env = GTK_THEME,$THEME|" "$ENV_FILE"
+sed -i "s|^env = HYPRCURSOR_THEME,.*|env = HYPRCURSOR_THEME,$CURSOR|" "$ENV_FILE"
+sed -i "s|^env = XCURSOR_THEME,.*|env = XCURSOR_THEME,$CURSOR|" "$ENV_FILE"
+sed -i "s|^env = HYPRCURSOR_SIZE,.*|env = HYPRCURSOR_SIZE,24|" "$ENV_FILE"
+sed -i "s|^env = XCURSOR_SIZE,.*|env = XCURSOR_SIZE,24|" "$ENV_FILE"
 
 echo "$CURSOR 24" > "$CACHE_FILE"
 
@@ -134,37 +134,31 @@ if command -v gsettings >/dev/null 2>&1; then
     gsettings set org.gnome.desktop.interface cursor-size 24 >/dev/null 2>&1 || true
 fi
 
-apply_prop "gtk-theme-name" "$THEME" ~/.config/gtk-3.0/settings.ini
-apply_prop "gtk-cursor-theme-name" "$CURSOR" ~/.config/gtk-3.0/settings.ini
-apply_prop "gtk-theme-name" "$THEME" ~/.config/gtk-4.0/settings.ini
-apply_prop "gtk-cursor-theme-name" "$CURSOR" ~/.config/gtk-4.0/settings.ini
+apply_prop "gtk-theme-name" "$THEME" "$HOME/.config/gtk-3.0/settings.ini"
+apply_prop "gtk-cursor-theme-name" "$CURSOR" "$HOME/.config/gtk-3.0/settings.ini"
+apply_prop "gtk-theme-name" "$THEME" "$HOME/.config/gtk-4.0/settings.ini"
+apply_prop "gtk-cursor-theme-name" "$CURSOR" "$HOME/.config/gtk-4.0/settings.ini"
 
-if [ -f ~/.gtkrc-2.0 ]; then
-    sed -i "s|^gtk-theme-name=.*|gtk-theme-name=\"$THEME\"|" ~/.gtkrc-2.0
-    sed -i "s|^gtk-cursor-theme-name=.*|gtk-cursor-theme-name=\"$CURSOR\"|" ~/.gtkrc-2.0
+if [ -f "$HOME/.gtkrc-2.0" ]; then
+    sed -i "s|^gtk-theme-name=.*|gtk-theme-name="$THEME"|" "$HOME/.gtkrc-2.0"
+    sed -i "s|^gtk-cursor-theme-name=.*|gtk-cursor-theme-name="$CURSOR"|" "$HOME/.gtkrc-2.0"
 fi
 
-if command -v papirus-folders >/dev/null 2>&1 && [ -n "$PAPIRUS_VARIANT" ]; then
-    available_variants=$(papirus-folders -l | tr -d '>' | awk '{ $1=$1; print $1 }')
-    if printf '%s\n' "$available_variants" | grep -qw "$PAPIRUS_VARIANT"; then
-        if papirus-folders -t "$PAPIRUS_VARIANT" --theme Papirus-Dark >/dev/null 2>&1; then
-            echo "Papirus folders applique: $PAPIRUS_VARIANT"
-            gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark >/dev/null 2>&1 || true
-        else
-            echo "Papirus folders: commande echouee (droits sudo requis ?)" >&2
-        fi
-    else
-        echo "Papirus folders: pas de variante '$PAPIRUS_VARIANT', valeur conservée." >&2
-    fi
-elif command -v papirus-folders >/dev/null 2>&1; then
-    echo "Papirus folders: aucune variante definie pour la couleur '$COLOR'." >&2
-else
-    echo "Papirus folders n'est pas installé. Installez le paquet papirus-folders."
+mkdir -p "$KVANTUM_PREFIX"
+cat > "$KVANTUM_CONF" <<EOF_KV
+[General]
+theme=$KVANTUM_THEME
+
+[Applications]
+Default=$KVANTUM_THEME
+EOF_KV
+
+if command -v kvantummanager >/dev/null 2>&1; then
+    kvantummanager --set "$KVANTUM_THEME" >/dev/null 2>&1 || true
 fi
 
 echo "Theme change en $COLOR"
 echo "Curseur utilisé : $CURSOR"
-notify-send "Catppuccin" "Thème $COLOR 
-• Curseur $CURSOR
-• Papirus ${PAPIRUS_VARIANT:-n/a}
-Astuce: redémarre Thunar si besoin." -i preferences-desktop-theme
+notify-send "Catppuccin" "Thème $COLOR
+• Curseur: $CURSOR
+• Kvantum: $KVANTUM_THEME" -i preferences-desktop-theme
