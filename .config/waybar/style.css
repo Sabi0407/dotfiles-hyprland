@@ -79,8 +79,15 @@ window#waybar {
   background: #503753;
   color: #140f23;
   border: 1px solid transparent;
-  animation: pulse 0.8s ease-in-out infinite;
+  animation: workspace-alert 1s ease-in-out infinite;
   opacity: 1;
+  box-shadow: 0 0 6px rgba(243, 138, 168, 0.55);
+}
+
+#workspaces button.occupied:not(.active):not(.visible) {
+  animation: workspace-alert 1.2s ease-in-out infinite;
+  box-shadow: 0 0 4px rgba(243, 138, 168, 0.35);
+  opacity: 0.9;
 }
 
 #workspaces button.visible {
@@ -295,4 +302,22 @@ window#waybar {
   0% { opacity: 1; }
   50% { opacity: 0.7; }
   100% { opacity: 1; }
+}
+
+@keyframes workspace-alert {
+  0% {
+    background: #503753;
+    box-shadow: 0 0 4px rgba(243, 138, 168, 0.35);
+    opacity: 1;
+  }
+  50% {
+    background: #9F3455;
+    box-shadow: 0 0 18px rgba(243, 138, 168, 0.75);
+    opacity: 0.6;
+  }
+  100% {
+    background: #503753;
+    box-shadow: 0 0 4px rgba(243, 138, 168, 0.35);
+    opacity: 1;
+  }
 }

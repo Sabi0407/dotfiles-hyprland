@@ -25,12 +25,6 @@ source "$COLORS_SH"
 # Fichier de configuration Hyprland
 HYPR_CONFIG="$HOME/.config/hypr/configs/look.conf"
 
-# Sauvegarder le fichier original si ce n'est pas déjà fait
-if [[ ! -f "${HYPR_CONFIG}.backup" ]]; then
-    cp "$HYPR_CONFIG" "${HYPR_CONFIG}.backup"
-    echo " Sauvegarde créée : ${HYPR_CONFIG}.backup"
-fi
-
 # Fonction pour convertir hex en rgba
 hex_to_rgba() {
     local hex="$1"

@@ -1,7 +1,6 @@
 {
     // Désactive complètement la barre de titre et les décorations
     "window.titleBarStyle": "native",
-    "window.menuBarVisibility": "toggle",
     "window.nativeTabs": false,
     "editor.minimap.enabled": false,
     "workbench.statusBar.visible": true,
@@ -11,8 +10,10 @@
     "geminicodeassist.project": "semiotic-tooling-k4vbx",
     "security.workspace.trust.untrustedFiles": "open",
     "workbench.secondarySideBar.showLabels": false,
-    "window.customTitleBarVisibility": "never",
-    "workbench.colorTheme": "Catppuccin Mocha"
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.editor.editorActionsLocation": "titleBar",
+    "window.menuBarVisibility": "compact",
+    "workbench.startupEditor": "none"
 
     }
 

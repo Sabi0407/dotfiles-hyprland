@@ -157,6 +157,52 @@ if command -v kvantummanager >/dev/null 2>&1; then
     kvantummanager --set "$KVANTUM_THEME" >/dev/null 2>&1 || true
 fi
 
+YAZI_CONF_FILE="$HOME/.config/yazi/conf"
+YAZI_THEME_DIR="$HOME/.config/yazi/themes/mocha"
+if [ -f "$YAZI_CONF_FILE" ] && [ -d "$YAZI_THEME_DIR" ]; then
+    YAZI_THEME_FILE="catppuccin-mocha-${COLOR}.toml"
+    if [ -f "$YAZI_THEME_DIR/$YAZI_THEME_FILE" ]; then
+        python3 - "$YAZI_CONF_FILE" "mocha/${YAZI_THEME_FILE%.toml}" <<'PY'
+import sys
+from pathlib import Path
+
+conf_path = Path(sys.argv[1])
+theme_value = sys.argv[2]
+
+text = conf_path.read_text(encoding="utf-8").splitlines()
+out_lines = []
+in_theme = False
+inserted = False
+
+for line in text:
+    stripped = line.strip()
+    if stripped.startswith("[") and stripped.lower() == "[theme]":
+        in_theme = True
+        out_lines.append(line)
+        continue
+    if stripped.startswith("[") and stripped.lower() != "[theme]" and in_theme and not inserted:
+        out_lines.append(f'theme = "{theme_value}"')
+        inserted = True
+        in_theme = False
+    if in_theme and stripped.startswith("theme") and "=" in stripped and not inserted:
+        out_lines.append(f'theme = "{theme_value}"')
+        inserted = True
+        in_theme = False
+        continue
+    out_lines.append(line)
+
+if not inserted:
+    out_lines.append("[theme]")
+    out_lines.append(f'theme = "{theme_value}"')
+
+conf_path.write_text("\n".join(out_lines) + "\n", encoding="utf-8")
+PY
+        echo "Thème Yazi appliqué : mocha/${YAZI_THEME_FILE%.toml}"
+    else
+        echo "Avertissement: thème Yazi catppuccin-mocha-${COLOR} introuvable" >&2
+    fi
+fi
+
 echo "Theme change en $COLOR"
 echo "Curseur utilisé : $CURSOR"
 notify-send "Catppuccin" "Thème $COLOR
