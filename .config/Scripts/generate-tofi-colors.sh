@@ -24,7 +24,6 @@ echo "Génération des couleurs Tofi depuis pywal16..."
 # Extraire les couleurs du fichier JSON
 COLOR0=$(grep '"color0"' "$COLORS_FILE" | sed 's/.*"color0": *"\([^"]*\)".*/\1/')
 COLOR4=$(grep '"color4"' "$COLORS_FILE" | sed 's/.*"color4": *"\([^"]*\)".*/\1/')
-COLOR8=$(grep '"color8"' "$COLORS_FILE" | sed 's/.*"color8": *"\([^"]*\)".*/\1/')
 COLOR11=$(grep '"color11"' "$COLORS_FILE" | sed 's/.*"color11": *"\([^"]*\)".*/\1/')
 COLOR13=$(grep '"color13"' "$COLORS_FILE" | sed 's/.*"color13": *"\([^"]*\)".*/\1/')
 COLOR15=$(grep '"color15"' "$COLORS_FILE" | sed 's/.*"color15": *"\([^"]*\)".*/\1/')
@@ -35,11 +34,8 @@ sed -i "s/text-color = .*/text-color = ${COLOR15}/" "$TOFI_CONFIG"
 sed -i "s/prompt-color = .*/prompt-color = ${COLOR15}/" "$TOFI_CONFIG"
 sed -i "s/prompt-background = .*/prompt-background = #00000000/" "$TOFI_CONFIG"
 sed -i "s/selection-color = .*/selection-color = ${COLOR11}/" "$TOFI_CONFIG"
-sed -i "s/selection-text-color = .*/selection-text-color = ${COLOR0}/" "$TOFI_CONFIG"
 sed -i "s/outline-color = .*/outline-color = ${COLOR11}80/" "$TOFI_CONFIG"
 sed -i "s/border-color = .*/border-color = ${COLOR11}60/" "$TOFI_CONFIG"
-sed -i "s/selection-match-color = .*/selection-match-color = ${COLOR11}/" "$TOFI_CONFIG"
-sed -i "s/match-color = .*/match-color = ${COLOR11}/" "$TOFI_CONFIG"
 sed -i "s/text-cursor-color = .*/text-cursor-color = ${COLOR13}/" "$TOFI_CONFIG"
 
 # Tuer les instances de Tofi en cours pour forcer le rechargement

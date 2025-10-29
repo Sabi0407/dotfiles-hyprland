@@ -1,5 +1,5 @@
 [General]
-theme=catppuccin-mocha-red
+theme=catppuccin-mocha-blue
 
 [Applications]
-Default=catppuccin-mocha-red
+Default=catppuccin-mocha-blue

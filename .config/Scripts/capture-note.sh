@@ -2,17 +2,20 @@
 #  Capture d'écran automatique vers ~/Documents/Notes/Cours/Images/
 # Fonctionne sous Wayland avec grim + slurp + wl-copy
 
-# Dossier cible
-base_dir="$HOME/Documents/Notes/Cours/Images"
+set -euo pipefail
+
+base_dir="$HOME/Documents/Notes/Cours.BTS2/Images"
 mkdir -p "$base_dir"
 
-# Nom de fichier horodaté
-filename="$(date +%Y-%m-%d_%H-%M-%S).png"
+filename="$(date +%d-%m-%Y_%H-%M-%S).png"
 filepath="$base_dir/$filename"
 
-# Capture interactive et copie dans le presse-papiers
-grim -g "$(slurp)" - | tee "$filepath" | wl-copy --type image/png
+if ! region="$(slurp)"; then
+    echo "Capture annulée."
+    exit 1
+fi
 
-# Notification et message console
+grim -g "$region" - | tee "$filepath" | wl-copy --type image/png
+
 notify-send "Capture enregistrée" "$filepath"
 echo "Capture enregistrée dans : $filepath"

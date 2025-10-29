@@ -12,8 +12,9 @@
     "workbench.secondarySideBar.showLabels": false,
     "workbench.colorTheme": "Catppuccin Mocha",
     "workbench.editor.editorActionsLocation": "titleBar",
-    "window.menuBarVisibility": "compact",
-    "workbench.startupEditor": "none"
+    "window.menuBarVisibility": "toggle",
+    "workbench.startupEditor": "none",
+    "window.commandCenter": false
 
     }
 

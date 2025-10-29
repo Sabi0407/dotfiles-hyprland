@@ -106,7 +106,7 @@ floatingwindow,
   border: none;
   border-radius: 12px;
   padding: 7px 14px;
-  transition: background-color 0.15s ease;
+  transition: none;
 }
 
 .widget-title button:hover,
@@ -159,7 +159,7 @@ floatingwindow,
   font-size: 16px;
   min-width: 34px;
   min-height: 34px;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: none;
 }
 
 .widget-mpris .widget-mpris-player button:hover {
@@ -207,7 +207,7 @@ scale trough progress {
   min-height: 12px;
   border-radius: 6px;
   background-color: @accent_color;
-  transition: background-color 0.15s ease;
+  transition: none;
 }
 
 scale:hover trough progress {
@@ -219,7 +219,7 @@ trough highlight {
   background: @accent_color;
   border-radius: 20px;
   box-shadow: 0 0 5px alpha(@accent_color, 0.5);
-  transition: all 0.7s ease;
+  transition: none;
 }
 
 scale slider {
@@ -248,7 +248,7 @@ scale slider {
   color: @icon_secondary;
   font-family: "Symbols Nerd Font", "Symbols Nerd Font Mono", "JetBrainsMono NFM", "Inter", sans-serif;
   font-size: 26px;
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: none;
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
@@ -279,7 +279,7 @@ scale slider {
   border: 1px solid @border_medium;
   padding: 16px;
   border-radius: 20px;
-  transition: background-color 0.15s ease;
+  transition: none;
   box-shadow: 0 14px 34px alpha(@color0, 0.50) inset;
   filter: brightness(0.98);
 }
@@ -311,7 +311,7 @@ scale slider {
   border-radius: 50%;
   min-width: 22px;
   min-height: 22px;
-  transition: background-color 0.15s ease;
+  transition: none;
 }
 
 .control-center .close-button:hover {
@@ -340,7 +340,7 @@ scale slider {
   border-radius: 16px;
   padding: 16px;
   margin: 8px 14px;
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: none;
   box-shadow: none;
   filter: none;
 }
@@ -382,7 +382,7 @@ scale slider {
   min-height: 30px;
   padding: 4px;
   margin-left: 14px;
-  transition: background-color 0.15s ease;
+  transition: none;
 }
 
 .floating-notifications .close-button:hover {
@@ -407,7 +407,7 @@ scale slider {
   background-color: @button_bg;
   border-radius: 12px;
   padding: 6px 14px;
-  transition: background-color 0.15s ease;
+  transition: none;
 }
 
 .floating-notifications .notification-action button:hover,

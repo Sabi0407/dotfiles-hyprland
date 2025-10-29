@@ -26,16 +26,13 @@ num-results = 8
 result-spacing = 16
 horizontal = false
 hide-cursor = true
-history = true
-fuzzy-match = true
+matching-algorithm = fuzzy
 drun-launch = true
-sort-results = true
-max-history = 100
 
 # Typographie adaptée à l'écran complet
 font = JetBrainsMono Nerd Font
 font-size = 26
-font-weight = 500
+# font-weight = 500
 font-features = "liga", "calt"
 
 # Prompt avec logo Arch Linux (sans fond surligné)
@@ -43,25 +40,19 @@ prompt-text = "󰣇 "
 prompt-padding = 12
 prompt-background-padding = 6
 prompt-background = #00000000
-prompt-color = #c4c3c8
+prompt-color = #c2c3c6
 
 # Couleurs Pywal synchronisées (script generate-tofi-colors.sh)
 # Valeurs par défaut, seront écrasées après un wal
-background-color = #140f23CC
-text-color = #c4c3c8
-selection-color = #5A4762
-selection-text-color = #140f23
+background-color = #0b101bCC
+text-color = #c2c3c6
+selection-color = #416CB5
 selection-background-padding = 14
-selection-outline-width = 2
-selection-outline-color = #5A476280
-outline-color = #5A476280
-border-color = #5A476260
-text-cursor-color = #DA3053
-match-color = #5A4762
+outline-color = #416CB580
+border-color = #416CB560
+text-cursor-color = #219AD4
 
-# Animations fluides et responsives
-transition-in = 150
-transition-out = 100
+# Animations élégantes et naturelles
 min-input-width = 300
 
 # Configuration moderne
@@ -74,18 +65,16 @@ multi-instance = false
 late-keyboard-init = false
 
 # Style des résultats pour écran complet
-selection-background-corner-radius = 12
+selection-background-corner-radius = 0
 text-cursor-style = bar
 text-cursor-corner-radius = 3
 text-cursor-thickness = 3
-selection-match-color = #5A4762
-default-result-background = #190a19AA
-default-result-background-padding = 6
+default-result-background = #00000000
+default-result-background-padding = 0
 placeholder-text = "Rechercher..."
 placeholder-color = #c5c1c5AA
 
 # Terminal par défaut et optimisations
 terminal = kitty
-drun-print-exec = false
 require-match = false
 print-index = false
