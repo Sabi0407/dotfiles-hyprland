@@ -47,13 +47,8 @@ apply_wallpaper() {
     echo "$wallpaper_path" > "$LAST_WALLPAPER_FILE"
     
     # Recharger l'interface
-    pkill waybar
-    sleep 0.3
-    hyprctl dispatch exec waybar
-    
-    pkill swaync
-    sleep 0.3
-    hyprctl dispatch exec swaync
+    systemctl --user restart waybar.service
+    systemctl --user restart swaync.service
     
     # Forcer la fermeture de Tofi pour qu'il recharge les couleurs
     pkill tofi 2>/dev/null
