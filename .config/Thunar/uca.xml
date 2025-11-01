@@ -27,6 +27,18 @@
 	<other-files/>
 </action>
 <action>
+	<icon>package-x-generic</icon>
+	<name>Extraire l&apos;archive ici</name>
+	<submenu>Archiver</submenu>
+	<unique-id>1760916221159090-8</unique-id>
+	<command>for f in %F; do dir=$(dirname &quot;$f&quot;); bsdtar -xf &quot;$f&quot; -C &quot;$dir&quot;; done</command>
+	<description>Extraire les archives sélectionnées dans le dossier courant</description>
+	<range></range>
+	<patterns>*.zip;*.tar;*.tar.gz;*.tgz;*.tar.bz2;*.tbz;*.tbz2;*.tar.xz;*.txz;*.tar.zst;*.tzst;*.7z;*.rar</patterns>
+	<startup-notify/>
+	<other-files/>
+</action>
+<action>
 	<icon>edit-copy</icon>
 	<name>Copier le chemin</name>
 	<submenu>Outils</submenu>
