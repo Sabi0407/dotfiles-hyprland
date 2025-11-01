@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script simple pour piloter le rétroéclairage clavier Asus/brightnessctl
-NIGHT_BEGIN=19   # début d'activation automatique (19h)
+NIGHT_BEGIN=18   # début d'activation automatique (18h)
 NIGHT_END=4      # fin d'activation automatique (04h)
 
 KBD_DEVICE="asus::kbd_backlight"
