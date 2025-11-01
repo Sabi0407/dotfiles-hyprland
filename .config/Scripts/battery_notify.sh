@@ -8,10 +8,12 @@
 DEFAULT_WARNING_LEVELS=(20 15)
 DEFAULT_CRITICAL_LEVELS=(10 5)
 DEFAULT_ZENITY_LEVELS=(15 10 5)
+CHARGE_NOTIFY_LEVELS=(90 100)
 WARNING_LEVELS=("${DEFAULT_WARNING_LEVELS[@]}")
 CRITICAL_LEVELS=("${DEFAULT_CRITICAL_LEVELS[@]}")
 ZENITY_LEVELS=("${DEFAULT_ZENITY_LEVELS[@]}")
 FULL_LEVEL=95
+CHARGE_LEVELS=("${CHARGE_NOTIFY_LEVELS[@]}")
 NOTIFICATION_COOLDOWN=300  # 5 minutes en secondes
 CHECK_INTERVAL=60          # Vérification toutes les 60 secondes
 LOG_FILE="/tmp/battery_notify.log"
@@ -397,6 +399,15 @@ process_battery() {
         reset_last_capacity "$battery_name"
 
         if [ "$status" = "Charging" ]; then
+            for level in "${CHARGE_LEVELS[@]}"; do
+                if [ "$capacity" -ge "$level" ]; then
+                    if check_cooldown "${battery_name}_charge_${level}"; then
+                        send_notification "low" "🔋 Batterie en charge" \
+                            "Batterie à ${capacity}%" \
+                            "battery-good-charging" "${battery_name}_charge_${level}"
+                    fi
+                fi
+            done
             if [ "$capacity" -ge "$FULL_LEVEL" ]; then
                 if check_cooldown "${battery_name}_full"; then
                     send_notification "low" "🔋 Batterie chargée" \
@@ -535,6 +546,8 @@ if [ ${#ZENITY_LEVELS[@]} -gt 0 ]; then
     validate_levels ZENITY_LEVELS "pour Zenity"
 fi
 
+validate_levels CHARGE_LEVELS "de charge"
+
 validate_positive_integer "$NOTIFICATION_COOLDOWN" "Le délai entre notifications"
 validate_positive_integer "$CHECK_INTERVAL" "L'intervalle de vérification"
 
@@ -557,7 +570,7 @@ zenity_config="désactivé"
 if [ ${#ZENITY_LEVELS[@]} -gt 0 ]; then
     zenity_config=$(format_levels_with_units ZENITY_LEVELS)
 fi
-log_message "INFO" "Configuration: Warning=$(format_levels_with_units WARNING_LEVELS) - Critical=$(format_levels_with_units CRITICAL_LEVELS) - Full=${FULL_LEVEL}% - Cooldown=${NOTIFICATION_COOLDOWN}s - Interval=${CHECK_INTERVAL}s - Zenity=${zenity_config}"
+log_message "INFO" "Configuration: Warning=$(format_levels_with_units WARNING_LEVELS) - Critical=$(format_levels_with_units CRITICAL_LEVELS) - Charge=$(format_levels_with_units CHARGE_LEVELS) - Full=${FULL_LEVEL}% - Cooldown=${NOTIFICATION_COOLDOWN}s - Interval=${CHECK_INTERVAL}s - Zenity=${zenity_config}"
 
 trap 'log_message "INFO" "Arrêt du script de surveillance de batterie"; exit 0' SIGINT SIGTERM
 
