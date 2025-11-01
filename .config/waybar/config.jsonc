@@ -39,14 +39,6 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
-
-  "custom/launcher": {
-    "format": "",
-    "on-click": "wofi --show drun",
-    "tooltip-format": "Lancer une application"
-  },
-
- 
   "battery": {
     "format": "{icon}  {capacity}%",
     "format-charging": "󰂄  {capacity}%",
@@ -246,22 +238,6 @@
     "tooltip": "Lancer Tofi",
     "on-click": "tofi-drun"
   },
-
-  "custom/dnd": {
-    "format": "{icon}",
-    "format-icons": {
-      "on": "",
-      "off": ""
-    },
-    "exec": "swaync-client -g | grep -q 'Do Not Disturb: true' && echo '{\"icon\":\"on\"}' || echo '{\"icon\":\"off\"}'",
-    "on-click": "swaync-client -t",
-    "return-type": "json",
-    "interval": 2,
-    "tooltip": "Activer/Désactiver Ne pas déranger"
-  },
-
-
-
   "custom/mic_status": {
     "exec": "~/.config/Scripts/mic_status_waybar.sh",
     "interval": 1,
