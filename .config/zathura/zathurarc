@@ -1,0 +1,171 @@
+################################################################################
+###                    CONFIGURATION ZATHURA                                ###
+################################################################################
+# Lecteur de PDF minimaliste avec raccourcis Vim
+# Documentation : man zathurarc
+################################################################################
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# THÈME SOMBRE (compatible avec votre config Hyprland)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Couleurs de base
+set default-bg                  "#1e1e2e"
+set default-fg                  "#cdd6f4"
+
+# Barre de statut
+set statusbar-bg                "#181825"
+set statusbar-fg                "#cdd6f4"
+
+# Barre d'entrée (recherche, commandes)
+set inputbar-bg                 "#181825"
+set inputbar-fg                 "#cdd6f4"
+
+# Notifications
+set notification-bg             "#181825"
+set notification-fg             "#cdd6f4"
+set notification-error-bg       "#f38ba8"
+set notification-error-fg       "#1e1e2e"
+set notification-warning-bg     "#fab387"
+set notification-warning-fg     "#1e1e2e"
+
+# Complétion
+set completion-bg               "#181825"
+set completion-fg               "#cdd6f4"
+set completion-highlight-bg     "#89b4fa"
+set completion-highlight-fg     "#1e1e2e"
+set completion-group-bg         "#181825"
+set completion-group-fg         "#89b4fa"
+
+# Index (table des matières)
+set index-bg                    "#1e1e2e"
+set index-fg                    "#cdd6f4"
+set index-active-bg             "#89b4fa"
+set index-active-fg             "#1e1e2e"
+
+# Surbrillance de recherche
+set highlight-color             "#f9e2af"
+set highlight-active-color      "#a6e3a1"
+set highlight-transparency      0.5
+
+# Couleur du texte sélectionné
+set recolor-lightcolor          "#1e1e2e"
+set recolor-darkcolor           "#cdd6f4"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PARAMÈTRES D'AFFICHAGE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Mode recolor (inverser les couleurs pour lecture confortable)
+set recolor                     false
+set recolor-keephue             true
+
+# Ajustement automatique de la page
+set adjust-open                 "width"
+
+# Padding autour des pages
+set page-padding                5
+
+# Nombre de pages affichées par ligne
+set pages-per-row               1
+
+# Barre de défilement
+set show-scrollbars             false
+
+# Barre de statut
+set statusbar-h-padding         10
+set statusbar-v-padding         5
+
+# Zoom par défaut
+set zoom-center                 true
+set zoom-step                   10
+
+# Mode plein écran au démarrage
+set window-title-page           true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# RACCOURCIS VIM (par défaut, mais explicites pour référence)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+## Navigation Vim
+# j/k : défiler vers le bas/haut
+# h/l : page précédente/suivante
+# gg : première page
+# G : dernière page
+# [numéro]G : aller à la page numéro
+
+## Recherche Vim
+# / : recherche vers l'avant
+# ? : recherche vers l'arrière
+# n : résultat suivant
+# N : résultat précédent
+
+## Zoom
+# + ou = : zoom avant
+# - : zoom arrière
+
+## Autres
+# r : rotation 90°
+# q : quitter
+# d : afficher en double page
+# Tab : afficher/masquer l'index
+# i : inverser les couleurs (recolor)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# RACCOURCIS PERSONNALISÉS ADDITIONNELS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Ctrl+r : basculer recolor (mode lecture confortable)
+map <C-r> recolor
+
+# Espace : page suivante (comme Vim)
+map <Space> navigate next
+
+# Shift+Espace : page précédente
+map <S-Space> navigate previous
+
+# a : ajuster à la largeur
+map a adjust_window width
+
+# s : ajuster à la hauteur
+map s adjust_window best-fit
+
+# f : plein écran
+map f toggle_fullscreen
+
+# F : mode présentation
+map F toggle_presentation
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SÉLECTION ET COPIE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Commande de copie vers presse-papiers (Wayland)
+set selection-clipboard clipboard
+
+# Notification lors de la copie
+set selection-notification      true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PERFORMANCES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Accélération matérielle
+set render-loading              true
+set render-loading-fg           "#89b4fa"
+set render-loading-bg           "#1e1e2e"
+
+# Nombre de pages en cache
+set page-cache-size             15
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DIVERS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# Nom de la fenêtre
+set window-title-basename       true
+set window-title-home-tilde     true
+
+# Base de données pour mémoriser la position
+set database                    sqlite
+

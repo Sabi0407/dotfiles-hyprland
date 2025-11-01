@@ -80,7 +80,6 @@ alias root='sudo -i' # Se connecter en tant que root
 
 # Scripts
 alias saveconfig='/home/sabi/saveconfig.sh'
-alias syup='cd ~/ChromiumPywal && ./generate-theme.sh'
 alias clean='/home/sabi/.config/Scripts/cleanup-system.sh'
 
 # Papirus Folders - Changer couleur des icones de dossiers
