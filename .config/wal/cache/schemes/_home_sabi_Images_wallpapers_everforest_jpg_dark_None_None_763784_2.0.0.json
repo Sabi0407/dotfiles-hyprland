@@ -1,0 +1,28 @@
+{
+    "checksum": "99f4b5ebae313906a740acc94a8a7293",
+    "wallpaper": "/home/sabi/Images/wallpapers/everforest.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#121211",
+        "foreground": "#c3c3c3",
+        "cursor": "#c3c3c3"
+    },
+    "colors": {
+        "color0": "#121211",
+        "color1": "#71736F",
+        "color2": "#80817D",
+        "color3": "#8D8E8F",
+        "color4": "#9E9DA2",
+        "color5": "#AFAFB7",
+        "color6": "#BBBBC5",
+        "color7": "#c3c3c3",
+        "color8": "#6e5959",
+        "color9": "#71736F",
+        "color10": "#80817D",
+        "color11": "#8D8E8F",
+        "color12": "#9E9DA2",
+        "color13": "#AFAFB7",
+        "color14": "#BBBBC5",
+        "color15": "#c3c3c3"
+    }
+}

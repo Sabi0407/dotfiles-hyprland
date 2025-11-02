@@ -1,0 +1,28 @@
+{
+    "checksum": "5be1d6823c1d28a22cbbfd190c4e40f5",
+    "wallpaper": "/home/sabi/Images/wallpapers/wallhaven-gwzqjl.png",
+    "alpha": "100",
+    "special": {
+        "background": "#130808",
+        "foreground": "#c4c1c1",
+        "cursor": "#c4c1c1"
+    },
+    "colors": {
+        "color0": "#130808",
+        "color1": "#912424",
+        "color2": "#A92526",
+        "color3": "#C24141",
+        "color4": "#B37F80",
+        "color5": "#C1A1A2",
+        "color6": "#D9D8D8",
+        "color7": "#c4c1c1",
+        "color8": "#6b5757",
+        "color9": "#912424",
+        "color10": "#A92526",
+        "color11": "#C24141",
+        "color12": "#B37F80",
+        "color13": "#C1A1A2",
+        "color14": "#D9D8D8",
+        "color15": "#c4c1c1"
+    }
+}

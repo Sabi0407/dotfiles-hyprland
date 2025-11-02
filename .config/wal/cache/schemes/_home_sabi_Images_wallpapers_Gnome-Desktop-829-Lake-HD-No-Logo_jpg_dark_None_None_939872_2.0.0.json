@@ -1,0 +1,28 @@
+{
+    "checksum": "04746c4280888ef59b5f48535d220c78",
+    "wallpaper": "/home/sabi/Images/wallpapers/Gnome-Desktop-829-Lake-HD-No-Logo.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#0e1921",
+        "foreground": "#c2c5c7",
+        "cursor": "#c2c5c7"
+    },
+    "colors": {
+        "color0": "#0e1921",
+        "color1": "#69857E",
+        "color2": "#A5907D",
+        "color3": "#E39779",
+        "color4": "#487B82",
+        "color5": "#658785",
+        "color6": "#EFB08C",
+        "color7": "#c2c5c7",
+        "color8": "#5d6972",
+        "color9": "#69857E",
+        "color10": "#A5907D",
+        "color11": "#E39779",
+        "color12": "#487B82",
+        "color13": "#658785",
+        "color14": "#EFB08C",
+        "color15": "#c2c5c7"
+    }
+}

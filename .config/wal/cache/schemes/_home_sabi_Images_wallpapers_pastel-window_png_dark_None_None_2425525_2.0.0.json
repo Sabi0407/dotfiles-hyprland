@@ -1,0 +1,28 @@
+{
+    "checksum": "2f7991119dff1ab9d19b14d2496393ea",
+    "wallpaper": "/home/sabi/Images/wallpapers/pastel-window.png",
+    "alpha": "100",
+    "special": {
+        "background": "#121112",
+        "foreground": "#c3c3c3",
+        "cursor": "#c3c3c3"
+    },
+    "colors": {
+        "color0": "#121112",
+        "color1": "#4F626A",
+        "color2": "#AD5E4A",
+        "color3": "#EB9B77",
+        "color4": "#597984",
+        "color5": "#837E81",
+        "color6": "#6D8C93",
+        "color7": "#c3c3c3",
+        "color8": "#6e5959",
+        "color9": "#4F626A",
+        "color10": "#AD5E4A",
+        "color11": "#EB9B77",
+        "color12": "#597984",
+        "color13": "#837E81",
+        "color14": "#6D8C93",
+        "color15": "#c3c3c3"
+    }
+}

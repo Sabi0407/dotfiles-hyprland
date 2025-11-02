@@ -1,0 +1,28 @@
+{
+    "checksum": "32c2797aa3b89c6995384ae286224fb2",
+    "wallpaper": "/home/sabi/Images/wallpapers/wallhaven-rqrqpm_1920x1080.png",
+    "alpha": "100",
+    "special": {
+        "background": "#0a0a04",
+        "foreground": "#c1c1c0",
+        "cursor": "#c1c1c0"
+    },
+    "colors": {
+        "color0": "#0a0a04",
+        "color1": "#7F807F",
+        "color2": "#81827F",
+        "color3": "#7F7F80",
+        "color4": "#8F908F",
+        "color5": "#9FA19E",
+        "color6": "#AFB0AF",
+        "color7": "#c1c1c0",
+        "color8": "#666653",
+        "color9": "#7F807F",
+        "color10": "#81827F",
+        "color11": "#7F7F80",
+        "color12": "#8F908F",
+        "color13": "#9FA19E",
+        "color14": "#AFB0AF",
+        "color15": "#c1c1c0"
+    }
+}

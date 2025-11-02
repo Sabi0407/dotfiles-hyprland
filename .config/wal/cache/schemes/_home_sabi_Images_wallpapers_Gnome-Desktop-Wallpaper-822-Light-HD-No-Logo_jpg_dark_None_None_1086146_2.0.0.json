@@ -1,0 +1,28 @@
+{
+    "checksum": "b31afaca6ca5ed744f870b44de5c5b1f",
+    "wallpaper": "/home/sabi/Images/wallpapers/Gnome-Desktop-Wallpaper-822-Light-HD-No-Logo.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#210e1b",
+        "foreground": "#c7c2c6",
+        "cursor": "#c7c2c6"
+    },
+    "colors": {
+        "color0": "#210e1b",
+        "color1": "#917A89",
+        "color2": "#7196AE",
+        "color3": "#78BFC4",
+        "color4": "#9FA9AA",
+        "color5": "#DCB3A1",
+        "color6": "#DAC5AA",
+        "color7": "#c7c2c6",
+        "color8": "#725d6b",
+        "color9": "#917A89",
+        "color10": "#7196AE",
+        "color11": "#78BFC4",
+        "color12": "#9FA9AA",
+        "color13": "#DCB3A1",
+        "color14": "#DAC5AA",
+        "color15": "#c7c2c6"
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/sabi/Images/wallpapers/wallhaven-gpyzvq_1920x1080.png",
+    "alpha": "100",
+    "special": {
+        "background": "#0d0e0d",
+        "foreground": "#dedede",
+        "cursor": "#dedede"
+    },
+    "colors": {
+        "color0": "#0d0e0d",
+        "color1": "#6F6F6E",
+        "color2": "#80817F",
+        "color3": "#8F8F8E",
+        "color4": "#9FA09F",
+        "color5": "#B1B2B1",
+        "color6": "#BFC1BF",
+        "color7": "#dedede",
+        "color8": "#9b9b9b",
+        "color9": "#6F6F6E",
+        "color10": "#80817F",
+        "color11": "#8F8F8E",
+        "color12": "#9FA09F",
+        "color13": "#B1B2B1",
+        "color14": "#BFC1BF",
+        "color15": "#dedede"
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "checksum": "def251ce9b6b6da37ea5c066f3fa30e4",
+    "wallpaper": "/home/sabi/Images/wallpapers/denji-5120x2880-8875.png",
+    "alpha": "100",
+    "special": {
+        "background": "#0c0c1c",
+        "foreground": "#c2c2c6",
+        "cursor": "#c2c2c6"
+    },
+    "colors": {
+        "color0": "#0c0c1c",
+        "color1": "#5F6074",
+        "color2": "#646679",
+        "color3": "#717287",
+        "color4": "#817E8A",
+        "color5": "#9F9CA8",
+        "color6": "#BDB9C3",
+        "color7": "#c2c2c6",
+        "color8": "#5b5b70",
+        "color9": "#5F6074",
+        "color10": "#646679",
+        "color11": "#717287",
+        "color12": "#817E8A",
+        "color13": "#9F9CA8",
+        "color14": "#BDB9C3",
+        "color15": "#c2c2c6"
+    }
+}

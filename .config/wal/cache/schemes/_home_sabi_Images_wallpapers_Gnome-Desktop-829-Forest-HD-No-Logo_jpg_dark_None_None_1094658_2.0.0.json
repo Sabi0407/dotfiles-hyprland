@@ -1,0 +1,28 @@
+{
+    "checksum": "4b0bf6ceeeedc15c93c962d4c5e750e5",
+    "wallpaper": "/home/sabi/Images/wallpapers/Gnome-Desktop-829-Forest-HD-No-Logo.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#0e1520",
+        "foreground": "#c2c4c7",
+        "cursor": "#c2c4c7"
+    },
+    "colors": {
+        "color0": "#0e1520",
+        "color1": "#9C6469",
+        "color2": "#A07C7D",
+        "color3": "#ED7756",
+        "color4": "#F59D62",
+        "color5": "#F4C471",
+        "color6": "#D49F9C",
+        "color7": "#c2c4c7",
+        "color8": "#5d6472",
+        "color9": "#9C6469",
+        "color10": "#A07C7D",
+        "color11": "#ED7756",
+        "color12": "#F59D62",
+        "color13": "#F4C471",
+        "color14": "#D49F9C",
+        "color15": "#c2c4c7"
+    }
+}

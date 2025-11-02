@@ -1,0 +1,23 @@
+" Special
+let wallpaper  = "/home/sabi/Images/wallpapers/Smoking_girl.png"
+let background = "#190a19"
+let foreground = "#c5c1c5"
+let cursor     = "#c5c1c5"
+
+" Colors
+let color0  = "#190a19"
+let color1  = "#B04E74"
+let color2  = "#DB576E"
+let color3  = "#3C6D8A"
+let color4  = "#6E4787"
+let color5  = "#614883"
+let color6  = "#955089"
+let color7  = "#c5c1c5"
+let color8  = "#6e596e"
+let color9  = "#B04E74"
+let color10 = "#DB576E"
+let color11 = "#3C6D8A"
+let color12 = "#6E4787"
+let color13 = "#614883"
+let color14 = "#955089"
+let color15 = "#c5c1c5"

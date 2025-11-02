@@ -1,0 +1,28 @@
+{
+    "checksum": "daa25915c4d4128015860bdbb2d75f23",
+    "wallpaper": "/home/sabi/Images/wallpapers/5.png",
+    "alpha": "100",
+    "special": {
+        "background": "#10121b",
+        "foreground": "#c3c3c6",
+        "cursor": "#c3c3c6"
+    },
+    "colors": {
+        "color0": "#10121b",
+        "color1": "#4F7AC1",
+        "color2": "#3F81BD",
+        "color3": "#4D84BD",
+        "color4": "#6E85BA",
+        "color5": "#608EC4",
+        "color6": "#DFA7BF",
+        "color7": "#c3c3c6",
+        "color8": "#5c5f70",
+        "color9": "#4F7AC1",
+        "color10": "#3F81BD",
+        "color11": "#4D84BD",
+        "color12": "#6E85BA",
+        "color13": "#608EC4",
+        "color14": "#DFA7BF",
+        "color15": "#c3c3c6"
+    }
+}
