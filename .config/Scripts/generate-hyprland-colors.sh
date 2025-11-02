@@ -1,60 +1,26 @@
 #!/bin/bash
+set -euo pipefail
 
-# Script pour générer les couleurs Hyprland à partir de pywal
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=pywal-common.sh
+. "$SCRIPT_DIR/pywal-common.sh"
 
-LOCAL_CACHE_DIR="$HOME/.config/Scripts/wal-cache"
-PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$LOCAL_CACHE_DIR}"
-DEFAULT_PYWAL_CACHE="$HOME/.cache/wal"
-COLORS_SH="$PYWAL_CACHE_DIR/colors.sh"
+HYPR_CONFIG="$HOME/.config/hypr/configs/look.conf"
 
-mkdir -p "$PYWAL_CACHE_DIR"
-
-if [[ ! -f "$COLORS_SH" && -f "$DEFAULT_PYWAL_CACHE/colors.sh" ]]; then
-    COLORS_SH="$DEFAULT_PYWAL_CACHE/colors.sh"
-fi
-
-# Vérifier que pywal a été exécuté
-if [[ ! -f "$COLORS_SH" ]]; then
-    echo " Pywal n'a pas été exécuté. Lancez d'abord 'wal -i /path/to/image'"
+if ! pywal_source_colors; then
+    echo "Pywal n'a pas encore généré de palette. Lancez 'wal' puis réessayez." >&2
     exit 1
 fi
 
-# Charger les couleurs pywal
-source "$COLORS_SH"
-
-# Fichier de configuration Hyprland
-HYPR_CONFIG="$HOME/.config/hypr/configs/look.conf"
-
-# Fonction pour convertir hex en rgba
-hex_to_rgba() {
-    local hex="$1"
-    local alpha="${2:-1.0}"
-    
-    # Supprimer le # si présent
-    hex="${hex#\#}"
-    
-    # Convertir en RGB
-    local r=$((16#${hex:0:2}))
-    local g=$((16#${hex:2:2}))
-    local b=$((16#${hex:4:2}))
-    
-    echo "rgba($r,$g,$b,$alpha)"
-}
-
-# Générer les couleurs de bordure simples
-# Active border : côté primaire + côté secondaire sur la même fenêtre
-ACTIVE_PRIMARY=$(hex_to_rgba "$color1" "1.0")    # Couleur primaire (côté principal)
-ACTIVE_SECONDARY=$(hex_to_rgba "$color4" "1.0")  # Couleur secondaire (côté opposé)
-
-# Inactive border : utilise background avec un peu de transparence
-INACTIVE_COLOR=$(hex_to_rgba "$background" "0.8")
+ACTIVE_PRIMARY="$(pywal_hex_to_rgba "${color1:-#ff0000}" "1.0")"
+ACTIVE_SECONDARY="$(pywal_hex_to_rgba "${color4:-#00ffcc}" "1.0")"
+INACTIVE_COLOR="$(pywal_hex_to_rgba "${background:-#1e1e2e}" "0.8")"
 
 echo " Génération des couleurs Hyprland avec pywal..."
-echo "   Côté primaire: $color1"
-echo "   Côté secondaire: $color4"
-echo "   Inactive border: $background"
+echo "   Côté primaire: ${color1:-inconnu}"
+echo "   Côté secondaire: ${color4:-inconnu}"
+echo "   Inactive border: ${background:-inconnu}"
 
-# Créer le fichier temporaire avec les nouvelles couleurs
 cat > /tmp/hyprland_colors_temp <<EOF
 # Couleurs générées automatiquement par pywal
 # Généré le $(date)
@@ -97,13 +63,11 @@ if [[ -f "$HYPR_CONFIG" ]]; then
     
     echo "Couleurs Hyprland mises à jour dans $HYPR_CONFIG"
     
-    # Recharger la configuration Hyprland
     if command -v hyprctl >/dev/null 2>&1; then
         hyprctl reload
         echo "Configuration Hyprland rechargée"
     fi
     
-    # Afficher les couleurs appliquées
     echo ""
     echo " Couleurs appliquées :"
     echo "   Dégradé: $ACTIVE_PRIMARY → $ACTIVE_SECONDARY"

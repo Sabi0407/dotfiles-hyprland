@@ -1,40 +1,38 @@
 #!/bin/bash
 set -euo pipefail
 
-LOCAL_CACHE_DIR="$HOME/.config/Scripts/wal-cache"
-PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$LOCAL_CACHE_DIR}"
-DEFAULT_PYWAL_CACHE="$HOME/.cache/wal"
-COLORS_SH="$PYWAL_CACHE_DIR/colors.sh"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=pywal-common.sh
+. "$SCRIPT_DIR/pywal-common.sh"
 
-mkdir -p "$PYWAL_CACHE_DIR"
-
-if [[ ! -f "$COLORS_SH" && -f "$DEFAULT_PYWAL_CACHE/colors.sh" ]]; then
-  COLORS_SH="$DEFAULT_PYWAL_CACHE/colors.sh"
-fi
 OUT_DIR="$HOME/.config/hypr/colors"
 OUT_FILE="$OUT_DIR/hyprlock-colors.conf"
 mkdir -p "$OUT_DIR"
-hex_to_rgba(){
-  local hex="${1:-#ffffff}" alpha="${2:-1.0}"
-  hex="${hex#\#}";[[ ${#hex} -eq 6 ]] || { echo "rgba(255,255,255,$alpha)";return; }
-  printf 'rgba(%d,%d,%d,%s)\n' 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2} "$alpha"
-}
-if [[ -f "$COLORS_SH" ]]; then
-  set +u
-  source "$COLORS_SH"
-  set -u
-  hour_hex="${color11:-${color5:-#ffffff}}"
-  minute_hex="${color13:-${color6:-#d0d0d0}}"
-  second_hex="${color7:-${foreground:-#e0e0e0}}"
-  label_hex="${color4:-${color11:-#ffffff}}"
+
+fallback_hour="#ffb86c"
+fallback_minute="#8be9fd"
+fallback_second="#f8f8f2"
+fallback_label="#ff79c6"
+
+if pywal_source_colors; then
+    hour_hex="${color11:-${color5:-$fallback_hour}}"
+    minute_hex="${color13:-${color6:-$fallback_minute}}"
+    second_hex="${color7:-${foreground:-$fallback_second}}"
+    label_hex="${color4:-${color11:-$fallback_label}}"
 else
-  hour_hex="#ffb86c";minute_hex="#8be9fd";second_hex="#f8f8f2";label_hex="#ff79c6"
+    pywal_warn "palette introuvable, utilisation des couleurs de secours."
+    hour_hex="$fallback_hour"
+    minute_hex="$fallback_minute"
+    second_hex="$fallback_second"
+    label_hex="$fallback_label"
 fi
+
 {
-  echo "# Couleurs Hyprlock générées automatiquement ($(date))"
-  printf '$hyprlock_hour = %s\n' "$(hex_to_rgba "$hour_hex" "1.0")"
-  printf '$hyprlock_minute = %s\n' "$(hex_to_rgba "$minute_hex" "1.0")"
-  printf '$hyprlock_second = %s\n' "$(hex_to_rgba "$second_hex" "1.0")"
-  printf '$hyprlock_label = %s\n' "$(hex_to_rgba "$label_hex" "1.0")"
+    echo "# Couleurs Hyprlock générées automatiquement ($(date))"
+    printf '$hyprlock_hour = %s\n' "$(pywal_hex_to_rgba "$hour_hex" "1.0")"
+    printf '$hyprlock_minute = %s\n' "$(pywal_hex_to_rgba "$minute_hex" "1.0")"
+    printf '$hyprlock_second = %s\n' "$(pywal_hex_to_rgba "$second_hex" "1.0")"
+    printf '$hyprlock_label = %s\n' "$(pywal_hex_to_rgba "$label_hex" "1.0")"
 } > "$OUT_FILE"
+
 echo "[hyprlock-colors] Fichier mis à jour : $OUT_FILE"

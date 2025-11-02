@@ -2,32 +2,37 @@
 
 set -euo pipefail
 
-PLAYER="spotify"
+# Liste des lecteurs à essayer par ordre de priorité
+PLAYERS=("spotify" "spotifyd" "firefox" "chromium" "vlc" "mpd")
 
 if ! command -v playerctl >/dev/null 2>&1; then
-    echo "<span font='JetBrainsMono NFM Bold 16'>Spotify indisponible</span>"
+    echo ""
     exit 0
 fi
 
-status="$(playerctl --player="${PLAYER}" status 2>/dev/null || true)"
+# Trouver le premier lecteur actif
+ACTIVE_PLAYER=""
+for player in "${PLAYERS[@]}"; do
+    status="$(playerctl --player="${player}" status 2>/dev/null || true)"
+    if [[ "${status}" == "Playing" || "${status}" == "Paused" ]]; then
+        ACTIVE_PLAYER="${player}"
+        break
+    fi
+done
 
-if [[ -z "${status}" || "${status}" == "No players found" ]]; then
-    echo "<span font='JetBrainsMono NFM Bold 16'>Spotify inactif</span>"
+# Si aucun lecteur actif, ne rien afficher
+if [[ -z "${ACTIVE_PLAYER}" ]]; then
+    echo ""
     exit 0
 fi
 
-if [[ "${status}" != "Playing" && "${status}" != "Paused" ]]; then
-    echo "<span font='JetBrainsMono NFM Bold 16'>Spotify ${status}</span>"
-    exit 0
-fi
-
-title="$(playerctl --player="${PLAYER}" metadata --format '{{title}}' 2>/dev/null | tr '\n' ' ' | sed 's/[[:space:]]\+$//')"
-artist="$(playerctl --player="${PLAYER}" metadata --format '{{artist}}' 2>/dev/null | tr '\n' ' ' | sed 's/[[:space:]]\+$//')"
+title="$(playerctl --player="${ACTIVE_PLAYER}" metadata --format '{{title}}' 2>/dev/null | tr '\n' ' ' | sed 's/[[:space:]]\+$//')"
+artist="$(playerctl --player="${ACTIVE_PLAYER}" metadata --format '{{artist}}' 2>/dev/null | tr '\n' ' ' | sed 's/[[:space:]]\+$//')"
 [[ -z "${title}" ]] && title="Titre inconnu"
 [[ -z "${artist}" ]] && artist="Artiste inconnu"
 
-position="$(playerctl --player="${PLAYER}" position 2>/dev/null || echo 0)"
-length_output="$(playerctl --player="${PLAYER}" metadata --format '{{mpris:length}}' 2>/dev/null || echo 0)"
+position="$(playerctl --player="${ACTIVE_PLAYER}" position 2>/dev/null || echo 0)"
+length_output="$(playerctl --player="${ACTIVE_PLAYER}" metadata --format '{{mpris:length}}' 2>/dev/null || echo 0)"
 if [[ "$length_output" =~ ^[0-9]+$ ]]; then
     length_micro="$length_output"
 else

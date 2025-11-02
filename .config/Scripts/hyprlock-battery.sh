@@ -2,9 +2,34 @@
 
 set -euo pipefail
 
+translate_uptime_fr() {
+    local input="$1"
+    local output="$input"
+
+    # Handle plural forms before singular to avoid partial replacements
+    output="${output//years/ans}"
+    output="${output//year/an}"
+    output="${output//months/mois}"
+    output="${output//month/mois}"
+    output="${output//weeks/semaines}"
+    output="${output//week/semaine}"
+    output="${output//days/jours}"
+    output="${output//day/jour}"
+    output="${output//hours/heures}"
+    output="${output//hour/heure}"
+    output="${output//minutes/minutes}"
+    output="${output//minute/minute}"
+    output="${output//seconds/secondes}"
+    output="${output//second/seconde}"
+    output="${output//up /}"
+
+    echo "${output}"
+}
+
 # locate the first battery device exposed by the kernel (works with symlinks)
 battery_dir="$(find /sys/class/power_supply -maxdepth 1 -mindepth 1 -name 'BAT*' -print | sort | head -n 1)"
-uptime_pretty="$(uptime -p | sed 's/^up //')"
+uptime_pretty_raw="$(uptime -p | sed 's/^up //')"
+uptime_pretty="$(translate_uptime_fr "${uptime_pretty_raw}")"
 
 mode="full"
 if [[ $# -gt 0 ]]; then

@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-base_dir="$HOME/Documents/Notes/Cours.BTS2/Images"
+base_dir="$HOME/Documents/Cours/Cours.BTS2/Images"
 mkdir -p "$base_dir"
 
 filename="$(date +%d-%m-%Y_%H-%M-%S).png"

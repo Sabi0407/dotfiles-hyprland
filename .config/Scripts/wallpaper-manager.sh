@@ -34,14 +34,20 @@ apply_wallpaper() {
     
     # Générer les couleurs pywal
     wal -i "$wallpaper_path" -n
-    "$SCRIPTS_DIR/update-pywalfox.sh" > /dev/null 2>&1 || true
-    
-    # Synchroniser tous les thèmes
-    for script in wal2swaync generate-pywal-waybar-style generate-tofi-colors generate-kitty-colors generate-hyprland-colors generate-hyprlock-colors; do
-        if [ -f "$SCRIPTS_DIR/$script.sh" ]; then
-            "$SCRIPTS_DIR/$script.sh" 2>/dev/null
+
+    if [ -x "$SCRIPTS_DIR/pywal-sync.sh" ]; then
+        if ! "$SCRIPTS_DIR/pywal-sync.sh" >/dev/null 2>&1; then
+            echo "[wallpaper-manager] Avertissement : certains modules pywal ont échoué." >&2
         fi
-    done
+        sleep 0.3
+    else
+        "$SCRIPTS_DIR/update-pywalfox.sh" > /dev/null 2>&1 || true
+        for script in wal2swaync generate-pywal-waybar-style generate-tofi-colors generate-kitty-colors generate-hyprland-colors generate-hyprlock-colors; do
+            if [ -f "$SCRIPTS_DIR/$script.sh" ]; then
+                "$SCRIPTS_DIR/$script.sh" > /dev/null 2>&1 || true
+            fi
+        done
+    fi
     
     # Sauvegarder le wallpaper utilisé
     echo "$wallpaper_path" > "$LAST_WALLPAPER_FILE"
@@ -51,7 +57,7 @@ apply_wallpaper() {
     systemctl --user restart swaync.service
     
     # Forcer la fermeture de Tofi pour qu'il recharge les couleurs
-    pkill tofi 2>/dev/null
+    pkill -x tofi 2>/dev/null
     sleep 0.2
     
     echo "Wallpaper appliqué avec succès: $(basename "$wallpaper_path")"
