@@ -45,7 +45,7 @@ yay -S --needed \
   anki-bin catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cursor-bin electron39-bin \
   gtk-engine-murrine gtk-engines gtk2 kvantum-theme-catppuccin-git librewolf-bin localsend-bin \
   onlyoffice-bin packettracer papirus-folders-git proton-pass-bin python-imageio-ffmpeg \
-  python-pywal16-git python-pywalfox python-screeninfo spicetify-cli \
+  python-pywal16-git python-pywalfox python-screeninfo spicetify-cli walcord \
   spicetify-custom-apps-and-extensions-git spicetify-extensions-rxri-git spicetify-marketplace-bin \
   spotify tofi-git touchpad-toggle ttf-all-the-icons vesktop-bin \
   vscodium-bin walcord waypaper yay yay-debug
