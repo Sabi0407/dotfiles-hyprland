@@ -1,4 +1,4 @@
-# Spicetify × Pywal : installation et configuration
+# Spicetify + Walcord + Pywal : installation et configuration
 
 Ce guide décrit toutes les étapes pour intégrer Spotify (Spicetify) dans ton workflow Pywal (wallpaper → palette → applications). Les commandes supposent un environnement Arch/Manjaro avec `yay`.
 
@@ -47,7 +47,7 @@ Le script détecte automatiquement le thème actif (`spicetify config current_th
 
 ---
 
-## 4. Script Pywal → Spicetify
+## 4. Scripts Pywal → Spicetify / Walcord
 
 Le script dédié est déjà présent : `~/.config/Scripts/pywal-spicetify.sh`.  
 Il s’occupe de :
@@ -55,6 +55,7 @@ Il s’occupe de :
 - récupérer la palette Wal (`~/.config/wal/cache`) ;
 - mettre à jour `color.ini` du thème Spotify courant ;
 - rappeler d’exécuter `spicetify apply --no-restart` si Spotify est actif.
+- **Walcord** : `walcord apply` génère `~/.config/vesktop/themes/walcord.theme.css` à partir de `~/.config/wal/colors.json`.
 
 Assure-toi qu’il est exécutable :
 
@@ -62,7 +63,7 @@ Assure-toi qu’il est exécutable :
 chmod +x ~/.config/Scripts/pywal-spicetify.sh
 ```
 
-⚠️ Spotify doit pouvoir être patché : applique les permissions une seule fois après installation du client officiel.
+⚠️ Spotify doit pouvoir être patché : applique les permissions une fois après installation du client officiel.
 
 ```bash
 sudo chmod a+wr /opt/spotify
@@ -104,11 +105,13 @@ Ce script :
 - SI Spotify est fermé → la palette est appliquée automatiquement.  
 - SI Spotify est ouvert → tape `spicetify apply --no-restart` quand tu veux appliquer la nouvelle palette, sans redémarrage.
 
- Pour forcer l’application du thème après un changement de fond :
-```bash
-~/.config/Scripts/pywal-spicetify.sh   # met à jour color.ini
-spicetify apply --no-restart          # applique immédiatement, même si Spotify est ouvert
-```
+- **Raccourci Hyprland** : `Super + Alt + S` exécute `pywal-spicetify.sh` puis `spicetify apply --no-restart` pour appliquer la palette immédiatement (même si Spotify tourne).
+- Pour Walcord : `walcord apply` met à jour le thème Vencord/Vesktop ; sélectionne `~/.config/vesktop/themes/walcord.theme.css` dans l’UI si ce n’est pas déjà fait.
+- En ligne de commande si besoin :
+  ```bash
+  ~/.config/Scripts/pywal-spicetify.sh
+  spicetify apply --no-restart
+  ```
 
 ---
 
@@ -127,8 +130,33 @@ Pywal, Hypr, Waybar et Spotify sont désormais synchronisés : un simple changem
 
 ## Annexe : commandes utiles par application
 
-- **Spotify** : `~/.config/Scripts/pywal-spicetify.sh` (relancé par `pywal-sync.sh`).
-- **Vesktop/Vencord** : `walcord apply` (ou automatiquement via `pywal-sync.sh` si ajouté).
-- **Vesktop/Vencord** : `walcord --json ~/.config/wal/cache/colors.json` (déjà intégré à `pywal-sync.sh`).
-  > Assure-toi ensuite de sélectionner `~/.config/vesktop/themes/walcord.theme.css` dans les paramètres Vesktop.
-- **Zathura** : `zathura-pywal` (également déclenché dans `pywal-sync.sh`).
+- **Spotify** : `~/.config/Scripts/pywal-spicetify.sh` (relancé par `pywal-sync.sh`).
+- **Vesktop/Vencord** : `walcord apply` ou `walcord --json ~/.config/wal/cache/colors.json`.
+  > Dans Vesktop, pointer le thème vers `~/.config/vesktop/themes/walcord.theme.css`.
+- **Zathura** : `zathura-pywal` (également déclenché dans `pywal-sync.sh`).
+
+---
+
+## 8. Sauvegarde / restauration des configurations
+
+`saveconfig.sh` copie automatiquement les dossiers suivants vers `~/dotfiles/.config/` :
+
+- `spicetify/` : thèmes, extensions, `config-xpui.ini`, etc.
+- `wal/` : palettes, templates (`colors-spicetify.ini`, etc.).
+
+Pour restaurer sur une nouvelle machine (après avoir installé les paquets via `yay`) :
+
+```bash
+rsync -av ~/dotfiles/.config/spicetify/ ~/.config/spicetify/
+rsync -av ~/dotfiles/.config/wal/ ~/.config/wal/
+```
+
+Ensuite relancer :
+
+```bash
+~/.config/Scripts/pywal-spicetify.sh
+spicetify apply --no-restart
+walcord apply
+```
+
+Les extensions MarketPlace et les thèmes personnels réapparaîtront immédiatement.
