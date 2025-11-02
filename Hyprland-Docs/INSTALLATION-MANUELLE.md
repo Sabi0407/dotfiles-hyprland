@@ -45,7 +45,7 @@ yay -S --needed \
   anki-bin catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cursor-bin electron39-bin \
   gtk-engine-murrine gtk-engines gtk2 kvantum-theme-catppuccin-git librewolf-bin localsend-bin \
   onlyoffice-bin packettracer papirus-folders-git proton-pass-bin python-imageio-ffmpeg \
-  python-pywal16-git python-pywalfox python-screeninfo pywal-spicetify spicetify-cli \
+  python-pywal16-git python-pywalfox python-screeninfo spicetify-cli \
   spicetify-custom-apps-and-extensions-git spicetify-extensions-rxri-git spicetify-marketplace-bin \
   spotify tofi-git touchpad-toggle ttf-all-the-icons vesktop-bin \
   vscodium-bin walcord waypaper yay yay-debug
@@ -116,6 +116,34 @@ crontab -l                           # Lister les tâches planifiées de l'utili
 crontab -e                           # Éditer les tâches
 journalctl -u cronie.service --since "today"  # Logs des exécutions
 ```
+
+## Spicetify : installation & configuration
+
+### 1. Installer les paquets
+```bash
+yay -S spicetify-cli spicetify-marketplace-bin spotify
+```
+
+### 2. Préparer Spotify
+```bash
+spicetify backup apply enable-devtools
+spicetify config inject-css 1 replace-colors 1
+```
+
+### 3. Ouvrir le Marketplace
+```bash
+spicetify config custom_apps marketplace
+spicetify config current_theme marketplace
+spicetify apply
+```
+- Dans Spotify, `Ctrl + Shift + L` ouvre le Marketplace pour installer thèmes et extensions.
+
+### 4. Passer sur un thème personnalisé (optionnel)
+```bash
+spicetify config current_theme MonTheme
+spicetify apply
+```
+- Pour revenir au Marketplace : `spicetify config current_theme marketplace && spicetify apply`
 
 ## Dépannage rapide
 - Miroirs pacman lents : `sudo reflector --sort rate --latest 20 --save /etc/pacman.d/mirrorlist`

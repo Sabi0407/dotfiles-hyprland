@@ -13,7 +13,6 @@ TASKS=(
     "generate-swaync-colors.sh"
     "generate-pywal-waybar-style.sh"
     "generate-tofi-colors.sh"
-    "pywal-spicetify.sh"
     "walcord-sync.sh"
     "generate-kitty-colors.sh"
     "generate-hyprland-colors.sh"

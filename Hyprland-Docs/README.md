@@ -1,6 +1,6 @@
 # Configuration Hyprland - Version 2
 
-> [Installation manuelle](INSTALLATION-MANUELLE.md) · [Raccourcis clavier](KEYBINDINGS.md) · [Spicetify + Pywal](Spicetify-Walcord-Pywal-Setup.md)
+> [Installation manuelle](INSTALLATION-MANUELLE.md) · [Raccourcis clavier](KEYBINDINGS.md)
 
 ## Composants principaux
 
