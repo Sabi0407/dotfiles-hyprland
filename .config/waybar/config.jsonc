@@ -11,7 +11,6 @@
     "hyprland/workspaces"
   ],
   "modules-right": [
-    "custom/mic_status",
     "custom/speaker_profile",
     "group/tray_drawer",
     "group/battery_drawer",
@@ -238,12 +237,6 @@
     "tooltip": "Lancer Tofi",
     "on-click": "tofi-drun"
   },
-  "custom/mic_status": {
-    "exec": "~/.config/Scripts/mic_status_waybar.sh",
-    "interval": 1,
-    "return-type": "json",
-    "tooltip": true
-  },
 
   "custom/speaker_profile": {
     "format": "{icon}",
@@ -254,7 +247,6 @@
     "on-click": "~/.config/Scripts/audio_profile_waybar.sh toggle",
     "on-click-right": "~/.config/Scripts/audio_profile_waybar.sh cycle"
   },
-
   "custom/updates": {
     "format": "󰇚 {text}",
     "return-type": "json",

@@ -43,12 +43,13 @@
 	<name>Copier le chemin</name>
 	<submenu>Outils</submenu>
 	<unique-id>1760916221159090-3</unique-id>
-	<command>echo -n %f | wl-copy</command>
-	<description>Copier le chemin complet du fichier dans le presse-papier</description>
+	<command>sh -c 'printf \"%s\n\" \"$@\" | wl-copy' _ %F</command>
+	<description>Copier le(s) chemin(s) sélectionné(s) dans le presse-papier</description>
 	<range></range>
 	<patterns>*</patterns>
 	<startup-notify/>
 	<directories/>
+	<files/>
 	<other-files/>
 </action>
 <action>
