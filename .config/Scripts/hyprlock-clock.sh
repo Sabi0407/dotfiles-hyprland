@@ -4,7 +4,7 @@ set -euo pipefail
 
 usage() {
     cat <<'EOF'
-Usage: hyprlock-clock.sh <hour|minute|second>
+Usage: hyprlock-clock.sh <hour|minute|second|full>
 Outputs formatted time fragments for Hyprlock.
 EOF
 }
@@ -29,6 +29,11 @@ case "${part}" in
     second)
         format_string='<b>%s</b>'
         date_format='%S'
+        use_pywal_color='false'
+        ;;
+    full)
+        format_string='%s'
+        date_format='%H:%M'
         use_pywal_color='false'
         ;;
     *)

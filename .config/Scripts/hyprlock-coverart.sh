@@ -11,6 +11,10 @@ set -euo pipefail
 COVER_DIR="/tmp/hyprlock-covers"
 COVER_FILE="${COVER_DIR}/current-cover.jpg"
 TRANSPARENT_COVER="${COVER_DIR}/transparent.png"
+LAYOUT_DIR="${HOME}/.config/hypr"
+LAYOUT_ACTIVE="${LAYOUT_DIR}/hyprlock-layout.conf"
+LAYOUT_PLAYER="${LAYOUT_DIR}/hyprlock-layout-player.conf"
+LAYOUT_MINIMAL="${LAYOUT_DIR}/hyprlock-layout-minimal.conf"
 
 # Créer le répertoire s'il n'existe pas
 mkdir -p "${COVER_DIR}"
@@ -81,12 +85,32 @@ for player in "${PLAYERS[@]}"; do
     fi
 done
 
-# Si aucune musique n'est en cours, copier l'image transparente et sortir
+# Copie le layout désiré si disponible
+update_layout() {
+    local src="$1"
+    if [[ -f "${src}" ]]; then
+        if [[ -L "${LAYOUT_ACTIVE}" ]]; then
+            ln -sf "${src}" "${LAYOUT_ACTIVE}" 2>/dev/null || {
+                rm -f "${LAYOUT_ACTIVE}"
+                ln -s "${src}" "${LAYOUT_ACTIVE}" 2>/dev/null || true
+            }
+        else
+            rm -f "${LAYOUT_ACTIVE}" 2>/dev/null
+            ln -s "${src}" "${LAYOUT_ACTIVE}" 2>/dev/null || true
+        fi
+    fi
+}
+
+# Si aucune musique n'est en cours, copier l'image transparente et le layout épuré
 if [[ "${music_playing}" == "false" ]]; then
     cp "${TRANSPARENT_COVER}" "${COVER_FILE}" 2>/dev/null || true
+    update_layout "${LAYOUT_MINIMAL}"
     echo "${COVER_FILE}"
     exit 0
 fi
+
+# Musique active : utiliser le layout avec cover art
+update_layout "${LAYOUT_PLAYER}"
 
 # Essayer de récupérer la cover art de chaque lecteur actif
 for player in "${PLAYERS[@]}"; do
@@ -99,5 +123,3 @@ done
 cp "${TRANSPARENT_COVER}" "${COVER_FILE}" 2>/dev/null || true
 echo "${COVER_FILE}"
 exit 0
-
-

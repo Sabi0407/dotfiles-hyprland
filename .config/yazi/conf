@@ -17,7 +17,7 @@ pdf = "pdftotext {} -"
 [theme]
 # Thème moderne (ex: catppuccin-mocha)
 # Pour appliquer un thème, place le fichier dans ~/.config/yazi/themes/
-theme = "mocha/catppuccin-mocha-blue"
+theme = "mocha/catppuccin-mocha-mauve"
 
 [statusbar]
 # Affiche le chemin, le nombre de fichiers, la sélection, etc.
