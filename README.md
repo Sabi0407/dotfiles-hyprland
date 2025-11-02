@@ -1,5 +1,7 @@
 # Configuration Hyprland - Version 2
 
+> [Installation manuelle](INSTALLATION-MANUELLE.md) · [Raccourcis clavier](KEYBINDINGS.md) · [Spicetify + Pywal](Spicetify-Walcord-Pywal-Setup.md)
+
 ## Composants principaux
 
 | Composant | Utilisation                       |
@@ -16,7 +18,7 @@
 | Fastfetch | Informations système              |
 | Thème     | Catppuccin Mocha                  |
 | Icônes    | Papirus Icon Pack                 |
-| Pywal     | Génération de couleurs            |
+| Pywal-16  | Génération de couleurs            |
 | Pywalfox  | Thème Firefox dynamique           |
 
 ---
@@ -47,21 +49,19 @@
 ### Import des configurations
 
 ```
-source = ~/.config/hypr/configs/env.conf
-source = ~/.config/hypr/configs/input.conf
-source = ~/.config/hypr/configs/autostart.conf
-source = ~/.config/hypr/configs/keybindings.conf
-source = ~/.config/hypr/configs/look.conf
-source = ~/.config/hypr/configs/monitors.conf
-source = ~/.config/hypr/configs/plugins.conf
-source = ~/.config/hypr/configs/windowrules.conf
+source = configs/env.conf
+source = configs/input.conf
+source = configs/autostart.conf
+source = configs/keybindings.conf
+source = configs/look.conf
+source = configs/monitors.conf
+source = configs/plugins.conf # Plugins non utilisé
+source = configs/windowrules.conf
 ```
 
 ---
 
-## Waybar - Barre d'état
-
-Barre d'état moderne pour Wayland. Affiche les informations système et les notifications.
+## Waybar 
 
 ### Fichiers de configuration
 
@@ -73,9 +73,7 @@ Barre d'état moderne pour Wayland. Affiche les informations système et les not
 
 ---
 
-## Tofi - Lanceur d'applications
-
-Lanceur d'applications rapide et léger. Permet de lancer des programmes et de naviguer dans les fichiers.
+## Tofi 
 
 ### Fichiers de configuration
 
@@ -86,10 +84,7 @@ Lanceur d'applications rapide et léger. Permet de lancer des programmes et de n
 
 ---
 
-## SwayNC - Centre de notifications
-
-Centre de notifications pour Wayland. Gère l'affichage et l'historique des notifications système.
-
+## SwayNC 
 ### Fichiers de configuration
 
 ```
@@ -100,10 +95,7 @@ Centre de notifications pour Wayland. Gère l'affichage et l'historique des noti
 
 ---
 
-## Hyprlock - Verrouillage d'écran
-
-Écran de verrouillage pour Hyprland. Sécurise la session avec un mot de passe.
-
+## Hyprlock
 ### Fichiers de configuration
 
 ```
@@ -113,10 +105,7 @@ Centre de notifications pour Wayland. Gère l'affichage et l'historique des noti
 
 ---
 
-## Hypridle - Gestionnaire d'inactivité
-
-Gestionnaire d'inactivité pour Hyprland. Verrouille automatiquement l'écran après une période d'inactivité.
-
+## Hypridle 
 ### Fichiers de configuration
 
 ```
@@ -126,7 +115,7 @@ Gestionnaire d'inactivité pour Hyprland. Verrouille automatiquement l'écran ap
 
 ---
 
-## Kitty - Terminal
+## Kitty 
 
 Terminal moderne avec support des images et des polices. Configuration flexible et performances élevées.
 
@@ -140,9 +129,8 @@ Terminal moderne avec support des images et des polices. Configuration flexible 
 
 ---
 
-## Pywal - Génération de couleurs
+## Pywal-16
 
-Génère automatiquement des palettes de couleurs à partir d'images. Crée des thèmes cohérents pour tout le système.
 
 ### Fichiers de configuration
 
@@ -155,9 +143,9 @@ Génère automatiquement des palettes de couleurs à partir d'images. Crée des 
 
 ---
 
-## Fastfetch - Informations système
+## Fastfetch 
 
-Affiche les informations système.
+
 
 ### Fichiers de configuration
 
@@ -180,20 +168,4 @@ Collection de scripts personnalisés.
 
 ```
 ~/.config/Scripts/
-```
-
-### Presse-papiers (Cliphist)
-
-- Service `wl-paste --watch cliphist store` lancé au démarrage pour conserver l'historique.
-- Raccourci Hyprland `Super + C` : ouvre l'historique via tofi, copie la sélection via `cliphist decode | wl-copy`.
-
-## Script d'installation
-
-Script automatisé pour installer tous les composants nécessaires. Installe les paquets pacman, AUR et Flatpak.
-
-### Utilisation
-
-```
-chmod +x package-base-V2.sh
-./package-base-v2.sh
 ```

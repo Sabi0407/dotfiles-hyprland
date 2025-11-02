@@ -8,7 +8,7 @@ LOG_FILE="$HOME/.config/saveconfig.log"
 
 # Dossiers sous ~/.config à synchroniser
 CONFIG_DEST="$DEST/.config"
-DIRS=(aliases flameshot fastfetch gtk-3.0 gtk-4.0 hypr kitty Kvantum Mousepad mpv nerdfetch nwg-look qt5ct Scripts swaync Thunar waybar tofi micro yazi zathura waypaper)
+DIRS=(aliases flameshot fastfetch gtk-3.0 gtk-4.0 hypr kitty Kvantum Mousepad mpv nerdfetch nwg-look qt5ct Scripts spicetify swaync Thunar wal waybar tofi micro yazi zathura waypaper)
 
 # Dossier ~/.icons (hors thème symbolique \"default\")
 ICONS_SRC="$HOME/.icons/"
@@ -25,6 +25,11 @@ LY_DEST="$DEST/ly-config"
 # Dossier Wallpapers uniquement
 WALLPAPERS_SRC="$HOME/Images/wallpapers/"
 WALLPAPERS_DEST="$DEST/wallpapers"
+
+# Documentation Hyprland
+HYPR_DOC_SRC="$HOME/Documents/Perso/Hyprland-Docs/"
+HYPR_DOC_DEST="$DEST"
+HYPR_DOC_INDEX="$DEST/.hypr_docs_manifest"
 
 # Créer le répertoire de destination principal s'il n'existe pas
 mkdir -p "$DEST"
@@ -93,6 +98,42 @@ if [ -f "$VSCODIUM_SRC" ]; then
     echo "$(date): Configuration VSCodium sauvegardée" >> "$LOG_FILE"
 else
     echo "$(date): ATTENTION - Fichier VSCodium settings.json non trouvé" >> "$LOG_FILE"
+fi
+
+# 11) Sync de la documentation Hyprland (MD à la racine du dépôt)
+echo "$(date): Sauvegarde de la documentation Hyprland" >> "$LOG_FILE"
+if [ -d "$HYPR_DOC_SRC" ]; then
+    mkdir -p "$HYPR_DOC_DEST"
+
+    # Supprimer les anciens fichiers suivis
+    if [ -f "$HYPR_DOC_INDEX" ]; then
+        while IFS= read -r tracked || [ -n "$tracked" ]; do
+            [ -n "$tracked" ] && rm -f "$HYPR_DOC_DEST/$tracked"
+        done < "$HYPR_DOC_INDEX"
+    fi
+
+    # Copier les nouveaux fichiers markdown
+    shopt -s nullglob
+    new_docs=()
+    for src_file in "$HYPR_DOC_SRC"/*.md; do
+        base=$(basename "$src_file")
+        cp -f "$src_file" "$HYPR_DOC_DEST/$base"
+        new_docs+=("$base")
+    done
+    shopt -u nullglob
+
+    # Mettre à jour le manifeste
+    if [ ${#new_docs[@]} -gt 0 ]; then
+        printf '%s\n' "${new_docs[@]}" > "$HYPR_DOC_INDEX"
+    else
+        : > "$HYPR_DOC_INDEX"
+    fi
+
+    if [ ${#new_docs[@]} -eq 0 ]; then
+        echo "$(date): Aucun fichier .md trouvé dans $HYPR_DOC_SRC" >> "$LOG_FILE"
+    fi
+else
+    echo "$(date): ATTENTION - Dossier $HYPR_DOC_SRC non trouvé" >> "$LOG_FILE"
 fi
 
 # Message de statut
