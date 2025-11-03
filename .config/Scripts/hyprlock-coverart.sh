@@ -36,7 +36,7 @@ if ! command -v playerctl >/dev/null 2>&1; then
 fi
 
 # Liste des lecteurs à essayer (par ordre de priorité)
-PLAYERS=("spotify" "spotifyd" "mpd" "vlc" "firefox" "chromium")
+PLAYERS=("spotify" "spotifyd" "mpd" "vlc")
 
 # Fonction pour récupérer la cover art d'un lecteur
 get_cover_from_player() {
@@ -101,25 +101,20 @@ update_layout() {
     fi
 }
 
-# Si aucune musique n'est en cours, copier l'image transparente et le layout épuré
+# Layout et cover
 if [[ "${music_playing}" == "false" ]]; then
-    cp "${TRANSPARENT_COVER}" "${COVER_FILE}" 2>/dev/null || true
     update_layout "${LAYOUT_MINIMAL}"
-    echo "${COVER_FILE}"
-    exit 0
+    cp "${TRANSPARENT_COVER}" "${COVER_FILE}" 2>/dev/null || true
+else
+    update_layout "${LAYOUT_PLAYER}"
+    for player in "${PLAYERS[@]}"; do
+        if get_cover_from_player "${player}"; then
+            exit 0
+        fi
+    done
+    # musique active mais pas d'art -> fallback transparent
+    cp "${TRANSPARENT_COVER}" "${COVER_FILE}" 2>/dev/null || true
 fi
 
-# Musique active : utiliser le layout avec cover art
-update_layout "${LAYOUT_PLAYER}"
-
-# Essayer de récupérer la cover art de chaque lecteur actif
-for player in "${PLAYERS[@]}"; do
-    if get_cover_from_player "${player}"; then
-        exit 0
-    fi
-done
-
-# Si aucune cover trouvée mais musique en cours, utiliser l'image transparente
-cp "${TRANSPARENT_COVER}" "${COVER_FILE}" 2>/dev/null || true
 echo "${COVER_FILE}"
 exit 0

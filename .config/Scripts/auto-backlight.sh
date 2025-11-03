@@ -57,6 +57,15 @@ status() {
     fi
 }
 
+loop_off() {
+    echo "Boucle d'extinction toutes les 10s (Ctrl+C pour arrêter)"
+    trap 'echo "Arrêt de la boucle autobacklight"; exit 0' SIGINT SIGTERM
+    while true; do
+        brightnessctl -d "$KBD_DEVICE" set 0 >/dev/null 2>&1
+        sleep 10
+    done
+}
+
 case "${1:-status}" in
     up) manual_up ;;
     down) manual_down ;;
@@ -81,6 +90,9 @@ case "${1:-status}" in
             brightnessctl -d "$KBD_DEVICE" set 0 >/dev/null 2>&1
             echo "(schedule) extinction automatique"
         fi
+        ;;
+    loop|watch)
+        loop_off
         ;;
     status|*) status ;;
 esac

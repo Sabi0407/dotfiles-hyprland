@@ -7,8 +7,8 @@
 # Configuration par défaut
 DEFAULT_WARNING_LEVELS=(20 15)
 DEFAULT_CRITICAL_LEVELS=(10 5)
-DEFAULT_ZENITY_LEVELS=(15 10 5)
-CHARGE_NOTIFY_LEVELS=(90 100)
+DEFAULT_ZENITY_LEVELS=(10 5)
+CHARGE_NOTIFY_LEVELS=(80)
 WARNING_LEVELS=("${DEFAULT_WARNING_LEVELS[@]}")
 CRITICAL_LEVELS=("${DEFAULT_CRITICAL_LEVELS[@]}")
 ZENITY_LEVELS=("${DEFAULT_ZENITY_LEVELS[@]}")
@@ -370,10 +370,20 @@ process_battery() {
     if [ "$status" = "Discharging" ]; then
         for level in "${CRITICAL_LEVELS[@]}"; do
             if crossed_threshold "$last_capacity" "$capacity" "$level"; then
-                if check_cooldown "${battery_name}_critical_${level}"; then
-                    send_notification "critical" "🚨 Batterie critique !" \
-                        "Batterie à ${capacity}%" \
-                        "battery-caution" "${battery_name}_critical_${level}"
+                local cooldown_id="${battery_name}_critical_${level}"
+                if check_cooldown "$cooldown_id"; then
+                    local suppress_notify=false
+                    if [ "$level" -eq 10 ]; then
+                        suppress_notify=true
+                    fi
+                    if [ "$suppress_notify" = false ]; then
+                        send_notification "critical" "🚨 Batterie critique !" \
+                            "Batterie à ${capacity}%" \
+                            "battery-caution" "$cooldown_id"
+                    else
+                        log_message "INFO" "Seuil ${level}% atteint pour ${battery_name} (notification standard ignorée, Zenity uniquement)"
+                        update_cooldown "$cooldown_id"
+                    fi
                     if [ ${#ZENITY_LEVELS[@]} -gt 0 ] && should_show_zenity_alert "$level"; then
                         trigger_zenity_alert "$battery_name" "$level" "$capacity" ""
                     fi
@@ -384,8 +394,13 @@ process_battery() {
         for level in "${WARNING_LEVELS[@]}"; do
             if crossed_threshold "$last_capacity" "$capacity" "$level"; then
                 if check_cooldown "${battery_name}_warning_${level}"; then
-                    send_notification "normal" "⚠️ Batterie faible" \
-                        "Batterie à ${capacity}%" \
+                    local warning_title="⚠️ Batterie faible"
+                    local warning_message="Batterie à ${capacity}%"
+                    if [ "$level" -eq 15 ]; then
+                        warning_message="Branche le chargeur (batterie à ${capacity}%)"
+                    fi
+                    send_notification "normal" "$warning_title" \
+                        "$warning_message" \
                         "battery-low" "${battery_name}_warning_${level}"
                     if [ ${#ZENITY_LEVELS[@]} -gt 0 ] && should_show_zenity_alert "$level"; then
                         trigger_zenity_alert "$battery_name" "$level" "$capacity" ""
@@ -401,25 +416,28 @@ process_battery() {
         if [ "$status" = "Charging" ]; then
             for level in "${CHARGE_LEVELS[@]}"; do
                 if [ "$capacity" -ge "$level" ]; then
-                    if check_cooldown "${battery_name}_charge_${level}"; then
-                        send_notification "low" "🔋 Batterie en charge" \
-                            "Batterie à ${capacity}%" \
-                            "battery-good-charging" "${battery_name}_charge_${level}"
+                    local charge_id="${battery_name}_charge_${level}"
+                    if check_cooldown "$charge_id"; then
+                        local title="🔌 Charge à ${capacity}%"
+                        local message="Tu peux débrancher le chargeur (batterie à ${capacity}%)"
+                        send_notification "low" "$title" "$message" \
+                            "battery-good-charging" "$charge_id"
                     fi
                 fi
             done
             if [ "$capacity" -ge "$FULL_LEVEL" ]; then
-                if check_cooldown "${battery_name}_full"; then
-                    send_notification "low" "🔋 Batterie chargée" \
-                        "Batterie à ${capacity}%" \
-                        "battery-full" "${battery_name}_full"
+                local near_full_id="${battery_name}_near_full"
+                if check_cooldown "$near_full_id"; then
+                    log_message "INFO" "Seuil proche de la charge complète atteint (${capacity}%), notification standard ignorée"
+                    update_cooldown "$near_full_id"
                 fi
             fi
         elif [ "$status" = "Full" ]; then
-            if check_cooldown "${battery_name}_full"; then
-                send_notification "low" "🔋 Batterie pleine" \
-                    "Batterie complètement chargée" \
-                    "battery-full" "${battery_name}_full"
+            local full_id="${battery_name}_full"
+            if check_cooldown "$full_id"; then
+                send_notification "low" "🔌 Batterie pleine" \
+                    "Tu peux débrancher le chargeur (batterie à ${capacity}%)" \
+                    "battery-full" "$full_id"
             fi
         fi
     fi
