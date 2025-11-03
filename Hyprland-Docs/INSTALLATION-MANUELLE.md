@@ -46,7 +46,7 @@ yay -S --needed \
   gtk-engine-murrine gtk-engines gtk2 kvantum-theme-catppuccin-git librewolf-bin localsend-bin \
   onlyoffice-bin packettracer papirus-folders-git proton-pass-bin python-imageio-ffmpeg \
   python-pywal16-git python-pywalfox python-screeninfo spicetify-cli walcord \
-  spicetify-custom-apps-and-extensions-git spicetify-extensions-rxri-git spicetify-marketplace-bin \
+  spicetify-extensions-rxri-git spicetify-marketplace-bin \
   spotify tofi-git touchpad-toggle ttf-all-the-icons vesktop-bin \
   vscodium-bin walcord waypaper yay yay-debug
 ```
@@ -136,7 +136,7 @@ spicetify config custom_apps marketplace
 spicetify config current_theme marketplace
 spicetify apply
 ```
-- Dans Spotify, `Ctrl + Shift + L` ouvre le Marketplace pour installer thèmes et extensions.
+- Dans Spotify, `Ctrl + Shift + L` ouvre le Marketplace pour installer thèmes et extensions (le paquet `spicetify-custom-apps-and-extensions-git` n'est plus nécessaire).
 
 ### 4. Passer sur un thème personnalisé (optionnel)
 ```bash

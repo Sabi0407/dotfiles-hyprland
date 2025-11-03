@@ -169,3 +169,10 @@ Collection de scripts personnalisés.
 ```
 ~/.config/Scripts/
 ```
+
+---
+
+## Spicetify
+
+Personnalisation de Spotify via Spicetify (`spicetify-cli` + `spicetify-marketplace-bin`).  
+Consulter [INSTALLATION-MANUELLE.md](INSTALLATION-MANUELLE.md) pour les étapes de configuration et l'accès au Marketplace intégré.
