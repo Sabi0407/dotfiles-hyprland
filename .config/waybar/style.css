@@ -7,7 +7,7 @@
 
 window#waybar {
   background-color: transparent;
-  color: #c5c2c7;
+  color: #c3c6ca;
   border-radius: 16px;
   box-shadow: none;
   padding-top: 6px;
@@ -20,14 +20,14 @@ window#waybar {
 
 /* Workspaces */
 #workspaces {
-  background: #170e22;
+  background: #121e2c;
   padding: 4px 12px;
   margin: 0 16px;
   border: 1px solid transparent;
   border-radius: 12px;
   box-shadow: none;
   transition: all 0.25s ease;
-  color: #c5c2c7;
+  color: #c3c6ca;
 }
 
 #workspaces:hover {
@@ -35,8 +35,8 @@ window#waybar {
 }
 
 #workspaces button {
-  background: mix(#170e22, #ffffff, 0.08);
-  color: #c5c2c7;
+  background: mix(#121e2c, #ffffff, 0.08);
+  color: #c3c6ca;
   font-size: 0.9em;
   font-weight: 500;
   padding: 4px 10px;
@@ -50,8 +50,8 @@ window#waybar {
 
 #workspaces button:not(.active):not(.visible):hover,
 #workspaces button.occupied:not(.active):not(.visible) {
-  background: mix(#170e22, #c5c2c7, 0.28);
-  color: #A23F4F;
+  background: mix(#121e2c, #c3c6ca, 0.28);
+  color: #4B6584;
   border: 1px solid transparent;
   box-shadow: none;
   opacity: 0.9;
@@ -59,8 +59,8 @@ window#waybar {
 
 #workspaces button.active,
 #workspaces button.visible {
-  background: #A23F4F;
-  color: #170e22;
+  background: #4B6584;
+  color: #121e2c;
   border: 1px solid transparent;
   box-shadow: none;
   opacity: 1;
@@ -69,34 +69,34 @@ window#waybar {
 
 #workspaces button.active:hover,
 #workspaces button.visible:hover {
-  background: #A23F4F;
-  color: #170e22;
+  background: #4B6584;
+  color: #121e2c;
   border: 1px solid transparent;
   opacity: 1;
 }
 
 #workspaces button.urgent {
-  background: #A22933;
-  color: #170e22;
+  background: #3F6683;
+  color: #121e2c;
   border: 1px solid transparent;
   animation: pulse 0.8s ease-in-out infinite;
   opacity: 1;
 }
 
 #workspaces button.visible {
-  color: #170e22;
+  color: #121e2c;
 }
 
 #workspaces button.empty {
-  color: #c5c2c7;
+  color: #c3c6ca;
   opacity: 0.5;
 }
 
 #group-clock_drawer,
 #group-processes_tray,
 #group-arch_drawer {
-  color: #c5c2c7;
-  background: #170e22;
+  color: #c3c6ca;
+  background: #121e2c;
   padding: 4px 14px;
   margin: 0 10px 0 0;
   border: 1px solid transparent;
@@ -108,9 +108,9 @@ window#waybar {
 #group-clock_drawer:hover,
 #group-processes_tray:hover,
 #group-arch_drawer:hover {
-  background: mix(#170e22, #c5c2c7, 0.18);
-  color: #A23F4F;
-  border: 1px solid mix(#170e22, #A23F4F, 0.45);
+  background: mix(#121e2c, #c3c6ca, 0.18);
+  color: #4B6584;
+  border: 1px solid mix(#121e2c, #4B6584, 0.45);
   box-shadow: none;
 }
 
@@ -148,8 +148,8 @@ window#waybar {
 #custom-speaker_profile,
 #custom-updates,
 #custom-system_toggle {
-  color: #c5c2c7;
-  background: #170e22;
+  color: #c3c6ca;
+  background: #121e2c;
   padding: 4px 14px;
   margin: 0 0 0 10px;
   border-radius: 14px;
@@ -192,8 +192,8 @@ window#waybar {
 #custom-speaker_profile:hover,
 #custom-updates:hover,
 #custom-system_toggle:hover {
-  background: mix(#170e22, #A23F4F, 0.95);
-  color: #170e22;
+  background: mix(#121e2c, #4B6584, 0.95);
+  color: #121e2c;
   border: 1px solid transparent;
   box-shadow: none;
 }
@@ -207,15 +207,15 @@ window#waybar {
 }
 
 #custom-updates.updates-some {
-  background: mix(#170e22, #A22933, 0.15);
+  background: mix(#121e2c, #3F6683, 0.15);
   border: 1px solid transparent;
-  color: #A22933;
+  color: #3F6683;
 }
 
 #custom-updates.updates-many {
-  background: mix(#170e22, #A22933, 0.3);
+  background: mix(#121e2c, #3F6683, 0.3);
   border: 1px solid transparent;
-  color: #A22933;
+  color: #3F6683;
   animation: pulse 1.5s infinite;
 }
 
@@ -231,7 +231,7 @@ window#waybar {
 
 #battery {
   transition: all 0.3s ease;
-  color: #c5c2c7;
+  color: #c3c6ca;
 }
 
 #battery.warning {
@@ -277,17 +277,17 @@ window#waybar {
 
 #custom-usb_drives.no-usb {
   opacity: 0.5;
-  color: #c5c2c7;
+  color: #c3c6ca;
 }
 
 #custom-usb_drives.usb-connected {
-  color: #c5c2c7;
-  border: 1px solid mix(#170e22, #A23F4F, 0.3);
+  color: #c3c6ca;
+  border: 1px solid mix(#121e2c, #4B6584, 0.3);
 }
 
 #custom-usb_drives.usb-many {
-  color: #c5c2c7;
-  border: 1px solid mix(#170e22, #A23F4F, 0.3);
+  color: #c3c6ca;
+  border: 1px solid mix(#121e2c, #4B6584, 0.3);
   animation: pulse 2s infinite;
 }
 

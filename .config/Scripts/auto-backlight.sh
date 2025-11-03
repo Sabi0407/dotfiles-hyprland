@@ -75,7 +75,7 @@ case "${1:-status}" in
         echo "Rétroéclairage éteint (off)"
         ;;
     on|wake|unlock)
-        if is_night_hours; then
+        if [[ "${AUTO_BACKLIGHT_FORCE:-0}" == "1" ]] || is_night_hours; then
             brightnessctl -d "$KBD_DEVICE" set 1 >/dev/null 2>&1
             echo "Rétroéclairage activé (1)"
         else
@@ -89,6 +89,14 @@ case "${1:-status}" in
         else
             brightnessctl -d "$KBD_DEVICE" set 0 >/dev/null 2>&1
             echo "(schedule) extinction automatique"
+        fi
+        ;;
+    maybe_off)
+        if is_night_hours || [[ "${AUTO_BACKLIGHT_FORCE:-0}" == "1" ]]; then
+            brightnessctl -d "$KBD_DEVICE" set 0 >/dev/null 2>&1
+            echo "Extinction automatique (maybe_off)"
+        else
+            echo "Extinction automatique ignorée (hors plage nocturne)"
         fi
         ;;
     loop|watch)
