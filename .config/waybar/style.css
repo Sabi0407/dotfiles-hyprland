@@ -115,7 +115,6 @@ window#waybar {
 }
 
 #battery,
-#pulseaudio,
 #backlight,
 #custom-keyboard-backlight,
 #custom-numlock,
@@ -146,6 +145,7 @@ window#waybar {
 #custom-weather,
 #custom-mic_status,
 #custom-speaker_profile,
+#pulseaudio,
 #custom-updates,
 #custom-system_toggle {
   color: #c2c3c5;
@@ -159,7 +159,6 @@ window#waybar {
 }
 
 #battery:hover,
-#pulseaudio:hover,
 #backlight:hover,
 #custom-keyboard-backlight:hover,
 #custom-numlock:hover,
@@ -190,6 +189,7 @@ window#waybar {
 #custom-weather:hover,
 #custom-mic_status:hover,
 #custom-speaker_profile:hover,
+#pulseaudio:hover,
 #custom-updates:hover,
 #custom-system_toggle:hover {
   background: mix(#0b1019, #958EC3, 0.95);
@@ -267,8 +267,13 @@ window#waybar {
 }
 
 #custom-mic_status,
-#custom-speaker_profile {
+#custom-speaker_profile,
+#pulseaudio {
   min-width: 32px;
+  color: #c2c3c5;
+  background: #0b1019;
+  border: 1px solid transparent;
+  transition: all 0.2s;
 }
 
 #group-arch_drawer {

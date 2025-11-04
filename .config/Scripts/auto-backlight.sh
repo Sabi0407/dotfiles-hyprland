@@ -1,106 +1,101 @@
 #!/bin/bash
 
 # Script simple pour piloter le rétroéclairage clavier Asus/brightnessctl
-NIGHT_BEGIN=18   # début d'activation automatique (18h)
-NIGHT_END=4      # fin d'activation automatique (04h)
 
 KBD_DEVICE="asus::kbd_backlight"
+STATE_FILE="/tmp/auto-backlight-state"
 
-is_night_hours() {
-    local hour=$(date +%H)
-    if (( NIGHT_END > NIGHT_BEGIN )); then
-        (( hour >= NIGHT_BEGIN && hour < NIGHT_END ))
-    else
-        (( hour >= NIGHT_BEGIN || hour < NIGHT_END ))
+load_state() {
+    LAST_LEVEL=0
+    MANUAL_OFF=0
+    if [[ -f "$STATE_FILE" ]]; then
+        read -r LAST_LEVEL MANUAL_OFF <"$STATE_FILE" 2>/dev/null || true
+        [[ "$LAST_LEVEL" =~ ^[0-9]+$ ]] || LAST_LEVEL=0
+        [[ "$MANUAL_OFF" =~ ^[0-9]+$ ]] || MANUAL_OFF=0
     fi
+}
+
+save_state() {
+    printf '%s %s\n' "$LAST_LEVEL" "$MANUAL_OFF" >"$STATE_FILE"
 }
 
 get_current() {
     brightnessctl -d "$KBD_DEVICE" get 2>/dev/null || echo "0"
 }
 
+cycle_brightness() {
+    local current=$(get_current)
+    local next_level
+    case "$current" in
+        0) next_level=1 ;;
+        1) next_level=2 ;;
+        2|3|*) next_level=0 ;;
+    esac
+    brightnessctl -d "$KBD_DEVICE" set "$next_level" >/dev/null 2>&1
+    echo "Rétroéclairage réglé sur $next_level"
+    load_state
+    if (( next_level > 0 )); then
+        LAST_LEVEL=$next_level
+        MANUAL_OFF=0
+        save_state
+    else
+        MANUAL_OFF=1
+        save_state
+    fi
+}
+
 # Commandes utilisateur -------------------------------------------------------
-manual_up() {
-    local current=$(get_current)
-    local max=$(brightnessctl -d "$KBD_DEVICE" max 2>/dev/null || echo "3")
-    local new_level=$((current + 1))
-    (( new_level > max )) && new_level=$max
-    brightnessctl -d "$KBD_DEVICE" set "$new_level" >/dev/null 2>&1
-    echo "Niveau: $new_level"
-}
-
-manual_down() {
-    local current=$(get_current)
-    local new_level=$((current - 1))
-    (( new_level < 0 )) && new_level=0
-    brightnessctl -d "$KBD_DEVICE" set "$new_level" >/dev/null 2>&1
-    echo "Niveau: $new_level"
-}
-
-manual_toggle() {
-    local current=$(get_current)
-    if (( current == 0 )); then
-        brightnessctl -d "$KBD_DEVICE" set 1 >/dev/null 2>&1
-        echo "Allumé (1)"
-    else
-        brightnessctl -d "$KBD_DEVICE" set 0 >/dev/null 2>&1
-        echo "Éteint"
-    fi
-}
-
-status() {
-    local current=$(get_current)
-    if (( current > 0 )); then
-        echo "ON ($current)"
-    else
-        echo "OFF"
-    fi
-}
-
-loop_off() {
-    echo "Boucle d'extinction toutes les 10s (Ctrl+C pour arrêter)"
-    trap 'echo "Arrêt de la boucle autobacklight"; exit 0' SIGINT SIGTERM
-    while true; do
-        brightnessctl -d "$KBD_DEVICE" set 0 >/dev/null 2>&1
-        sleep 10
-    done
-}
-
 case "${1:-status}" in
-    up) manual_up ;;
-    down) manual_down ;;
-    toggle) manual_toggle ;;
     off|lock)
         brightnessctl -d "$KBD_DEVICE" set 0 >/dev/null 2>&1
         echo "Rétroéclairage éteint (off)"
+        load_state
+        MANUAL_OFF=1
+        save_state
         ;;
     on|wake|unlock)
-        if [[ "${AUTO_BACKLIGHT_FORCE:-0}" == "1" ]] || is_night_hours; then
-            brightnessctl -d "$KBD_DEVICE" set 1 >/dev/null 2>&1
-            echo "Rétroéclairage activé (1)"
-        else
-            echo "Hors plage nocturne (19h-04h) : rétroéclairage laissé éteint"
-        fi
-        ;;
-    schedule|check)
-        if is_night_hours; then
-            brightnessctl -d "$KBD_DEVICE" set 1 >/dev/null 2>&1
-            echo "(schedule) activation automatique"
-        else
-            brightnessctl -d "$KBD_DEVICE" set 0 >/dev/null 2>&1
-            echo "(schedule) extinction automatique"
+        load_state
+        local current=$(get_current)
+        if [[ "${AUTO_BACKLIGHT_FORCE:-0}" == "1" ]]; then
+            LAST_LEVEL=${LAST_LEVEL:-1}
+            (( LAST_LEVEL == 0 )) && LAST_LEVEL=1
+            MANUAL_OFF=0
+            save_state
+            brightnessctl -d "$KBD_DEVICE" set "$LAST_LEVEL" >/dev/null 2>&1
+            echo "Rétroéclairage activé ($LAST_LEVEL)"
+        elif (( MANUAL_OFF == 1 )); then
+            echo "Rétroéclairage laissé éteint"
+        elif (( current == 0 )) && (( LAST_LEVEL > 0 )); then
+            brightnessctl -d "$KBD_DEVICE" set "$LAST_LEVEL" >/dev/null 2>&1
+            echo "Rétroéclairage restauré ($LAST_LEVEL)"
         fi
         ;;
     maybe_off)
-        if is_night_hours || [[ "${AUTO_BACKLIGHT_FORCE:-0}" == "1" ]]; then
-            brightnessctl -d "$KBD_DEVICE" set 0 >/dev/null 2>&1
-            echo "Extinction automatique (maybe_off)"
-        else
-            echo "Extinction automatique ignorée (hors plage nocturne)"
+        brightnessctl -d "$KBD_DEVICE" set 0 >/dev/null 2>&1
+        echo "Extinction automatique (maybe_off)"
+        load_state
+        MANUAL_OFF=0
+        save_state
+        ;;
+    cycle)
+        cycle_brightness
+        ;;
+    restore)
+        load_state
+        if (( MANUAL_OFF == 0 )) && (( LAST_LEVEL > 0 )); then
+            brightnessctl -d "$KBD_DEVICE" set "$LAST_LEVEL" >/dev/null 2>&1
+            echo "Rétroéclairage restauré ($LAST_LEVEL)"
         fi
         ;;
-    loop|watch)
-        loop_off
+    status)
+        local current=$(get_current)
+        if (( current > 0 )); then
+            echo "ON ($current)"
+        else
+            echo "OFF"
+        fi
         ;;
-    status|*) status ;;
+    *)
+        cycle_brightness
+        ;;
 esac
