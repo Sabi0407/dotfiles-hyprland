@@ -90,32 +90,14 @@ yay -Scc                         # Nettoyage cache yay
 flatpak uninstall --unused       # Nettoyage Flatpak
 ```
 
-## Cronie : rétroéclairage clavier automatique
-- Script utilisé : `~/.config/Scripts/auto-backlight.sh` (options `on`, `off`, `toggle`, `schedule`).
-
-### Activer le service Cronie
-```bash
-sudo systemctl enable --now cronie.service
-```
-
-### Planifier l’exécution (crontab utilisateur)
-```bash
-crontab -e
-```
-Entrées recommandées pour allumer à 18h et couper à 4h :
-```
-0 18 * * * ~/.config/Scripts/auto-backlight.sh on
-0 4  * * * ~/.config/Scripts/auto-backlight.sh off
-```
-- Adapter les horaires ou remplacer `on/off` par `schedule` si tu veux laisser le script décider.
-
-### Commandes utiles Cronie
-```bash
-systemctl status cronie.service      # Vérifier que le service tourne
-crontab -l                           # Lister les tâches planifiées de l'utilisateur
-crontab -e                           # Éditer les tâches
-journalctl -u cronie.service --since "today"  # Logs des exécutions
-```
+## Rétroéclairage clavier
+- Script utilisé : `~/.config/Scripts/auto-backlight.sh`.
+- Super + Espace (`$mainMod + SPACE`) fait défiler les niveaux de luminosité.
+- Un cron relance automatiquement le rétroéclairage à 18 h et l'éteint à 6 h du matin :
+  ```cron
+  0 18 * * * ~/.config/Scripts/auto-backlight.sh cycle
+  0 6  * * * ~/.config/Scripts/auto-backlight.sh off
+  ```
 
 ## Spicetify : installation & configuration
 
