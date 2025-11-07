@@ -32,8 +32,32 @@ apply_wallpaper() {
     transition=${transitions[$RANDOM % ${#transitions[@]}]}
     swww img "$wallpaper_path" --transition-type "$transition" --transition-duration 2
     
-    # Générer les couleurs pywal
-    wal -i "$wallpaper_path" -n
+    # Générer les couleurs pywal (avec fallbacks)
+    if ! wal -i "$wallpaper_path" -n; then
+        echo "[wallpaper-manager] Échec backend wal par défaut." >&2
+        declare -A BACKENDS=(
+            [colorthief]=colorthief
+            [haishoku]=haishoku
+            [colorz]=colorz
+        )
+        fallback_ok=false
+        for backend in "${!BACKENDS[@]}"; do
+            module=${BACKENDS[$backend]}
+            if python -c "import $module" >/dev/null 2>&1; then
+                echo "[wallpaper-manager] Tentative backend $backend..." >&2
+                if wal -i "$wallpaper_path" -n --backend "$backend"; then
+                    fallback_ok=true
+                    break
+                fi
+            else
+                echo "[wallpaper-manager] Backend $backend indisponible (module Python '$module' absent)." >&2
+            fi
+        done
+        if [[ $fallback_ok == false ]]; then
+            echo "[wallpaper-manager] Impossible de générer une palette Pywal pour ce wallpaper." >&2
+            return 1
+        fi
+    fi
 
     if [ -x "$SCRIPTS_DIR/pywal-sync.sh" ]; then
         if ! "$SCRIPTS_DIR/pywal-sync.sh" >/dev/null 2>&1; then

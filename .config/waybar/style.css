@@ -7,7 +7,7 @@
 
 window#waybar {
   background-color: transparent;
-  color: #c2c3c5;
+  color: #c3c3c7;
   border-radius: 16px;
   box-shadow: none;
   padding-top: 6px;
@@ -20,14 +20,14 @@ window#waybar {
 
 /* Workspaces */
 #workspaces {
-  background: #0b1019;
+  background: #000000;
   padding: 4px 12px;
   margin: 0 16px;
   border: 1px solid transparent;
   border-radius: 12px;
   box-shadow: none;
   transition: all 0.25s ease;
-  color: #c2c3c5;
+  color: #c3c3c7;
 }
 
 #workspaces:hover {
@@ -35,8 +35,8 @@ window#waybar {
 }
 
 #workspaces button {
-  background: mix(#0b1019, #ffffff, 0.08);
-  color: #c2c3c5;
+  background: mix(#000000, #ffffff, 0.08);
+  color: #c3c3c7;
   font-size: 0.9em;
   font-weight: 500;
   padding: 4px 10px;
@@ -50,8 +50,8 @@ window#waybar {
 
 #workspaces button:not(.active):not(.visible):hover,
 #workspaces button.occupied:not(.active):not(.visible) {
-  background: mix(#0b1019, #c2c3c5, 0.28);
-  color: #958EC3;
+  background: mix(#000000, #c3c3c7, 0.28);
+  color: #7E809E;
   border: 1px solid transparent;
   box-shadow: none;
   opacity: 0.9;
@@ -59,8 +59,8 @@ window#waybar {
 
 #workspaces button.active,
 #workspaces button.visible {
-  background: #958EC3;
-  color: #0b1019;
+  background: #7E809E;
+  color: #000000;
   border: 1px solid transparent;
   box-shadow: none;
   opacity: 1;
@@ -69,34 +69,34 @@ window#waybar {
 
 #workspaces button.active:hover,
 #workspaces button.visible:hover {
-  background: #958EC3;
-  color: #0b1019;
+  background: #7E809E;
+  color: #000000;
   border: 1px solid transparent;
   opacity: 1;
 }
 
 #workspaces button.urgent {
-  background: #DB8B8F;
-  color: #0b1019;
+  background: #6F6C91;
+  color: #000000;
   border: 1px solid transparent;
   animation: pulse 0.8s ease-in-out infinite;
   opacity: 1;
 }
 
 #workspaces button.visible {
-  color: #0b1019;
+  color: #000000;
 }
 
 #workspaces button.empty {
-  color: #c2c3c5;
+  color: #c3c3c7;
   opacity: 0.5;
 }
 
 #group-clock_drawer,
 #group-processes_tray,
 #group-arch_drawer {
-  color: #c2c3c5;
-  background: #0b1019;
+  color: #c3c3c7;
+  background: #000000;
   padding: 4px 14px;
   margin: 0 10px 0 0;
   border: 1px solid transparent;
@@ -108,13 +108,14 @@ window#waybar {
 #group-clock_drawer:hover,
 #group-processes_tray:hover,
 #group-arch_drawer:hover {
-  background: mix(#0b1019, #c2c3c5, 0.18);
-  color: #958EC3;
-  border: 1px solid mix(#0b1019, #958EC3, 0.45);
+  background: mix(#000000, #c3c3c7, 0.18);
+  color: #7E809E;
+  border: 1px solid mix(#000000, #7E809E, 0.45);
   box-shadow: none;
 }
 
 #battery,
+#pulseaudio,
 #backlight,
 #custom-keyboard-backlight,
 #custom-numlock,
@@ -145,11 +146,10 @@ window#waybar {
 #custom-weather,
 #custom-mic_status,
 #custom-speaker_profile,
-#pulseaudio,
 #custom-updates,
 #custom-system_toggle {
-  color: #c2c3c5;
-  background: #0b1019;
+  color: #c3c3c7;
+  background: #000000;
   padding: 4px 14px;
   margin: 0 0 0 10px;
   border-radius: 14px;
@@ -159,6 +159,7 @@ window#waybar {
 }
 
 #battery:hover,
+#pulseaudio:hover,
 #backlight:hover,
 #custom-keyboard-backlight:hover,
 #custom-numlock:hover,
@@ -189,11 +190,10 @@ window#waybar {
 #custom-weather:hover,
 #custom-mic_status:hover,
 #custom-speaker_profile:hover,
-#pulseaudio:hover,
 #custom-updates:hover,
 #custom-system_toggle:hover {
-  background: mix(#0b1019, #958EC3, 0.95);
-  color: #0b1019;
+  background: mix(#000000, #7E809E, 0.95);
+  color: #000000;
   border: 1px solid transparent;
   box-shadow: none;
 }
@@ -207,15 +207,15 @@ window#waybar {
 }
 
 #custom-updates.updates-some {
-  background: mix(#0b1019, #DB8B8F, 0.15);
+  background: mix(#000000, #6F6C91, 0.15);
   border: 1px solid transparent;
-  color: #DB8B8F;
+  color: #6F6C91;
 }
 
 #custom-updates.updates-many {
-  background: mix(#0b1019, #DB8B8F, 0.3);
+  background: mix(#000000, #6F6C91, 0.3);
   border: 1px solid transparent;
-  color: #DB8B8F;
+  color: #6F6C91;
   animation: pulse 1.5s infinite;
 }
 
@@ -231,7 +231,7 @@ window#waybar {
 
 #battery {
   transition: all 0.3s ease;
-  color: #c2c3c5;
+  color: #c3c3c7;
 }
 
 #battery.warning {
@@ -267,13 +267,8 @@ window#waybar {
 }
 
 #custom-mic_status,
-#custom-speaker_profile,
-#pulseaudio {
+#custom-speaker_profile {
   min-width: 32px;
-  color: #c2c3c5;
-  background: #0b1019;
-  border: 1px solid transparent;
-  transition: all 0.2s;
 }
 
 #group-arch_drawer {
@@ -282,17 +277,17 @@ window#waybar {
 
 #custom-usb_drives.no-usb {
   opacity: 0.5;
-  color: #c2c3c5;
+  color: #c3c3c7;
 }
 
 #custom-usb_drives.usb-connected {
-  color: #c2c3c5;
-  border: 1px solid mix(#0b1019, #958EC3, 0.3);
+  color: #c3c3c7;
+  border: 1px solid mix(#000000, #7E809E, 0.3);
 }
 
 #custom-usb_drives.usb-many {
-  color: #c2c3c5;
-  border: 1px solid mix(#0b1019, #958EC3, 0.3);
+  color: #c3c3c7;
+  border: 1px solid mix(#000000, #7E809E, 0.3);
   animation: pulse 2s infinite;
 }
 

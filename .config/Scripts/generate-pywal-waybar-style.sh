@@ -14,6 +14,10 @@ fi
 
 fallback() {
     local key="$1" value=""
+    if [[ "$key" == "background" ]]; then
+        printf '#000000\n'
+        return
+    fi
     if [[ "${PYWAL_COLORS_STATUS:-1}" -eq 0 ]]; then
         value="$(eval "printf '%s' \"\${$key:-}\"")"
     fi
