@@ -81,6 +81,28 @@ alias root='sudo -i' # Se connecter en tant que root
 # Scripts
 alias saveconfig='/home/sabi/saveconfig.sh'
 alias clean='/home/sabi/.config/Scripts/cleanup-system.sh'
+alias wallanim='MPVWALL_SKIP_STOP=1 ~/.config/Scripts/mpvpaper-wallpaper.sh random'
+
+walldyn() {
+    local base_dir="${MPV_WALL_PICKER_VIDEOS:-$HOME/Images/anime-walls}"
+    if [ ! -d "$base_dir" ]; then
+        echo "walldyn: dossier introuvable -> $base_dir"
+        return 1
+    fi
+    local selection
+    if command -v yazi >/dev/null 2>&1; then
+        local chooser_file
+        chooser_file=$(mktemp)
+        yazi --chooser-file "$chooser_file" "$base_dir"
+        selection=$(sed -n '1p' "$chooser_file")
+        rm -f "$chooser_file"
+    else
+        command -v fzf >/dev/null 2>&1 || { echo "walldyn: installe yazi ou fzf."; return 1; }
+        selection=$(find "$base_dir" -type f \( -iname '*.mp4' -o -iname '*.mkv' -o -iname '*.webm' -o -iname '*.avi' -o -iname '*.mov' \) | sort | fzf --prompt "Fond animé > " --height 80% --border)
+    fi
+    [ -z "$selection" ] && return 0
+    MPVWALL_SKIP_STOP=1 MPV_WALL_VIDEO="$selection" ~/.config/Scripts/mpvpaper-wallpaper.sh start
+}
 
 # Papirus Folders - Changer couleur des icones de dossiers
 alias folder-black='sudo papirus-folders -C black --theme Papirus-Dark'
