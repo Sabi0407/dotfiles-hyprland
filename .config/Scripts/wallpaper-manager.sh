@@ -18,7 +18,14 @@ apply_wallpaper() {
         echo "Erreur: Wallpaper non trouvé - $wallpaper_path"
         return 1
     fi
-    
+
+    # Si mpvpaper est actif, l'arrêter proprement (une seule fois)
+    if [ "${MPVWALL_SKIP_STOP:-0}" != "1" ]; then
+        if [ -x "$HOME/.config/Scripts/mpvpaper-wallpaper.sh" ]; then
+            MPVWALL_SKIP_STOP=1 "$HOME/.config/Scripts/mpvpaper-wallpaper.sh" stop >/dev/null 2>&1 || true
+        fi
+    fi
+
     echo "Application du wallpaper: $(basename "$wallpaper_path")"
     
     # Démarrer swww-daemon si nécessaire
@@ -33,7 +40,7 @@ apply_wallpaper() {
     swww img "$wallpaper_path" --transition-type "$transition" --transition-duration 2
     
     # Générer les couleurs pywal (avec fallbacks)
-    if ! wal -i "$wallpaper_path" -n; then
+    if ! wal --cols16 -i "$wallpaper_path" -n; then
         echo "[wallpaper-manager] Échec backend wal par défaut." >&2
         declare -A BACKENDS=(
             [colorthief]=colorthief
@@ -45,7 +52,7 @@ apply_wallpaper() {
             module=${BACKENDS[$backend]}
             if python -c "import $module" >/dev/null 2>&1; then
                 echo "[wallpaper-manager] Tentative backend $backend..." >&2
-                if wal -i "$wallpaper_path" -n --backend "$backend"; then
+                if wal --cols16 -i "$wallpaper_path" -n --backend "$backend"; then
                     fallback_ok=true
                     break
                 fi
