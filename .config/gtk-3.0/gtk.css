@@ -51,3 +51,44 @@ dialog window {
     opacity: 1.0;
 }
 
+/* Masquer la barre de menu de Blueman Manager */
+window.blueman-manager menubar,
+.blueman-manager menubar,
+window.blueman-manager .menubar,
+.blueman-manager .menubar {
+    min-height: 0;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    opacity: 0;
+}
+
+window.blueman-manager menubar *,
+.blueman-manager menubar * {
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+    min-width: 0;
+    opacity: 0;
+    color: transparent;
+}
+
+/* Masquer également le headerbar (barre de titre) de Blueman Manager */
+window.blueman-manager headerbar,
+.blueman-manager headerbar,
+window.blueman-manager headerbar *,
+.blueman-manager headerbar * {
+    min-height: 0;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    opacity: 0;
+    color: transparent;
+}
+
