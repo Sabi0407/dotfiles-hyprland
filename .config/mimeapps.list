@@ -1,7 +1,7 @@
 [Default Applications]
 application/zip=org.gnome.FileRoller.desktop
 x-scheme-handler/anytype=anytype.desktop
-inode/directory=org.gnome.Nautilus.desktop
+inode/directory=Thunar.desktop
 application/x-shellscript=org.xfce.mousepad.desktop
 x-terminal-emulator.desktop=kitty.desktop
 TerminalEmulator=kitty.desktop

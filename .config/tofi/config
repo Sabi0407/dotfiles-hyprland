@@ -46,11 +46,11 @@ prompt-color = #c2c2c5
 # Valeurs par défaut, seront écrasées après un wal
 background-color = #0b0b19CC
 text-color = #c2c2c5
-selection-color = #B64A34
+selection-color = #A59360
 selection-background-padding = 14
-outline-color = #B64A3480
-border-color = #B64A3460
-text-cursor-color = #707C83
+outline-color = #A5936080
+border-color = #A5936060
+text-cursor-color = #77878C
 
 # Animations élégantes et naturelles
 min-input-width = 300
