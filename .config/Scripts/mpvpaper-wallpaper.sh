@@ -245,6 +245,9 @@ apply_pywal_from_image() {
     if "${cmd[@]}" >"$log_file" 2>&1; then
         log "Palette Pywal générée (backend ${backend:-default})"
         run_pywal_sync_helpers
+        if [ -x "$HOME/.config/Scripts/update-swayosd-style.sh" ]; then
+            "$HOME/.config/Scripts/update-swayosd-style.sh" >/dev/null 2>&1 || true
+        fi
         reload_ui_theme
         return 0
     fi

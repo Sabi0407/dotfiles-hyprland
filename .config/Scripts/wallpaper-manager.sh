@@ -66,6 +66,10 @@ apply_wallpaper() {
         fi
     fi
 
+    if [ -x "$SCRIPTS_DIR/update-swayosd-style.sh" ]; then
+        "$SCRIPTS_DIR/update-swayosd-style.sh" >/dev/null 2>&1 || true
+    fi
+
     if [ -x "$SCRIPTS_DIR/pywal-sync.sh" ]; then
         if ! "$SCRIPTS_DIR/pywal-sync.sh" >/dev/null 2>&1; then
             echo "[wallpaper-manager] Avertissement : certains modules pywal ont échoué." >&2
