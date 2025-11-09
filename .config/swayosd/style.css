@@ -1,0 +1,68 @@
+@define-color theme_bg_color #0b0b19;
+@define-color theme_fg_color #c2c2c5;
+@define-color accent_color #7c6f48;
+@define-color muted_color #5a5a6e;
+
+window#osd {
+  font-family: "Inter", "SF Pro Text", "Noto Sans", sans-serif;
+  border-radius: 18px;
+  border: none;
+  background: alpha(@theme_bg_color, 0.94);
+  margin: 12px 24px 0 auto;
+  min-width: 300px;
+  box-shadow: 0 18px 40px alpha(@theme_bg_color, 0.70);
+  padding: 0;
+}
+
+window#osd #container {
+  margin: 16px 20px;
+  padding: 0;
+}
+
+window#osd image,
+window#osd label {
+  color: @theme_fg_color;
+}
+
+window#osd image {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  margin-right: 14px;
+  border-radius: 14px;
+  background: alpha(@theme_fg_color, 0.15);
+}
+
+window#osd label {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05px;
+}
+
+window#osd progressbar:disabled,
+window#osd image:disabled {
+  opacity: 0.45;
+}
+
+window#osd progressbar {
+  min-height: 12px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+  margin-top: 8px;
+}
+
+window#osd trough {
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background: alpha(@muted_color, 0.45);
+}
+
+window#osd progress {
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background: @accent_color;
+  box-shadow: 0 0 8px alpha(@accent_color, 0.45);
+}
