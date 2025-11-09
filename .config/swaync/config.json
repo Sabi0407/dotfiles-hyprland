@@ -74,9 +74,8 @@
         },
         {
           "label": "󰂛",
-          "command": "bash -c 'swaync-client -d && swaync-client -t'",
-          "type": "toggle",
-          "tooltip": "DND"
+          "command": "~/.config/Scripts/toggle_dnd.sh",
+          "tooltip": "Ne pas déranger"
         },
         {
           "label": "󰸈",
