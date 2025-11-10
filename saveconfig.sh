@@ -30,6 +30,12 @@ WALLPAPERS_DEST="$DEST/wallpapers"
 HYPR_DOC_SRC="$HOME/Documents/Perso/Hyprland-Docs/"
 HYPR_DOC_DEST="$DEST/Hyprland-Docs"
 
+# Emplacements VSCodium
+VSCODIUM_SETTINGS_SRC="$HOME/.config/VSCodium/User/settings.json"
+VSCODIUM_LANG_SRC="$HOME/.config/VSCodium/languagepacks.json"
+VSCODIUM_DEST_BASE="$DEST/.config/VSCodium"
+VSCODIUM_USER_DEST="$VSCODIUM_DEST_BASE/User"
+
 # Créer le répertoire de destination principal s'il n'existe pas
 mkdir -p "$DEST"
 mkdir -p "$CONFIG_DEST"
@@ -87,16 +93,22 @@ rsync -av --delete "$HOME/.config/mimeapps.list" "$DEST/.config/" >> "$LOG_FILE"
 echo "$(date): Sauvegarde de saveconfig.sh" >> "$LOG_FILE"
 rsync -av --delete "$HOME/saveconfig.sh" "$DEST/" >> "$LOG_FILE" 2>&1
 
-# 10) Sync de la configuration VSCodium (settings.json)
+# 10) Sync de la configuration VSCodium (settings.json + languagepacks)
 echo "$(date): Sauvegarde de la configuration VSCodium" >> "$LOG_FILE"
-VSCODIUM_SRC="$HOME/.config/VSCodium/User/settings.json"
-VSCODIUM_DEST="$DEST/VSCodium/User"
-if [ -f "$VSCODIUM_SRC" ]; then
-    mkdir -p "$VSCODIUM_DEST"
-    rsync -av "$VSCODIUM_SRC" "$VSCODIUM_DEST/" >> "$LOG_FILE" 2>&1
-    echo "$(date): Configuration VSCodium sauvegardée" >> "$LOG_FILE"
+mkdir -p "$VSCODIUM_USER_DEST"
+if [ -f "$VSCODIUM_SETTINGS_SRC" ]; then
+    rsync -av "$VSCODIUM_SETTINGS_SRC" "$VSCODIUM_USER_DEST/" >> "$LOG_FILE" 2>&1
+    echo "$(date): Fichier settings.json sauvegardé" >> "$LOG_FILE"
 else
-    echo "$(date): ATTENTION - Fichier VSCodium settings.json non trouvé" >> "$LOG_FILE"
+    echo "$(date): ATTENTION - settings.json introuvable" >> "$LOG_FILE"
+fi
+
+if [ -f "$VSCODIUM_LANG_SRC" ]; then
+    mkdir -p "$VSCODIUM_DEST_BASE"
+    rsync -av "$VSCODIUM_LANG_SRC" "$VSCODIUM_DEST_BASE/" >> "$LOG_FILE" 2>&1
+    echo "$(date): languagepacks.json sauvegardé" >> "$LOG_FILE"
+else
+    echo "$(date): ATTENTION - languagepacks.json introuvable" >> "$LOG_FILE"
 fi
 
 # 11) Sync de la documentation Hyprland
