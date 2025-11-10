@@ -10,45 +10,41 @@ sudo pacman -Sc    # Nettoyage des anciens paquets (optionnel)
 
 ### Miroirs recommandés (France + voisins)
 Privilégier les miroirs français et limitrophes :
-```bash
-sudo reflector --country France \
-  --country Belgium \
-  --country Luxembourg \
-  --country Germany \
-  --country Switzerland \
-  --protocol https \
-  --latest 10 \
-  --sort rate \
+```
+sudo reflector --country France --country Belgium --country Luxembourg \
+  --country Germany --country Switzerland \
+  --protocol https --latest 10 --sort rate \
   --save /etc/pacman.d/mirrorlist
 ```
 
 ### Paquets installés avec pacman
 Liste des paquets explicitement installés depuis les dépôts officiels (commande `pacman -Qqent`) :
-```bash
-sudo pacman -S --needed \
-  base bat blueman bluez-utils brightnessctl btop cliphist cronie \
-  eza fastfetch firefox flameshot flatpak galculator gsimplecal hypridle \
-  hyprland hyprlock hyprpicker imv intel-ucode kooha libxcrypt-compat ly \
+```
+sudo pacman -S --needed base bat blueman bluez-utils brightnessctl btop \
+  cliphist cronie eza fastfetch firefox flameshot flatpak galculator gsimplecal \
+  hypridle hyprland hyprlock hyprpicker imv intel-ucode kooha libxcrypt-compat ly \
   micro mousepad ncdu numlockx nwg-look obsidian openssl-1.1 pacman-contrib \
   pavucontrol plymouth polkit-gnome power-profiles-daemon proton-vpn-gtk-app qbittorrent \
-  qemu-guest-agent qt5ct qt6ct reflector sassc spice-vdagent swaync syncthing \
-  terminus-font thunar tree ttf-firacode-nerd ttf-jetbrains-mono ttf-jetbrains-mono-nerd ttf-meslo-nerd \
-  veracrypt virt-viewer virtualbox-guest-utils waybar woff2-font-awesome xarchiver xf86-video-qxl yazi \
+  qemu-guest-agent qt5ct qt6ct reflector sassc spice-vdagent swaync swayosd \
+  terminus-font thunar tree ttf-firacode-nerd ttf-jetbrains-mono \
+  ttf-jetbrains-mono-nerd ttf-meslo-nerd udiskie veracrypt virtualbox-guest-utils \
+  virt-viewer waybar woff2-font-awesome xarchiver xf86-video-qxl yazi \
   zsh-completions zsh-syntax-highlighting
 ```
 
 
 ### Paquets installés depuis l'AUR
 Résultat de `pacman -Qqm` (paquets « foreign ») :
-```bash
-yay -S --needed \
-  anki-bin catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cursor-bin electron39-bin \
-  gtk-engine-murrine gtk-engines gtk2 kvantum-theme-catppuccin-git librewolf-bin localsend-bin \
-  onlyoffice-bin packettracer papirus-folders-git proton-pass-bin python-imageio-ffmpeg \
-  python-pywal16-git python-pywalfox python-screeninfo spicetify-cli walcord \
-  spicetify-extensions-rxri-git spicetify-marketplace-bin \
-  spotify tofi-git touchpad-toggle ttf-all-the-icons vesktop-bin \
-  vscodium-bin walcord waypaper yay yay-debug
+```
+yay -S --needed anki-bin catppuccin-cursors-mocha catppuccin-gtk-theme-mocha \
+  cursor-bin electron39-bin gtk2 gtk-engine-murrine gtk-engines \
+  kvantum-theme-catppuccin-git librewolf-bin localsend-bin mpvpaper \
+  onlyoffice-bin packettracer papirus-folders-git proton-pass-bin \
+  python-imageio-ffmpeg python-pywal16-git python-pywalfox python-screeninfo \
+  qt5-webchannel qt5-webengine qt5-websockets spicetify-cli \
+  spicetify-extensions-rxri-git spicetify-marketplace-bin spotify tofi-git \
+  touchpad-toggle ttf-all-the-icons vesktop-bin virtualbox-ext-oracle \
+  vscodium-bin walcord waypaper wlogout yay yay-debug
 ```
 - Cette configuration s'appuie sur `python-pywal16-git` (version de développement minimaliste maintenue via l'AUR). En cas de réinstallation, utiliser `yay -S python-pywal16-git` puis relancer les scripts Pywal dépendants pour régénérer les palettes.
 
