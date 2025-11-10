@@ -1,97 +1,120 @@
 #!/bin/bash
 
-COFFRE_COURS="/home/sabi/Documents/Cours"      # Coffre Obsidian pour les cours
-COFFRE_PERSO="/home/sabi/Documents/Perso"      # Coffre Obsidian personnel
-POINT_MONTAGE="/run/media/sabi/Sabi"           # Point de montage de la clé USB
-DOSSIER_USB="$POINT_MONTAGE/dotfiles-hypr"    # Répertoire racine utilisé sur la clé
+# Sauvegardes rapides des coffres Obsidian + dotfiles vers la clé USB.
+# Les données sont copiées dans /run/media/sabi/Sabi/Backup.
 
-CONFIG_DIRS=(aliases flameshot fastfetch gtk-3.0 gtk-4.0 hypr kitty Kvantum Mousepad mpv nerdfetch nwg-look qt5ct Scripts spicetify swaync swayosd Thunar waybar tofi micro yazi zathura waypaper)
+set -euo pipefail
+
+COFFRE_COURS="$HOME/Documents/Cours"
+COFFRE_PERSO="$HOME/Documents/Perso"
+POINT_MONTAGE="/run/media/sabi/Sabi"
+DOSSIER_USB="$POINT_MONTAGE/Backup"
+
+OBSIDIAN_DIR="$DOSSIER_USB/Obsidian"
+DOTFILES_DIR="$DOSSIER_USB/dotfiles"
 CONFIG_BASE="$HOME/.config"
-DEST_CONFIG_BASE="$DOSSIER_USB/dotfiles/.config"
-DEST_ICONS="$DOSSIER_USB/dotfiles/icons"
-DEST_APPS="$DOSSIER_USB/dotfiles/applications"
-DEST_ROOT="$DOSSIER_USB/dotfiles"
 
-# S'assure que Zenity est disponible pour afficher les boîtes de dialogue.
-if ! command -v zenity >/dev/null 2>&1; then
-    echo "Zenity est requis pour lancer cette sauvegarde."
-    exit 1
-fi
-
-# Vérifie que la clé est montée et contient le dossier de destination.
-if [ ! -d "$POINT_MONTAGE" ] || [ ! -d "$DOSSIER_USB" ]; then
-    zenity --error --text="Le dossier $DOSSIER_USB est introuvable.\nMonte la clé USB et crée ce dossier si nécessaire." --title="Sauvegarde USB"
-    exit 1
-fi
-
-zenity --question \
-    --title="Sauvegarde USB" \
-    --text="Sauvegarder les coffres Obsidian et les dossiers de configuration vers la clé USB ?" \
-    || exit 0
-
-mkdir -p "$DOSSIER_USB/Cours" "$DOSSIER_USB/Perso"
-
-sync_and_check() {
-    local src="$1" dest="$2" log
-    log=$(mktemp)
-    if rsync -av --delete --itemize-changes "$src/" "$dest/" >"$log"; then
-        if grep -E '^[<>ch\*]' "$log" >/dev/null 2>&1; then
-            rm -f "$log"
-            echo "changed"
-        else
-            rm -f "$log"
-            echo "unchanged"
-        fi
-    else
-        rm -f "$log"
-        echo "error"
-    fi
-}
-
-obsidian_status=(
-    "$(sync_and_check "$COFFRE_COURS" "$DOSSIER_USB/Cours")"
-    "$(sync_and_check "$COFFRE_PERSO" "$DOSSIER_USB/Perso")"
+CONFIG_DIRS=(
+    aliases fastfetch flameshot gtk-3.0 gtk-4.0 hypr kitty Kvantum
+    micro Mousepad mpv nwg-look qt5ct Scripts spicetify swaync swayosd
+    Thunar tofi waybar waypaper yazi zathura
 )
 
-if [[ " ${obsidian_status[*]} " == *" error "* ]]; then
-    zenity --error --text="Une erreur est survenue pendant la sauvegarde des coffres Obsidian." --title="Sauvegarde USB"
-    exit 1
-fi
+DEST_CONFIG_BASE="$DOTFILES_DIR/.config"
+DEST_APPS="$DOTFILES_DIR/applications"
+DEST_ICONES="$DOTFILES_DIR/icones"
+DEST_ICONS="$DOTFILES_DIR/icons"
+DEST_WALLPAPERS="$DOTFILES_DIR/wallpapers"
+DEST_ANIME="$DOTFILES_DIR/anime-walls"
+DEST_LY="$DOTFILES_DIR/ly-configs"
+DEST_SAVE_SCRIPT="$DOTFILES_DIR"
+DEST_VSCODIUM="$DEST_CONFIG_BASE/VSCodium"
 
-copy_config_dirs() {
-    mkdir -p "$DEST_CONFIG_BASE"
-    local dir src dest
-    for dir in "${CONFIG_DIRS[@]}"; do
-        src="$CONFIG_BASE/$dir"
-        dest="$DEST_CONFIG_BASE/$dir"
-        [ -d "$src" ] || continue
-        mkdir -p "$dest"
-        rsync -av --delete "$src/" "$dest/"
-    done
-}
+CHANGES=0
 
-copy_other_assets() {
-    [ -d "$HOME/.icons" ] && rsync -av --delete "$HOME/.icons/" "$DEST_ICONS/"
-    [ -d "$HOME/.local/share/applications" ] && rsync -av --delete "$HOME/.local/share/applications/" "$DEST_APPS/"
-    [ -d "$HOME/Images/anime-walls" ] && rsync -av --delete "$HOME/Images/anime-walls/" "$DOSSIER_USB/anime-walls/"
+require_ready_disk() {
+    if ! command -v zenity >/dev/null 2>&1; then
+        echo "Zenity est requis pour lancer cette sauvegarde." >&2
+        exit 1
+    fi
 
-    mkdir -p "$DEST_ROOT"
-    for file in "$HOME/.bashrc" "$HOME/.zshrc"; do
-        [ -f "$file" ] && rsync -av "$file" "$DEST_ROOT/" >/dev/null 2>&1
-    done
-    [ -f "$HOME/.config/mimeapps.list" ] && rsync -av "$HOME/.config/mimeapps.list" "$DEST_CONFIG_BASE/" >/dev/null 2>&1
-
-    local vs_src="$HOME/.config/VSCodium/User/settings.json"
-    if [ -f "$vs_src" ]; then
-        rsync -av "$vs_src" "$DEST_ROOT/VSCodium/User/"
+    if [ ! -d "$POINT_MONTAGE" ] || [ ! -d "$DOSSIER_USB" ]; then
+        zenity --error --title="Sauvegarde USB" \
+            --text="Impossible de trouver $DOSSIER_USB.\nMonte la clé USB puis relance." && exit 1
     fi
 }
 
-copy_config_dirs
-copy_other_assets
+track_rsync() {
+    local log
+    log=$(mktemp)
+    if rsync "$@" >"$log"; then
+        if grep -Eq '^[<>ch\*]' "$log"; then
+            CHANGES=1
+        fi
+        rm -f "$log"
+    else
+        rm -f "$log"
+        zenity --error --title="Sauvegarde USB" --text="Rsync a échoué pour $2"
+        exit 1
+    fi
+}
 
-if [[ " ${obsidian_status[*]} " == *" changed "* ]]; then
-    zenity --info --text="Sauvegarde terminée avec succès." --title="Sauvegarde USB"
-else
-    zenity --info --text="Aucun nouveau fichier à copier (tout est déjà à jour)." --title="Sauvegarde USB"
-fi
+sync_dir() {
+    local src="$1" dest="$2"
+    [ -d "$src" ] || return
+    mkdir -p "$dest"
+    track_rsync -a --delete "$src/" "$dest/"
+}
+
+sync_file() {
+    local src="$1" dest_dir="$2"
+    [ -f "$src" ] || return
+    mkdir -p "$dest_dir"
+    track_rsync -a "$src" "$dest_dir/"
+}
+
+backup_obsidian() {
+    sync_dir "$COFFRE_COURS" "$OBSIDIAN_DIR/Cours"
+    sync_dir "$COFFRE_PERSO" "$OBSIDIAN_DIR/Perso"
+}
+
+backup_configs() {
+    mkdir -p "$DEST_CONFIG_BASE"
+    for dir in "${CONFIG_DIRS[@]}"; do
+        sync_dir "$CONFIG_BASE/$dir" "$DEST_CONFIG_BASE/$dir"
+    done
+
+    sync_file "$CONFIG_BASE/mimeapps.list" "$DEST_CONFIG_BASE"
+    sync_dir "$CONFIG_BASE/VSCodium" "$DEST_VSCODIUM"
+}
+
+backup_assets() {
+    sync_dir "$HOME/.local/share/applications" "$DEST_APPS"
+    sync_dir "$HOME/.icons" "$DEST_ICONES"
+    sync_dir "$HOME/.icons" "$DEST_ICONS"
+    sync_dir "$HOME/Images/wallpapers" "$DEST_WALLPAPERS"
+    sync_dir "$HOME/Images/anime-walls" "$DEST_ANIME"
+    sync_dir "/etc/ly" "$DEST_LY"
+    sync_file "$HOME/saveconfig.sh" "$DEST_SAVE_SCRIPT"
+}
+
+main() {
+    require_ready_disk
+
+    zenity --question --title="Sauvegarde USB" \
+        --text="Sauvegarder Obsidian et les dotfiles vers la clé USB ?" || exit 0
+
+    backup_obsidian
+    backup_configs
+    backup_assets
+
+    if (( CHANGES )); then
+        zenity --info --title="Sauvegarde USB" \
+            --text="Sauvegarde terminée. Les nouveaux fichiers sont copiés."
+    else
+        zenity --info --title="Sauvegarde USB" \
+            --text="Tout est déjà à jour, aucune copie nécessaire."
+    fi
+}
+
+main "$@"

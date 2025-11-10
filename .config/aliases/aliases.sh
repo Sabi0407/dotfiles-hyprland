@@ -83,7 +83,7 @@ alias root='sudo -i' # Se connecter en tant que root
 alias saveconfig='/home/sabi/saveconfig.sh'
 alias clean='/home/sabi/.config/Scripts/cleanup-system.sh'
 alias wallanim='MPVWALL_SKIP_STOP=1 ~/.config/Scripts/mpvpaper-wallpaper.sh random'
-alias saveusb='~/.config/Scripts/backup-obsidian-dotfiles.sh'
+alias saveusb='~/.config/Scripts/backup-usb.sh'
 
 walldyn() {
     local base_dir="${MPV_WALL_PICKER_VIDEOS:-$HOME/Images/anime-walls}"
