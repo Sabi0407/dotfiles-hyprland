@@ -54,6 +54,7 @@ alias obsidian='env -u QT_QPA_PLATFORMTHEME -u QT_STYLE_OVERRIDE -u QT_QPA_PLATF
 # Redémarrage rapide
 alias reloadb='source ~/.bashrc' # Recharger le fichier de configuration
 alias reloadz='source ~/.zshrc'
+alias thumbreset='~/.config/Scripts/thunar-thumbs-reset.sh'
 # Pacman avec options
 alias s='sudo pacman -S' # Installer un paquet
 alias r='sudo pacman -R' # Supprimer un paquet
@@ -82,6 +83,7 @@ alias root='sudo -i' # Se connecter en tant que root
 alias saveconfig='/home/sabi/saveconfig.sh'
 alias clean='/home/sabi/.config/Scripts/cleanup-system.sh'
 alias wallanim='MPVWALL_SKIP_STOP=1 ~/.config/Scripts/mpvpaper-wallpaper.sh random'
+alias saveusb='~/.config/Scripts/backup-obsidian-dotfiles.sh'
 
 walldyn() {
     local base_dir="${MPV_WALL_PICKER_VIDEOS:-$HOME/Images/anime-walls}"
