@@ -1,7 +1,8 @@
-@define-color theme_bg_color #0b0b19;
-@define-color theme_fg_color #c2c2c5;
-@define-color accent_color #545d62;
-@define-color muted_color #5a5a6e;
+@define-color theme_bg_color #0e0711;
+@define-color theme_fg_color #c2c1c3;
+@define-color accent_primary #673A94;
+@define-color accent_secondary #5B4DA5;
+@define-color muted_color #64566a;
 
 window#osd {
   font-family: "Inter", "SF Pro Text", "Noto Sans", sans-serif;
@@ -63,6 +64,6 @@ window#osd progress {
   min-height: inherit;
   border-radius: inherit;
   border: none;
-  background: @accent_color;
-  box-shadow: 0 0 8px alpha(@accent_color, 0.45);
+  background: @accent_primary;
+  box-shadow: 0 0 8px alpha(@accent_secondary, 0.45);
 }
