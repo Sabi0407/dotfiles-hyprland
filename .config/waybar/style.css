@@ -51,7 +51,7 @@ window#waybar {
 #workspaces button:not(.active):not(.visible):hover,
 #workspaces button.occupied:not(.active):not(.visible) {
   background: mix(#000000, #c2c1c3, 0.28);
-  color: #673A94;
+  color: #673A95;
   border: 1px solid transparent;
   box-shadow: none;
   opacity: 0.9;
@@ -59,7 +59,7 @@ window#waybar {
 
 #workspaces button.active,
 #workspaces button.visible {
-  background: #673A94;
+  background: #673A95;
   color: #000000;
   border: 1px solid transparent;
   box-shadow: none;
@@ -69,7 +69,7 @@ window#waybar {
 
 #workspaces button.active:hover,
 #workspaces button.visible:hover {
-  background: #673A94;
+  background: #673A95;
   color: #000000;
   border: 1px solid transparent;
   opacity: 1;
@@ -109,8 +109,8 @@ window#waybar {
 #group-processes_tray:hover,
 #group-arch_drawer:hover {
   background: mix(#000000, #c2c1c3, 0.18);
-  color: #673A94;
-  border: 1px solid mix(#000000, #673A94, 0.45);
+  color: #673A95;
+  border: 1px solid mix(#000000, #673A95, 0.45);
   box-shadow: none;
 }
 
@@ -192,7 +192,7 @@ window#waybar {
 #custom-speaker_profile:hover,
 #custom-updates:hover,
 #custom-system_toggle:hover {
-  background: mix(#000000, #673A94, 0.95);
+  background: mix(#000000, #673A95, 0.95);
   color: #000000;
   border: 1px solid transparent;
   box-shadow: none;
