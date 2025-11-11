@@ -29,7 +29,19 @@ DEST_LY="$DOTFILES_DIR/ly-config"
 DEST_SAVE_SCRIPT="$DEST_CONFIG_BASE"
 DEST_VSCODIUM_USER="$DEST_CONFIG_BASE/VSCodium/User"
 
+LOG_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/backup-usb.log"
+mkdir -p "$(dirname "$LOG_FILE")"
+
+RSYNC_DIR_FLAGS=(-a --delete --human-readable --info=stats1 \
+    --exclude='.git/' --exclude='.cache/' --exclude='Cache/' --exclude='__pycache__/' \
+    --exclude='node_modules/' --exclude='*.log')
+RSYNC_FILE_FLAGS=(-a --human-readable)
+
 CHANGES=0
+
+log_event() {
+    printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$LOG_FILE"
+}
 
 require_ready_disk() {
     if ! command -v zenity >/dev/null 2>&1; then
@@ -44,60 +56,65 @@ require_ready_disk() {
 }
 
 track_rsync() {
+    local label="$1"
+    shift
     local log
     log=$(mktemp)
-    if rsync "$@" >"$log"; then
-        if grep -Eq '^[<>ch\*]' "$log"; then
+    if rsync "$@" >"$log" 2>&1; then
+        cat "$log" >> "$LOG_FILE"
+        if grep -Eq '^[<>ch\*]' "$log" >/dev/null 2>&1; then
             CHANGES=1
         fi
         rm -f "$log"
     else
+        cat "$log" >> "$LOG_FILE"
         rm -f "$log"
-        zenity --error --title="Sauvegarde USB" --text="Rsync a échoué pour $2"
+        zenity --error --title="Sauvegarde USB" --text="Rsync a échoué ($label)." || true
         exit 1
     fi
 }
 
 sync_dir() {
-    local src="$1" dest="$2"
+    local src="$1" dest="$2" label="${3:-$dest}"
     [ -d "$src" ] || return
     mkdir -p "$dest"
-    track_rsync -a --delete "$src/" "$dest/"
+    track_rsync "$label" "${RSYNC_DIR_FLAGS[@]}" "$src/" "$dest/"
 }
 
 sync_file() {
-    local src="$1" dest_dir="$2"
+    local src="$1" dest_dir="$2" label="${3:-$src}"
     [ -f "$src" ] || return
     mkdir -p "$dest_dir"
-    track_rsync -a "$src" "$dest_dir/"
+    track_rsync "$label" "${RSYNC_FILE_FLAGS[@]}" "$src" "$dest_dir/"
 }
 
 backup_obsidian() {
-    sync_dir "$COFFRE_COURS" "$OBSIDIAN_DIR/Cours"
-    sync_dir "$COFFRE_PERSO" "$OBSIDIAN_DIR/Perso"
+    sync_dir "$COFFRE_COURS" "$OBSIDIAN_DIR/Cours" "Obsidian Cours"
+    sync_dir "$COFFRE_PERSO" "$OBSIDIAN_DIR/Perso" "Obsidian Perso"
 }
 
 backup_configs() {
     mkdir -p "$DEST_CONFIG_BASE"
     for dir in "${CONFIG_DIRS[@]}"; do
-        sync_dir "$CONFIG_BASE/$dir" "$DEST_CONFIG_BASE/$dir"
+        sync_dir "$CONFIG_BASE/$dir" "$DEST_CONFIG_BASE/$dir" "Config $dir"
     done
 
-    sync_file "$CONFIG_BASE/mimeapps.list" "$DEST_CONFIG_BASE"
-    sync_dir "$CONFIG_BASE/VSCodium/User" "$DEST_VSCODIUM_USER"
+    sync_file "$CONFIG_BASE/mimeapps.list" "$DEST_CONFIG_BASE" "mimeapps.list"
+    sync_dir "$CONFIG_BASE/VSCodium/User" "$DEST_VSCODIUM_USER" "VSCodium/User"
 }
 
 backup_assets() {
-    sync_dir "$HOME/.local/share/applications" "$DEST_APPS"
-    sync_dir "$HOME/.icons" "$DEST_ICONS"
-    sync_dir "$HOME/Images/wallpapers" "$DEST_WALLPAPERS"
-    sync_dir "$HOME/Images/anime-walls" "$DEST_ANIME"
-    sync_dir "/etc/ly" "$DEST_LY"
-    sync_file "$HOME/saveconfig.sh" "$DEST_SAVE_SCRIPT"
+    sync_dir "$HOME/.local/share/applications" "$DEST_APPS" "Applications .desktop"
+    sync_dir "$HOME/.icons" "$DEST_ICONS" "Thèmes d'icônes"
+    sync_dir "$HOME/Images/wallpapers" "$DEST_WALLPAPERS" "Wallpapers"
+    sync_dir "$HOME/Images/anime-walls" "$DEST_ANIME" "Wallpapers vidéo"
+    sync_dir "/etc/ly" "$DEST_LY" "ly"
+    sync_file "$HOME/saveconfig.sh" "$DEST_SAVE_SCRIPT" "saveconfig.sh"
 }
 
 main() {
     require_ready_disk
+    log_event "Début de sauvegarde vers $DOSSIER_USB"
 
     zenity --question --title="Sauvegarde USB" \
         --text="Sauvegarder Obsidian et les dotfiles vers la clé USB ?" || exit 0
@@ -109,9 +126,11 @@ main() {
     if (( CHANGES )); then
         zenity --info --title="Sauvegarde USB" \
             --text="Sauvegarde terminée. Les nouveaux fichiers sont copiés."
+        log_event "Sauvegarde terminée avec changements"
     else
         zenity --info --title="Sauvegarde USB" \
             --text="Tout est déjà à jour, aucune copie nécessaire."
+        log_event "Sauvegarde sans changement"
     fi
 }
 
