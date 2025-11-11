@@ -28,7 +28,6 @@ DEST_ANIME="$DOTFILES_DIR/anime-walls"
 DEST_LY="$DOTFILES_DIR/ly-config"
 DEST_SAVE_SCRIPT="$DEST_CONFIG_BASE"
 DEST_VSCODIUM_USER="$DEST_CONFIG_BASE/VSCodium/User"
-DEST_VSCODIUM_LANG="$DEST_CONFIG_BASE/VSCodium"
 
 CHANGES=0
 
@@ -86,7 +85,6 @@ backup_configs() {
 
     sync_file "$CONFIG_BASE/mimeapps.list" "$DEST_CONFIG_BASE"
     sync_dir "$CONFIG_BASE/VSCodium/User" "$DEST_VSCODIUM_USER"
-    sync_file "$CONFIG_BASE/VSCodium/languagepacks.json" "$DEST_VSCODIUM_LANG"
 }
 
 backup_assets() {
