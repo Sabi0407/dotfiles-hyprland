@@ -22,7 +22,6 @@ CONFIG_DIRS=(
 
 DEST_CONFIG_BASE="$DOTFILES_DIR/.config"
 DEST_APPS="$DOTFILES_DIR/applications"
-DEST_ICONES="$DOTFILES_DIR/icones"
 DEST_ICONS="$DOTFILES_DIR/icons"
 DEST_WALLPAPERS="$DOTFILES_DIR/wallpapers"
 DEST_ANIME="$DOTFILES_DIR/anime-walls"
@@ -92,7 +91,6 @@ backup_configs() {
 
 backup_assets() {
     sync_dir "$HOME/.local/share/applications" "$DEST_APPS"
-    sync_dir "$HOME/.icons" "$DEST_ICONES"
     sync_dir "$HOME/.icons" "$DEST_ICONS"
     sync_dir "$HOME/Images/wallpapers" "$DEST_WALLPAPERS"
     sync_dir "$HOME/Images/anime-walls" "$DEST_ANIME"
