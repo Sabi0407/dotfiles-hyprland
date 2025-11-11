@@ -9,6 +9,7 @@
 | Hyprland  | Gestionnaire de fenêtres          |
 | Waybar    | Barre d'état                      |
 | SwayNC    | Centre de notifications           |
+| SwayOSD   | Indicateurs volume/luminosité     |
 | Hyprlock  | Verrouillage d'écran              |
 | Hypridle  | Gestionnaire d'inactivité         |
 | Yazi      | Gestionnaire de fichiers terminal |
@@ -91,6 +92,18 @@ source = configs/windowrules.conf
 ~/.config/swaync/
 ├── config.json            # Configuration principale
 └── style.css              # Styles et apparence
+```
+
+---
+
+## SwayOSD
+
+Affiche les barres de volume, luminosité et notifications système visuelles.
+
+```
+~/.config/swayosd/
+├── config.toml            # Paramètres (appareils suivis, commandes associées)
+└── style.css              # Styles (couleurs, typographie, ombres)
 ```
 
 ---

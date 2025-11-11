@@ -1,8 +1,8 @@
-@define-color theme_bg_color #04040a;
-@define-color theme_fg_color #c0c0c1;
-@define-color accent_primary #6D6E91;
-@define-color accent_secondary #A8A6CC;
-@define-color muted_color #535366;
+@define-color theme_bg_color #0e0711;
+@define-color theme_fg_color #c2c1c3;
+@define-color accent_primary #673A94;
+@define-color accent_secondary #5B4DA5;
+@define-color muted_color #64566a;
 
 window#osd {
   font-family: "Inter", "SF Pro Text", "Noto Sans", sans-serif;
