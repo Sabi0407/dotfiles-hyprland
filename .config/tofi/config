@@ -50,7 +50,7 @@ selection-color = #544895
 selection-background-padding = 14
 outline-color = #54489580
 border-color = #54489560
-text-cursor-color = #6953B0
+text-cursor-color = #6954B0
 
 # Animations élégantes et naturelles
 min-input-width = 300
