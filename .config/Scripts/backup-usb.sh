@@ -32,10 +32,10 @@ DEST_VSCODIUM_USER="$DEST_CONFIG_BASE/VSCodium/User"
 LOG_FILE="${XDG_STATE_HOME:-$HOME/.local/state}/backup-usb.log"
 mkdir -p "$(dirname "$LOG_FILE")"
 
-RSYNC_DIR_FLAGS=(-a --delete --human-readable --info=stats1 \
+RSYNC_DIR_FLAGS=(-a --delete --human-readable --info=stats1 -i \
     --exclude='.git/' --exclude='.cache/' --exclude='Cache/' --exclude='__pycache__/' \
     --exclude='node_modules/' --exclude='*.log')
-RSYNC_FILE_FLAGS=(-a --human-readable)
+RSYNC_FILE_FLAGS=(-a --human-readable -i)
 
 CHANGES=0
 
@@ -131,6 +131,7 @@ main() {
         zenity --info --title="Sauvegarde USB" \
             --text="Tout est déjà à jour, aucune copie nécessaire."
         log_event "Sauvegarde sans changement"
+        notify-send "Sauvegarde USB" "Aucun fichier nouveau : tout est déjà à jour" -i drive-removable-media-usb || true
     fi
 }
 
