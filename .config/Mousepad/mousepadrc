@@ -6,7 +6,7 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # Thème de coloration syntaxique (classic, cobalt, kate, oblivion, solarized-dark, solarized-light, tango)
-ColorScheme=solarized-dark
+ColorScheme=catppuccin-mocha
 
 # Police de caractères
 ViewFontName=JetBrains Mono 11
@@ -21,8 +21,8 @@ ViewShowWhitespace=false
 ViewHighlightCurrentLine=true
 
 # Afficher la marge droite
-ViewShowRightMargin=true
-ViewRightMarginPosition=80
+ViewShowRightMargin=false
+ViewRightMarginPosition=100
 
 # Afficher la barre d'état
 WindowStatusbarVisible=true
@@ -44,7 +44,7 @@ ViewTabWidth=4
 ViewInsertSpaces=true
 
 # Retour à la ligne automatique
-ViewWordWrap=false
+ViewWordWrap=true
 
 # Auto-indentation
 ViewAutoIndent=true
@@ -63,11 +63,11 @@ FileSaveEncoding=UTF-8
 FileSaveLineEnding=unix
 
 # Créer une copie de sauvegarde
-FileBackup=false
+FileBackup=true
 
 # Sauvegarde automatique
 FileAutosave=true
-FileAutosaveInterval=5
+FileAutosaveInterval=2
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # FENÊTRE
