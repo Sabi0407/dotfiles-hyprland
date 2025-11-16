@@ -8,3 +8,7 @@ flowboxchild {
 .thumbnail {
   border-radius: 10px;
 }
+
+flowboxchild:selected .thumbnail {
+  border: 2px solid #c3c6c8;
+}
