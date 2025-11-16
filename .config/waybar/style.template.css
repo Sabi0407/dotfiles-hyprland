@@ -20,7 +20,7 @@ window#waybar {
 
 /* Workspaces */
 #workspaces {
-  background: {background};
+  background: #000000;
   padding: 4px 12px;
   margin: 0 16px;
   border: 1px solid transparent;
@@ -59,7 +59,7 @@ window#waybar {
 
 #workspaces button.active,
 #workspaces button.visible {
-  background: {color10};
+  background: mix({background}, {color10}, 0.65);
   color: {background};
   border: 1px solid transparent;
   box-shadow: none;
@@ -96,7 +96,7 @@ window#waybar {
 #group-processes_tray,
 #group-arch_drawer {
   color: {foreground};
-  background: {background};
+  background: #000000;
   padding: 4px 14px;
   margin: 0 10px 0 0;
   border: 1px solid transparent;
@@ -149,7 +149,7 @@ window#waybar {
 #custom-updates,
 #custom-system_toggle {
   color: {foreground};
-  background: {background};
+  background: #000000;
   padding: 4px 14px;
   margin: 0 0 0 10px;
   border-radius: 14px;

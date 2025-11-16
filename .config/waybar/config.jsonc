@@ -15,20 +15,19 @@
     "group/battery_drawer",
     "custom/notification"
   ],
-  "height": 42,
-
+  "height": 44,
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
     "format-icons": {
-      "notification": "",
-      "none": "",
-      "dnd-notification": "",
-      "dnd-none": "",
-      "inhibited-notification": "",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "",
-      "dnd-inhibited-none": ""
+      "notification": "\uf0f3",
+      "none": "\uf0a2",
+      "dnd-notification": "\uf1f7",
+      "dnd-none": "\uf1f7",
+      "inhibited-notification": "\uf0f3",
+      "inhibited-none": "\uf0a2",
+      "dnd-inhibited-notification": "\uf1f7",
+      "dnd-inhibited-none": "\uf1f7"
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
@@ -39,17 +38,27 @@
   },
   "battery": {
     "format": "{icon}  {capacity}%",
-    "format-charging": "󰂄  {capacity}%",
-    "format-full": "󰁹  {capacity}%",
+    "format-charging": "\udb80\udc84  {capacity}%",
+    "format-full": "\udb80\udc79  {capacity}%",
     "format-warning": "{icon}  {capacity}%",
     "format-critical": "{icon}  {capacity}%",
-    "format-plugged": "󰂄  {capacity}%",
+    "format-plugged": "\udb80\udc84  {capacity}%",
     "format-discharging": "{icon}  {capacity}%",
     "max-length": 20,
     "format-icons": [
-      "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰂁", "󰁹"
+      "\udb80\udc7a",
+      "\udb80\udc7b",
+      "\udb80\udc7c",
+      "\udb80\udc7d",
+      "\udb80\udc7e",
+      "\udb80\udc7f",
+      "\udb80\udc80",
+      "\udb80\udc81",
+      "\udb80\udc82",
+      "\udb80\udc81",
+      "\udb80\udc79"
     ],
-    "tooltip-format": "Batterie : {capacity}%\nÉtat : {time}\nPuissance : {power}W",
+    "tooltip-format": "Batterie : {capacity}%\n\u00c9tat : {time}\nPuissance : {power}W",
     "interval": 1,
     "states": {
       "warning": 29,
@@ -61,45 +70,43 @@
     "on-scroll-down": "brightnessctl set 5%-",
     "exec-on-event": "~/.config/Scripts/battery_notify.sh"
   },
-
   "clock": {
     "format": "{:%H:%M:%S}",
     "tooltip": false,
     "interval": 1
   },
-
   "pulseaudio": {
     "format": "{icon}  {volume}%",
-    "format-bluetooth": "󰂱 {volume}%",
-  "format-muted": "󰖁",
+    "format-bluetooth": "\udb80\udcb1 {volume}%",
+    "format-muted": "\udb81\udd81",
     "scroll-step": 1,
     "on-click": "pavucontrol",
-    "ignored-sinks": ["Easy Effects Sink"],
+    "ignored-sinks": [
+      "Easy Effects Sink"
+    ],
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
+      "headphone": "\uf025",
+      "hands-free": "\uf590",
       "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["󰖀", "󰕾"]
+      "phone": "\uf095",
+      "portable": "\uf095",
+      "car": "\uf1b9",
+      "default": [
+        "\udb81\udd80",
+        "\udb81\udd7e"
+      ]
     },
     "tooltip-format": "Volume: {volume}%"
   },
-
   "network": {
     "interval": 2,
-    "format-wifi": "",
-    "format-ethernet": "󰈀",
-    "format-disconnected": "󰤭<span foreground='red'><sup></sup></span>",
-    "format-unknown": "󰤫",
+    "format-wifi": "\uf1eb",
+    "format-ethernet": "\udb80\ude00",
+    "format-disconnected": "\udb82\udd2d<span foreground='red'><sup>\uf444</sup></span>",
+    "format-unknown": "\udb82\udd2b",
     "tooltip": true,
-    "tooltip-format": "{ifname} {ipaddr}\nSignal : {signalStrength}%\nVitesse : {bandwidthDownBits}↓ / {bandwidthUpBits}↑"
+    "tooltip-format": "{ifname} {ipaddr}\nSignal : {signalStrength}%\nVitesse : {bandwidthDownBits}\u2193 / {bandwidthUpBits}\u2191"
   },
-
-
-
-
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-active": "{icon}",
@@ -118,43 +125,41 @@
     "active-only": false,
     "move-to-monitor": true,
     "persistent-workspaces": {
-      "1": ["1", "2"]
+      "1": [
+        "1",
+        "2"
+      ]
     },
-    "window-rewrite-default": "󰖯",
+    "window-rewrite-default": "\udb81\uddaf",
     "window-rewrite": {
-      "title<.*youtube.*>": "󰗃",
-      "class<firefox>": "󰈹",
-      "class<firefox> title<.*github.*>": "󰊤",
-      "class<firefox> title<.*reddit.*>": "󰑍",
-      "class<firefox> title<.*youtube.*>": "󰗃",
-      "class<firefox> title<.*twitch.*>": "󰓓",
-      "class<code>": "󰨞",
-      "class<discord>": "󰙯",
-      "class<spotify>": "󰓇",
-      "class<steam>": "󰓓",
-      "class<kitty>": "󰄛",
-      "class<gimp>": "󰵸",
-      "class<blender>": "󰂫",
-      "class<nautilus>": "󰉋",
-      "class<mpv>": "󰎆",
-      "class<obsidian>": "󰈙",
-      "class<anki>": "󰚯",
-      "class<onlyoffice>": "󰈙",
-      "class<virtualbox>": "󰆧",
-      "class<qBittorrent>": "󰇚"
+      "title<.*youtube.*>": "\udb81\uddc3",
+      "class<firefox>": "\udb80\ude39",
+      "class<firefox> title<.*github.*>": "\udb80\udea4",
+      "class<firefox> title<.*reddit.*>": "\udb81\udc4d",
+      "class<firefox> title<.*youtube.*>": "\udb81\uddc3",
+      "class<firefox> title<.*twitch.*>": "\udb81\udcd3",
+      "class<code>": "\udb82\ude1e",
+      "class<discord>": "\udb81\ude6f",
+      "class<spotify>": "\udb81\udcc7",
+      "class<steam>": "\udb81\udcd3",
+      "class<kitty>": "\udb80\udd1b",
+      "class<gimp>": "\udb83\udd78",
+      "class<blender>": "\udb80\udcab",
+      "class<nautilus>": "\udb80\ude4b",
+      "class<mpv>": "\udb80\udf86",
+      "class<obsidian>": "\udb80\ude19",
+      "class<anki>": "\udb81\udeaf",
+      "class<onlyoffice>": "\udb80\ude19",
+      "class<virtualbox>": "\udb80\udda7",
+      "class<qBittorrent>": "\udb80\uddda"
     }
   },
-
-
   "hyprland/window": {
     "format": "{class}",
     "separate-outputs": true,
     "icon": true,
     "icon-size": 18
   },
-  
-
-
   "tray": {
     "spacing": 10,
     "icon-size": 21,
@@ -168,12 +173,10 @@
       "*"
     ]
   },
-
   "custom/tray_toggle": {
-    "format": "",
+    "format": "\uf104",
     "tooltip": false
   },
-
   "group/tray_drawer": {
     "orientation": "horizontal",
     "drawer": {
@@ -190,8 +193,6 @@
       "custom/updates"
     ]
   },
-
-
   "group/clock_drawer": {
     "orientation": "horizontal",
     "drawer": {
@@ -206,7 +207,6 @@
       "custom/date_fr"
     ]
   },
-
   "group/battery_drawer": {
     "orientation": "horizontal",
     "drawer": {
@@ -222,21 +222,17 @@
       "temperature"
     ]
   },
-
-
   "custom/date_fr": {
     "exec": "LC_TIME=fr_FR.UTF-8 date '+%a%e %b %Y'",
     "interval": 1,
     "return-type": "plain",
     "on-click": "gsimplecal"
   },
-
   "custom/archlogo": {
-    "format": "",
+    "format": "\uf303",
     "tooltip": "Lancer Tofi",
     "on-click": "tofi-drun"
   },
-
   "custom/speaker_profile": {
     "format": "{icon}",
     "return-type": "json",
@@ -247,7 +243,7 @@
     "on-click-right": "~/.config/Scripts/audio_profile_waybar.sh cycle"
   },
   "custom/updates": {
-    "format": "󰇚 {text}",
+    "format": "\udb80\uddda {text}",
     "return-type": "json",
     "exec": "~/.config/Scripts/updates_waybar.sh",
     "interval": 900,
@@ -256,30 +252,26 @@
     "on-click-right": "kitty --class=updates-term -e bash -lc 'sudo pacman -Syu'",
     "on-click-middle": "kitty --class=updates-term -e bash -lc '~/.config/Scripts/cleanup-system.sh'"
   },
-
   "cpu": {
-    "format": "󰍛 {usage}%",
+    "format": "\udb80\udf5b {usage}%",
     "interval": 5,
     "tooltip": true,
     "tooltip-format": "CPU : {usage}%"
   },
-
   "memory": {
-    "format": "󰍛 {percentage}%",
+    "format": "\udb80\udf5b {percentage}%",
     "interval": 5,
     "tooltip": true,
-    "tooltip-format": "Mémoire : {used} / {total} Gio ({percentage}%)"
+    "tooltip-format": "M\u00e9moire : {used} / {total} Gio ({percentage}%)"
   },
-
   "temperature": {
-    "format": "󰔏 {temperatureC}°",
+    "format": "\udb81\udd0f {temperatureC}\u00b0",
     "tooltip": true,
     "interval": 5,
     "thermal-zone": 0,
     "critical-threshold": 75,
-    "tooltip-format": "Température : {temperatureC}°C"
+    "tooltip-format": "Temp\u00e9rature : {temperatureC}\u00b0C"
   },
-
   "group/arch_drawer": {
     "orientation": "horizontal",
     "drawer": {
@@ -295,25 +287,24 @@
       "custom/poweroff"
     ]
   },
-
   "custom/lock-session": {
-    "format": "󰌾",
+    "format": "\udb80\udf3e",
     "tooltip": "Verrouiller la session",
     "on-click": "hyprlock"
   },
   "custom/logout": {
-    "format": "󰍃",
-    "tooltip": "Déconnexion",
+    "format": "\udb80\udf43",
+    "tooltip": "D\u00e9connexion",
     "on-click": "~/.config/Scripts/confirm_logout.sh"
   },
   "custom/reboot": {
-    "format": "󰜉",
-    "tooltip": "Redémarrer",
+    "format": "\udb81\udf09",
+    "tooltip": "Red\u00e9marrer",
     "on-click": "~/.config/Scripts/confirm_reboot.sh"
   },
   "custom/poweroff": {
-    "format": "⏻",
-    "tooltip": "Éteindre",
+    "format": "\u23fb",
+    "tooltip": "\u00c9teindre",
     "on-click": "~/.config/Scripts/confirm_poweroff.sh"
   }
 }
