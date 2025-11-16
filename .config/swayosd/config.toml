@@ -2,7 +2,7 @@
 style = "/home/sabi/.config/swayosd/style.css"
 top_margin = 0.12
 show_percentage = true
-max_volume = 130
+max_volume = 100
 playerctl_format = "{artist} - {title}"
 
 [client]
