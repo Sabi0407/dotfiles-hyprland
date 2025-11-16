@@ -57,8 +57,11 @@ set recolor-darkcolor           "#cdd6f4"
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # Mode recolor (inverser les couleurs pour lecture confortable)
-set recolor                     false
+set recolor                     true
 set recolor-keephue             true
+set recolor-lightcolor          "#1e1e2e"
+set recolor-darkcolor           "#cdd6f4"
+set highlight-transparency      0.25
 
 # Ajustement automatique de la page
 set adjust-open                 "width"
@@ -168,4 +171,3 @@ set window-title-home-tilde     true
 
 # Base de données pour mémoriser la position
 set database                    sqlite
-
