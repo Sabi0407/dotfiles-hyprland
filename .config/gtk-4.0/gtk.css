@@ -1,1 +1,13 @@
-/usr/share/themes/catppuccin-mocha-peach-standard+default/gtk-4.0/gtk.css
+@import url("/usr/share/themes/catppuccin-mocha-peach-standard+default/gtk-4.0/gtk.css");
+
+window#osd button,
+window#osd button:hover,
+window#osd button:focus,
+window#osd button:active,
+window#osd button:checked {
+  background: none;
+  background-color: transparent;
+  border-color: transparent;
+  outline: 0;
+  box-shadow: none;
+}

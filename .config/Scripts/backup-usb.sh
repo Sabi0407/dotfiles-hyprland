@@ -17,7 +17,7 @@ CONFIG_BASE="$HOME/.config"
 CONFIG_DIRS=(
     aliases fastfetch flameshot gtk-3.0 gtk-4.0 hypr kitty Kvantum
     micro Mousepad mpv nwg-look qt5ct Scripts spicetify swaync swayosd
-    Thunar tofi waybar waypaper yazi zathura
+    Thunar tofi waybar waypaper yazi zathura wlogout
 )
 
 DEST_CONFIG_BASE="$DOTFILES_DIR/.config"

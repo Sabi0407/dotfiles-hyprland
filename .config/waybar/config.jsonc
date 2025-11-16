@@ -231,7 +231,7 @@
   "custom/archlogo": {
     "format": "\uf303",
     "tooltip": "Lancer Tofi",
-    "on-click": "tofi-drun"
+    "on-click": "wlogout"
   },
   "custom/speaker_profile": {
     "format": "{icon}",
@@ -280,31 +280,7 @@
       "transition-left-to-right": true
     },
     "modules": [
-      "custom/archlogo",
-      "custom/lock-session",
-      "custom/logout",
-      "custom/reboot",
-      "custom/poweroff"
+      "custom/archlogo"
     ]
-  },
-  "custom/lock-session": {
-    "format": "\udb80\udf3e",
-    "tooltip": "Verrouiller la session",
-    "on-click": "hyprlock"
-  },
-  "custom/logout": {
-    "format": "\udb80\udf43",
-    "tooltip": "D\u00e9connexion",
-    "on-click": "~/.config/Scripts/confirm_logout.sh"
-  },
-  "custom/reboot": {
-    "format": "\udb81\udf09",
-    "tooltip": "Red\u00e9marrer",
-    "on-click": "~/.config/Scripts/confirm_reboot.sh"
-  },
-  "custom/poweroff": {
-    "format": "\u23fb",
-    "tooltip": "\u00c9teindre",
-    "on-click": "~/.config/Scripts/confirm_poweroff.sh"
   }
 }

@@ -20,6 +20,7 @@
 | Icônes    | Papirus Icon Pack                 |
 | Pywal-16  | Génération de couleurs            |
 | Pywalfox  | Thème Firefox dynamique           |
+| wlogout   | Menu d'arrêt Wayland              |
 
 ---
 
@@ -112,6 +113,21 @@ source = configs/windowrules.conf
 ~/.config/hypr/
 └── hypridle.conf          # Configuration de l'inactivité
 ```
+
+---
+
+## Wlogout
+
+Menu d'alimentation (Wayland) affiché via une notification OSD.
+
+### Fichiers de configuration
+
+```
+~/.config/wlogout/
+├── layout                 # Définition des boutons
+└── style.css (→ pywal)    # Styles générés depuis ~/.config/wal/templates/wlogout.css
+```
+
 
 ---
 

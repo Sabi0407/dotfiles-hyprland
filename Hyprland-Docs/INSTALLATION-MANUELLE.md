@@ -21,13 +21,13 @@ sudo reflector --country France --country Belgium --country Luxembourg \
 Liste des paquets explicitement installés depuis les dépôts officiels (commande `pacman -Qqent`) :
 ```
 sudo pacman -S --needed base bat blueman bluez-utils brightnessctl btop \
-  cliphist cronie eza fastfetch firefox flameshot flatpak galculator gsimplecal \
+  cliphist cronie exa eza fastfetch firefox flameshot flatpak galculator gsimplecal \
   hypridle hyprland hyprlock hyprpicker imv intel-ucode kooha libxcrypt-compat ly \
   micro mousepad ncdu numlockx nwg-look obsidian openssl-1.1 pacman-contrib \
-  pavucontrol plymouth polkit-gnome power-profiles-daemon proton-vpn-gtk-app transmission-gtk \
-  qemu-guest-agent qt5ct qt6ct reflector sassc spice-vdagent swaync swayosd \
+  pavucontrol plymouth polkit-gnome poppler power-profiles-daemon proton-vpn-gtk-app transmission-gtk \
+  qemu-guest-agent qt5ct qt6ct reflector sassc scdoc spice-vdagent swaync swayosd \
   terminus-font thunar tree ttf-firacode-nerd ttf-jetbrains-mono \
-  ttf-jetbrains-mono-nerd ttf-meslo-nerd udiskie veracrypt virtualbox-guest-utils \
+  ttf-jetbrains-mono-nerd ttf-meslo-nerd udiskie veracrypt virtualbox-guest-utils viu \
   virt-viewer waybar woff2-font-awesome xarchiver xf86-video-qxl yazi \
   zsh-completions zsh-syntax-highlighting
 ```
@@ -84,6 +84,11 @@ flatpak update                   # Mise à jour Flatpak
 sudo pacman -Sc                  # Nettoyage cache pacman
 yay -Scc                         # Nettoyage cache yay
 flatpak uninstall --unused       # Nettoyage Flatpak
+
+# Vérifier les nouveaux paquets installés par pacman/yay (ex : wlogout)
+grep "\[PACMAN\]" /var/log/pacman.log | tail -n 50
+```
+L'extrait ci-dessus permet de contrôler rapidement quels paquets viennent d'être ajoutés ou retirés (utile après avoir réinstallé une application comme `wlogout` via `yay`).
 ```
 
 ## Rétroéclairage clavier

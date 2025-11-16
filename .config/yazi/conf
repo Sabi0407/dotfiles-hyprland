@@ -20,3 +20,5 @@ open_terminal = "ctrl+t"
 toggle_hidden = "ctrl+h"
 preview = "space"
 quit = "q"
+[theme]
+theme = "mocha/catppuccin-mocha-blue"

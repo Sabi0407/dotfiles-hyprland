@@ -17,8 +17,11 @@ killall swaync 2>/dev/null
 sleep 0.3
 swaync &
 
+# Redemarrer SwayOSD
+echo "Redemarrage de SwayOSD..."
+systemctl --user restart swayosd.service
+
 # Notification de confirmation
-notify-send "Environnement recharge" "Hyprland, Waybar et SwayNC ont ete recharges" -i system-restart
+notify-send "Environnement recharge" "Hyprctl reload + Waybar, SwayNC et SwayOSD ont ete relances" -i system-restart
 
 echo "Tous les composants ont ete recharges avec succes"
-

@@ -7,7 +7,7 @@
 
 window#waybar {
   background-color: transparent;
-  color: #c1c2c4;
+  color: #c7c2c6;
   border-radius: 16px;
   box-shadow: none;
   padding-top: 6px;
@@ -27,7 +27,7 @@ window#waybar {
   border-radius: 12px;
   box-shadow: none;
   transition: all 0.25s ease;
-  color: #c1c2c4;
+  color: #c7c2c6;
 }
 
 #workspaces:hover {
@@ -35,8 +35,8 @@ window#waybar {
 }
 
 #workspaces button {
-  background: mix(#090c15, #ffffff, 0.08);
-  color: #c1c2c4;
+  background: mix(#210e1b, #ffffff, 0.08);
+  color: #c7c2c6;
   font-size: 0.9em;
   font-weight: 500;
   padding: 4px 10px;
@@ -50,8 +50,8 @@ window#waybar {
 
 #workspaces button:not(.active):not(.visible):hover,
 #workspaces button.occupied:not(.active):not(.visible) {
-  background: mix(#090c15, #c1c2c4, 0.28);
-  color: #525C66;
+  background: mix(#210e1b, #c7c2c6, 0.28);
+  color: #7196AE;
   border: 1px solid transparent;
   box-shadow: none;
   opacity: 0.9;
@@ -59,8 +59,8 @@ window#waybar {
 
 #workspaces button.active,
 #workspaces button.visible {
-  background: mix(#090c15, #525C66, 0.65);
-  color: #090c15;
+  background: mix(#210e1b, #7196AE, 0.65);
+  color: #210e1b;
   border: 1px solid transparent;
   box-shadow: none;
   opacity: 1;
@@ -69,33 +69,33 @@ window#waybar {
 
 #workspaces button.active:hover,
 #workspaces button.visible:hover {
-  background: #525C66;
-  color: #090c15;
+  background: #7196AE;
+  color: #210e1b;
   border: 1px solid transparent;
   opacity: 1;
 }
 
 #workspaces button.urgent {
-  background: #20384e;
-  color: #090c15;
+  background: #6c5b66;
+  color: #210e1b;
   border: 1px solid transparent;
   animation: pulse 0.8s ease-in-out infinite;
   opacity: 1;
 }
 
 #workspaces button.visible {
-  color: #090c15;
+  color: #210e1b;
 }
 
 #workspaces button.empty {
-  color: #c1c2c4;
+  color: #c7c2c6;
   opacity: 0.5;
 }
 
 #group-clock_drawer,
 #group-processes_tray,
 #group-arch_drawer {
-  color: #c1c2c4;
+  color: #c7c2c6;
   background: #000000;
   padding: 4px 14px;
   margin: 0 10px 0 0;
@@ -108,9 +108,9 @@ window#waybar {
 #group-clock_drawer:hover,
 #group-processes_tray:hover,
 #group-arch_drawer:hover {
-  background: mix(#090c15, #c1c2c4, 0.18);
-  color: #525C66;
-  border: 1px solid mix(#090c15, #525C66, 0.45);
+  background: mix(#210e1b, #c7c2c6, 0.18);
+  color: #7196AE;
+  border: 1px solid mix(#210e1b, #7196AE, 0.45);
   box-shadow: none;
 }
 
@@ -148,7 +148,7 @@ window#waybar {
 #custom-speaker_profile,
 #custom-updates,
 #custom-system_toggle {
-  color: #c1c2c4;
+  color: #c7c2c6;
   background: #000000;
   padding: 4px 14px;
   margin: 0 0 0 10px;
@@ -192,8 +192,8 @@ window#waybar {
 #custom-speaker_profile:hover,
 #custom-updates:hover,
 #custom-system_toggle:hover {
-  background: mix(#090c15, #525C66, 0.95);
-  color: #090c15;
+  background: mix(#210e1b, #7196AE, 0.95);
+  color: #210e1b;
   border: 1px solid transparent;
   box-shadow: none;
 }
@@ -207,15 +207,15 @@ window#waybar {
 }
 
 #custom-updates.updates-some {
-  background: mix(#090c15, #20384e, 0.15);
+  background: mix(#210e1b, #6c5b66, 0.15);
   border: 1px solid transparent;
-  color: #20384e;
+  color: #6c5b66;
 }
 
 #custom-updates.updates-many {
-  background: mix(#090c15, #20384e, 0.3);
+  background: mix(#210e1b, #6c5b66, 0.3);
   border: 1px solid transparent;
-  color: #20384e;
+  color: #6c5b66;
   animation: pulse 1.5s infinite;
 }
 
@@ -231,7 +231,7 @@ window#waybar {
 
 #battery {
   transition: all 0.3s ease;
-  color: #c1c2c4;
+  color: #c7c2c6;
 }
 
 #battery.warning {
@@ -277,17 +277,17 @@ window#waybar {
 
 #custom-usb_drives.no-usb {
   opacity: 0.5;
-  color: #c1c2c4;
+  color: #c7c2c6;
 }
 
 #custom-usb_drives.usb-connected {
-  color: #c1c2c4;
-  border: 1px solid mix(#090c15, #867551, 0.3);
+  color: #c7c2c6;
+  border: 1px solid mix(#210e1b, #777e7f, 0.3);
 }
 
 #custom-usb_drives.usb-many {
-  color: #c1c2c4;
-  border: 1px solid mix(#090c15, #867551, 0.3);
+  color: #c7c2c6;
+  border: 1px solid mix(#210e1b, #777e7f, 0.3);
   animation: pulse 2s infinite;
 }
 

@@ -4,17 +4,23 @@ set -euo pipefail
 DEVICE_NAME="asup1204:00-093a:2005-touchpad"
 STATE_FILE="${XDG_CACHE_HOME:-$HOME/.cache}/touchpad-state"
 SWAYOSD_BIN="${SWAYOSD_CLIENT:-swayosd-client}"
-ICON_THEME_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/icons/hicolor/scalable/status"
-ICON_ON_PRESET="$ICON_THEME_DIR/touchpad-enabled-symbolic.svg"
-ICON_OFF_PRESET="$ICON_THEME_DIR/touchpad-disabled-symbolic.svg"
-ICON_ON="${TOUCHPAD_ICON_ON:-$ICON_ON_PRESET}"
-ICON_OFF="${TOUCHPAD_ICON_OFF:-$ICON_OFF_PRESET}"
-if [ ! -f "$ICON_ON" ]; then
-    ICON_ON="input-touchpad"
+USER_ICON_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/icons/hicolor/scalable/status"
+CUSTOM_ICON_ON="trackpad_on"
+CUSTOM_ICON_OFF="trackpad_off"
+
+ICON_ON_DEFAULT="input-touchpad-symbolic"
+ICON_OFF_DEFAULT="touchpad-disabled-symbolic"
+
+if [ -f "$USER_ICON_DIR/${CUSTOM_ICON_ON}.svg" ]; then
+    ICON_ON_DEFAULT="$CUSTOM_ICON_ON"
 fi
-if [ ! -f "$ICON_OFF" ]; then
-    ICON_OFF="touchpad-disabled-symbolic"
+
+if [ -f "$USER_ICON_DIR/${CUSTOM_ICON_OFF}.svg" ]; then
+    ICON_OFF_DEFAULT="$CUSTOM_ICON_OFF"
 fi
+
+ICON_ON="${TOUCHPAD_ICON_ON:-$ICON_ON_DEFAULT}"
+ICON_OFF="${TOUCHPAD_ICON_OFF:-$ICON_OFF_DEFAULT}"
 ICON_ERR="${TOUCHPAD_ICON_ERROR:-dialog-error}"
 
 osd() {
