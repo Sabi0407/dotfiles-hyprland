@@ -5,7 +5,8 @@
   "layer": "overlay",
   "control-center-layer": "top",
   "layer-shell": true,
-  "cssPriority": "application",
+  "ignore-gtk-theme": true,
+  "cssPriority": "user",
   "style": "/home/sabi/.config/swaync/style.css",
   "control-center-width": 420,
   "control-center-margin-top": 18,
@@ -50,12 +51,12 @@
       "image-radius": 10
     },
     "volume": {
-      "label": "",
+      "label": "\uf027",
       "step": 5,
       "show-percentage": true
     },
     "backlight": {
-      "label": "󰃞",
+      "label": "\udb80\udcde",
       "step": 5,
       "device": "intel_backlight",
       "subsystem": "backlight"
@@ -63,32 +64,32 @@
     "buttons-grid": {
       "actions": [
         {
-          "label": "",
+          "label": "\uf1eb",
           "command": "bash -c 'swaync-client -t && exec nm-connection-editor'",
           "tooltip": "NetworkManager"
         },
         {
-          "label": "",
+          "label": "\uf294",
           "command": "bash -c 'swaync-client -t && exec blueman-manager'",
           "tooltip": "Bluetooth"
         },
         {
-          "label": "󰂛",
+          "label": "\udb80\udc9b",
           "command": "~/.config/Scripts/toggle_dnd.sh",
-          "tooltip": "Ne pas déranger"
+          "tooltip": "Ne pas d\u00e9ranger"
         },
         {
-          "label": "󰸈",
+          "label": "\udb83\ude08",
           "command": "bash -c 'swaync-client -t && pactl set-sink-mute @DEFAULT_SINK@ toggle'",
           "tooltip": "Volume Mute"
         },
         {
-          "label": "󰍬",
+          "label": "\udb80\udf6c",
           "command": "bash -c 'swaync-client -t && ~/.config/Scripts/toggle_mic.sh'",
           "tooltip": "Microphone"
         },
         {
-          "label": "󰣆",
+          "label": "\udb82\udcc6",
           "command": "bash -c 'swaync-client -t && exec nwg-look'",
           "tooltip": "Theme"
         }
@@ -100,11 +101,12 @@
       "show-percentage": true
     },
     "network": {
-      "label-wifi": "󰤨",
-      "label-ethernet": "󰈀",
-      "label-disconnected": "󰤭",
+      "label-wifi": "\udb82\udd28",
+      "label-ethernet": "\udb80\ude00",
+      "label-disconnected": "\udb82\udd2d",
       "show-type": true,
       "show-connected-devices": true
-    }
+    },
+    "notifications": {}
   }
 }

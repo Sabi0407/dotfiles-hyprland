@@ -4,25 +4,25 @@
     --wallpaper: url("/home/sabi/.cache/mpvpaper-wallpaper/pywal/wallpaper.png");
 
     /* Special */
-    --background: #0e0711;
-    --foreground: #c2c1c3;
-    --cursor: #c2c1c3;
+    --background: #110708;
+    --foreground: #c3c1c1;
+    --cursor: #c3c1c1;
 
     /* Colors */
-    --color0: #0e0711;
-    --color1: #362b69;
-    --color2: #4d2c6e;
-    --color3: #3f366f;
-    --color4: #44397b;
-    --color5: #4e3f84;
-    --color6: #523f8a;
-    --color7: #938b96;
-    --color8: #64566a;
-    --color9: #483A8D;
-    --color10: #673B93;
-    --color11: #544895;
-    --color12: #5B4DA5;
-    --color13: #6954B0;
-    --color14: #6E55B8;
-    --color15: #c2c1c3;
+    --color0: #110708;
+    --color1: #942f39;
+    --color2: #745767;
+    --color3: #8b7084;
+    --color4: #9a7998;
+    --color5: #9f859f;
+    --color6: #a693a5;
+    --color7: #968b8b;
+    --color8: #6a5659;
+    --color9: #C63F4D;
+    --color10: #9B758A;
+    --color11: #BA96B1;
+    --color12: #CEA2CB;
+    --color13: #D5B2D4;
+    --color14: #DEC4DD;
+    --color15: #c3c1c1;
 }
