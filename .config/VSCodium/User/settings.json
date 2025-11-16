@@ -1,24 +1,5 @@
 {
-    "window.titleBarStyle": "native",
-    "window.nativeTabs": false,
-    "editor.minimap.enabled": false,
-    "workbench.statusBar.visible": true,
-    "workbench.iconTheme": "catppuccin-mocha",
-    "git.openRepositoryInParentFolders": "never",
-    "workbench.secondarySideBar.defaultVisibility": "hidden",
-    "geminicodeassist.project": "semiotic-tooling-k4vbx",
-    "security.workspace.trust.untrustedFiles": "open",
-    "workbench.secondarySideBar.showLabels": false,
+    "window.controlsStyle": "hidden",
     "workbench.colorTheme": "Catppuccin Mocha",
-    "workbench.editor.editorActionsLocation": "titleBar",
-    "window.menuBarVisibility": "toggle",
-    "workbench.startupEditor": "none",
-    "window.commandCenter": false,
-    "editor.fontFamily": "JetBrains Mono",
-    "editor.fontLigatures": true,
-    "extensions.recommendations": [
-        "esbenp.prettier-vscode",
-        "dbaeumer.vscode-eslint",
-        "ms-python.python"
-    ]
+    "workbench.iconTheme": "catppuccin-mocha"
 }

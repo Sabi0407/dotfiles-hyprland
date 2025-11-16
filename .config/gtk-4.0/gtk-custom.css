@@ -1,23 +1,22 @@
-
 /* ═══════════════════════════════════════════════════════════════════════════════ */
 /* AMÉLIORATION DE LA LISIBILITÉ DES MENUS CONTEXTUELS GTK-4.0 */
 /* ═══════════════════════════════════════════════════════════════════════════════ */
 
 /* Menu contextuel principal */
-popover,
-popover.background,
-popover > contents {
+window:not(.control-center) popover,
+window:not(.control-center) popover.background,
+window:not(.control-center) popover > contents {
     background-color: shade(@theme_bg_color, 1.24) !important;
     border: 1px solid alpha(@theme_fg_color, 0.5) !important;
     border-radius: 6px !important;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.24) !important;
+    box-shadow: none !important;
     padding: 4px !important;
     margin: 2px !important;
 }
 
 /* Éléments du menu contextuel */
-menuitem,
-modelbutton {
+window:not(.control-center) menuitem,
+window:not(.control-center) modelbutton {
     background-color: transparent !important;
     border-radius: 4px !important;
     margin: 1px 0 !important;
@@ -30,22 +29,22 @@ modelbutton {
 }
 
 /* Hover sur les éléments du menu */
-menuitem:hover,
-modelbutton:hover {
+window:not(.control-center) menuitem:hover,
+window:not(.control-center) modelbutton:hover {
     background-color: shade(@theme_selected_bg_color, 0.88) !important;
     color: @theme_selected_fg_color !important;
 }
 
 /* Élément sélectionné */
-menuitem:selected,
-modelbutton:selected {
+window:not(.control-center) menuitem:selected,
+window:not(.control-center) modelbutton:selected {
     background-color: @theme_selected_bg_color !important;
     color: @theme_selected_fg_color !important;
     font-weight: 600 !important;
 }
 
 /* Séparateurs dans le menu */
-separator {
+window:not(.control-center) separator {
     background-color: @theme_fg_color !important;
     opacity: 0.3 !important;
     margin: 1px 2px !important;
@@ -53,37 +52,37 @@ separator {
 }
 
 /* Icônes dans le menu */
-menuitem image,
-modelbutton image {
+window:not(.control-center) menuitem image,
+window:not(.control-center) modelbutton image {
     margin-right: 12px !important;
     opacity: 0.8 !important;
 }
 
-menuitem:hover image,
-modelbutton:hover image {
+window:not(.control-center) menuitem:hover image,
+window:not(.control-center) modelbutton:hover image {
     opacity: 1.0 !important;
 }
 
 /* Flèches pour les sous-menus */
-menuitem arrow,
-modelbutton arrow {
+window:not(.control-center) menuitem arrow,
+window:not(.control-center) modelbutton arrow {
     margin-left: 8px !important;
     opacity: 0.7 !important;
 }
 
 /* Amélioration des menus contextuels généraux */
-menu,
-.menu {
+window:not(.control-center) menu,
+window:not(.control-center) .menu {
     background-color: shade(@theme_bg_color, 1.2) !important;
     border: 1px solid alpha(@theme_fg_color, 0.45) !important;
     border-radius: 6px !important;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.24) !important;
+    box-shadow: none !important;
     padding: 4px !important;
 }
 
 /* Éléments de menu avec meilleur contraste */
-.menu menuitem,
-.menu modelbutton {
+window:not(.control-center) .menu menuitem,
+window:not(.control-center) .menu modelbutton {
     background-color: transparent !important;
     border-radius: 5px !important;
     margin: 1px 0 !important;
@@ -94,22 +93,21 @@ menu,
     font-size: 14px !important;
 }
 
-.menu menuitem:hover,
-.menu modelbutton:hover {
+window:not(.control-center) .menu menuitem:hover,
+window:not(.control-center) .menu modelbutton:hover {
     background-color: shade(@theme_selected_bg_color, 0.88) !important;
     color: @theme_selected_fg_color !important;
 }
 
 /* Amélioration des raccourcis clavier dans les menus */
-.menu menuitem accelerator {
+window:not(.control-center) .menu menuitem accelerator {
     color: @theme_fg_color !important;
     opacity: 0.7 !important;
     font-size: 13px !important;
     margin-left: 10px !important;
 }
 
-.menu menuitem:hover accelerator {
+window:not(.control-center) .menu menuitem:hover accelerator {
     color: @theme_selected_fg_color !important;
     opacity: 0.9 !important;
 }
-

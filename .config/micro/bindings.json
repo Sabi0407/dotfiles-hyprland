@@ -1,10 +1,5 @@
 {
     "Alt-/": "lua:comment.comment",
-    "Ctrl-t": "command:tabnew",
-    "Ctrl-w": "command:tabclose",
-    "Ctrl-Shift-t": "command:tabopen",
-    "Ctrl-Tab": "NextTab",
-    "Ctrl-Shift-Tab": "PreviousTab",
     "Ctrl-1": "command:tab 1",
     "Ctrl-2": "command:tab 2",
     "Ctrl-3": "command:tab 3",
@@ -14,7 +9,13 @@
     "Ctrl-7": "command:tab 7",
     "Ctrl-8": "command:tab 8",
     "Ctrl-9": "command:tab 9",
-    "Ctrl-l": "JumpLine",
+    "Ctrl-Shift-Tab": "PreviousTab",
+    "Ctrl-Shift-t": "command:tabopen",
+    "Ctrl-Tab": "NextTab",
     "Ctrl-d": "DuplicateLine",
+    "Ctrl-l": "JumpLine",
+    "Ctrl-t": "command:tabnew",
+    "Ctrl-w": "command:tabclose",
+    "CtrlUnderscore": "lua:comment.comment",
     "F5": "command:reload"
 }
