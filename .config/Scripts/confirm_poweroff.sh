@@ -1,2 +1,1 @@
-#!/bin/bash
-exec "$(dirname "$0")/confirm-action.sh" shutdown "$@"
+confirm-action.sh

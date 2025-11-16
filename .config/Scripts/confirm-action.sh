@@ -8,6 +8,8 @@ run_zenity_dark() {
     GTK_THEME="catppuccin-mocha-red-standard+default" zenity "$@" 2> >(grep -v "Adwaita-WARNING")
 }
 
+trap 'exit 1' INT TERM
+
 usage() {
     cat <<'EOF'
 Usage: confirm-action.sh <logout|reboot|shutdown>

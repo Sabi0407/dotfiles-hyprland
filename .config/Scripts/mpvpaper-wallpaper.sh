@@ -215,9 +215,22 @@ run_pywal_sync_helpers() {
     done
 }
 
+restart_component() {
+    local unit="$1"
+    local binary="$2"
+    if systemctl --user restart "$unit" >/dev/null 2>&1; then
+        return
+    fi
+    pkill -x "$binary" >/dev/null 2>&1 || true
+    sleep 0.3
+    if command -v "$binary" >/dev/null 2>&1; then
+        nohup "$binary" >/dev/null 2>&1 &
+    fi
+}
+
 reload_ui_theme() {
-    systemctl --user restart waybar.service >/dev/null 2>&1 || true
-    systemctl --user restart swaync.service >/dev/null 2>&1 || true
+    restart_component waybar.service waybar
+    restart_component swaync.service swaync
     pkill -x tofi >/dev/null 2>&1 || true
     sleep 0.2
 }

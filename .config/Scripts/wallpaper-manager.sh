@@ -9,6 +9,28 @@ WALLPAPER_DIR="$HOME/Images/wallpapers"
 LAST_WALLPAPER_FILE="$HOME/.config/dernier_wallpaper.txt"
 SCRIPTS_DIR="$HOME/.config/Scripts"
 
+restart_waybar() {
+    if systemctl --user restart waybar.service >/dev/null 2>&1; then
+        return
+    fi
+    pkill -x waybar >/dev/null 2>&1 || true
+    sleep 0.3
+    if command -v waybar >/dev/null 2>&1; then
+        nohup waybar >/dev/null 2>&1 &
+    fi
+}
+
+restart_swaync() {
+    if systemctl --user restart swaync.service >/dev/null 2>&1; then
+        return
+    fi
+    pkill -x swaync >/dev/null 2>&1 || true
+    sleep 0.3
+    if command -v swaync >/dev/null 2>&1; then
+        nohup swaync >/dev/null 2>&1 &
+    fi
+}
+
 # Fonction pour appliquer un wallpaper avec pywal
 apply_wallpaper() {
     local wallpaper_path="$1"
@@ -88,8 +110,8 @@ apply_wallpaper() {
     echo "$wallpaper_path" > "$LAST_WALLPAPER_FILE"
     
     # Recharger l'interface
-    systemctl --user restart waybar.service
-    systemctl --user restart swaync.service
+    restart_waybar
+    restart_swaync
     
     # Forcer la fermeture de Tofi pour qu'il recharge les couleurs
     pkill -x tofi 2>/dev/null

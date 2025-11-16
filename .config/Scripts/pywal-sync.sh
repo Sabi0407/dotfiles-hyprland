@@ -17,6 +17,7 @@ TASKS=(
     "generate-kitty-colors.sh"
     "generate-hyprland-colors.sh"
     "generate-hyprlock-colors.sh"
+    "generate-swayosd-colors.sh"
 )
 
 failures=()
@@ -33,6 +34,15 @@ for task in "${TASKS[@]}"; do
         failures+=("${task}")
     fi
 done
+
+# Relancer les applis dépendantes des nouvelles couleurs
+echo "[pywal-sync] Reloading swaync/waybar/swayosd"
+pkill swaync 2>/dev/null || true
+swaync & disown
+pkill waybar 2>/dev/null || true
+waybar & disown
+pkill swayosd-server 2>/dev/null || true
+swayosd-server >/tmp/swayosd.log 2>&1 & disown
 
 if (( ${#failures[@]} > 0 )); then
     echo "[pywal-sync] Attention : certains modules ont échoué :" >&2

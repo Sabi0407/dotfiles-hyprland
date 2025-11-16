@@ -14,6 +14,7 @@ CONFIG_FILE="$CONFIG_DIR/config.ini"
 STATE_FILE="$CONFIG_DIR/state.ini"
 SCRIPTS_DIR="$HOME/.config/Scripts"
 POST_COMMAND="$SCRIPTS_DIR/wallpaper-manager.sh apply-path \$wallpaper"
+BACKEND="${WAYPAPER_BACKEND:-swww}"
 
 if [ ! -d "$WALLPAPER_DIR" ]; then
     echo "Erreur : dossier des wallpapers introuvable ($WALLPAPER_DIR)." >&2
@@ -22,7 +23,7 @@ fi
 
 mkdir -p "$CONFIG_DIR"
 
-CONFIG_FILE="$CONFIG_FILE" WALLPAPER_DIR="$WALLPAPER_DIR" POST_COMMAND="$POST_COMMAND" python - <<'PY'
+CONFIG_FILE="$CONFIG_FILE" WALLPAPER_DIR="$WALLPAPER_DIR" POST_COMMAND="$POST_COMMAND" BACKEND="$BACKEND" python - <<'PY'
 import configparser
 import os
 import pathlib
@@ -46,7 +47,7 @@ for path in extra_dirs:
         folders.append(resolved)
 
 config_path.parent.mkdir(parents=True, exist_ok=True)
-config = configparser.ConfigParser()
+config = configparser.ConfigParser(strict=False)
 config.read(config_path, encoding="utf-8")
 
 if "Settings" not in config:
@@ -61,7 +62,7 @@ for folder in folders:
         folder_lines.append(folder)
 settings["folder"] = "\n".join(folder_lines)
 
-settings["backend"] = "none"
+settings["backend"] = os.environ.get("BACKEND", "swww")
 settings.setdefault("fill", "fill")
 settings.setdefault("sort", "name")
 settings["number_of_columns"] = "9"
@@ -83,4 +84,4 @@ with config_path.open("w", encoding="utf-8") as f:
     config.write(f)
 PY
 
-waypaper --backend none --folder "$WALLPAPER_DIR" --state-file "$STATE_FILE"
+waypaper --backend "$BACKEND" --state-file "$STATE_FILE"
