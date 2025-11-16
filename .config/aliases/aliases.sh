@@ -23,14 +23,14 @@ alias ll='ls -alF' # Liste détaillée avec tous les fichiers
 alias la='ls -A'
 alias l='ls -CF'
 
-# cat amélioré avec bat
-alias cat='bat'
+# cat amélioré avec bat (sans supprimer le cat classique)
+alias batcat='bat --paging=never'
 
 # Sécurité
-alias rm='rm -i' # Suppression avec confirmation            
+alias rm='rm -i' # Suppression avec confirmation
 alias cp='cp -i' # Copie avec confirmation
 alias mv='mv -i' # Déplacement avec confirmation
-alias mkdir='mkdir -p' # Création de dossiers avec confirmation
+alias mkdir='mkdir -p' # Création récursive même si le dossier existe déjà
 
 # Recherche
 alias grep='grep --color=auto' # Recherche avec coloration
@@ -59,18 +59,26 @@ alias thumbreset='~/.config/Scripts/thunar-thumbs-reset.sh'
 alias s='sudo pacman -S' # Installer un paquet
 alias r='sudo pacman -R' # Supprimer un paquet
 alias rns='sudo pacman -Rs' # Supprimer un paquet et ses dépendances
-alias sy='sudo pacman -Sy' # Mettre à jour la base de données
-alias syu='sudo pacman -Syu' # Mettre à jour le système
+alias sy='sudo pacman -Syu' # Mettre à jour le système (évite les partial upgrades)
+alias syu='sudo pacman -Syu' # Mettre à jour le système (équivalent à sy)
 alias ss='pacman -Ss' # Rechercher un paquet
 alias si='pacman -Si' # Afficher les détails d'un paquet
-alias pacmanclean='sudo pacman -Rns $(pacman -Qdtq) && sudo pacman -Sc'
+pacmanclean() {
+    local orphans
+    if orphans=$(pacman -Qdtq 2>/dev/null) && [ -n "$orphans" ]; then
+        sudo pacman -Rns -- $orphans
+    else
+        echo "pacmanclean: aucun paquet orphelin détecté"
+    fi
+    sudo pacman -Sc
+}
 
 # Yay avec options
 alias ys='yay -S' # Installer un paquet
 alias yr='yay -R' # Supprimer un paquet
 alias yrs='yay -Rns' # Supprimer un paquet et ses dépendances
-alias ysy='yay -Sy' # Mettre à jour la base de données
-alias ysyu='yay -Syu' # Mettre à jour le système
+alias ysy='yay -Syu' # Mettre à jour le système (évite les partial upgrades)
+alias ysyu='yay -Syu' # Mettre à jour le système (équivalent à ysy)
 alias yss='yay -Ss' # Rechercher un paquet
 alias ysi='yay -Si' # Afficher les détails d'un paquet
 alias yayclean='yay -Yc && yay -Sc'
@@ -95,7 +103,15 @@ walldyn() {
     if command -v yazi >/dev/null 2>&1; then
         local chooser_file
         chooser_file=$(mktemp)
-        yazi --chooser-file "$chooser_file" "$base_dir"
+        (
+            trap 'rm -f "$chooser_file"; exit 130' INT TERM
+            yazi --chooser-file "$chooser_file" "$base_dir"
+        )
+        local chooser_status=$?
+        if [ $chooser_status -ne 0 ]; then
+            rm -f "$chooser_file"
+            return $chooser_status
+        fi
         selection=$(sed -n '1p' "$chooser_file")
         rm -f "$chooser_file"
     else
