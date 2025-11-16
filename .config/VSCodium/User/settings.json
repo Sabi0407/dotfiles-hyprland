@@ -1,5 +1,4 @@
 {
-    // Désactive complètement la barre de titre et les décorations
     "window.titleBarStyle": "native",
     "window.nativeTabs": false,
     "editor.minimap.enabled": false,
@@ -14,5 +13,12 @@
     "workbench.editor.editorActionsLocation": "titleBar",
     "window.menuBarVisibility": "toggle",
     "workbench.startupEditor": "none",
-    "window.commandCenter": false
+    "window.commandCenter": false,
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontLigatures": true,
+    "extensions.recommendations": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-python.python"
+    ]
 }
