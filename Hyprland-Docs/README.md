@@ -124,9 +124,13 @@ Menu d'alimentation (Wayland) affiché via une notification OSD.
 
 ```
 ~/.config/wlogout/
-├── layout                 # Définition des boutons
-└── style.css (→ pywal)    # Styles générés depuis ~/.config/wal/templates/wlogout.css
+├── layout                   # Définition des boutons (JSON)
+├── style.css → ~/.config/wal/cache/wlogout.css
+├── icons/                   # Icônes utilisées par wlogout
+└── wallpapers/              # Fonds spécifiques (house.png, snow-covered-mountains…)
 ```
+
+Styles : `~/.config/wal/templates/wlogout.css` (Pywal) + règles GTK (`~/.config/gtk-4.0/gtk.css`).
 
 
 ---
