@@ -8,6 +8,55 @@ mkdir -p "$PYWAL_CACHE_DIR"
 WALLPAPER_DIR="$HOME/Images/wallpapers"
 LAST_WALLPAPER_FILE="$HOME/.config/dernier_wallpaper.txt"
 SCRIPTS_DIR="$HOME/.config/Scripts"
+declare -A WAL_BACKEND_MODULES=(
+    [colorz]=colorz
+    [colorthief]=colorthief
+    [average]=""
+)
+WAL_BACKEND_PRIORITY=(colorz colorthief average)
+
+backend_available() {
+    local backend="$1"
+    [[ "$backend" == "default" ]] && return 0
+    local module="${WAL_BACKEND_MODULES[$backend]}"
+    if [[ -z "$module" ]]; then
+        return 0
+    fi
+    python - "$module" >/dev/null 2>&1 <<'PY'
+import importlib, sys
+module = sys.argv[1]
+try:
+    importlib.import_module(module)
+except Exception:
+    sys.exit(1)
+PY
+}
+
+generate_palette_with_backend() {
+    local backend="$1"
+    local wallpaper="$2"
+    local cmd=(wal --cols16 -i "$wallpaper" -n)
+    if [[ "$backend" != "default" ]]; then
+        cmd+=(--backend "$backend")
+    fi
+    "${cmd[@]}"
+}
+
+generate_dynamic_palette() {
+    local wallpaper="$1"
+    local backend
+    for backend in "${WAL_BACKEND_PRIORITY[@]}"; do
+        if ! backend_available "$backend"; then
+            continue
+        fi
+        if generate_palette_with_backend "$backend" "$wallpaper"; then
+            echo "[wallpaper-manager] Palette générée avec backend ${backend}" >&2
+            return 0
+        fi
+    done
+    echo "[wallpaper-manager] Aucun backend Pywal n'a fonctionné." >&2
+    return 1
+}
 
 restart_waybar() {
     if systemctl --user restart waybar.service >/dev/null 2>&1; then
@@ -61,31 +110,9 @@ apply_wallpaper() {
     transition=${transitions[$RANDOM % ${#transitions[@]}]}
     swww img "$wallpaper_path" --transition-type "$transition" --transition-duration 2
     
-    # Générer les couleurs pywal (avec fallbacks)
-    if ! wal --cols16 -i "$wallpaper_path" -n; then
-        echo "[wallpaper-manager] Échec backend wal par défaut." >&2
-        declare -A BACKENDS=(
-            [colorthief]=colorthief
-            [haishoku]=haishoku
-            [colorz]=colorz
-        )
-        fallback_ok=false
-        for backend in "${!BACKENDS[@]}"; do
-            module=${BACKENDS[$backend]}
-            if python -c "import $module" >/dev/null 2>&1; then
-                echo "[wallpaper-manager] Tentative backend $backend..." >&2
-                if wal --cols16 -i "$wallpaper_path" -n --backend "$backend"; then
-                    fallback_ok=true
-                    break
-                fi
-            else
-                echo "[wallpaper-manager] Backend $backend indisponible (module Python '$module' absent)." >&2
-            fi
-        done
-        if [[ $fallback_ok == false ]]; then
-            echo "[wallpaper-manager] Impossible de générer une palette Pywal pour ce wallpaper." >&2
-            return 1
-        fi
+    if ! generate_dynamic_palette "$wallpaper_path"; then
+        echo "[wallpaper-manager] Impossible de générer une palette Pywal pour ce wallpaper." >&2
+        return 1
     fi
 
     if [ -x "$SCRIPTS_DIR/update-swayosd-style.sh" ]; then

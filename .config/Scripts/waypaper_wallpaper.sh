@@ -9,6 +9,7 @@ if ! command -v waypaper >/dev/null 2>&1; then
 fi
 
 WALLPAPER_DIR="${WALLPAPER_DIR:-$HOME/Images/wallpapers}"
+EXTRA_DIRS="$WALLPAPER_DIR:$HOME/dotfiles/wallpapers:$HOME/Images/wallpapers"
 CONFIG_DIR="$HOME/.config/waypaper"
 CONFIG_FILE="$CONFIG_DIR/config.ini"
 STATE_FILE="$CONFIG_DIR/state.ini"
@@ -23,62 +24,52 @@ fi
 
 mkdir -p "$CONFIG_DIR"
 
-CONFIG_FILE="$CONFIG_FILE" WALLPAPER_DIR="$WALLPAPER_DIR" POST_COMMAND="$POST_COMMAND" BACKEND="$BACKEND" python - <<'PY'
+CONFIG_FILE="$CONFIG_FILE" EXTRA_DIRS="$EXTRA_DIRS" POST_COMMAND="$POST_COMMAND" BACKEND="$BACKEND" python - <<'PY'
 import configparser
 import os
-import pathlib
+from pathlib import Path
 
-config_path = pathlib.Path(os.environ["CONFIG_FILE"]).expanduser()
-wallpaper_dir = pathlib.Path(os.environ["WALLPAPER_DIR"]).expanduser()
-post_command = os.environ["POST_COMMAND"]
-
-extra_dirs = [
-    wallpaper_dir,
-    pathlib.Path.home() / "dotfiles/wallpapers",
-    pathlib.Path.home() / "Images/wallpapers",
-]
-
+config_path = Path(os.environ["CONFIG_FILE"]).expanduser()
 folders = []
-for path in extra_dirs:
-    if not path.exists():
-        continue
-    resolved = str(path.resolve())
-    if resolved not in folders:
-        folders.append(resolved)
+for entry in os.environ["EXTRA_DIRS"].split(":"):
+    path = Path(entry).expanduser().resolve()
+    if path.exists() and str(path) not in folders:
+        folders.append(str(path))
 
-config_path.parent.mkdir(parents=True, exist_ok=True)
 config = configparser.ConfigParser(strict=False)
+config_path.parent.mkdir(parents=True, exist_ok=True)
 config.read(config_path, encoding="utf-8")
+settings = config.setdefault("Settings", {})
 
-if "Settings" not in config:
-    config["Settings"] = {}
+existing = [line.strip() for line in settings.get("folder", "").splitlines() if line.strip()]
+merged = []
+for folder in folders + existing:
+    if folder and folder not in merged:
+        merged.append(folder)
+settings["folder"] = "\n".join(merged)
 
-settings = config["Settings"]
+defaults = {
+    "backend": os.environ["BACKEND"],
+    "fill": "fill",
+    "sort": "name",
+    "number_of_columns": "9",
+    "post_command": os.environ["POST_COMMAND"],
+    "color": "#000000",
+    "swww_transition_type": "random",
+    "swww_transition_step": "63",
+    "swww_transition_angle": "0",
+    "swww_transition_duration": "2",
+    "swww_transition_fps": "60",
+    "zen_mode": "True",
+    "show_path_in_tooltip": "True",
+    "subfolders": "True",
+    "all_subfolders": "True",
+    "show_hidden": "False",
+    "stylesheet": str((Path.home() / ".config/waypaper/style.css").resolve()),
+}
 
-folders_raw = settings.get("folder", "").strip()
-folder_lines = [line.strip() for line in folders_raw.splitlines() if line.strip()]
-for folder in folders:
-    if folder not in folder_lines:
-        folder_lines.append(folder)
-settings["folder"] = "\n".join(folder_lines)
-
-settings["backend"] = os.environ.get("BACKEND", "swww")
-settings.setdefault("fill", "fill")
-settings.setdefault("sort", "name")
-settings["number_of_columns"] = "9"
-settings["post_command"] = post_command
-settings.setdefault("color", "#000000")
-settings.setdefault("swww_transition_type", "random")
-settings.setdefault("swww_transition_step", "63")
-settings.setdefault("swww_transition_angle", "0")
-settings.setdefault("swww_transition_duration", "2")
-settings.setdefault("swww_transition_fps", "60")
-settings.setdefault("zen_mode", "True")
-settings.setdefault("show_path_in_tooltip", "True")
-settings.setdefault("subfolders", "True")
-settings.setdefault("all_subfolders", "True")
-settings.setdefault("show_hidden", "False")
-settings["stylesheet"] = str(pathlib.Path.home() / ".config/waypaper/style.css")
+for key, value in defaults.items():
+    settings.setdefault(key, value)
 
 with config_path.open("w", encoding="utf-8") as f:
     config.write(f)
