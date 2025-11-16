@@ -1,31 +1,21 @@
-# Modern Yazi config
+# Modern Yazi config avec fallbacks
 
 [manager]
-# Utilise exa ou lsd pour lister les fichiers si dispo
-ls_command = "exa --icons --group-directories-first"
-# Affiche les fichiers cachés par défaut
+ls_command = "sh -c 'command -v exa >/dev/null && exa --icons --group-directories-first "$@" || ls "$@"' ls"
 show_hidden = true
 
 [preview]
-# Utilise bat pour prévisualiser les fichiers texte
-text = "bat --style=plain --color=always --paging=never {}"
-# Utilise viu pour les images (si installé)
-image = "viu -b {}"
-# Utilise pdftotext pour les PDF
-pdf = "pdftotext {} -"
+text = "sh -c 'command -v bat >/dev/null && exec bat --style=plain --color=always --paging=never "$@" || exec cat "$@"' preview"
+image = "sh -c 'command -v viu >/dev/null && exec viu -b "$@" || exec wezterm imgcat "$@"' preview"
+pdf = "sh -c 'command -v pdftotext >/dev/null && pdftotext "$@" - || echo \"pdftotext non installé\"' preview"
 
-[theme]
-# Thème moderne (ex: catppuccin-mocha)
-# Pour appliquer un thème, place le fichier dans ~/.config/yazi/themes/
-theme = "mocha/catppuccin-mocha-blue"
+theme = "mocha/catppuccin-mocha-green"
 
 [statusbar]
-# Affiche le chemin, le nombre de fichiers, la sélection, etc.
 left = "{cwd} {mode}"
 right = "{total} files | {selected} selected"
 
 [keymap]
-# Raccourcis modernes
 open_terminal = "ctrl+t"
 toggle_hidden = "ctrl+h"
 preview = "space"
