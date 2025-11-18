@@ -36,14 +36,15 @@ window#osd {
 }
 
 .osd-volume scale trough {
-  background: alpha(@muted_color, 0.45);
+  background: alpha(@accent_primary, 0.25);
   border-radius: 8px;
+  box-shadow: inset 0 0 6px alpha(@accent_primary, 0.5);
 }
 
 .osd-volume scale slider {
   border-radius: 8px;
   background: @accent_primary;
-  box-shadow: none;
+  box-shadow: 0 0 8px alpha(@accent_secondary, 0.55);
 }
 
 .osd-volume scale slider:disabled {

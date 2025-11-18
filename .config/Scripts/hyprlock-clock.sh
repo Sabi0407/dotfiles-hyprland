@@ -118,7 +118,7 @@ if [[ "${color_mode}" == 'pywal16' ]]; then
         source "${palette_file_pywal}"
         set -u
         primary="${color3:-${color4:-${color5:-#f5c2e7}}}"
-        secondary="${color6:-${color2:-${color1:-#89b4fa}}}"
+        secondary="${color11:-${color6:-${color2:-#89b4fa}}}"
         mapfile -t pywal_palette < <(generate_linear_gradient "$primary" "$secondary" 12)
     fi
     build_gradient_markup "${value}" "${pywal_palette[@]}"

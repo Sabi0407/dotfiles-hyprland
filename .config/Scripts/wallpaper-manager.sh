@@ -125,8 +125,7 @@ apply_wallpaper() {
         fi
         sleep 0.3
     else
-        "$SCRIPTS_DIR/update-pywalfox.sh" > /dev/null 2>&1 || true
-        for script in wal2swaync generate-pywal-waybar-style generate-tofi-colors generate-kitty-colors generate-hyprland-colors generate-hyprlock-colors; do
+        for script in wal2swaync generate-tofi-colors generate-kitty-colors generate-hyprland-colors generate-hyprlock-colors; do
             if [ -f "$SCRIPTS_DIR/$script.sh" ]; then
                 "$SCRIPTS_DIR/$script.sh" > /dev/null 2>&1 || true
             fi
