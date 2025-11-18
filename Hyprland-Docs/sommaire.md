@@ -1,0 +1,10 @@
+***
+
+[[INSTALLATION-MANUELLE]]
+
+[[KEYBINDINGS]]
+
+[[Hyprland-Docs/README|README]]
+
+
+

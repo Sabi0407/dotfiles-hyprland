@@ -41,12 +41,18 @@ yay -S --needed anki-bin catppuccin-cursors-mocha catppuccin-gtk-theme-mocha \
   kvantum-theme-catppuccin-git librewolf-bin localsend-bin mpvpaper \
   onlyoffice-bin packettracer papirus-folders-git proton-pass-bin \
   python-imageio-ffmpeg python-pywal16-git python-pywalfox python-screeninfo \
+  python-colorthief python-haishoku \
   qt5-webchannel qt5-webengine qt5-websockets spicetify-cli \
   spicetify-extensions-rxri-git spicetify-marketplace-bin spotify tofi-git \
   touchpad-toggle ttf-all-the-icons vesktop-bin virtualbox-ext-oracle \
   vscodium-bin walcord waypaper wlogout yay yay-debug
 ```
 - Cette configuration s'appuie sur `python-pywal16-git` (version de développement minimaliste maintenue via l'AUR). En cas de réinstallation, utiliser `yay -S python-pywal16-git` puis relancer les scripts Pywal dépendants pour régénérer les palettes.
+- Les scripts de wallpapers utilisent les backends `colorz`, `colorthief` et `haishoku` pour générer des palettes harmonisées. Installer leurs dépendances Python via l'AUR :
+  ```bash
+  yay -S python-colorthief python-haishoku
+  ```
+  (Ces paquets installent proprement les modules, évitant d'utiliser `pip --break-system-packages`.)
 
 ## Packet Tracer
 - Télécharger le paquet `.deb` Linux 64 bits depuis https://www.computernetworkingnotes.com/ccna-study-guide/download-packet-tracer-for-windows-and-linux.html (ex. `CiscoPacketTracer_900_Ubuntu_64bit.deb`).

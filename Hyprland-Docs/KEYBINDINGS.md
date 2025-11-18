@@ -101,6 +101,7 @@ Notation : `Super + X` signifie maintenir `Super`, puis frapper `X`. Les combin
 | `Super + N` | Afficher / masquer SwayNC |
 | `Super + Shift + S` | Restaurer rapidement le thème Catppuccin |
 | `Super + Ctrl + S` | Sélecteur complet de thème Catppuccin |
+| `Super + Echap` | Menu d’extinction Wlogout |
 | `Super + Shift + O` | Lancer `backup-usb.sh` (sauvegarde USB) |
 | `Super + Ctrl + Shift + R` | Redémarrer la machine |
 | `Super + Ctrl + Shift + O` | Éteindre la machine |
