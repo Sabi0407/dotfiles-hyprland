@@ -1,8 +1,8 @@
-@define-color theme_bg_color #0f060f;
-@define-color theme_fg_color #c3c0c3;
-@define-color accent_primary #4e5b72;
-@define-color accent_secondary #9c3f55;
-@define-color muted_color #695669;
+@define-color theme_bg_color #090917;
+@define-color theme_fg_color #c1c1c5;
+@define-color accent_primary #485169;
+@define-color accent_secondary #6d5769;
+@define-color muted_color #59596d;
 
 window#osd {
   font-family: "Inter", "SF Pro Text", "Noto Sans", sans-serif;
@@ -29,14 +29,15 @@ window#osd {
 }
 
 .osd-volume scale trough {
-  background: alpha(@muted_color, 0.45);
+  background: alpha(@accent_primary, 0.25);
   border-radius: 8px;
+  box-shadow: inset 0 0 6px alpha(@accent_primary, 0.5);
 }
 
 .osd-volume scale slider {
   border-radius: 8px;
   background: @accent_primary;
-  box-shadow: none;
+  box-shadow: 0 0 8px alpha(@accent_secondary, 0.55);
 }
 
 .osd-volume scale slider:disabled {
