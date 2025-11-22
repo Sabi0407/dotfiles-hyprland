@@ -73,7 +73,7 @@ source = configs/windowrules.conf
 └── style.css              
 ```
 
-![Waybar](https://raw.githubusercontent.com/Sabi0407/dotfiles-hyprland/main/Hyprland-Docs/Images/2025-11-22_09-34_1.png)
+![Waybar](Hyprland-Docs/Images/2025-11-22_09-34_1.png)
 
 ---
 
@@ -85,7 +85,7 @@ source = configs/windowrules.conf
 ~/.config/tofi/
 └── config                 
 ```
-![Tofi](https://raw.githubusercontent.com/Sabi0407/dotfiles-hyprland/main/Hyprland-Docs/Images/2025-11-22_09-35.png)
+![Tofi](Hyprland-Docs/Images/2025-11-22_09-35.png)
 ---
 
 ## SwayNC 
@@ -96,12 +96,12 @@ source = configs/windowrules.conf
 ├── config.json            
 └── style.css              
 ```
-![SwayNC](https://raw.githubusercontent.com/Sabi0407/dotfiles-hyprland/main/Hyprland-Docs/Images/2025-11-22_09-34.png)
+![SwayNC](Hyprland-Docs/Images/2025-11-22_09-34.png)
 ---
 
 ## SwayOSD
 
-![SwayOSD](https://raw.githubusercontent.com/Sabi0407/dotfiles-hyprland/main/Hyprland-Docs/Images/2025-11-22_09-35_1.png)
+![SwayOSD](Hyprland-Docs/Images/2025-11-22_09-35_1.png)
 
 
 ```
@@ -115,7 +115,7 @@ source = configs/windowrules.conf
 ## Hyprlock
 ### Fichiers de configuration
 
-![Hyprlock](https://raw.githubusercontent.com/Sabi0407/dotfiles-hyprland/main/Hyprland-Docs/Images/screenshot.png)
+![Hyprlock](Hyprland-Docs/Images/screenshot.png)
 
 ```
 ~/.config/hypr/
@@ -146,7 +146,7 @@ source = configs/windowrules.conf
 ├── style.css                
 └── icons/                   
 ```
-![Wlogout](https://raw.githubusercontent.com/Sabi0407/dotfiles-hyprland/main/Hyprland-Docs/Images/2025-11-22_09-35.png)
+![Wlogout](Hyprland-Docs/Images/2025-11-22_09-35.png)
 
 
 ---
@@ -193,7 +193,7 @@ source = configs/windowrules.conf
     ├── itachi.png         # Logo Itachi
     └── sasukeyyy.png      # Logo Sasuke
 ```
-![Fastfetch](https://raw.githubusercontent.com/Sabi0407/dotfiles-hyprland/main/Hyprland-Docs/Images/2025-11-22_09-35_3.png)
+![Fastfetch](Hyprland-Docs/Images/2025-11-22_09-35_3.png)
 ---
 
 ## Scripts - Scripts personnalisés
