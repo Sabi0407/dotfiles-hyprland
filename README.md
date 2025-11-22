@@ -73,8 +73,6 @@ source = configs/windowrules.conf
 └── style.css              
 ```
 
-![Waybar](Hyprland-Docs/Images/2025-11-22_09-34_1.png)
-
 ---
 
 ## Tofi 
@@ -85,7 +83,6 @@ source = configs/windowrules.conf
 ~/.config/tofi/
 └── config                 
 ```
-![Tofi](Hyprland-Docs/Images/2025-11-22_09-35.png)
 ---
 
 ## SwayNC 
@@ -96,13 +93,9 @@ source = configs/windowrules.conf
 ├── config.json            
 └── style.css              
 ```
-![SwayNC](Hyprland-Docs/Images/2025-11-22_09-34.png)
 ---
 
 ## SwayOSD
-
-![SwayOSD](Hyprland-Docs/Images/2025-11-22_09-35_1.png)
-
 
 ```
 ~/.config/swayosd/
@@ -114,8 +107,6 @@ source = configs/windowrules.conf
 
 ## Hyprlock
 ### Fichiers de configuration
-
-![Hyprlock](Hyprland-Docs/Images/screenshot.png)
 
 ```
 ~/.config/hypr/
@@ -147,8 +138,6 @@ source = configs/windowrules.conf
 └── icons/                   
 ```
 
-
-![Wlogout](Hyprland-Docs/Images/2025-11-22_09-35.png)
 
 
 ---
@@ -194,7 +183,6 @@ source = configs/windowrules.conf
     ├── akatsuki.png       # Logo Akatsuki
     ├── itachi.png         # Logo Itachi
     └── sasukeyyy.png      # Logo Sasuke
-![Fastfetch](Hyprland-Docs/Images/2025-11-22_09-35_3.png)
 ---
 
 ## Scripts - Scripts personnalisés
