@@ -73,7 +73,11 @@ source = configs/windowrules.conf
 └── style.css              
 ```
 
+<<<<<<< HEAD
 ![Waybar](Images/2025-11-22_09-34_1.png)
+=======
+![Waybar](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-34_1.png)
+>>>>>>> 9d61bec (docs: liens images via github/raw)
 
 ---
 
@@ -85,7 +89,11 @@ source = configs/windowrules.conf
 ~/.config/tofi/
 └── config                 
 ```
+<<<<<<< HEAD
 ![Tofi](Images/2025-11-22_09-35.png)
+=======
+![Tofi](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-35.png)
+>>>>>>> 9d61bec (docs: liens images via github/raw)
 ---
 
 ## SwayNC 
@@ -96,12 +104,20 @@ source = configs/windowrules.conf
 ├── config.json            
 └── style.css              
 ```
+<<<<<<< HEAD
 ![SwayNC](Images/2025-11-22_09-34.png)
+=======
+![SwayNC](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-34.png)
+>>>>>>> 9d61bec (docs: liens images via github/raw)
 ---
 
 ## SwayOSD
 
+<<<<<<< HEAD
 ![SwayOSD](Images/2025-11-22_09-35_1.png)
+=======
+![SwayOSD](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-35_1.png)
+>>>>>>> 9d61bec (docs: liens images via github/raw)
 
 
 ```
@@ -115,7 +131,11 @@ source = configs/windowrules.conf
 ## Hyprlock
 ### Fichiers de configuration
 
+<<<<<<< HEAD
 ![Hyprlock](Images/screenshot.png)
+=======
+![Hyprlock](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/screenshot.png)
+>>>>>>> 9d61bec (docs: liens images via github/raw)
 
 ```
 ~/.config/hypr/
@@ -146,9 +166,13 @@ source = configs/windowrules.conf
 ├── style.css                
 └── icons/                   
 ```
+<<<<<<< HEAD
 
 
 ![Wlogout](Images/2025-11-22_09-35.png)
+=======
+![Wlogout](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-35.png)
+>>>>>>> 9d61bec (docs: liens images via github/raw)
 
 
 ---
@@ -195,7 +219,11 @@ source = configs/windowrules.conf
     ├── itachi.png         # Logo Itachi
     └── sasukeyyy.png      # Logo Sasuke
 ```
+<<<<<<< HEAD
 ![Fastfetch](Images/2025-11-22_09-35_3.png)
+=======
+![Fastfetch](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-35_3.png)
+>>>>>>> 9d61bec (docs: liens images via github/raw)
 ---
 
 ## Scripts - Scripts personnalisés
