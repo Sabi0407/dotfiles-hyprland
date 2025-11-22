@@ -73,7 +73,7 @@ source = configs/windowrules.conf
 └── style.css              
 ```
 
-![Waybar](Images/2025-11-22_09-34_1.png)
+![Waybar](../Images/2025-11-22_09-34_1.png)
 
 ---
 
@@ -85,7 +85,7 @@ source = configs/windowrules.conf
 ~/.config/tofi/
 └── config                 
 ```
-![Tofi](Images/2025-11-22_09-35.png)
+![Tofi](../Images/2025-11-22_09-35.png)
 ---
 
 ## SwayNC 
@@ -96,12 +96,12 @@ source = configs/windowrules.conf
 ├── config.json            
 └── style.css              
 ```
-![SwayNC](Images/2025-11-22_09-34.png)
+![SwayNC](../Images/2025-11-22_09-34.png)
 ---
 
 ## SwayOSD
 
-![SwayOSD](Images/2025-11-22_09-35_1.png)
+![SwayOSD](../Images/2025-11-22_09-35_1.png)
 
 
 ```
@@ -115,7 +115,7 @@ source = configs/windowrules.conf
 ## Hyprlock
 ### Fichiers de configuration
 
-![Hyprlock](Images/screenshot.png)
+![Hyprlock](../Images/screenshot.png)
 
 ```
 ~/.config/hypr/
@@ -146,7 +146,7 @@ source = configs/windowrules.conf
 ├── style.css                
 └── icons/                   
 ```
-![Wlogout](Images/2025-11-22_09-35.png)
+![Wlogout](../Images/2025-11-22_09-35.png)
 
 
 ---
@@ -193,7 +193,7 @@ source = configs/windowrules.conf
     ├── itachi.png         # Logo Itachi
     └── sasukeyyy.png      # Logo Sasuke
 ```
-![Fastfetch](Images/2025-11-22_09-35_3.png)
+![Fastfetch](../Images/2025-11-22_09-35_3.png)
 ---
 
 ## Scripts - Scripts personnalisés
