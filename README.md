@@ -76,7 +76,7 @@ source = configs/windowrules.conf
 <<<<<<< HEAD
 ![Waybar](Images/2025-11-22_09-34_1.png)
 =======
-![Waybar](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-34_1.png)
+![Waybar](Hyprland-Docs/Images/2025-11-22_09-34_1.png)
 >>>>>>> 9d61bec (docs: liens images via github/raw)
 
 ---
@@ -92,7 +92,7 @@ source = configs/windowrules.conf
 <<<<<<< HEAD
 ![Tofi](Images/2025-11-22_09-35.png)
 =======
-![Tofi](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-35.png)
+![Tofi](Hyprland-Docs/Images/2025-11-22_09-35.png)
 >>>>>>> 9d61bec (docs: liens images via github/raw)
 ---
 
@@ -107,7 +107,7 @@ source = configs/windowrules.conf
 <<<<<<< HEAD
 ![SwayNC](Images/2025-11-22_09-34.png)
 =======
-![SwayNC](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-34.png)
+![SwayNC](Hyprland-Docs/Images/2025-11-22_09-34.png)
 >>>>>>> 9d61bec (docs: liens images via github/raw)
 ---
 
@@ -116,7 +116,7 @@ source = configs/windowrules.conf
 <<<<<<< HEAD
 ![SwayOSD](Images/2025-11-22_09-35_1.png)
 =======
-![SwayOSD](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-35_1.png)
+![SwayOSD](Hyprland-Docs/Images/2025-11-22_09-35_1.png)
 >>>>>>> 9d61bec (docs: liens images via github/raw)
 
 
@@ -134,7 +134,7 @@ source = configs/windowrules.conf
 <<<<<<< HEAD
 ![Hyprlock](Images/screenshot.png)
 =======
-![Hyprlock](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/screenshot.png)
+![Hyprlock](Hyprland-Docs/Images/screenshot.png)
 >>>>>>> 9d61bec (docs: liens images via github/raw)
 
 ```
@@ -171,7 +171,7 @@ source = configs/windowrules.conf
 
 ![Wlogout](Images/2025-11-22_09-35.png)
 =======
-![Wlogout](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-35.png)
+![Wlogout](Hyprland-Docs/Images/2025-11-22_09-35.png)
 >>>>>>> 9d61bec (docs: liens images via github/raw)
 
 
@@ -222,7 +222,7 @@ source = configs/windowrules.conf
 <<<<<<< HEAD
 ![Fastfetch](Images/2025-11-22_09-35_3.png)
 =======
-![Fastfetch](https://github.com/Sabi0407/dotfiles-hyprland/raw/main/Hyprland-Docs/Images/2025-11-22_09-35_3.png)
+![Fastfetch](Hyprland-Docs/Images/2025-11-22_09-35_3.png)
 >>>>>>> 9d61bec (docs: liens images via github/raw)
 ---
 
