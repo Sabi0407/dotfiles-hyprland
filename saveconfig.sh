@@ -29,6 +29,7 @@ WALLPAPERS_DEST="$DEST/wallpapers"
 # Documentation Hyprland
 HYPR_DOC_SRC="$HOME/Documents/Perso/Hyprland-Docs/"
 HYPR_DOC_DEST="$DEST/Hyprland-Docs"
+HYPR_DOC_README_SRC="$HOME/Documents/Perso/Hyprland-Docs/README.md"
 
 # Emplacements VSCodium
 VSCODIUM_SETTINGS_SRC="$HOME/.config/VSCodium/User/settings.json"
@@ -107,6 +108,9 @@ echo "$(date): Sauvegarde de la documentation Hyprland" >> "$LOG_FILE"
 if [ -d "$HYPR_DOC_SRC" ]; then
     mkdir -p "$HYPR_DOC_DEST"
     rsync -av --delete "$HYPR_DOC_SRC" "$HYPR_DOC_DEST/" >> "$LOG_FILE" 2>&1
+    if [ -f "$HYPR_DOC_README_SRC" ]; then
+        rsync -av "$HYPR_DOC_README_SRC" "$HYPR_DOC_DEST/" >> "$LOG_FILE" 2>&1
+    fi
 else
     echo "$(date): ATTENTION - Dossier $HYPR_DOC_SRC non trouvé" >> "$LOG_FILE"
 fi
