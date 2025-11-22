@@ -9,6 +9,7 @@
 | Hyprland  | Gestionnaire de fenêtres          |
 | Waybar    | Barre d'état                      |
 | SwayNC    | Centre de notifications           |
+| SwayOSD   | Indicateurs volume/luminosité     |
 | Hyprlock  | Verrouillage d'écran              |
 | Hypridle  | Gestionnaire d'inactivité         |
 | Yazi      | Gestionnaire de fichiers terminal |
@@ -30,21 +31,21 @@
 
 ```
 ~/.config/hypr/
-├── hyprland.conf          # Configuration principale
-├── hypridle.conf          # Gestionnaire d'inactivité
-├── hyprlock.conf          # Verrouillage d'écran
-├── colors_temp.conf       # Couleurs temporaires
+├── hyprland.conf          
+├── hypridle.conf          
+├── hyprlock.conf          
+├── colors_temp.conf       
 ├── configs/
-│   ├── env.conf           # Variables d'environnement
-│   ├── input.conf         # Configuration clavier/souris
-│   ├── autostart.conf     # Applications au démarrage
-│   ├── keybindings.conf   # Raccourcis clavier
-│   ├── look.conf          # Apparence et décoration
-│   ├── monitors.conf      # Configuration des écrans
-│   ├── plugins.conf       # Plugins et extensions
-│   └── windowrules.conf   # Règles de fenêtres
+│   ├── env.conf           
+│   ├── input.conf         
+│   ├── autostart.conf     
+│   ├── keybindings.conf   
+│   ├── look.conf          
+│   ├── monitors.conf     
+│   ├── plugins.conf       
+│   └── windowrules.conf   
 └── colors/
-    └── hyprlock-colors.conf # Couleurs pour hyprlock
+    └── hyprlock-colors.conf 
 ```
 
 ### Import des configurations
@@ -68,9 +69,11 @@ source = configs/windowrules.conf
 
 ```
 ~/.config/waybar/
-├── config                 # Configuration principale
-└── style.css              # Styles et apparence
+├── config                 
+└── style.css              
 ```
+
+![[2025-11-22_09-34_1.png]]
 
 ---
 
@@ -80,9 +83,9 @@ source = configs/windowrules.conf
 
 ```
 ~/.config/tofi/
-└── config                 # Configuration du lanceur
+└── config                 
 ```
-
+![[2025-11-22_09-35.png]]
 ---
 
 ## SwayNC 
@@ -90,8 +93,21 @@ source = configs/windowrules.conf
 
 ```
 ~/.config/swaync/
-├── config.json            # Configuration principale
-└── style.css              # Styles et apparence
+├── config.json            
+└── style.css              
+```
+![[2025-11-22_09-34.png]]
+---
+
+## SwayOSD
+
+![[2025-11-22_09-35_1.png]]
+
+
+```
+~/.config/swayosd/
+├── config.toml            # Paramètres (appareils suivis, commandes associées)
+└── style.css              # Styles (couleurs, typographie, ombres)
 ```
 
 ---
@@ -99,9 +115,11 @@ source = configs/windowrules.conf
 ## Hyprlock
 ### Fichiers de configuration
 
+![[screenshot.png]]
+
 ```
 ~/.config/hypr/
-└── hyprlock.conf          # Configuration du verrouillage
+└── hyprlock.conf          
 ```
 
 ---
@@ -111,33 +129,31 @@ source = configs/windowrules.conf
 
 ```
 ~/.config/hypr/
-└── hypridle.conf          # Configuration de l'inactivité
+└── hypridle.conf          
 ```
 
 ---
 
 ## Wlogout
 
-Menu d'alimentation (Wayland) affiché via une notification OSD.
+
 
 ### Fichiers de configuration
 
 ```
 ~/.config/wlogout/
-├── layout                   # Boutons : poweroff, reboot, veille, hyprlock, etc.
-├── style.css                # Généré par Pywal (voir template ci-dessous)
-└── icons/                   # Icônes PNG & variantes hover
+├── layout                   
+├── style.css                
+└── icons/                   
 ```
-
-Le thème est régénéré par Pywal depuis `~/.config/wal/templates/wlogout.css` (couleurs dynamiques + fond issu du wallpaper courant).  
-Pour l’intégration GTK (fondu/transparence), voir aussi `~/.config/gtk-4.0/gtk.css`.
+![[2025-11-22_09-35.png]]
 
 
 ---
 
 ## Kitty 
 
-Terminal moderne avec support des images et des polices. Configuration flexible et performances élevées.
+
 
 ### Fichiers de configuration
 
@@ -177,7 +193,7 @@ Terminal moderne avec support des images et des polices. Configuration flexible 
     ├── itachi.png         # Logo Itachi
     └── sasukeyyy.png      # Logo Sasuke
 ```
-
+![[2025-11-22_09-35_3.png]]
 ---
 
 ## Scripts - Scripts personnalisés
