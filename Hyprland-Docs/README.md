@@ -146,6 +146,8 @@ source = configs/windowrules.conf
 ├── style.css                
 └── icons/                   
 ```
+
+
 ![Wlogout](Images/2025-11-22_09-35.png)
 
 
