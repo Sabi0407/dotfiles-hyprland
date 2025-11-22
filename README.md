@@ -1,6 +1,6 @@
 # Configuration Hyprland - Version 2
 
-> Consulte la documentation détaillée dans [`Hyprland-Docs/`](Hyprland-Docs/README.md)
+> [Installation manuelle](INSTALLATION-MANUELLE.md) · [Raccourcis clavier](KEYBINDINGS.md)
 
 ## Composants principaux
 
@@ -21,6 +21,7 @@
 | Icônes    | Papirus Icon Pack                 |
 | Pywal-16  | Génération de couleurs            |
 | Pywalfox  | Thème Firefox dynamique           |
+| wlogout   | Menu d'arrêt Wayland              |
 
 ---
 
@@ -30,21 +31,21 @@
 
 ```
 ~/.config/hypr/
-├── hyprland.conf          # Configuration principale
-├── hypridle.conf          # Gestionnaire d'inactivité
-├── hyprlock.conf          # Verrouillage d'écran
-├── colors_temp.conf       # Couleurs temporaires
+├── hyprland.conf          
+├── hypridle.conf          
+├── hyprlock.conf          
+├── colors_temp.conf       
 ├── configs/
-│   ├── env.conf           # Variables d'environnement
-│   ├── input.conf         # Configuration clavier/souris
-│   ├── autostart.conf     # Applications au démarrage
-│   ├── keybindings.conf   # Raccourcis clavier
-│   ├── look.conf          # Apparence et décoration
-│   ├── monitors.conf      # Configuration des écrans
-│   ├── plugins.conf       # Plugins et extensions
-│   └── windowrules.conf   # Règles de fenêtres
+│   ├── env.conf           
+│   ├── input.conf         
+│   ├── autostart.conf     
+│   ├── keybindings.conf   
+│   ├── look.conf          
+│   ├── monitors.conf     
+│   ├── plugins.conf       
+│   └── windowrules.conf   
 └── colors/
-    └── hyprlock-colors.conf # Couleurs pour hyprlock
+    └── hyprlock-colors.conf 
 ```
 
 ### Import des configurations
@@ -68,9 +69,11 @@ source = configs/windowrules.conf
 
 ```
 ~/.config/waybar/
-├── config                 # Configuration principale
-└── style.css              # Styles et apparence
+├── config                 
+└── style.css              
 ```
+
+![[2025-11-22_09-34_1.png]]
 
 ---
 
@@ -80,9 +83,9 @@ source = configs/windowrules.conf
 
 ```
 ~/.config/tofi/
-└── config                 # Configuration du lanceur
+└── config                 
 ```
-
+![[2025-11-22_09-35.png]]
 ---
 
 ## SwayNC 
@@ -90,15 +93,16 @@ source = configs/windowrules.conf
 
 ```
 ~/.config/swaync/
-├── config.json            # Configuration principale
-└── style.css              # Styles et apparence
+├── config.json            
+└── style.css              
 ```
-
+![[2025-11-22_09-34.png]]
 ---
 
 ## SwayOSD
 
-Affiche les barres de volume, luminosité et notifications système visuelles.
+![[2025-11-22_09-35_1.png]]
+
 
 ```
 ~/.config/swayosd/
@@ -111,9 +115,11 @@ Affiche les barres de volume, luminosité et notifications système visuelles.
 ## Hyprlock
 ### Fichiers de configuration
 
+![[screenshot.png]]
+
 ```
 ~/.config/hypr/
-└── hyprlock.conf          # Configuration du verrouillage
+└── hyprlock.conf          
 ```
 
 ---
@@ -123,14 +129,31 @@ Affiche les barres de volume, luminosité et notifications système visuelles.
 
 ```
 ~/.config/hypr/
-└── hypridle.conf          # Configuration de l'inactivité
+└── hypridle.conf          
 ```
+
+---
+
+## Wlogout
+
+
+
+### Fichiers de configuration
+
+```
+~/.config/wlogout/
+├── layout                   
+├── style.css                
+└── icons/                   
+```
+![[2025-11-22_09-35.png]]
+
 
 ---
 
 ## Kitty 
 
-Terminal moderne avec support des images et des polices. Configuration flexible et performances élevées.
+
 
 ### Fichiers de configuration
 
@@ -170,7 +193,7 @@ Terminal moderne avec support des images et des polices. Configuration flexible 
     ├── itachi.png         # Logo Itachi
     └── sasukeyyy.png      # Logo Sasuke
 ```
-
+![[2025-11-22_09-35_3.png]]
 ---
 
 ## Scripts - Scripts personnalisés
@@ -182,3 +205,10 @@ Collection de scripts personnalisés.
 ```
 ~/.config/Scripts/
 ```
+
+---
+
+## Spicetify
+
+Personnalisation de Spotify via Spicetify (`spicetify-cli` + `spicetify-marketplace-bin`).  
+Consulter [INSTALLATION-MANUELLE.md](INSTALLATION-MANUELLE.md) pour les étapes de configuration et l'accès au Marketplace intégré.
