@@ -195,7 +195,7 @@ source = configs/windowrules.conf
     ├── itachi.png         # Logo Itachi
     └── sasukeyyy.png      # Logo Sasuke
 ```
-![Fastfetch](Hyprland-Docs/Images/2025-11-22_09-35_3)
+![Fastfetch](Hyprland-Docs/Images/2025-11-22_09-35_3.png)
 ---
 
 ## Scripts - Scripts personnalisés
