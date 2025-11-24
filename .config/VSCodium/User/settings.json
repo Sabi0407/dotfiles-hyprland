@@ -1,7 +1,7 @@
 {
     "window.controlsStyle": "hidden",
     "workbench.colorTheme": "Catppuccin Mocha",
-    "workbench.iconTheme": "catppuccin-mocha",
+    "workbench.iconTheme": "vs-seti",
     "git.openRepositoryInParentFolders": "never",
     "window.menuBarVisibility": "compact",
     "window.commandCenter": false,
