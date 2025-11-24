@@ -22,6 +22,8 @@ echo "Redemarrage de SwayOSD..."
 systemctl --user restart swayosd.service
 
 # Notification de confirmation
-notify-send "Environnement recharge" "Hyprctl reload + Waybar, SwayNC et SwayOSD ont ete relances" -i system-restart
+ICON_PATH="/usr/share/icons/Papirus/32x32/apps/system-restart.svg"
+[ -f "$ICON_PATH" ] || ICON_PATH="system-restart"
+notify-send -a "reload-all" -i "$ICON_PATH" "Environnement recharge" "Hyprctl reload + Waybar, SwayNC et SwayOSD ont ete relances"
 
 echo "Tous les composants ont ete recharges avec succes"
