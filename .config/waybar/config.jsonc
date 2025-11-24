@@ -230,7 +230,7 @@
   },
   "custom/archlogo": {
     "format": "\uf303",
-    "tooltip": "Lancer Tofi",
+    "tooltip": "Lancer Wlogout",
     "on-click": "wlogout"
   },
   "custom/speaker_profile": {
