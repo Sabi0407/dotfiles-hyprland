@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Kooha
+Comment=Enregistrez élégamment votre écran
+Exec=env GTK_THEME=Adwaita GTK_ICON_THEME=Adwaita kooha
+Terminal=false
+Type=Application
+Categories=GTK;GNOME;Utility;Recorder;
+Keywords=Screen;Recorder;Video;
+Icon=io.github.seadve.Kooha
+StartupNotify=true
+DBusActivatable=true
+X-GNOME-UsesNotifications=true
