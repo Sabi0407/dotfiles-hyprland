@@ -21,10 +21,10 @@ sudo reflector --country France --country Belgium --country Luxembourg \
 Liste des paquets explicitement installés depuis les dépôts officiels (commande `pacman -Qqent`) :
 ```
 sudo pacman -S --needed base bat blueman bluez-utils brightnessctl btop \
-  cliphist cronie exa eza fastfetch firefox flameshot flatpak galculator gsimplecal \
+  cliphist copyq cronie exa eza fastfetch firefox flameshot flatpak galculator gsimplecal \
   hypridle hyprland hyprlock hyprpicker imv intel-ucode kooha libxcrypt-compat ly \
   micro mousepad ncdu numlockx nwg-look obsidian openssl-1.1 pacman-contrib \
-  pavucontrol plymouth polkit-gnome poppler power-profiles-daemon proton-vpn-gtk-app transmission-gtk \
+  pavucontrol plymouth polkit-gnome poppler power-profiles-daemon proton-vpn-gtk-app qbittorrent \
   qemu-guest-agent qt5ct qt6ct reflector sassc scdoc spice-vdagent swaync swayosd \
   terminus-font thunar tree ttf-firacode-nerd ttf-jetbrains-mono \
   ttf-jetbrains-mono-nerd ttf-meslo-nerd udiskie veracrypt virtualbox-guest-utils viu \
