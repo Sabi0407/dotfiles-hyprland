@@ -1,2 +1,8 @@
 .config/wal/cache/
 .config/wal/cache/**
+applications/transmission-gtk.desktop
+applications/userapp-transmission-gtk-U2VCG3.desktop
+ly-config/config.ini.example
+ly-config/config.ini.pacnew
+ly-config/custom-sessions/
+ly-config/save.txt
