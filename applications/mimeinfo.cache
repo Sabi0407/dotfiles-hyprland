@@ -1,5 +1,6 @@
 [MIME Cache]
 application/java-archive=java-java-openjdk.desktop;
+application/x-bittorrent=transmission-gtk.desktop;
 application/x-cmakecache=cmake-gui.desktop;
 application/x-designer=designer.desktop;
 application/x-jar=java-java-openjdk.desktop;
@@ -8,6 +9,9 @@ application/x-linguist=linguist.desktop;
 application/x-pka=packettracer.desktop;
 application/x-pkt=packettracer.desktop;
 application/x-pkz=packettracer.desktop;
+inode/directory=codium-wayland.desktop;
 text/markdown=obsidian.desktop;
+text/plain=codium-wayland.desktop;
 text/vnd.trolltech.linguist=linguist.desktop;
 text/x-markdown=obsidian.desktop;
+x-scheme-handler/magnet=transmission-gtk.desktop;

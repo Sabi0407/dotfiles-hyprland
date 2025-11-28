@@ -27,6 +27,7 @@ image/gif=imv.desktop
 image/webp=imv.desktop
 image/bmp=imv.desktop
 image/jpg=imv.desktop
+x-scheme-handler/magnet=userapp-transmission-gtk-U2VCG3.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
@@ -54,3 +55,4 @@ application/x-tar=xarchiver.desktop;
 text/markdown=org.xfce.mousepad.desktop;codium.desktop;obsidian.desktop;
 application/schema+json=org.xfce.mousepad.desktop;
 application/x-zerosize=mpv.desktop;
+x-scheme-handler/magnet=userapp-transmission-gtk-U2VCG3.desktop;
