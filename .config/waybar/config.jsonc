@@ -231,7 +231,7 @@
   "custom/archlogo": {
     "format": "\uf303",
     "tooltip": "Lancer Wlogout",
-    "on-click": "wlogout"
+    "on-click": "/home/sabi/.local/bin/wlogout"
   },
   "custom/speaker_profile": {
     "format": "{icon}",
