@@ -8,6 +8,7 @@ mkdir -p "$PYWAL_CACHE_DIR"
 WALLPAPER_DIR="$HOME/Images/wallpapers"
 LAST_WALLPAPER_FILE="$HOME/.config/dernier_wallpaper.txt"
 SCRIPTS_DIR="$HOME/.config/Scripts"
+WLOGOUT_UPDATE_SCRIPT="$HOME/.config/Scripts/update-wlogout-wallpaper.sh"
 declare -A WAL_BACKEND_MODULES=(
     [colorz]=colorz
     [colorthief]=colorthief
@@ -80,6 +81,14 @@ restart_swaync() {
     fi
 }
 
+refresh_wlogout_background() {
+    if [ -x "$WLOGOUT_UPDATE_SCRIPT" ]; then
+        if ! WLOGOUT_FORCE_STATIC=1 "$WLOGOUT_UPDATE_SCRIPT" >/dev/null 2>&1; then
+            echo "[wallpaper-manager] Impossible de mettre à jour wlogout." >&2
+        fi
+    fi
+}
+
 # Fonction pour appliquer un wallpaper avec pywal
 apply_wallpaper() {
     local wallpaper_path="$1"
@@ -142,6 +151,8 @@ apply_wallpaper() {
     # Forcer la fermeture de Tofi pour qu'il recharge les couleurs
     pkill -x tofi 2>/dev/null
     sleep 0.2
+
+    refresh_wlogout_background
     
     echo "Wallpaper appliqué avec succès: $(basename "$wallpaper_path")"
 }

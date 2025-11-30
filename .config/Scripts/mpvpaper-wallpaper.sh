@@ -28,6 +28,7 @@ VIDEO_SELECTION_OVERRIDE=""
 PYWAL_CACHE_DIR="${PYWAL_CACHE_DIR:-$HOME/.config/wal/cache}"
 export PYWAL_CACHE_DIR
 MPV_WALL_PICKER_VIDEOS="${MPV_WALL_PICKER_VIDEOS:-$HOME/Images/anime-walls}"
+WLOGOUT_UPDATE_SCRIPT="${MPV_WLOGOUT_UPDATE_SCRIPT:-$HOME/.config/Scripts/update-wlogout-wallpaper.sh}"
 
 declare -a VIDEO_EXTENSION_LIST=()
 
@@ -213,6 +214,17 @@ run_pywal_sync_helpers() {
             "$SCRIPTS_DIR/$helper.sh" >/dev/null 2>&1 || true
         fi
     done
+}
+
+refresh_wlogout_background() {
+    local mode="${1:-video}"
+    if [ -x "$WLOGOUT_UPDATE_SCRIPT" ]; then
+        if [ "$mode" = "static" ]; then
+            WLOGOUT_FORCE_STATIC=1 "$WLOGOUT_UPDATE_SCRIPT" >/dev/null 2>&1 || log "Impossible de mettre à jour le fond wlogout (ignoré)"
+        else
+            "$WLOGOUT_UPDATE_SCRIPT" >/dev/null 2>&1 || log "Impossible de mettre à jour le fond wlogout (ignoré)"
+        fi
+    fi
 }
 
 restart_component() {
@@ -667,6 +679,7 @@ start_command() {
     stop_swww_daemon
     start_instances "$selected_video"
     generate_pywal_theme
+    refresh_wlogout_background video
     set_wall_mode video
     start_auto_pause_daemon
 }
@@ -676,6 +689,7 @@ stop_command() {
     kill_tracked_instances
     set_wall_mode static
     restore_static_wallpaper
+    refresh_wlogout_background static
 }
 
 resume_command() {
