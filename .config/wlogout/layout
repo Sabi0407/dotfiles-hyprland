@@ -1,8 +1,26 @@
 {
-    "label" : "shutdown",
-    "action" : "systemctl poweroff",
-    "text" : "Éteindre",
-    "keybind" : "s"
+    "label" : "lock",
+    "action" : "loginctl lock-session",
+    "text" : "Verrouiller",
+    "keybind" : "l"
+}
+{
+    "label" : "logout",
+    "action" : "loginctl terminate-user $USER",
+    "text" : "Déconnexion",
+    "keybind" : "e"
+}
+{
+    "label" : "suspend",
+    "action" : "systemctl suspend",
+    "text" : "Veille",
+    "keybind" : "u"
+}
+{
+    "label" : "hibernate",
+    "action" : "systemctl hibernate",
+    "text" : "Hiberner",
+    "keybind" : "h"
 }
 {
     "label" : "reboot",
@@ -11,26 +29,8 @@
     "keybind" : "r"
 }
 {
-    "label" : "logout",
-    "action" : "loginctl kill-session $XDG_SESSION_ID",
-    "text" : "Déconnexion",
-    "keybind" : "e"
-}
-{
-    "label" : "sleep",
-    "action" : "systemctl suspend",
-    "text" : "Veille",
-    "keybind" : "u"
-}
-{
-    "label" : "hibernate",
-    "action" : "hyprlock && systemctl hibernate",
-    "text" : "Hibernation",
-    "keybind" : "h"
-}
-{
-    "label" : "lock",
-    "action" : "hyprlock",
-    "text" : "Verrouiller",
-    "keybind" : "l"
+    "label" : "shutdown",
+    "action" : "systemctl poweroff",
+    "text" : "Éteindre",
+    "keybind" : "s"
 }
