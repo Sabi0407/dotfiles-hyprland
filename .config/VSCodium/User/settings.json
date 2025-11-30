@@ -3,7 +3,6 @@
     "workbench.colorTheme": "Catppuccin Mocha",
     "workbench.iconTheme": "vs-seti",
     "git.openRepositoryInParentFolders": "never",
-    "window.menuBarVisibility": "compact",
     "window.commandCenter": false,
     "workbench.layoutControl.enabled": false,
     "geminicodeassist.project": "semiotic-tooling-k4vbx"
