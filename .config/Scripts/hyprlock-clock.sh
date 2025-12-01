@@ -31,6 +31,11 @@ case "${part}" in
         date_format='%S'
         color_mode='plain'
         ;;
+    colon)
+        format_string='%s'
+        date_format=':'
+        color_mode='plain'
+        ;;
     full)
         format_string='%s'
         date_format='%H:%M'

@@ -28,8 +28,14 @@ fi
 
 title="$(playerctl --player="${ACTIVE_PLAYER}" metadata --format '{{title}}' 2>/dev/null | tr '\n' ' ' | sed 's/[[:space:]]\+$//')"
 artist="$(playerctl --player="${ACTIVE_PLAYER}" metadata --format '{{artist}}' 2>/dev/null | tr '\n' ' ' | sed 's/[[:space:]]\+$//')"
+album="$(playerctl --player="${ACTIVE_PLAYER}" metadata --format '{{album}}' 2>/dev/null | tr '\n' ' ' | sed 's/[[:space:]]\+$//')"
+cell_width=18
+[ ${#title} -gt $cell_width ] && title="${title:0:$cell_width}…"
+[ ${#album} -gt $cell_width ] && album="${album:0:$cell_width}…"
+[ ${#artist} -gt $cell_width ] && artist="${artist:0:$cell_width}…"
 [[ -z "${title}" ]] && title="Titre inconnu"
 [[ -z "${artist}" ]] && artist="Artiste inconnu"
+[[ -z "${album}" ]] && album="Album inconnu"
 
 position="$(playerctl --player="${ACTIVE_PLAYER}" position 2>/dev/null || echo 0)"
 length_output="$(playerctl --player="${ACTIVE_PLAYER}" metadata --format '{{mpris:length}}' 2>/dev/null || echo 0)"
@@ -39,24 +45,4 @@ else
     length_micro="0"
 fi
 
-progress_line=""
-if [[ "${length_micro}" =~ ^[0-9]+$ ]] && (( length_micro > 0 )); then
-    progress_line="$(python3 - "$position" "$length_micro" <<'PY'
-import sys
-position = float(sys.argv[1])
-length = float(sys.argv[2]) / 1_000_000
-bar_len = 24
-ratio = 0 if length <= 0 else min(max(position / length, 0), 1)
-filled = int(round(bar_len * ratio))
-bar = "━" * filled + "┄" * (bar_len - filled)
-def fmt(sec):
-    sec = max(sec, 0)
-    m = int(sec // 60)
-    s = int(sec % 60)
-    return f"{m:02d}:{s:02d}"
-print(f"<span font='JetBrainsMono NFM 12'>{bar}</span>  <span font='JetBrainsMono NFM 12'>{fmt(position)} · {fmt(length)}</span>")
-PY
-)"
-fi
-
-printf "<span font='JetBrainsMono NFM Bold 18'>%s</span>\n<span font='JetBrainsMono NFM 14'>%s</span>\n%s" "${title}" "${artist}" "${progress_line}"
+printf "<span font='JetBrainsMono NFM Bold 16'>%s</span>\n<span font='JetBrainsMono NFM 12'>%s</span>\n<span font='JetBrainsMono NFM Italic 11'>%s</span>" "${title:-Titre inconnu}" "${album:-Album inconnu}" "${artist:-Artiste inconnu}"
