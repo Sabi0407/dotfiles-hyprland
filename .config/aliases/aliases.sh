@@ -92,6 +92,7 @@ alias saveconfig='/home/sabi/saveconfig.sh'
 alias clean='/home/sabi/.config/Scripts/cleanup-system.sh'
 alias wallanim='MPVWALL_SKIP_STOP=1 ~/.config/Scripts/mpvpaper-wallpaper.sh random'
 alias saveusb='~/.config/Scripts/backup-usb.sh'
+alias screenlock='sleep 5 && grim -o "$(hyprctl monitors -j | jq -r '"'"'.[0].name'"'"')" hyprlock5.png'
 
 walldyn() {
     local base_dir="${MPV_WALL_PICKER_VIDEOS:-$HOME/Images/anime-walls}"
