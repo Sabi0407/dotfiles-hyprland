@@ -117,7 +117,8 @@ walldyn() {
         rm -f "$chooser_file"
     else
         command -v fzf >/dev/null 2>&1 || { echo "walldyn: installe yazi ou fzf."; return 1; }
-        selection=$(find "$base_dir" -type f \( -iname '*.mp4' -o -iname '*.mkv' -o -iname '*.webm' -o -iname '*.avi' -o -iname '*.mov' \) | sort | fzf --prompt "Fond animé > " --height 80% --border)
+        selection=$(MPV_WALL_PICKER_VIDEOS="$base_dir" "$HOME/.config/Scripts/mpvpaper-wallpaper.sh" list | \
+            fzf --prompt "Fond animé > " --height 80% --border)
     fi
     [ -z "$selection" ] && return 0
     MPVWALL_SKIP_STOP=1 MPV_WALL_VIDEO="$selection" ~/.config/Scripts/mpvpaper-wallpaper.sh start
