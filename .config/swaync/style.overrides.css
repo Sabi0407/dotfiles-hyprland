@@ -1,10 +1,11 @@
 /* SwayNC refined layout adapted for pywal16 palette */
+@import url("hyprlock-colors.css");
 
 @define-color theme_fg @color15;
 @define-color theme_fg_secondary alpha(@color15, 0.78);
-@define-color theme_bg alpha(@color0, 0.97);
-@define-color popup_bg alpha(@color0, 0.96);
-@define-color module_bg alpha(@color0, 0.92);
+@define-color theme_bg rgba(0, 0, 0, 1.0);
+@define-color popup_bg rgba(0, 0, 0, 1.0);
+@define-color module_bg rgba(0, 0, 0, 0.96);
 @define-color module_hover_bg alpha(@color7, 0.60);
 @define-color button_bg alpha(@color8, 0.58);
 @define-color button_hover_bg alpha(@color8, 0.70);
@@ -15,8 +16,8 @@
 @define-color border_medium alpha(@color15, 0.09);
 @define-color icon_primary @color15;
 @define-color icon_secondary alpha(@color15, 0.88);
-@define-color slider_trough_bg alpha(@color8, 0.35);
-@define-color slider_thumb_bg @color15;
+@define-color slider_trough_bg alpha(@hyprlock_hour, 0.35);
+@define-color slider_thumb_bg @hyprlock_hour;
 @define-color close_button_bg alpha(@color8, 0.15);
 @define-color close_button_hover_bg alpha(@color8, 0.30);
 @define-color mpris_player_bg alpha(@color0, 0.50);
@@ -206,19 +207,19 @@ scale trough {
 scale trough progress {
   min-height: 12px;
   border-radius: 6px;
-  background-color: @accent_color;
+  background-color: alpha(@hyprlock_hour, 0.92);
   transition: none;
 }
 
 scale:hover trough progress {
-  background-color: @accent_color_hover;
+  background-color: @hyprlock_hour;
 }
 
 trough highlight {
   padding: 5px;
-  background: @accent_color;
+  background: alpha(@hyprlock_hour, 0.85);
   border-radius: 20px;
-  box-shadow: 0 0 5px alpha(@accent_color, 0.5);
+  box-shadow: 0 0 5px alpha(@hyprlock_hour, 0.35);
   transition: none;
 }
 
