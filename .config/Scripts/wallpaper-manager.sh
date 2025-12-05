@@ -9,12 +9,69 @@ WALLPAPER_DIR="$HOME/Images/wallpapers"
 LAST_WALLPAPER_FILE="$HOME/.config/dernier_wallpaper.txt"
 SCRIPTS_DIR="$HOME/.config/Scripts"
 WLOGOUT_UPDATE_SCRIPT="$HOME/.config/Scripts/update-wlogout-wallpaper.sh"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/wallpaper-manager"
+WALLPAPER_CACHE_FILE="$CACHE_DIR/wallpapers.list"
+WALLPAPER_CACHE_TTL="${WALLPAPER_CACHE_TTL:-600}"
 declare -A WAL_BACKEND_MODULES=(
     [colorz]=colorz
     [colorthief]=colorthief
     [average]=""
 )
 WAL_BACKEND_PRIORITY=(colorz colorthief average)
+
+ensure_cache_dir() {
+    mkdir -p "$CACHE_DIR"
+}
+
+wallpaper_cache_is_outdated() {
+    if [ ! -s "$WALLPAPER_CACHE_FILE" ]; then
+        return 0
+    fi
+    local ttl="$WALLPAPER_CACHE_TTL"
+    case "$ttl" in
+        ''|*[!0-9]*) ttl=0 ;;
+    esac
+    if [ "$ttl" -le 0 ]; then
+        return 0
+    fi
+    local last_update
+    last_update=$(stat -c %Y "$WALLPAPER_CACHE_FILE" 2>/dev/null || echo 0)
+    local now
+    now=$(date +%s)
+    if [ "$last_update" -eq 0 ]; then
+        return 0
+    fi
+    (( now - last_update >= ttl ))
+}
+
+build_wallpaper_cache() {
+    ensure_cache_dir
+    if [ ! -d "$WALLPAPER_DIR" ]; then
+        echo "[wallpaper-manager] Dossier wallpapers introuvable: $WALLPAPER_DIR" >&2
+        return 1
+    fi
+    local tmp
+    tmp=$(mktemp "$CACHE_DIR/wallpapers.XXXXXX") || return 1
+    if ! find "$WALLPAPER_DIR" -type f \
+        \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) \
+        -print >"$tmp" 2>/dev/null; then
+        rm -f "$tmp"
+        return 1
+    fi
+    mv "$tmp" "$WALLPAPER_CACHE_FILE"
+}
+
+ensure_wallpaper_cache_ready() {
+    ensure_cache_dir
+    if [ ! -s "$WALLPAPER_CACHE_FILE" ]; then
+        build_wallpaper_cache
+        return
+    fi
+    if wallpaper_cache_is_outdated; then
+        (build_wallpaper_cache >/dev/null 2>&1) &
+    fi
+    return 0
+}
 
 backend_available() {
     local backend="$1"
@@ -89,6 +146,54 @@ refresh_wlogout_background() {
     fi
 }
 
+ensure_swww_daemon() {
+    if pgrep -x swww-daemon >/dev/null 2>&1; then
+        return
+    fi
+    swww-daemon >/dev/null 2>&1 &
+    for _ in {1..20}; do
+        if swww query >/dev/null 2>&1; then
+            return
+        fi
+        sleep 0.1
+    done
+    sleep 0.2
+}
+
+update_theme_components() {
+    local wallpaper_path="$1"
+    if ! generate_dynamic_palette "$wallpaper_path"; then
+        return 1
+    fi
+
+    if [ -x "$SCRIPTS_DIR/update-swayosd-style.sh" ]; then
+        "$SCRIPTS_DIR/update-swayosd-style.sh" >/dev/null 2>&1 || true
+    fi
+
+    local sync_success=0
+    if [ -x "$SCRIPTS_DIR/pywal-sync.sh" ]; then
+        if "$SCRIPTS_DIR/pywal-sync.sh" >/dev/null 2>&1; then
+            sync_success=1
+        else
+            echo "[wallpaper-manager] Avertissement : certains modules pywal ont échoué." >&2
+        fi
+    fi
+
+    if [ "$sync_success" -eq 0 ]; then
+        for script in wal2swaync generate-tofi-colors generate-kitty-colors generate-hyprland-colors generate-hyprlock-colors generate-pywal-waybar-style update-pywalfox; do
+            if [ -x "$SCRIPTS_DIR/$script.sh" ]; then
+                "$SCRIPTS_DIR/$script.sh" >/dev/null 2>&1 || true
+            fi
+        done
+        restart_waybar
+        restart_swaync
+    fi
+
+    pkill -x tofi 2>/dev/null || true
+    sleep 0.15
+    return 0
+}
+
 # Fonction pour appliquer un wallpaper avec pywal
 apply_wallpaper() {
     local wallpaper_path="$1"
@@ -108,49 +213,19 @@ apply_wallpaper() {
 
     echo "Application du wallpaper: $(basename "$wallpaper_path")"
     
-    # Démarrer swww-daemon si nécessaire
-    if ! pgrep -x swww-daemon > /dev/null; then
-        swww-daemon &
-        sleep 1
-    fi
+    ensure_swww_daemon
     
     # Appliquer le wallpaper avec transition
     transitions=("none" "simple" "fade" "left" "right" "top" "bottom" "wipe" "wave" "grow" "center" "outer" "random")
     transition=${transitions[$RANDOM % ${#transitions[@]}]}
     swww img "$wallpaper_path" --transition-type "$transition" --transition-duration 2
-    
-    if ! generate_dynamic_palette "$wallpaper_path"; then
+
+    if ! update_theme_components "$wallpaper_path"; then
         echo "[wallpaper-manager] Impossible de générer une palette Pywal pour ce wallpaper." >&2
-        return 1
     fi
 
-    if [ -x "$SCRIPTS_DIR/update-swayosd-style.sh" ]; then
-        "$SCRIPTS_DIR/update-swayosd-style.sh" >/dev/null 2>&1 || true
-    fi
-
-    if [ -x "$SCRIPTS_DIR/pywal-sync.sh" ]; then
-        if ! "$SCRIPTS_DIR/pywal-sync.sh" >/dev/null 2>&1; then
-            echo "[wallpaper-manager] Avertissement : certains modules pywal ont échoué." >&2
-        fi
-        sleep 0.3
-    else
-        for script in wal2swaync generate-tofi-colors generate-kitty-colors generate-hyprland-colors generate-hyprlock-colors; do
-            if [ -f "$SCRIPTS_DIR/$script.sh" ]; then
-                "$SCRIPTS_DIR/$script.sh" > /dev/null 2>&1 || true
-            fi
-        done
-    fi
-    
     # Sauvegarder le wallpaper utilisé
     echo "$wallpaper_path" > "$LAST_WALLPAPER_FILE"
-    
-    # Recharger l'interface
-    restart_waybar
-    restart_swaync
-    
-    # Forcer la fermeture de Tofi pour qu'il recharge les couleurs
-    pkill -x tofi 2>/dev/null
-    sleep 0.2
 
     refresh_wlogout_background
     
@@ -159,7 +234,23 @@ apply_wallpaper() {
 
 # Fonction pour choisir un wallpaper aléatoire
 choose_random_wallpaper() {
-    find "$WALLPAPER_DIR" -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) | shuf -n 1
+    if ! ensure_wallpaper_cache_ready; then
+        return 1
+    fi
+    if [ ! -s "$WALLPAPER_CACHE_FILE" ]; then
+        return 1
+    fi
+    local -a wallpapers=()
+    mapfile -t wallpapers < "$WALLPAPER_CACHE_FILE"
+    local count=${#wallpapers[@]}
+    if [ "$count" -eq 0 ]; then
+        return 1
+    fi
+    local index=$((RANDOM % count))
+    local selection="${wallpapers[$index]}"
+    if [ -n "$selection" ]; then
+        printf '%s\n' "$selection"
+    fi
 }
 
 # Fonction principale
@@ -203,7 +294,11 @@ main() {
             ;;
         "list"|"l")
             echo "Wallpapers disponibles dans $WALLPAPER_DIR:"
-            find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) -exec basename {} \; | sort
+            if ensure_wallpaper_cache_ready && [ -s "$WALLPAPER_CACHE_FILE" ]; then
+                sed 's#.*/##' "$WALLPAPER_CACHE_FILE" | sort
+            else
+                find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) -exec basename {} \; | sort
+            fi
             ;;
         "fast-waybar")
             waybar &

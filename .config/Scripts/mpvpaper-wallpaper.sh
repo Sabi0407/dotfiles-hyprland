@@ -20,6 +20,7 @@ MPV_SOCKET_WAIT_SECONDS="${MPV_WALL_IPC_WAIT_SECONDS:-5}"
 VIDEO_SELECTION_MODE="${MPV_WALL_VIDEO_SELECTION:-random}"
 VIDEO_EXTENSIONS="${MPV_WALL_VIDEO_EXTENSIONS:-mp4,mkv,webm,avi,mov}"
 VIDEO_RECURSIVE="${MPV_WALL_VIDEO_RECURSIVE:-true}"
+VIDEO_CACHE_TTL="${MPV_WALL_VIDEO_CACHE_TTL:-600}"
 PYWAL_ENABLED="${MPV_WALL_PYWAL_ENABLED:-true}"
 PYWAL_WAIT_SECONDS="${MPV_WALL_PYWAL_WAIT_SECONDS:-5}"
 PYWAL_SCREENSHOT_DIR="$CACHE_DIR/pywal"
@@ -54,6 +55,103 @@ ensure_cache_dir() {
     mkdir -p "$PYWAL_CACHE_DIR"
 }
 
+video_cache_file_for_dir() {
+    local dir="$1"
+    local signature
+    signature=$(printf '%s' "$dir|$VIDEO_RECURSIVE|$VIDEO_EXTENSIONS" | sha1sum 2>/dev/null | awk '{print $1}')
+    printf '%s/videos-%s.list' "$CACHE_DIR" "$signature"
+}
+
+video_cache_is_outdated() {
+    local file="$1"
+    if [ ! -s "$file" ]; then
+        return 0
+    fi
+    local ttl="$VIDEO_CACHE_TTL"
+    case "$ttl" in
+        ''|*[!0-9]*) ttl=0 ;;
+    esac
+    if [ "$ttl" -le 0 ]; then
+        return 0
+    fi
+    local last_update
+    last_update=$(stat -c %Y "$file" 2>/dev/null || echo 0)
+    local now
+    now=$(date +%s)
+    if [ "$last_update" -eq 0 ]; then
+        return 0
+    fi
+    (( now - last_update >= ttl ))
+}
+
+build_video_cache_for_dir() {
+    local dir="$1"
+    local cache_file="$2"
+    [ -d "$dir" ] || return 1
+    ensure_cache_dir
+    local tmp
+    tmp=$(mktemp "$CACHE_DIR/videos.XXXXXX") || return 1
+    local find_cmd=(find "$dir")
+    if ! bool_enabled "$VIDEO_RECURSIVE"; then
+        find_cmd+=(-maxdepth 1)
+    fi
+    find_cmd+=(-type f)
+
+    local found_files=()
+    mapfile -t found_files < <("${find_cmd[@]}" 2>/dev/null | LC_ALL=C sort)
+
+    local filtered=()
+    local file
+    for file in "${found_files[@]}"; do
+        if is_supported_video "$file"; then
+            filtered+=("$file")
+        fi
+    done
+
+    if [ ${#filtered[@]} -gt 0 ]; then
+        printf '%s\n' "${filtered[@]}" >"$tmp"
+    else
+        : >"$tmp"
+    fi
+
+    mv "$tmp" "$cache_file"
+}
+
+load_videos_from_cache() {
+    local dir="$1"
+    local cache_file
+    cache_file=$(video_cache_file_for_dir "$dir")
+    if [ ! -s "$cache_file" ]; then
+        build_video_cache_for_dir "$dir" "$cache_file" || return 1
+    elif video_cache_is_outdated "$cache_file"; then
+        (build_video_cache_for_dir "$dir" "$cache_file" >/dev/null 2>&1) &
+    fi
+    if [ -s "$cache_file" ]; then
+        cat "$cache_file"
+    fi
+}
+
+list_available_videos() {
+    local target="$1"
+    if [ -z "$target" ]; then
+        target="$MPV_WALL_PICKER_VIDEOS"
+    fi
+    if [ -z "$target" ]; then
+        log "Erreur: aucun dossier vidéo pour le picker (MPV_WALL_PICKER_VIDEOS)."
+        return 1
+    fi
+    if [ -d "$target" ]; then
+        list_videos_in_directory "$target"
+        return
+    fi
+    if [ -f "$target" ]; then
+        printf '%s\n' "$target"
+        return
+    fi
+    log "Erreur: source picker introuvable ($target)"
+    return 1
+}
+
 log() {
     printf '[mpvpaper-wallpaper] %s\n' "$*"
 }
@@ -82,27 +180,8 @@ is_supported_video() {
 list_videos_in_directory() {
     local dir="$1"
     [ -d "$dir" ] || return 1
-
-    local find_cmd=(find "$dir")
-    if ! bool_enabled "$VIDEO_RECURSIVE"; then
-        find_cmd+=(-maxdepth 1)
-    fi
-    find_cmd+=(-type f)
-
-    local found_files=()
-    mapfile -t found_files < <("${find_cmd[@]}" 2>/dev/null | LC_ALL=C sort)
-
-    local filtered=()
-    local file
-    for file in "${found_files[@]}"; do
-        if is_supported_video "$file"; then
-            filtered+=("$file")
-        fi
-    done
-
-    if [ ${#filtered[@]} -gt 0 ]; then
-        printf '%s\n' "${filtered[@]}"
-    fi
+    ensure_cache_dir
+    load_videos_from_cache "$dir"
 }
 
 select_video_from_directory() {
@@ -747,6 +826,12 @@ main() {
         random)
             VIDEO_SELECTION_OVERRIDE="random"
             start_command
+            ;;
+        list|list-videos)
+            local target="${2:-$MPV_WALL_PICKER_VIDEOS}"
+            if ! list_available_videos "$target"; then
+                exit 1
+            fi
             ;;
         status)
             status_command

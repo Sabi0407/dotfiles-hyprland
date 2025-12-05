@@ -37,6 +37,21 @@ fi
 
 # Liste des lecteurs à essayer (par ordre de priorité)
 PLAYERS=("spotify" "spotifyd" "mpd" "vlc")
+# Sources à ignorer (streams YouTube, etc.)
+BLOCKED_PATTERNS=("youtube.com" "youtu.be" "ytimg.com" "googlevideo.com")
+
+is_blocked_source() {
+    local player="$1"
+    local metadata lower
+    metadata="$(playerctl --player="${player}" metadata --format '{{xesam:url}}\n{{mpris:artUrl}}\n{{mpris:trackid}}\n{{xesam:title}}\n{{xesam:album}}' 2>/dev/null || true)"
+    lower="${metadata,,}"
+    for pattern in "${BLOCKED_PATTERNS[@]}"; do
+        if [[ -n "${pattern}" && "${lower}" == *"${pattern}"* ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
 
 # Fonction pour récupérer la cover art d'un lecteur
 get_cover_from_player() {
@@ -75,13 +90,17 @@ get_cover_from_player() {
     return 1
 }
 
-# Vérifier si au moins un lecteur est actif et en lecture/pause
+# Vérifier si au moins un lecteur autorisé est actif
 music_playing=false
+ACTIVE_PLAYERS=()
 for player in "${PLAYERS[@]}"; do
     status="$(playerctl --player="${player}" status 2>/dev/null || echo "")"
     if [[ "${status}" == "Playing" || "${status}" == "Paused" ]]; then
+        if is_blocked_source "${player}"; then
+            continue
+        fi
         music_playing=true
-        break
+        ACTIVE_PLAYERS+=("${player}")
     fi
 done
 
@@ -107,7 +126,7 @@ if [[ "${music_playing}" == "false" ]]; then
     cp "${TRANSPARENT_COVER}" "${COVER_FILE}" 2>/dev/null || true
 else
     update_layout "${LAYOUT_PLAYER}"
-    for player in "${PLAYERS[@]}"; do
+    for player in "${ACTIVE_PLAYERS[@]}"; do
         if get_cover_from_player "${player}"; then
             exit 0
         fi

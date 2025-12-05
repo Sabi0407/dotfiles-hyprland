@@ -27,12 +27,27 @@ else
     label_hex="$fallback_label"
 fi
 
+hour_rgba="$(pywal_hex_to_rgba "$hour_hex" "1.0")"
+minute_rgba="$(pywal_hex_to_rgba "$minute_hex" "1.0")"
+second_rgba="$(pywal_hex_to_rgba "$second_hex" "1.0")"
+label_rgba="$(pywal_hex_to_rgba "$label_hex" "1.0")"
+
 {
     echo "# Couleurs Hyprlock générées automatiquement ($(date))"
-    printf '$hyprlock_hour = %s\n' "$(pywal_hex_to_rgba "$hour_hex" "1.0")"
-    printf '$hyprlock_minute = %s\n' "$(pywal_hex_to_rgba "$minute_hex" "1.0")"
-    printf '$hyprlock_second = %s\n' "$(pywal_hex_to_rgba "$second_hex" "1.0")"
-    printf '$hyprlock_label = %s\n' "$(pywal_hex_to_rgba "$label_hex" "1.0")"
+    printf '$hyprlock_hour = %s\n' "$hour_rgba"
+    printf '$hyprlock_minute = %s\n' "$minute_rgba"
+    printf '$hyprlock_second = %s\n' "$second_rgba"
+    printf '$hyprlock_label = %s\n' "$label_rgba"
 } > "$OUT_FILE"
 
-echo "[hyprlock-colors] Fichier mis à jour : $OUT_FILE"
+CSS_EXPORT="$HOME/.config/swaync/hyprlock-colors.css"
+mkdir -p "$(dirname "$CSS_EXPORT")"
+{
+    echo "/* Hyprlock colors exported for GTK / swaync ($(date)) */"
+    printf '@define-color hyprlock_hour %s;\n' "$hour_rgba"
+    printf '@define-color hyprlock_minute %s;\n' "$minute_rgba"
+    printf '@define-color hyprlock_second %s;\n' "$second_rgba"
+    printf '@define-color hyprlock_label %s;\n' "$label_rgba"
+} > "$CSS_EXPORT"
+
+echo "[hyprlock-colors] Fichiers mis à jour : $OUT_FILE et $CSS_EXPORT"
