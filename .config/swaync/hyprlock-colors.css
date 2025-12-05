@@ -1,0 +1,5 @@
+/* Hyprlock colors exported for GTK / swaync (ven. 05 déc. 2025 12:47:08 CET) */
+@define-color hyprlock_hour rgba(62,55,63,1.0);
+@define-color hyprlock_minute rgba(111,99,104,1.0);
+@define-color hyprlock_second rgba(150,138,141,1.0);
+@define-color hyprlock_label rgba(57,54,58,1.0);
