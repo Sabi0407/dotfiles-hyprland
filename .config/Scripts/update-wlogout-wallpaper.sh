@@ -14,6 +14,27 @@ WLOGOUT_COLOR_FILE="$HOME/.config/wlogout/colors.css"
 DEFAULT_ACCENT="#7f5af0"
 DEFAULT_TEXT="#f0f0f0"
 DEFAULT_STRONG="#ffffff"
+SPECIAL_WALLPAPERS=(
+	"$HOME/Images/wallpapers/guts-berserk-dark.jpg"
+	"$HOME/Images/wallpapers/berserk-guts-colored-5k-1920x1080-13633.jpg"
+	"$HOME/Images/wallpapers/guts-berserk-dark-1920x1080-13650.jpg"
+)
+SPECIAL_ACCENT="#d60f2c"
+SPECIAL_TEXT="#c1c0c0"
+SPECIAL_STRONG="#f7f7f7"
+
+is_special_wallpaper() {
+	local target="$1"
+	[[ -z "$target" ]] && return 1
+	local candidate base
+	for candidate in "${SPECIAL_WALLPAPERS[@]}"; do
+		base="${candidate%.*}"
+		if [[ "$target" == "$candidate" || "$target" == "$base"-* ]]; then
+			return 0
+		fi
+	done
+	return 1
+}
 
 cleanup() {
 	if [ -f "$TEMP_OUTPUT" ]; then
@@ -184,6 +205,11 @@ PY
 			[ -n "${wal_values[1]:-}" ] && text="${wal_values[1]}"
 			[ -n "${wal_values[2]:-}" ] && strong="${wal_values[2]}"
 		fi
+	fi
+	if [[ -n "${SOURCE_PATH:-}" ]] && is_special_wallpaper "$SOURCE_PATH"; then
+		accent="$SPECIAL_ACCENT"
+		text="$SPECIAL_TEXT"
+		strong="$SPECIAL_STRONG"
 	fi
 	cat >"$WLOGOUT_COLOR_FILE" <<EOF
 @define-color accent-color ${accent};

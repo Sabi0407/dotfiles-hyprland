@@ -6,15 +6,47 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$SCRIPT_DIR/pywal-common.sh"
 
 HYPR_CONFIG="$HOME/.config/hypr/configs/look.conf"
+SPECIAL_WALLPAPERS=(
+    "$HOME/Images/wallpapers/guts-berserk-dark.jpg"
+    "$HOME/Images/wallpapers/berserk-guts-colored-5k-1920x1080-13633.jpg"
+    "$HOME/Images/wallpapers/guts-berserk-dark-1920x1080-13650.jpg"
+)
+SPECIAL_ACCENT_PRIMARY="#d60f2c"
+SPECIAL_ACCENT_SECONDARY="#8f3532"
+SPECIAL_INACTIVE="#090404"
+
+is_special_wallpaper() {
+    local target="$1"
+    [[ -z "$target" ]] && return 1
+    local candidate base
+    for candidate in "${SPECIAL_WALLPAPERS[@]}"; do
+        base="${candidate%.*}"
+        if [[ "$target" == "$candidate" || "$target" == "$base"-* ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
 
 if ! pywal_source_colors; then
     echo "Pywal n'a pas encore généré de palette. Lancez 'wal' puis réessayez." >&2
     exit 1
 fi
 
-ACTIVE_PRIMARY="$(pywal_hex_to_rgba "${color1:-#ff0000}" "1.0")"
-ACTIVE_SECONDARY="$(pywal_hex_to_rgba "${color4:-#00ffcc}" "1.0")"
-INACTIVE_COLOR="$(pywal_hex_to_rgba "${background:-#1e1e2e}" "0.8")"
+use_special=false
+if [[ -n "${wallpaper:-}" ]] && is_special_wallpaper "$wallpaper"; then
+    use_special=true
+fi
+
+if $use_special; then
+    ACTIVE_PRIMARY="$(pywal_hex_to_rgba "$SPECIAL_ACCENT_PRIMARY" "1.0")"
+    ACTIVE_SECONDARY="$(pywal_hex_to_rgba "$SPECIAL_ACCENT_SECONDARY" "1.0")"
+    INACTIVE_COLOR="$(pywal_hex_to_rgba "$SPECIAL_INACTIVE" "0.9")"
+else
+    ACTIVE_PRIMARY="$(pywal_hex_to_rgba "${color1:-#ff0000}" "1.0")"
+    ACTIVE_SECONDARY="$(pywal_hex_to_rgba "${color4:-#00ffcc}" "1.0")"
+    INACTIVE_COLOR="$(pywal_hex_to_rgba "${background:-#1e1e2e}" "0.8")"
+fi
 
 echo " Génération des couleurs Hyprland avec pywal..."
 echo "   Côté primaire: ${color1:-inconnu}"

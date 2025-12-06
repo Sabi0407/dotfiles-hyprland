@@ -13,6 +13,25 @@ fallback_hour="#ffb86c"
 fallback_minute="#8be9fd"
 fallback_second="#f8f8f2"
 fallback_label="#ff79c6"
+SPECIAL_WALLPAPERS=(
+    "$HOME/Images/wallpapers/guts-berserk-dark.jpg"
+    "$HOME/Images/wallpapers/berserk-guts-colored-5k-1920x1080-13633.jpg"
+    "$HOME/Images/wallpapers/guts-berserk-dark-1920x1080-13650.jpg"
+)
+SPECIAL_ACCENT="#d60f2c"
+
+is_special_wallpaper() {
+    local target="$1"
+    [[ -z "$target" ]] && return 1
+    local candidate base
+    for candidate in "${SPECIAL_WALLPAPERS[@]}"; do
+        base="${candidate%.*}"
+        if [[ "$target" == "$candidate" || "$target" == "$base"-* ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
 
 if pywal_source_colors; then
     hour_hex="${color11:-${color5:-$fallback_hour}}"
@@ -25,6 +44,17 @@ else
     minute_hex="$fallback_minute"
     second_hex="$fallback_second"
     label_hex="$fallback_label"
+fi
+
+use_special=false
+if [[ -n "${wallpaper:-}" ]] && is_special_wallpaper "$wallpaper"; then
+    use_special=true
+fi
+
+if $use_special; then
+    hour_hex="$SPECIAL_ACCENT"
+    minute_hex="$SPECIAL_ACCENT"
+    second_hex="$SPECIAL_ACCENT"
 fi
 
 hour_rgba="$(pywal_hex_to_rgba "$hour_hex" "1.0")"

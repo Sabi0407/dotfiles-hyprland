@@ -7,6 +7,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 TEMPLATE="$HOME/.config/waybar/style.template.css"
 OUT="$HOME/.config/waybar/style.css"
+SPECIAL_WALLPAPER="$HOME/Images/wallpapers/guts-berserk-dark.jpg"
 
 if ! pywal_source_colors; then
     pywal_warn "Aucune palette pywal trouvée, utilisation de couleurs de secours."
@@ -43,6 +44,19 @@ fallback() {
     printf '%s\n' "$value"
 }
 
+waybar_accent() {
+    local default_accent
+    default_accent="$(fallback color10)"
+    if [[ -n "${wallpaper:-}" ]]; then
+        local special_base="${SPECIAL_WALLPAPER%.*}"
+        if [[ "$wallpaper" == "$SPECIAL_WALLPAPER" || "$wallpaper" == ${special_base}-* ]]; then
+            printf '#d60f2c\n'
+            return
+        fi
+    fi
+    printf '%s\n' "$default_accent"
+}
+
 sed \
   -e "s|{background}|$(fallback background)|g" \
   -e "s|{foreground}|$(fallback foreground)|g" \
@@ -62,6 +76,7 @@ sed \
   -e "s|{color13}|$(fallback color13)|g" \
   -e "s|{color14}|$(fallback color14)|g" \
   -e "s|{color15}|$(fallback color15)|g" \
+  -e "s|{waybar_accent}|$(waybar_accent)|g" \
   -e "s|{background-rgb}|$(pywal_hex_to_rgb "$(fallback background)")|g" \
   -e "s|{foreground-rgb}|$(pywal_hex_to_rgb "$(fallback foreground)")|g" \
   -e "s|{color0-rgb}|$(pywal_hex_to_rgb "$(fallback color0)")|g" \
