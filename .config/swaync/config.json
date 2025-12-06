@@ -96,8 +96,8 @@
       ]
     },
     "battery": {
-      "critical": 15,
-      "low": 25,
+      "critical": 10,
+      "low": 15,
       "show-percentage": true
     },
     "network": {
