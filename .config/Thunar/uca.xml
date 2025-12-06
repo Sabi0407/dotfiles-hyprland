@@ -5,7 +5,7 @@
 	<name>Compresser en .tar.gz</name>
 	<submenu>Archiver</submenu>
 	<unique-id>1760916221159090-4</unique-id>
-	<command>tar -czf %n.tar.gz %N</command>
+	<command>sh -c 'tar -czf &quot;$1.tar.gz&quot; &quot;$@&quot;' _ %n %F</command>
 	<description>Compresser la selection en archive tar.gz</description>
 	<range></range>
 	<patterns>*</patterns>
@@ -18,7 +18,7 @@
 	<name>Compresser en .zip</name>
 	<submenu>Archiver</submenu>
 	<unique-id>1760916221159090-5</unique-id>
-	<command>zip -r %n.zip %N</command>
+	<command>sh -c 'zip -r &quot;$1.zip&quot; &quot;$@&quot;' _ %n %F</command>
 	<description>Compresser la selection en archive ZIP</description>
 	<range></range>
 	<patterns>*</patterns>
@@ -31,7 +31,7 @@
 	<name>Extraire l&apos;archive ici</name>
 	<submenu>Archiver</submenu>
 	<unique-id>1760916221159090-8</unique-id>
-	<command>for f in %F; do dir=$(dirname &quot;$f&quot;); bsdtar -xf &quot;$f&quot; -C &quot;$dir&quot;; done</command>
+	<command>sh -c 'for f in &quot;$@&quot;; do dir=$(dirname &quot;$f&quot;); bsdtar -xf &quot;$f&quot; -C &quot;$dir&quot;; done' _ %F</command>
 	<description>Extraire les archives sélectionnées dans le dossier courant</description>
 	<range></range>
 	<patterns>*.zip;*.tar;*.tar.gz;*.tgz;*.tar.bz2;*.tbz;*.tbz2;*.tar.xz;*.txz;*.tar.zst;*.tzst;*.7z;*.rar</patterns>
@@ -56,7 +56,7 @@
 	<name>Trouver les doublons</name>
 	<submenu>Outils</submenu>
 	<unique-id>1760916221159090-6</unique-id>
-	<command>kitty sh -c &apos;find %f -type f -exec md5sum {} + | sort | uniq -w32 -dD | less&apos;</command>
+	<command>kitty sh -c &apos;for path in &quot;$@&quot;; do find &quot;$path&quot; -type f -exec md5sum {{}} +; done | sort | uniq -w32 -dD | less&apos; _ %F</command>
 	<description>Rechercher les fichiers en double par hash MD5</description>
 	<range></range>
 	<patterns>*</patterns>
@@ -68,7 +68,7 @@
 	<name>Ouvrir Terminal Ici</name>
 	<submenu>Outils</submenu>
 	<unique-id>1760916221159090-2</unique-id>
-	<command>kitty --working-directory %f</command>
+	<command>kitty --working-directory %d</command>
 	<description>Ouvrir Kitty dans ce dossier</description>
 	<range></range>
 	<patterns>*</patterns>
@@ -80,7 +80,7 @@
 	<name>Editer en tant que root</name>
 	<submenu></submenu>
 	<unique-id>1760916221159090-7</unique-id>
-	<command>pkexec micro %f</command>
+	<command>pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY micro %f</command>
 	<description>Ouvrir le fichier avec micro en mode root</description>
 	<range></range>
 	<patterns>*</patterns>
