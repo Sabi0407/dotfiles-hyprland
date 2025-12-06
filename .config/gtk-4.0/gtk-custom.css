@@ -6,108 +6,108 @@
 window:not(.control-center) popover,
 window:not(.control-center) popover.background,
 window:not(.control-center) popover > contents {
-    background-color: shade(@theme_bg_color, 1.24) !important;
-    border: 1px solid alpha(@theme_fg_color, 0.5) !important;
-    border-radius: 6px !important;
-    box-shadow: none !important;
-    padding: 4px !important;
-    margin: 2px !important;
+    background-color: shade(@theme_bg_color, 1.24);
+    border: 1px solid alpha(@theme_fg_color, 0.5);
+    border-radius: 6px;
+    box-shadow: none;
+    padding: 4px;
+    margin: 2px;
 }
 
 /* Éléments du menu contextuel */
 window:not(.control-center) menuitem,
 window:not(.control-center) modelbutton {
-    background-color: transparent !important;
-    border-radius: 4px !important;
-    margin: 1px 0 !important;
-    padding: 2px 6px !important;
-    min-height: 16px !important;
-    transition: all 0.2s ease !important;
-    color: shade(@theme_fg_color, 1.1) !important;
-    font-weight: 500 !important;
-    font-size: 14px !important;
+    background-color: transparent;
+    border-radius: 4px;
+    margin: 1px 0;
+    padding: 2px 6px;
+    min-height: 16px;
+    transition: all 0.2s ease;
+    color: shade(@theme_fg_color, 1.1);
+    font-weight: 500;
+    font-size: 14px;
 }
 
 /* Hover sur les éléments du menu */
 window:not(.control-center) menuitem:hover,
 window:not(.control-center) modelbutton:hover {
-    background-color: shade(@theme_selected_bg_color, 0.88) !important;
-    color: @theme_selected_fg_color !important;
+    background-color: shade(@theme_selected_bg_color, 0.88);
+    color: @theme_selected_fg_color;
 }
 
 /* Élément sélectionné */
 window:not(.control-center) menuitem:selected,
 window:not(.control-center) modelbutton:selected {
-    background-color: @theme_selected_bg_color !important;
-    color: @theme_selected_fg_color !important;
-    font-weight: 600 !important;
+    background-color: @theme_selected_bg_color;
+    color: @theme_selected_fg_color;
+    font-weight: 600;
 }
 
 /* Séparateurs dans le menu */
 window:not(.control-center) separator {
-    background-color: @theme_fg_color !important;
-    opacity: 0.3 !important;
-    margin: 1px 2px !important;
-    min-height: 1px !important;
+    background-color: @theme_fg_color;
+    opacity: 0.3;
+    margin: 1px 2px;
+    min-height: 1px;
 }
 
 /* Icônes dans le menu */
 window:not(.control-center) menuitem image,
 window:not(.control-center) modelbutton image {
-    margin-right: 12px !important;
-    opacity: 0.8 !important;
+    margin-right: 12px;
+    opacity: 0.8;
 }
 
 window:not(.control-center) menuitem:hover image,
 window:not(.control-center) modelbutton:hover image {
-    opacity: 1.0 !important;
+    opacity: 1.0;
 }
 
 /* Flèches pour les sous-menus */
 window:not(.control-center) menuitem arrow,
 window:not(.control-center) modelbutton arrow {
-    margin-left: 8px !important;
-    opacity: 0.7 !important;
+    margin-left: 8px;
+    opacity: 0.7;
 }
 
 /* Amélioration des menus contextuels généraux */
 window:not(.control-center) menu,
 window:not(.control-center) .menu {
-    background-color: shade(@theme_bg_color, 1.2) !important;
-    border: 1px solid alpha(@theme_fg_color, 0.45) !important;
-    border-radius: 6px !important;
-    box-shadow: none !important;
-    padding: 4px !important;
+    background-color: shade(@theme_bg_color, 1.2);
+    border: 1px solid alpha(@theme_fg_color, 0.45);
+    border-radius: 6px;
+    box-shadow: none;
+    padding: 4px;
 }
 
 /* Éléments de menu avec meilleur contraste */
 window:not(.control-center) .menu menuitem,
 window:not(.control-center) .menu modelbutton {
-    background-color: transparent !important;
-    border-radius: 5px !important;
-    margin: 1px 0 !important;
-    padding: 2px 6px !important;
-    min-height: 16px !important;
-    color: shade(@theme_fg_color, 1.1) !important;
-    font-weight: 500 !important;
-    font-size: 14px !important;
+    background-color: transparent;
+    border-radius: 5px;
+    margin: 1px 0;
+    padding: 2px 6px;
+    min-height: 16px;
+    color: shade(@theme_fg_color, 1.1);
+    font-weight: 500;
+    font-size: 14px;
 }
 
 window:not(.control-center) .menu menuitem:hover,
 window:not(.control-center) .menu modelbutton:hover {
-    background-color: shade(@theme_selected_bg_color, 0.88) !important;
-    color: @theme_selected_fg_color !important;
+    background-color: shade(@theme_selected_bg_color, 0.88);
+    color: @theme_selected_fg_color;
 }
 
 /* Amélioration des raccourcis clavier dans les menus */
 window:not(.control-center) .menu menuitem accelerator {
-    color: @theme_fg_color !important;
-    opacity: 0.7 !important;
-    font-size: 13px !important;
-    margin-left: 10px !important;
+    color: @theme_fg_color;
+    opacity: 0.7;
+    font-size: 13px;
+    margin-left: 10px;
 }
 
 window:not(.control-center) .menu menuitem:hover accelerator {
-    color: @theme_selected_fg_color !important;
-    opacity: 0.9 !important;
+    color: @theme_selected_fg_color;
+    opacity: 0.9;
 }
