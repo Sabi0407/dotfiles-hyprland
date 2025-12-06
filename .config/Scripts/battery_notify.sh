@@ -5,19 +5,26 @@
 # Version: 2.0
 
 # Configuration par défaut
-DEFAULT_WARNING_LEVELS=(20 15)
-DEFAULT_CRITICAL_LEVELS=(10 5)
+DEFAULT_WARNING_LEVELS=()
+DEFAULT_CRITICAL_LEVELS=(15 10 5)
 DEFAULT_ZENITY_LEVELS=(10 5)
-CHARGE_NOTIFY_LEVELS=(80)
 WARNING_LEVELS=("${DEFAULT_WARNING_LEVELS[@]}")
 CRITICAL_LEVELS=("${DEFAULT_CRITICAL_LEVELS[@]}")
 ZENITY_LEVELS=("${DEFAULT_ZENITY_LEVELS[@]}")
-FULL_LEVEL=95
-CHARGE_LEVELS=("${CHARGE_NOTIFY_LEVELS[@]}")
 NOTIFICATION_COOLDOWN=300  # 5 minutes en secondes
 CHECK_INTERVAL=60          # Vérification toutes les 60 secondes
 ZENITY_THEME="catppuccin-mocha-red-standard+default"
 ZENITY_MISSING_LOGGED=0
+CONFIG_FILE="$HOME/.config/Scripts/battery_notify.conf"
+
+BATTERY_GLOB="/sys/class/power_supply/BAT*"
+
+[ -f "$CONFIG_FILE" ] && . "$CONFIG_FILE"
+
+if ! compgen -G "$BATTERY_GLOB" >/dev/null; then
+    echo "Impossible de trouver /sys/class/power_supply/BAT* sur ce système"
+    exit 1
+fi
 
 # Fonction pour vérifier si une notification a été envoyée récemment
 check_cooldown() {
@@ -388,64 +395,22 @@ process_battery() {
             fi
         done
 
-        for level in "${WARNING_LEVELS[@]}"; do
-            if crossed_threshold "$last_capacity" "$capacity" "$level"; then
-                if check_cooldown "${battery_name}_warning_${level}"; then
-                    local warning_title="⚠️ Batterie faible"
-                    local warning_message="Batterie à ${capacity}%"
-                    if [ "$level" -eq 15 ]; then
-                        warning_message="Branche le chargeur (batterie à ${capacity}%)"
-                    fi
-                    send_notification "normal" "$warning_title" \
-                        "$warning_message" \
-                        "battery-low" "${battery_name}_warning_${level}"
-                    if [ ${#ZENITY_LEVELS[@]} -gt 0 ] && should_show_zenity_alert "$level"; then
-                        trigger_zenity_alert "$battery_name" "$level" "$capacity" ""
-                    fi
-                fi
-            fi
-        done
+        # Avertissement visuel uniquement en dessous de 15 % (critique)
+        # Pas de notification orange
 
         update_last_capacity "$battery_name" "$capacity"
         reset_last_charge_level "$battery_name"
     else
         reset_last_capacity "$battery_name"
 
-        if [ "$status" = "Charging" ]; then
-            for level in "${CHARGE_LEVELS[@]}"; do
-                if [ "$capacity" -ge "$level" ] && [ "$level" -gt "$last_charge_level" ]; then
-                    local charge_id="${battery_name}_charge_${level}"
-                    if check_cooldown "$charge_id"; then
-                        local title="🔌 Charge à ${capacity}%"
-                        local message="Tu peux débrancher le chargeur (batterie à ${capacity}%)"
-                        send_notification "low" "$title" "$message" \
-                            "battery-good-charging" "$charge_id"
-                        last_charge_level="$level"
-                        update_last_charge_level "$battery_name" "$last_charge_level"
-                    fi
-                fi
-            done
-            if [ "$capacity" -ge "$FULL_LEVEL" ] && [ "$last_charge_level" -lt "$FULL_LEVEL" ]; then
-                local near_full_id="${battery_name}_near_full"
-                if check_cooldown "$near_full_id"; then
-                    send_notification "low" "🔌 Batterie presque pleine" \
-                        "Tu peux débrancher le chargeur (batterie à ${capacity}%)" \
-                        "battery-full" "$near_full_id"
-                    last_charge_level="$FULL_LEVEL"
-                    update_last_charge_level "$battery_name" "$last_charge_level"
-                fi
+        if [ "$status" = "Full" ]; then
+            local full_id="${battery_name}_full_notify"
+            if check_cooldown "$full_id"; then
+                send_notification "low" "🔋 Batterie pleine" \
+                    "Tu peux débrancher le chargeur (batterie à ${capacity}%)" \
+                    "battery-full" "$full_id"
             fi
-        elif [ "$status" = "Full" ]; then
-            if [ "$last_charge_level" -lt 101 ]; then
-                local full_id="${battery_name}_full"
-                if check_cooldown "$full_id"; then
-                    send_notification "low" "🔌 Batterie pleine" \
-                        "Tu peux débrancher le chargeur (batterie à ${capacity}%)" \
-                        "battery-full" "$full_id"
-                    last_charge_level=101
-                    update_last_charge_level "$battery_name" "$last_charge_level"
-                fi
-            fi
+            reset_last_charge_level "$battery_name"
         else
             reset_last_charge_level "$battery_name"
         fi
@@ -463,10 +428,6 @@ while [[ $# -gt 0 ]]; do
         -c|--critical)
             parse_levels "$2" CRITICAL_LEVELS
             normalize_levels CRITICAL_LEVELS
-            shift 2
-            ;;
-        -f|--full)
-            FULL_LEVEL="$2"
             shift 2
             ;;
         -i|--interval)
@@ -493,32 +454,32 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Validation des paramètres
-normalize_levels WARNING_LEVELS
+if [ ${#WARNING_LEVELS[@]} -gt 0 ]; then
+    normalize_levels WARNING_LEVELS
+    validate_levels WARNING_LEVELS "d'avertissement"
+else
+    WARNING_LEVELS=()
+fi
+
 normalize_levels CRITICAL_LEVELS
 normalize_levels ZENITY_LEVELS
 
-validate_levels WARNING_LEVELS "d'avertissement"
 validate_levels CRITICAL_LEVELS "critique"
 if [ ${#ZENITY_LEVELS[@]} -gt 0 ]; then
     validate_levels ZENITY_LEVELS "pour Zenity"
 fi
 
-validate_levels CHARGE_LEVELS "de charge"
-
 validate_positive_integer "$NOTIFICATION_COOLDOWN" "Le délai entre notifications"
 validate_positive_integer "$CHECK_INTERVAL" "L'intervalle de vérification"
 
-local_max_warning=$(get_max_level WARNING_LEVELS)
 local_max_critical=$(get_max_level CRITICAL_LEVELS)
 
-if [ "$local_max_warning" -le "$local_max_critical" ]; then
-    echo "Erreur: Le niveau d'avertissement le plus élevé doit être supérieur au niveau critique le plus élevé"
-    exit 1
-fi
-
-if ! [[ "$FULL_LEVEL" =~ ^[0-9]+$ ]] || [ "$FULL_LEVEL" -lt 1 ] || [ "$FULL_LEVEL" -gt 100 ]; then
-    echo "Erreur: Le niveau de charge complète doit être un nombre entre 1 et 100"
-    exit 1
+if [ ${#WARNING_LEVELS[@]} -gt 0 ]; then
+    local_max_warning=$(get_max_level WARNING_LEVELS)
+    if [ "$local_max_warning" -le "$local_max_critical" ]; then
+        echo "Erreur: Le niveau d'avertissement le plus élevé doit être supérieur au niveau critique le plus élevé"
+        exit 1
+    fi
 fi
 
 if [ ${#ZENITY_LEVELS[@]} -gt 0 ]; then

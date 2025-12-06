@@ -1,9 +1,13 @@
 #!/bin/bash
 
 # Script simple pour piloter le rétroéclairage clavier Asus/brightnessctl
+# Usage :
+#   auto-backlight.sh on|off|restore|cycle
+#   auto-backlight.sh override-on|override-off|override-status (empêche l'extinction auto)
 
 KBD_DEVICE="asus::kbd_backlight"
 STATE_FILE="/tmp/auto-backlight-state"
+OVERRIDE_FILE="$HOME/.cache/auto-backlight.force"
 
 load_state() {
     LAST_LEVEL=0
@@ -93,6 +97,22 @@ case "${1:-status}" in
             echo "ON ($current)"
         else
             echo "OFF"
+        fi
+        ;;
+    override-on)
+        mkdir -p "$(dirname "$OVERRIDE_FILE")"
+        touch "$OVERRIDE_FILE"
+        echo "Override nocturne activé"
+        ;;
+    override-off)
+        rm -f "$OVERRIDE_FILE"
+        echo "Override nocturne désactivé"
+        ;;
+    override-status)
+        if [ -f "$OVERRIDE_FILE" ]; then
+            echo "Override actif"
+        else
+            echo "Override inactif"
         fi
         ;;
     *)
